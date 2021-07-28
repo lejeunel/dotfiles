@@ -14,6 +14,9 @@
 (after! ranger
     (setq ranger-override-dired 'ranger)
     (setq ranger-override-dired-mode t))
+
+(after! counsel
+  (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
 #+end_src
 * Dictionary
 #+begin_src emacs-lisp :tangle yes
@@ -54,6 +57,7 @@
         (message "French"))
       (t (message "No changes have been made."))) ))
 #+end_src
+
 * Compilation
 #+begin_src emacs-lisp :tangle yes
 
@@ -88,10 +92,12 @@
 #+end_src
 * Appearance
 #+begin_src emacs-lisp :tangle yes
+
 (setq doom-theme 'doom-nord)
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 16))
+(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 22))
 (setq doom-big-font-increment 2)
 #+end_src
+
 * LaTeX
 #+begin_src emacs-lisp :tangle yes
 (map! :localleader
@@ -135,7 +141,7 @@
 Download standalone server from https://languagetool.org/download/LanguageTool-stable.zip and unzip somewhere.
 Set these variables:
 #+begin_src emacs-lisp :tangle yes
-(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.2/languagetool-commandline.jar")
+(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.4/languagetool-commandline.jar")
 
 (defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)
@@ -164,9 +170,9 @@ Set these variables:
 (add-hook 'python-mode-hook 'py-yapf-enable-on-save)
 
 (defvar python--pdb-breakpoint-string "import pdb; pdb.set_trace() ## DEBUG ##")
-(pyvenv-activate "/home/laurent/anaconda3/envs/my")
-(setq pyvenv-default-virtual-env-name '"/home/laurent/anaconda3/envs/")
-(setq pyvenv-virtual-env '"/home/laurent/anaconda3/envs/my")
+(pyvenv-activate "/home/laurent/.pyenv/versions/my")
+(setq pyvenv-default-virtual-env-name '"/home/laurent/.pyenv/versions/")
+(setq pyvenv-virtual-env '"/home/laurent/.pyenv/versions/my")
 (defun python-add-breakpoint ()
 "Inserts a python breakpoint using `pdb'"
     (interactive)

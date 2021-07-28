@@ -70,6 +70,8 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 ###############################################################################
 # Launcher dialogs
 ###############################################################################
+## Launch // Calendar
+bindsym $alt+o exec /usr/bin/gnome-calendar
 
 ## Launch // Terminal // <> Enter ##
 bindsym $alt+t exec /usr/bin/xfce4-terminal
@@ -329,6 +331,7 @@ bindsym $mod+i bar mode toggle
 # Cause Settings app to float above tiled windows
 floating_maximum_size -1 x -1
 for_window [class="Gnome-control-center"] floating enable
+for_window [class="Gnome-calendar"] floating enable
 
 # for_window [class="^.*"] border pixel 10
 

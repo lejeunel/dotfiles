@@ -39,8 +39,7 @@ task :install do
       link_file(file)
     end
   end
-  copy_swapescape
-  install_packages
+  gsettings_swapescape
   install_oh_my_zsh
   install_gtk_theme
   install_vim
@@ -71,7 +70,7 @@ end
 
 def install_packages
   packages = %w{
-        emacs gconf2 dconf-cli uuid-runtime xfce4-terminal ripgrep
+        gconf2 dconf-cli uuid-runtime xfce4-terminal ripgrep
  git tmux sshfs ranger lsyncd telegram-desktop
  evolution regolith-look-dracula
 aspell-fr zathura
@@ -166,7 +165,7 @@ def install_vim
 end
 
 def install_fonts
-  fonts = ['JetBrainsMono', 'Iosevka']
+  fonts = ['UbuntuMono']
   print "install fonts? [ynq] "
     case $stdin.gets.chomp
     when 'y'

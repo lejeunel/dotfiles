@@ -25,11 +25,11 @@
 # 
 # Just fill in the variables with your parameters and have fun!
 
-REMOTE_USER="laurent.lejeune"  # user name on remote host
-REMOTE_HOST="example.com"
-REMOTE_PATH="/remote/path"
+REMOTE_USER="ll04x036"  # user name on remote host
+REMOTE_HOST="submit.unibe.ch"
+REMOTE_PATH="/"
 SSH_PORT=22
-MOUNT_POINT="/local/path"
+MOUNT_POINT="/home/ubelix"
 URI="$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"
 
 case "$1" in
