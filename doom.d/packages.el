@@ -55,3 +55,4 @@
 (package! org-ref)
 (package! py-yapf)
 (package! typopunct)
+(package! langtool)

@@ -98,6 +98,7 @@ plugins=(
     command-not-found
     extract
     z
+    pyenv
 )
 
 
@@ -146,34 +147,12 @@ autoload -U zranger
 bindkey -s '^O' 'zranger^M'
 alias pdfjoin="pdfjoin --paper a4paper --rotateoversize false"
 
-alias -g 'llvm=llvm -t zsh'
 alias tmux='tmux -u'
 alias o='mimeopen'
-alias em='emacsclient -nc'
+alias e='emacsclient -nc'
+alias E="SUDO_EDITOR=\"emacsclient\" sudo -e"
 
 export EDITOR="emacsclient -nc"
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/laurent/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/laurent/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/laurent/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/laurent/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-conda activate my
-# <<< conda initialize <<<
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/laurent/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/laurent/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/laurent/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/laurent/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+eval "$(pyenv virtualenv-init -)"
+pyenv activate my
