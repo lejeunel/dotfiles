@@ -93,7 +93,7 @@
 * Appearance
 #+begin_src emacs-lisp :tangle yes
 
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-one)
 (setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 22))
 (setq doom-big-font-increment 2)
 #+end_src
@@ -167,12 +167,7 @@ Set these variables:
 * Python
 #+begin_src emacs-lisp :tangle yes
 
-(add-hook 'python-mode-hook 'py-yapf-enable-on-save)
-
-(defvar python--pdb-breakpoint-string "import pdb; pdb.set_trace() ## DEBUG ##")
-(pyvenv-activate "/home/laurent/.pyenv/versions/my")
-(setq pyvenv-default-virtual-env-name '"/home/laurent/.pyenv/versions/")
-(setq pyvenv-virtual-env '"/home/laurent/.pyenv/versions/my")
+(defvar python--pdb-breakpoint-string "breakpoint()")
 (defun python-add-breakpoint ()
 "Inserts a python breakpoint using `pdb'"
     (interactive)
@@ -186,8 +181,7 @@ Set these variables:
 
 (defun python-set-debug-highlight ()
 (interactive)
-(highlight-lines-matching-regexp "pdb" 'hi-red-b)
-(highlight-lines-matching-regexp "pdb[.]?" 'hi-red-b))
+(highlight-lines-matching-regexp "breakpoint[.]?" 'hi-red-b))
 
 (defun python-add-debug-highlight ()
 "Adds a highlighter for use by `python--pdb-breakpoint-string'"
