@@ -11,6 +11,9 @@
     (setq ranger-override-dired 'ranger)
     (setq ranger-override-dired-mode t))
 
+(after! counsel
+  (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
+
 (defface ispell-alpha-num-choice-face
   '((t (:background "black" :foreground "red")))
   "Face for `ispell-alpha-num-choice-face`."
@@ -77,8 +80,8 @@
 
 (add-to-list 'compilation-finish-functions 'notify-compilation-result)
 
-(setq doom-theme 'doom-nord)
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 16))
+(setq doom-theme 'doom-one)
+(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 22))
 (setq doom-big-font-increment 2)
 
 (map! :localleader
@@ -112,7 +115,7 @@
 :config
     (setq iflipb-ignore-buffers '("(?!(\*Python\*))(^[*])")))
 
-(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.2/languagetool-commandline.jar")
+(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.4/languagetool-commandline.jar")
 
 (defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)
@@ -130,12 +133,7 @@
   :ensure t
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
-(add-hook 'python-mode-hook 'py-yapf-enable-on-save)
-
-(defvar python--pdb-breakpoint-string "import pdb; pdb.set_trace() ## DEBUG ##")
-(pyvenv-activate "/home/laurent/anaconda3/envs/my")
-(setq pyvenv-default-virtual-env-name '"/home/laurent/anaconda3/envs/")
-(setq pyvenv-virtual-env '"/home/laurent/anaconda3/envs/my")
+(defvar python--pdb-breakpoint-string "breakpoint()")
 (defun python-add-breakpoint ()
 "Inserts a python breakpoint using `pdb'"
     (interactive)
@@ -149,8 +147,7 @@
 
 (defun python-set-debug-highlight ()
 (interactive)
-(highlight-lines-matching-regexp "pdb" 'hi-red-b)
-(highlight-lines-matching-regexp "pdb[.]?" 'hi-red-b))
+(highlight-lines-matching-regexp "breakpoint[.]?" 'hi-red-b))
 
 (defun python-add-debug-highlight ()
 "Adds a highlighter for use by `python--pdb-breakpoint-string'"

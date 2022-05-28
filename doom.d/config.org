@@ -166,7 +166,6 @@ Set these variables:
 
 * Python
 #+begin_src emacs-lisp :tangle yes
-
 (defvar python--pdb-breakpoint-string "breakpoint()")
 (defun python-add-breakpoint ()
 "Inserts a python breakpoint using `pdb'"
