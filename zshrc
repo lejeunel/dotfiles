@@ -150,9 +150,10 @@ alias pdfjoin="pdfjoin --paper a4paper --rotateoversize false"
 alias tmux='tmux -u'
 alias o='mimeopen'
 alias e='emacsclient -nc'
-alias E="SUDO_EDITOR=\"emacsclient\" sudo -e"
 
-export EDITOR="emacsclient -nc"
+export EDITOR="vim"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 eval "$(pyenv virtualenv-init -)"
 pyenv activate my
+
+eval "$(direnv hook zsh)"
