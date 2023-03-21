@@ -152,8 +152,11 @@ alias o='mimeopen'
 alias e='emacsclient -nc'
 
 export EDITOR="vim"
+
+export PYENV_ROOT="$HOME/efs/pyenv"
+export POETRY_CACHE_DIR="$HOME/efs/cache"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv virtualenv-init -)"
-pyenv activate my
 
 eval "$(direnv hook zsh)"
