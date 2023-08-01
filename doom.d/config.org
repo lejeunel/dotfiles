@@ -4,13 +4,13 @@
 * General Bindings
 #+begin_src emacs-lisp :tangle yes
 (map! :leader
-      :desc "Kill buffer" "x" #'kill-this-buffer
-      :desc "Expand region" "e" #'er/expand-region
-      :desc "Increase font size" "+" #'doom/increase-font-size
-      :desc "Decrease font size" "-" #'doom/decrease-font-size
-      :desc "Next buffer" "k" #'iflipb-next-buffer
-      :desc "Previous buffer" "j" #'iflipb-previous-buffer
-      :desc "Switch window" "TAB" #'ace-window)
+    :desc "Kill buffer" "x" #'kill-this-buffer
+    :desc "Expand region" "e" #'er/expand-region
+    :desc "Increase font size" "+" #'doom/increase-font-size
+    :desc "Decrease font size" "-" #'doom/decrease-font-size
+    :desc "Next buffer" "k" #'iflipb-next-buffer
+    :desc "Previous buffer" "j" #'iflipb-previous-buffer
+    :desc "Switch window" "TAB" #'ace-window)
 
 (after! ranger
     (setq ranger-override-dired 'ranger)
@@ -18,6 +18,9 @@
 
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
+
+(after! org
+  (setq org-return-follows-link t))
 #+end_src
 * Dictionary
 #+begin_src emacs-lisp :tangle yes
@@ -59,11 +62,6 @@
       (t (message "No changes have been made."))) ))
 #+end_src
 
-* Compilation
-#+begin_src emacs-lisp :tangle yes
-(defvar compilation-buffer-visible nil)
-(add-to-list 'compilation-finish-functions 'notify-compilation-result)
-#+end_src
 * Appearance
 #+begin_src emacs-lisp :tangle yes
 (all-the-icons-ivy-setup)
@@ -97,7 +95,6 @@
   :config
   (typopunct-change-language 'french t))
   #+end_src
-
 * Iflipb
 #+begin_src emacs-lisp :tangle yes
 (use-package! iflipb

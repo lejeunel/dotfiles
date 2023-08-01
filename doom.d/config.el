@@ -1,11 +1,11 @@
 (map! :leader
-      :desc "Kill buffer" "x" #'kill-this-buffer
-      :desc "Expand region" "e" #'er/expand-region
-      :desc "Increase font size" "+" #'doom/increase-font-size
-      :desc "Decrease font size" "-" #'doom/decrease-font-size
-      :desc "Next buffer" "k" #'iflipb-next-buffer
-      :desc "Previous buffer" "j" #'iflipb-previous-buffer
-      :desc "Switch window" "TAB" #'ace-window)
+    :desc "Kill buffer" "x" #'kill-this-buffer
+    :desc "Expand region" "e" #'er/expand-region
+    :desc "Increase font size" "+" #'doom/increase-font-size
+    :desc "Decrease font size" "-" #'doom/decrease-font-size
+    :desc "Next buffer" "k" #'iflipb-next-buffer
+    :desc "Previous buffer" "j" #'iflipb-previous-buffer
+    :desc "Switch window" "TAB" #'ace-window)
 
 (after! ranger
     (setq ranger-override-dired 'ranger)
@@ -13,6 +13,9 @@
 
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
+
+(after! org
+  (setq org-return-follows-link t))
 
 (defface ispell-alpha-num-choice-face
   '((t (:background "black" :foreground "red")))
@@ -50,9 +53,6 @@
         (ispell-kill-ispell)
         (message "French"))
       (t (message "No changes have been made."))) ))
-
-(defvar compilation-buffer-visible nil)
-(add-to-list 'compilation-finish-functions 'notify-compilation-result)
 
 (all-the-icons-ivy-setup)
 
