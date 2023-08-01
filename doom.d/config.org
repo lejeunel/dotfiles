@@ -92,10 +92,11 @@
 #+end_src
 * Appearance
 #+begin_src emacs-lisp :tangle yes
-
-(setq doom-theme 'doom-nord)
-(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 22))
+(setq doom-theme 'doom-dracula)
 (setq doom-big-font-increment 2)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 20 :weight 'light)
+      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
+      ivy-posframe-font (font-spec :family "JetBrainsMono" :size 20))
 #+end_src
 
 * LaTeX
@@ -151,7 +152,6 @@ Set these variables:
                 (memq last-command '(keyboard-quit)))
       (let ((msg (langtool-details-error-message overlays)))
         (popup-tip msg)))))
-
 (setq langtool-autoshow-message-function
       'langtool-autoshow-detail-popup)
 
