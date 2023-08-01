@@ -11,6 +11,9 @@
     (setq ranger-override-dired 'ranger)
     (setq ranger-override-dired-mode t))
 
+(after! counsel
+  (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
+
 (defface ispell-alpha-num-choice-face
   '((t (:background "black" :foreground "red")))
   "Face for `ispell-alpha-num-choice-face`."
@@ -77,9 +80,11 @@
 
 (add-to-list 'compilation-finish-functions 'notify-compilation-result)
 
-(setq doom-theme 'doom-nord)
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 16))
+(setq doom-theme 'doom-dracula)
 (setq doom-big-font-increment 2)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 20 :weight 'light)
+      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
+      ivy-posframe-font (font-spec :family "JetBrainsMono" :size 20))
 
 (map! :localleader
       :map LaTeX-mode-map
@@ -112,7 +117,7 @@
 :config
     (setq iflipb-ignore-buffers '("(?!(\*Python\*))(^[*])")))
 
-(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.2/languagetool-commandline.jar")
+(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.4/languagetool-commandline.jar")
 
 (defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)
@@ -122,7 +127,6 @@
                 (memq last-command '(keyboard-quit)))
       (let ((msg (langtool-details-error-message overlays)))
         (popup-tip msg)))))
-
 (setq langtool-autoshow-message-function
       'langtool-autoshow-detail-popup)
 
@@ -133,9 +137,9 @@
 (add-hook 'python-mode-hook 'py-yapf-enable-on-save)
 
 (defvar python--pdb-breakpoint-string "import pdb; pdb.set_trace() ## DEBUG ##")
-(pyvenv-activate "/home/laurent/anaconda3/envs/my")
-(setq pyvenv-default-virtual-env-name '"/home/laurent/anaconda3/envs/")
-(setq pyvenv-virtual-env '"/home/laurent/anaconda3/envs/my")
+(pyvenv-activate "/home/laurent/.pyenv/versions/my")
+(setq pyvenv-default-virtual-env-name '"/home/laurent/.pyenv/versions/")
+(setq pyvenv-virtual-env '"/home/laurent/.pyenv/versions/my")
 (defun python-add-breakpoint ()
 "Inserts a python breakpoint using `pdb'"
     (interactive)
