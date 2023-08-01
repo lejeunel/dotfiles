@@ -1,9 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:/$HOME/.bin:$HOME/.emacs.d/elpa/rtags-20180619.823/rtags-2.18/bin:$PATH
-export PATH=$HOME/Documents/software/deep-mesos/deep-mesos/client-tools:$PATH
 export FPATH=$HOME/.zsh_custom:$FPATH
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
-#export PYTHONPATH=$HOME/Documents/gaze-label-web/server/app
 
 export ZSH_DISABLE_COMPFIX=true
 

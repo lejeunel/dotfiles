@@ -1,5 +1,0 @@
-let g:spf13_bundle_groups=['general', 'programming', 'ruby', 'python', 'html', 'misc']
-
-UnBundle 'amirh/HTML-AutoCloseTag'
-Bundle 'dracula/vim'
-Bundle 'itchyny/lightline.vim'
