@@ -26,3 +26,4 @@ pyenv-installer*
 config/pavucontrol.ini
 lsyncd/log
 local
+*.pyc

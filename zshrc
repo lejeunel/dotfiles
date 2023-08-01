@@ -155,4 +155,4 @@ alias E="SUDO_EDITOR=\"emacsclient\" sudo -e"
 export EDITOR="emacsclient -nc"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 eval "$(pyenv virtualenv-init -)"
-pyenv activate my
+pyenv activate my-3.7
