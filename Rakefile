@@ -39,16 +39,16 @@ task :install do
       link_file(file)
     end
   end
-  gsettings_swapescape
+  #gsettings_swapescape
   install_oh_my_zsh
-  install_gtk_theme
-  install_vim
+  #install_gtk_theme
+  #install_vim
   switch_to_zsh
-  x_screen_tearing_fix
+  #x_screen_tearing_fix
   install_fonts
   install_doom
-  init_systemd_services
-  install_regolith
+  #init_systemd_services
+  #install_regolith
 end
 
 def replace_file(file)

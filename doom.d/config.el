@@ -81,6 +81,9 @@
 (add-to-list 'compilation-finish-functions 'notify-compilation-result)
 
 (setq doom-theme 'doom-dracula)
+(custom-theme-set-faces! 'doom-dracula
+    '(default :background "black"))
+(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 22))
 (setq doom-big-font-increment 2)
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 20 :weight 'light)
       doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
@@ -134,12 +137,7 @@
   :ensure t
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
-(add-hook 'python-mode-hook 'py-yapf-enable-on-save)
-
-(defvar python--pdb-breakpoint-string "import pdb; pdb.set_trace() ## DEBUG ##")
-(pyvenv-activate "/home/laurent/.pyenv/versions/my")
-(setq pyvenv-default-virtual-env-name '"/home/laurent/.pyenv/versions/")
-(setq pyvenv-virtual-env '"/home/laurent/.pyenv/versions/my")
+(defvar python--pdb-breakpoint-string "breakpoint()")
 (defun python-add-breakpoint ()
 "Inserts a python breakpoint using `pdb'"
     (interactive)
@@ -153,8 +151,7 @@
 
 (defun python-set-debug-highlight ()
 (interactive)
-(highlight-lines-matching-regexp "pdb" 'hi-red-b)
-(highlight-lines-matching-regexp "pdb[.]?" 'hi-red-b))
+(highlight-lines-matching-regexp "breakpoint[.]?" 'hi-red-b))
 
 (defun python-add-debug-highlight ()
 "Adds a highlighter for use by `python--pdb-breakpoint-string'"

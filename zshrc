@@ -150,9 +150,12 @@ alias pdfjoin="pdfjoin --paper a4paper --rotateoversize false"
 alias tmux='tmux -u'
 alias o='mimeopen'
 alias e='emacsclient -nc'
-alias E="SUDO_EDITOR=\"emacsclient\" sudo -e"
 
-export EDITOR="emacsclient -nc"
+export EDITOR="vim"
+
+export PYENV_ROOT="$HOME/efs/pyenv"
+export POETRY_CACHE_DIR="$HOME/efs/cache"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv virtualenv-init -)"
 pyenv activate my-3.7
