@@ -15,28 +15,8 @@ export TERM=xterm-256color
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="gentoo"
 
-
-# BULLETTRAIN_PROMPT_ORDER=(
-#   context
-#   dir
-#   virtualenv
-# )
-# BULLETTRAIN_CONTEXT_BG=238
-# BULLETTRAIN_VIRTUALENV_BG=red
-# BULLETTRAIN_VIRTUALENV_FG=black
-# BULLETTRAIN_DIR_BG=blue
-# BULLETTRAIN_DIR_FG=black
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
-
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -151,9 +131,6 @@ alias e='emacsclient -nc'
 
 export EDITOR="vim"
 
-export PYENV_ROOT="$HOME/efs/pyenv"
-export POETRY_CACHE_DIR="$HOME/efs/cache"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv virtualenv-init -)"
 pyenv activate my-3.7

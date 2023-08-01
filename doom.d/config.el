@@ -81,10 +81,6 @@
 (add-to-list 'compilation-finish-functions 'notify-compilation-result)
 
 (setq doom-theme 'doom-dracula)
-(custom-theme-set-faces! 'doom-dracula
-    '(default :background "black"))
-(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 22))
-(setq doom-big-font-increment 2)
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 20 :weight 'light)
       doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
       ivy-posframe-font (font-spec :family "JetBrainsMono" :size 20))
@@ -194,8 +190,6 @@
 
 (setq org-export-allow-bind-keywords t)
 (setq org-export-in-background nil)
-
-
 
 (add-to-list 'org-latex-classes
              '("koma-article" "\\documentclass{scrartcl}"
