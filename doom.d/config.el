@@ -52,33 +52,9 @@
       (t (message "No changes have been made."))) ))
 
 (defvar compilation-buffer-visible nil)
-
-(defun toggle-compilation-visible ()
-  (interactive)
-  (setq compilation-buffer-visible (not compilation-buffer-visible))
-  (message "Compilation buffer %s"
-           (if compilation-buffer-visible "visible" "not visible")))
-
-(defun notify-compilation-result(buffer msg)
-  (with-current-buffer buffer
-    (progn
-      (cond
-       ((and (string-match "^finished" msg) (string= "*compilation*" (buffer-name)))
-        (progn
-          (unless compilation-buffer-visible (delete-windows-on buffer))
-          ))
-       ((string= "*compilation*" (buffer-name))
-        (progn
-          ;; you can add a custom message here, like (buffer-contents, but I like the default ones from
-          ;; compilation-mode
-          ;;
-          ;; (message "Compilation failed: %s" (buffer-substring () ()))
-          ))
-       )
-      (setq current-frame (car (car (cdr (current-frame-configuration)))))
-      (raise-frame current-frame))))
-
 (add-to-list 'compilation-finish-functions 'notify-compilation-result)
+
+(all-the-icons-ivy-setup)
 
 (setq doom-theme 'doom-dracula)
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 20 :weight 'light)
@@ -92,15 +68,6 @@
 (setq TeX-auto-save t) ; Enable parse on save.
 
 (require 'ox-extra)
-(add-to-list 'org-latex-classes
-             '("TMI"
-               "\\documentclass[journal, web, twoside]{ieeecolor}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
 (setq TeX-view-program-list
       '(("zathura"
 	 ("zathura" (mode-io-correlate "-sync.sh")
@@ -167,12 +134,12 @@
             "bibtex %b"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-        (setq org-ref-bibliography-notes "~/Documents/paper-notes/paper-notes.org"
-            org-ref-default-bibliography "~/Documents/paper-notes/refs.bib"
+        (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
+            org-ref-default-bibliography "~/org/refs.bib"
             bibtex-completion-bibliography org-ref-default-bibliography
             org-ref-pdf-directory "~/Nextcloud/papers/"
             bibtex-completion-library-path "~/Nextcloud/papers"
-            bibtex-completion-notes-path "~/Documents/paper-notes/paper-notes.org"
+            bibtex-completion-notes-path "~/org/paper-notes/paper-notes.org"
             bibtex-completion-pdf-open-function
                 (lambda (fpath)
                 (call-process "zathura" nil 0 nil fpath))))
@@ -182,15 +149,21 @@
       :desc "Insert citation"    "c" 'ivy-bibtex)
 
 (after! org
-  (require 'ox-extra)
-  (ox-extras-activate '(ignore-headlines)))
+    (setq org-startup-folded 'overview
+        org-ellipsis " ▾ "
+        org-hide-emphasis-markers t
+        org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
+        org-list-demote-modify-bullet '(("+" . "-") ("-" . "+"))))
+
+(add-hook! 'org-mode-hook
+           #'+org-pretty-mode)
 
 (defmacro by-backend (&rest body)
   `(case (if (boundp 'backend) (org-export-backend-name backend) nil) ,@body))
 
 (setq org-export-allow-bind-keywords t)
 (setq org-export-in-background nil)
-
+(setq )
 (add-to-list 'org-latex-classes
              '("koma-article" "\\documentclass{scrartcl}"
                ("\\section{%s}" . "\\section*{%s}")
@@ -227,6 +200,16 @@
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(add-to-list 'org-latex-classes
+             '("TMI"
+               "\\documentclass[journal, web, twoside]{ieeecolor}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 
 (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))
 
