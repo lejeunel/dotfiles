@@ -52,6 +52,7 @@
 
 (package! iflipb)
 (package! ivy-bibtex)
+(package! all-the-icons-ivy)
 (package! org-ref)
 (package! py-yapf)
 (package! typopunct)

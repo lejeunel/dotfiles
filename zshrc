@@ -1,9 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:/$HOME/.bin:$HOME/.emacs.d/elpa/rtags-20180619.823/rtags-2.18/bin:$PATH
-export PATH=$HOME/Documents/software/deep-mesos/deep-mesos/client-tools:$PATH
 export FPATH=$HOME/.zsh_custom:$FPATH
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
-#export PYTHONPATH=$HOME/Documents/gaze-label-web/server/app
 
 export ZSH_DISABLE_COMPFIX=true
 
@@ -17,28 +15,8 @@ export TERM=xterm-256color
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="gentoo"
 
-
-# BULLETTRAIN_PROMPT_ORDER=(
-#   context
-#   dir
-#   virtualenv
-# )
-# BULLETTRAIN_CONTEXT_BG=238
-# BULLETTRAIN_VIRTUALENV_BG=red
-# BULLETTRAIN_VIRTUALENV_FG=black
-# BULLETTRAIN_DIR_BG=blue
-# BULLETTRAIN_DIR_FG=black
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
-
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -151,8 +129,8 @@ alias tmux='tmux -u'
 alias o='mimeopen'
 alias e='emacsclient -nc'
 
-eval "$(direnv hook zsh)"
-export PYENV_ROOT="$HOME/efs/pyenv"
-export POETRY_CACHE_DIR="$HOME/efs/cache"
+export EDITOR="vim"
+
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+pyenv activate my-3.7

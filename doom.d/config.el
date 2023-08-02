@@ -1,11 +1,11 @@
 (map! :leader
-      :desc "Kill buffer" "x" #'kill-this-buffer
-      :desc "Expand region" "e" #'er/expand-region
-      :desc "Increase font size" "+" #'doom/increase-font-size
-      :desc "Decrease font size" "-" #'doom/decrease-font-size
-      :desc "Next buffer" "k" #'iflipb-next-buffer
-      :desc "Previous buffer" "j" #'iflipb-previous-buffer
-      :desc "Switch window" "TAB" #'ace-window)
+    :desc "Kill buffer" "x" #'kill-this-buffer
+    :desc "Expand region" "e" #'er/expand-region
+    :desc "Increase font size" "+" #'doom/increase-font-size
+    :desc "Decrease font size" "-" #'doom/decrease-font-size
+    :desc "Next buffer" "k" #'iflipb-next-buffer
+    :desc "Previous buffer" "j" #'iflipb-previous-buffer
+    :desc "Switch window" "TAB" #'ace-window)
 
 (after! ranger
     (setq ranger-override-dired 'ranger)
@@ -13,6 +13,9 @@
 
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
+
+(after! org
+  (setq org-return-follows-link t))
 
 (defface ispell-alpha-num-choice-face
   '((t (:background "black" :foreground "red")))
@@ -51,38 +54,12 @@
         (message "French"))
       (t (message "No changes have been made."))) ))
 
-(defvar compilation-buffer-visible nil)
+(all-the-icons-ivy-setup)
 
-(defun toggle-compilation-visible ()
-  (interactive)
-  (setq compilation-buffer-visible (not compilation-buffer-visible))
-  (message "Compilation buffer %s"
-           (if compilation-buffer-visible "visible" "not visible")))
-
-(defun notify-compilation-result(buffer msg)
-  (with-current-buffer buffer
-    (progn
-      (cond
-       ((and (string-match "^finished" msg) (string= "*compilation*" (buffer-name)))
-        (progn
-          (unless compilation-buffer-visible (delete-windows-on buffer))
-          ))
-       ((string= "*compilation*" (buffer-name))
-        (progn
-          ;; you can add a custom message here, like (buffer-contents, but I like the default ones from
-          ;; compilation-mode
-          ;;
-          ;; (message "Compilation failed: %s" (buffer-substring () ()))
-          ))
-       )
-      (setq current-frame (car (car (cdr (current-frame-configuration)))))
-      (raise-frame current-frame))))
-
-(add-to-list 'compilation-finish-functions 'notify-compilation-result)
-
-(setq doom-theme 'doom-one)
-(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 22))
-(setq doom-big-font-increment 2)
+(setq doom-theme 'doom-dracula)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 20 :weight 'light)
+      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
+      ivy-posframe-font (font-spec :family "JetBrainsMono" :size 20))
 
 (map! :localleader
       :map LaTeX-mode-map
@@ -91,15 +68,6 @@
 (setq TeX-auto-save t) ; Enable parse on save.
 
 (require 'ox-extra)
-(add-to-list 'org-latex-classes
-             '("TMI"
-               "\\documentclass[journal, web, twoside]{ieeecolor}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
 (setq TeX-view-program-list
       '(("zathura"
 	 ("zathura" (mode-io-correlate "-sync.sh")
@@ -125,7 +93,6 @@
                 (memq last-command '(keyboard-quit)))
       (let ((msg (langtool-details-error-message overlays)))
         (popup-tip msg)))))
-
 (setq langtool-autoshow-message-function
       'langtool-autoshow-detail-popup)
 
@@ -167,12 +134,21 @@
             "bibtex %b"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+<<<<<<< HEAD
         (setq org-ref-bibliography-notes "~/efs/paper-notes/paper-notes.org"
             org-ref-default-bibliography "~/efs/paper-notes/refs.bib"
             bibtex-completion-bibliography org-ref-default-bibliography
             org-ref-pdf-directory "~/Nextcloud/papers/"
             bibtex-completion-library-path "~/Nextcloud/papers"
             bibtex-completion-notes-path "~/efs/paper-notes/paper-notes.org"
+=======
+        (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
+            org-ref-default-bibliography "~/org/refs.bib"
+            bibtex-completion-bibliography org-ref-default-bibliography
+            org-ref-pdf-directory "~/Nextcloud/papers/"
+            bibtex-completion-library-path "~/Nextcloud/papers"
+            bibtex-completion-notes-path "~/org/paper-notes/paper-notes.org"
+>>>>>>> d93558effe25340f0554b9ac275eb205a8fdb7b3
             bibtex-completion-pdf-open-function
                 (lambda (fpath)
                 (call-process "zathura" nil 0 nil fpath))))
@@ -182,17 +158,21 @@
       :desc "Insert citation"    "c" 'ivy-bibtex)
 
 (after! org
-  (require 'ox-extra)
-  (ox-extras-activate '(ignore-headlines)))
+    (setq org-startup-folded 'overview
+        org-ellipsis " ▾ "
+        org-hide-emphasis-markers t
+        org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
+        org-list-demote-modify-bullet '(("+" . "-") ("-" . "+"))))
+
+(add-hook! 'org-mode-hook
+           #'+org-pretty-mode)
 
 (defmacro by-backend (&rest body)
   `(case (if (boundp 'backend) (org-export-backend-name backend) nil) ,@body))
 
 (setq org-export-allow-bind-keywords t)
 (setq org-export-in-background nil)
-
-
-
+(setq )
 (add-to-list 'org-latex-classes
              '("koma-article" "\\documentclass{scrartcl}"
                ("\\section{%s}" . "\\section*{%s}")
@@ -229,6 +209,16 @@
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(add-to-list 'org-latex-classes
+             '("TMI"
+               "\\documentclass[journal, web, twoside]{ieeecolor}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 
 (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))
 
