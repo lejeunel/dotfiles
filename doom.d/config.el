@@ -134,21 +134,12 @@
             "bibtex %b"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-<<<<<<< HEAD
-        (setq org-ref-bibliography-notes "~/efs/paper-notes/paper-notes.org"
-            org-ref-default-bibliography "~/efs/paper-notes/refs.bib"
-            bibtex-completion-bibliography org-ref-default-bibliography
-            org-ref-pdf-directory "~/Nextcloud/papers/"
-            bibtex-completion-library-path "~/Nextcloud/papers"
-            bibtex-completion-notes-path "~/efs/paper-notes/paper-notes.org"
-=======
         (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
             org-ref-default-bibliography "~/org/refs.bib"
             bibtex-completion-bibliography org-ref-default-bibliography
             org-ref-pdf-directory "~/Nextcloud/papers/"
             bibtex-completion-library-path "~/Nextcloud/papers"
             bibtex-completion-notes-path "~/org/paper-notes/paper-notes.org"
->>>>>>> d93558effe25340f0554b9ac275eb205a8fdb7b3
             bibtex-completion-pdf-open-function
                 (lambda (fpath)
                 (call-process "zathura" nil 0 nil fpath))))
