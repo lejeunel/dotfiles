@@ -2,6 +2,7 @@
 #+AUTHOR:      Laurent Lejeune
 
 * General Bindings
+
 #+begin_src emacs-lisp :tangle yes
 (map! :leader
     :desc "Kill buffer" "x" #'kill-this-buffer
@@ -180,6 +181,9 @@ Set these variables:
       :desc "Insert citation"    "c" 'ivy-bibtex)
 #+end_src
 * Org
+:PROPERTIES:
+:ID:       5472790a-3003-40f9-9b1d-138eb6d72734
+:END:
 ** Appearance
 #+begin_src emacs-lisp :tangle yes
 (after! org
