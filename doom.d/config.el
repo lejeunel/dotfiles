@@ -167,12 +167,12 @@
             "bibtex %b"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
             "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-        (setq org-ref-bibliography-notes "~/Documents/paper-notes/paper-notes.org"
-            org-ref-default-bibliography "~/Documents/paper-notes/refs.bib"
+        (setq org-ref-bibliography-notes "~/efs/paper-notes/paper-notes.org"
+            org-ref-default-bibliography "~/efs/paper-notes/refs.bib"
             bibtex-completion-bibliography org-ref-default-bibliography
             org-ref-pdf-directory "~/Nextcloud/papers/"
             bibtex-completion-library-path "~/Nextcloud/papers"
-            bibtex-completion-notes-path "~/Documents/paper-notes/paper-notes.org"
+            bibtex-completion-notes-path "~/efs/paper-notes/paper-notes.org"
             bibtex-completion-pdf-open-function
                 (lambda (fpath)
                 (call-process "zathura" nil 0 nil fpath))))
