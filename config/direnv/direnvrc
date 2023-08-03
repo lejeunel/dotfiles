@@ -57,14 +57,7 @@ use_python() {
 #    layout virtualenv <version> <name>
 layout_virtualenv() {
     local pyversion=$1
-    local pvenv=$2
-    if has pyenv; then
-        pyenv local ${pyversion}
-        eval "$(pyenv virtualenv-init -)"
-        pyenv virtualenv --force --quiet ${pyversion} ${pvenv}
-    else
-        log_error "pyenv or python3 venv not found."
-    fi
+    pyenv local ${pyversion}
 }
 
 # === Activate a virtualenv ===
