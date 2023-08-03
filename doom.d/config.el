@@ -124,8 +124,7 @@
 
 (map! :localleader
       :map python-mode-map
-      :desc "Insert breakpoint"    "d" 'python-add-breakpoint
-      :desc "Fix code"    "f" 'py-yapf-buffer)
+      :desc "Insert breakpoint"    "d" 'python-add-breakpoint)
 
 (use-package! org-ref
     :init

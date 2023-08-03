@@ -76,7 +76,6 @@ plugins=(
     command-not-found
     extract
     z
-    pyenv
 )
 
 
@@ -128,9 +127,21 @@ alias pdfjoin="pdfjoin --paper a4paper --rotateoversize false"
 alias tmux='tmux -u'
 alias o='mimeopen'
 alias e='emacsclient -nc'
+alias ll='ls -lah'
 
 export EDITOR="vim"
+export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
+export POETRY_VIRTUALENVS_CREATE=false
+export PYENV_ROOT=$HOME/efs/pyenv
 
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv virtualenv-init -)"
-pyenv activate my-3.7
+if [ -n "$(which pyenv)" ]; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+fi
+
+if [ -n "$(which direnv)" ]; then
+  eval "$(direnv hook $(basename $SHELL))"
+  # export DIRENV_WARN_TIMEOUT=100s
+fi
