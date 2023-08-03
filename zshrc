@@ -131,6 +131,8 @@ alias e='emacsclient -nc'
 
 export EDITOR="vim"
 
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv virtualenv-init -)"
-pyenv activate my-3.7
+# - direnv: https://direnv.net/
+if [ -n "$(which direnv)" ]; then
+  eval "$(direnv hook $(basename $SHELL))"
+  # export DIRENV_WARN_TIMEOUT=100s
+fi
