@@ -16,6 +16,7 @@
     ~/.vlc: vlc
     ~/.wallpapers: wallpapers
 
+# TODO Some of these should be defined as submodules
 - shell:
   -
     command: git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
