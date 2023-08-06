@@ -38,7 +38,7 @@
     description: Cloning oh-my-zsh
     stderr: true
   -
-    command: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+    command: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k
     description: Cloning p10k zsh theme
     stderr: true
   -

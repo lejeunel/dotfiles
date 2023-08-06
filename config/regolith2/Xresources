@@ -4,4 +4,4 @@ i3-wm.alt: Mod4
 i3-wm.binding.exit_app: q
 regolith.look.path: /usr/share/regolith-look/dracula
 i3-wm.gaps.inner.size: 15
-gnome.terminal.font: JetBrainsMono Nerd Font 14
+gnome.terminal.font: MesloGs Nerd Font Mono 14
