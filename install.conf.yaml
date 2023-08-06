@@ -1,0 +1,48 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.tmux.conf: tmux.conf
+    ~/.zsh_custom: zsh_custom
+    ~/.zshrc: zshrc
+    ~/.p10k.zsh: p10k.zsh
+    ~/.gitconfig: gitconfig
+    ~/.config: config
+    ~/.doom.d: doom.d
+    ~/.toprc: toprc
+    ~/.vlc: vlc
+    ~/.wallpapers: wallpapers
+
+# TODO Some of these should be defined as submodules
+- shell:
+  -
+    command: git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+    description: Cloning Doom
+    stderr: true
+  -
+    command: ~/.emacs.d/bin/doom install
+    description: Installing Doom
+    stdin: true
+    stdout: true
+  -
+    command: chsh -s $(which zsh)
+    description: Switch shell to zsh
+    stdin: true
+    stdout: true
+    stderr: true
+  -
+    command: git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    description: Cloning oh-my-zsh
+    stderr: true
+  -
+    command: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+    description: Cloning p10k zsh theme
+    stderr: true
+  -
+    command: ./install-nerd-fonts
+    description: Installing nerd fonts
+    stderr: true
+    stdin: true
