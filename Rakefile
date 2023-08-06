@@ -39,16 +39,11 @@ task :install do
       link_file(file)
     end
   end
-  #gsettings_swapescape
   install_oh_my_zsh
-  #install_gtk_theme
-  #install_vim
   switch_to_zsh
-  #x_screen_tearing_fix
   install_fonts
   install_doom
-  #init_systemd_services
-  #install_regolith
+  gsettings_swapescape
 end
 
 def replace_file(file)
@@ -66,16 +61,6 @@ def link_file(file)
     puts "linking ~/.#{file}"
     system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
   end
-end
-
-def install_packages
-  packages = %w{
-        gconf2 dconf-cli uuid-runtime xfce4-terminal ripgrep
- git tmux sshfs ranger lsyncd telegram-desktop
- evolution regolith-look-dracula
-aspell-fr zathura
-      }
-      sh "sudo apt-get install #{packages * ' '}"
 end
 
 def switch_to_zsh
@@ -144,6 +129,7 @@ def install_oh_my_zsh
     when 'y'
       puts "installing oh-my-zsh"
       system %Q{git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"}
+      system %Q{git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k}
     when 'q'
       exit
     else
@@ -152,20 +138,8 @@ def install_oh_my_zsh
   end
 end
 
-def install_vim
-  print "install spf13-vim? [ynq] "
-    case $stdin.gets.chomp
-    when 'y'
-      puts "installing spf13-vim"
-      system %Q{curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh}
-    when 'q'
-      puts "skipping spf13-vim"
-      exit
-    end
-end
-
 def install_fonts
-  fonts = ['UbuntuMono']
+  fonts = ['JetBrainsMono']
   print "install fonts? [ynq] "
     case $stdin.gets.chomp
     when 'y'
@@ -174,7 +148,7 @@ def install_fonts
       fonts.each
       fonts.each { |item|
           puts item
-          system %Q{wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/#{item}.zip}
+          system %Q{wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/#{item}.zip}
           system %Q{mv #{item}.zip fonts/}
           system %Q{cd fonts && unzip #{item}.zip}
       }
@@ -185,60 +159,12 @@ def install_fonts
     end
 end
 
-def x_screen_tearing_fix
-  print "add screen tearing fix to X11? [ynq] "
-    case $stdin.gets.chomp
-    when 'y'
-      puts "installing"
-      system %Q{sudo ln -s $PWD/92-nvidia.conf /etc/X11/xorg.conf.d/92-nvidia.conf}
-    when 'q'
-      puts "skipping"
-      exit
-    end
-end
-
 def gsettings_swapescape
   print "apply gsettings conf to swap capslock and escape? [ynq] "
     case $stdin.gets.chomp
     when 'y'
       puts "applying xkb-options through gsettings"
       system %Q{gsettings set org.gnome.desktop.input-sources xkb-options "['caps:swapescape']"}
-    when 'q'
-      puts "skipping"
-      exit
-    end
-end
-
-def copy_swapescape
-  print "install xorg config to swap capslock and escape? [ynq] "
-    case $stdin.gets.chomp
-    when 'y'
-      puts "installing"
-      system %Q{sudo ln -s $PWD/91-swapesc.conf /etc/X11/xorg.conf.d/91-swapesc.conf}
-    when 'q'
-      puts "skipping"
-      exit
-    end
-end
-
-def init_systemd_services
-  print "enable emacs daemon service? [ynq] "
-    case $stdin.gets.chomp
-    when 'y'
-      puts "enabling/starting emacs daemon"
-      system %Q{systemctl --user enable emacs}
-      system %Q{systemctl --user start emacs}
-    when 'q'
-      puts "skipping"
-      exit
-    end
-
-  print "enable lsyncd daemon service? [ynq] "
-    case $stdin.gets.chomp
-    when 'y'
-      puts "enabling/starting emacs daemon"
-      system %Q{systemctl --user enable lsyncd}
-      system %Q{systemctl --user start lsyncd}
     when 'q'
       puts "skipping"
       exit
