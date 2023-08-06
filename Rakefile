@@ -81,31 +81,6 @@ def switch_to_zsh
   end
 end
 
-def install_regolith
-  system %Q{sudo add-apt-repository ppa:regolith-linux/release}
-  system %Q{sudo apt update}
-  system %Q{sudo apt install regolith-desktop i3xrocks-net-traffic i3xrocks-cpu-usage i3xrocks-time i3xrocks-battery}
-end
-
-def install_gtk_theme
-  url = "https://github.com/dracula/gtk/archive/master.zip"
-  puts "downloading gtk theme: .#{url}"
-  system %Q{wget #{url} -O gtk-theme.zip}
-  if(Dir.exist?('~/.themes'))
-    puts 'themes.d already exists'
-  else
-    system %Q{mkdir ~/.themes}
-    if(Dir.exist?('~/.themes.d/dracula'))
-      puts 'themes.d/dracula already exists'
-    else
-      system %Q{unzip gtk-theme.zip && mv gtk-master ~/.themes/dracula}
-    end
-  end
-
-  system %Q{sudo add-apt-repository ppa:snwh/ppa}
-  system %Q{sudo apt update}
-  system %Q{sudo apt install paper-icon-theme}
-end
 
 def install_doom
   url_doom = "https://github.com/hlissner/doom-emacs"
