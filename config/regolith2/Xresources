@@ -1,6 +1,6 @@
 i3-wm.mod: Mod1
 i3-wm.alt: Mod4
 i3-wm.gaps.inner.size: 15
-gnome.terminal.font: JetBrains Mono 14
+gnome.terminal.font: JetBrainsMono Nerd Font 14
 !regolith.look.path: /usr/share/regolith-look/gruvbox
 regolith.look.path: /usr/share/regolith-look/dracula

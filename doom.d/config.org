@@ -106,7 +106,7 @@
 Download standalone server from https://languagetool.org/download/LanguageTool-stable.zip and unzip somewhere.
 Set these variables:
 #+begin_src emacs-lisp :tangle yes
-(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.4/languagetool-commandline.jar")
+(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.2/languagetool-commandline.jar")
 
 (defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)

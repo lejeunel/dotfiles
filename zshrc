@@ -132,14 +132,12 @@ alias ll='ls -lah'
 export EDITOR="vim"
 export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
 export POETRY_VIRTUALENVS_CREATE=false
-export PYENV_ROOT=$HOME/efs/pyenv
+export PYENV_ROOT=$HOME/.pyenv
 
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-if [ -n "$(which pyenv)" ]; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-fi
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 if [ -n "$(which direnv)" ]; then
   eval "$(direnv hook $(basename $SHELL))"

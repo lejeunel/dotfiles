@@ -83,7 +83,7 @@
 :config
     (setq iflipb-ignore-buffers '("(?!(\*Python\*))(^[*])")))
 
-(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.4/languagetool-commandline.jar")
+(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.2/languagetool-commandline.jar")
 
 (defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)
