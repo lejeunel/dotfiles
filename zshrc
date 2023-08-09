@@ -39,7 +39,6 @@ alias ll='ls -lah'
 export EDITOR="vim"
 export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
 export POETRY_VIRTUALENVS_CREATE=false
-
 export PYENV_ROOT=$HOME/.pyenv
 export PATH="$PYENV_ROOT/bin:$PATH"
 

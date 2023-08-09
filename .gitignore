@@ -28,3 +28,4 @@ lsyncd/log
 local
 *.pyc
 /*.zip
+/bin/zathura_sync.sh

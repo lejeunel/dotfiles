@@ -52,29 +52,6 @@ use_python() {
     fi
 }
 
-# === Support for Python >=3.3 venv ===
-# See https://github.com/direnv/direnv/wiki/Python#venv-stdlib-module
-# Python 3.3 and later provide built-in support for virtual environments via the venv module in the standard library.
-# Usage in .envrc:
-#   export VIRTUAL_ENV_HOME=.venv    # Default: ~/venv
-#   layout python-venv <name>        # creates ${VIRTUAL_ENV_HOME}/<name> venv
-realpath() {
-    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
-}
-layout_python-venv() {
-    local pvenv=$1
-
-    VIRTUAL_ENV_HOME=${VIRTUAL_ENV_HOME:-~/venv}
-    VIRTUAL_ENV=${VIRTUAL_ENV:-${VIRTUAL_ENV_HOME}/${pvenv}}
-    unset PYTHONHOME
-    export VIRTUAL_ENV
-    if [[ ! -d $VIRTUAL_ENV ]]; then
-        log_status "no venv found; creating $VIRTUAL_ENV"
-        python3 -m venv "$VIRTUAL_ENV"
-    fi
-    PATH_add "${VIRTUAL_ENV}/bin"
-}
-
 # === Create a new virtualenv ===
 # Usage in .envrc:
 #    layout virtualenv <version> <name>
