@@ -57,7 +57,7 @@
 (all-the-icons-ivy-setup)
 
 (setq doom-theme 'doom-dracula)
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 20 :weight 'light)
+(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 20 :weight 'light)
       doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
       ivy-posframe-font (font-spec :family "JetBrainsMono" :size 20))
 
