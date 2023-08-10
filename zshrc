@@ -1,13 +1,12 @@
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/.bin:$HOME/.emacs.d/elpa/rtags-20180619.823/rtags-2.18/bin:$PATH
 export FPATH=$HOME/.zsh_custom:$FPATH
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
-export ZSH_DISABLE_COMPFIX=true
 export DISABLE_AUTO_UPDATE="true"
-export ZSH_CUSTOM=~/.zsh_custom/
 
-# Path to your oh-my-zsh installation.
+# zsh
 export ZSH=$HOME/.oh-my-zsh
-
+export ZSH_CUSTOM=~/.zsh_custom/
+export ZSH_DISABLE_COMPFIX=true
 
 plugins=(
     docker

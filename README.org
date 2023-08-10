@@ -1,0 +1,13 @@
+* Installation
+
+Clone this with all submodules
+
+#+begin_src sh
+git clone --recurse-submodules -j8 git@github.com:lejeunel/dotfiles.git ~/.dotfiles
+#+end_src
+
+Run install script:
+#+begin_src sh
+cd .dotfiles
+./install
+#+end_src

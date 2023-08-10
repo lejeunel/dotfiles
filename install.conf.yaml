@@ -11,16 +11,13 @@
     ~/.gitconfig: gitconfig
     ~/.config: config
     ~/.doom.d: doom.d
+    ~/.emacs.d: emacs.d
+    ~/.oh-my-zsh: oh-my-zsh
     ~/.toprc: toprc
     ~/.vlc: vlc
     ~/.wallpapers: wallpapers
 
-# TODO Some of these should be defined as submodules
 - shell:
-  -
-    command: git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-    description: Cloning Doom
-    stderr: true
   -
     command: ~/.emacs.d/bin/doom install
     description: Installing Doom
@@ -31,14 +28,6 @@
     description: Switch shell to zsh
     stdin: true
     stdout: true
-    stderr: true
-  -
-    command: git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    description: Cloning oh-my-zsh
-    stderr: true
-  -
-    command: git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-    description: Cloning zsh-autosuggestions
     stderr: true
   -
     command: curl -sS https://starship.rs/install.sh | sh
