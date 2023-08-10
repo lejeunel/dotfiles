@@ -19,6 +19,9 @@
 
 - shell:
   -
+    command: curl https://pyenv.run | bash
+    description: Installing pyenv
+  -
     command: ~/.emacs.d/bin/doom install
     description: Installing Doom Emacs
     stdin: true
@@ -39,5 +42,5 @@
     command: ./install-nerd-fonts
     description: Installing nerd fonts
   -
-    command: curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |sh && mv tectonic ~/.local/bin
+    command: curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |sh && mv tectonic ~/.local/bin/
     description: Installing tectonic

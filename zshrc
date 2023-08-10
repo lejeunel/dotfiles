@@ -26,6 +26,7 @@ source $ZSH/oh-my-zsh.sh
 
 bindkey "^K" up-line-or-search
 bindkey "^J" down-line-or-search
+bindkey '^ ' autosuggest-accept
 autoload -U zranger
 bindkey -s '^O' 'zranger^M'
 alias pdfjoin="pdfjoin --paper a4paper --rotateoversize false"
@@ -41,11 +42,11 @@ export EDITOR="vim"
 export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
 export POETRY_VIRTUALENVS_CREATE=false
 export PYENV_ROOT=$HOME/.pyenv
+export PYTHON_KEYRING_BACKEND=keyring.backends.fail.Keyring
 export PATH="$PYENV_ROOT/bin:$PATH"
 
 if [ -n "$(which pyenv)" ]; then
   eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
 
