@@ -36,6 +36,8 @@ alias e='emacsclient -nc'
 alias ll='ls -lah'
 
 export EDITOR="vim"
+
+# python
 export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
 export POETRY_VIRTUALENVS_CREATE=false
 export PYENV_ROOT=$HOME/.pyenv
@@ -49,7 +51,6 @@ fi
 
 if [ -n "$(which direnv)" ]; then
   eval "$(direnv hook $(basename $SHELL))"
-  # export DIRENV_WARN_TIMEOUT=100s
 fi
 
 eval "$(starship init zsh)"

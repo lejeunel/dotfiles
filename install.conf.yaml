@@ -20,7 +20,7 @@
 - shell:
   -
     command: ~/.emacs.d/bin/doom install
-    description: Installing Doom
+    description: Installing Doom Emacs
     stdin: true
     stdout: true
   -
@@ -38,5 +38,6 @@
   -
     command: ./install-nerd-fonts
     description: Installing nerd fonts
-    stderr: true
-    stdin: true
+  -
+    command: curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |sh && mv tectonic ~/.local/bin
+    description: Installing tectonic
