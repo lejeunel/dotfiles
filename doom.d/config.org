@@ -68,9 +68,9 @@
 (all-the-icons-ivy-setup)
 
 (setq doom-theme 'doom-dracula)
-(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 20 :weight 'light)
+(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 19)
       doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
-      ivy-posframe-font (font-spec :family "Hack Nerd Font Mono" :size 20))
+      ivy-posframe-font (font-spec :family "Hack Nerd Font Mono" :size 19))
 #+end_src
 
 * LaTeX
@@ -156,6 +156,13 @@ Set these variables:
       :map python-mode-map
       :desc "Insert breakpoint"    "d" 'python-add-breakpoint)
 
+(use-package! python-black
+  :demand t
+  :after python)
+(add-hook! 'python-mode-hook #'python-black-on-save-mode)
+(map! :localleader
+      (:map python-mode-map
+       "f" #'python-black-buffer))
 #+end_src
 * Org-ref / bibtex
 #+begin_src emacs-lisp :tangle yes
