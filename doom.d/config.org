@@ -129,6 +129,7 @@ Set these variables:
 #+end_src
 
 * Python
+Bindings and functions to add breakpoints.
 #+begin_src emacs-lisp :tangle yes
 (defvar python--pdb-breakpoint-string "breakpoint()")
 (defun python-add-breakpoint ()
@@ -155,6 +156,10 @@ Set these variables:
 (map! :localleader
       :map python-mode-map
       :desc "Insert breakpoint"    "d" 'python-add-breakpoint)
+#+end_src
+
+Use black for format buffer
+#+begin_src emacs-lisp :tangle yes
 
 (use-package! python-black
   :demand t
