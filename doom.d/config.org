@@ -164,29 +164,6 @@ Set these variables:
       (:map python-mode-map
        "f" #'python-black-buffer))
 #+end_src
-* Org-ref / bibtex
-#+begin_src emacs-lisp :tangle yes
-(use-package! org-ref
-    :init
-        (setq org-latex-pdf-process
-            '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-            "bibtex %b"
-            "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-            "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-        (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
-            org-ref-default-bibliography "~/org/refs.bib"
-            bibtex-completion-bibliography org-ref-default-bibliography
-            org-ref-pdf-directory "~/Nextcloud/papers/"
-            bibtex-completion-library-path "~/Nextcloud/papers"
-            bibtex-completion-notes-path "~/org/paper-notes/paper-notes.org"
-            bibtex-completion-pdf-open-function
-                (lambda (fpath)
-                (call-process "zathura" nil 0 nil fpath))))
-
-(map! :localleader
-      :map org-mode-map
-      :desc "Insert citation"    "c" 'ivy-bibtex)
-#+end_src
 * Org
 :PROPERTIES:
 :ID:       5472790a-3003-40f9-9b1d-138eb6d72734
@@ -269,4 +246,28 @@ Set these variables:
                   (apostrophe :utf-8 "’" :html "&rsquo;")))
 
 (add-to-list 'org-export-smart-quotes-alist fr-quotes)
+#+end_src
+
+** Org-ref / bibtex
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-ref
+    :init
+        (setq org-latex-pdf-process
+            '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+            "bibtex %b"
+            "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+            "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+        (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
+            org-ref-default-bibliography "~/org/refs.bib"
+            bibtex-completion-bibliography org-ref-default-bibliography
+            org-ref-pdf-directory "~/Nextcloud/papers/"
+            bibtex-completion-library-path "~/Nextcloud/papers"
+            bibtex-completion-notes-path "~/org/paper-notes/paper-notes.org"
+            bibtex-completion-pdf-open-function
+                (lambda (fpath)
+                (call-process "zathura" nil 0 nil fpath))))
+
+(map! :localleader
+      :map org-mode-map
+      :desc "Insert citation"    "c" 'ivy-bibtex)
 #+end_src
