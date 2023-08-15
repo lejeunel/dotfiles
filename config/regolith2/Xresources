@@ -2,6 +2,14 @@ i3-wm.mod: Mod1
 i3-wm.alt: Mod4
 
 i3-wm.binding.exit_app: q
-regolith.look.path: /usr/share/regolith-look/dracula
 i3-wm.gaps.inner.size: 15
+i3-wm.window.border.size: 4
+
 gnome.terminal.font: Hack Nerd Font 14
+gtk.font_name: Ubuntu 13
+gtk.monospace_font_name: Ubuntu 13
+gnome.terminal.use-transparent-background: false
+
+regolith.look.path: /usr/share/regolith-look/dracula
+i3-wm.client.focused_inactive.color.child_border: #282a36
+i3-wm.client.unfocused.color.child_border: #282a36

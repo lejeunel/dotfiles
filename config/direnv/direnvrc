@@ -52,28 +52,15 @@ use_python() {
     fi
 }
 
-# === Create a new virtualenv ===
-# Usage in .envrc:
-#    layout virtualenv <version> <name>
-layout_virtualenv() {
-    local pyversion=$1
-    pyenv local ${pyversion}
-}
-
 # === Activate a virtualenv ===
 # Note that pyenv-virtualenv uses 'python -m venv' if it is
 # available (CPython 3.3 and newer) and  'virtualenv' otherwise
 # Usage in .envrc:
 #    layout activate <name>
 layout_activate() {
-    if has pyenv; then
-        local pyenvprefix=$(pyenv prefix)
-        local pyversion=$(pyenv version-name)
-        local pvenv="$1"
-        # Below initialization is necessary to recall ;(
+	local pyenvprefix=$(pyenv prefix)
+	local pyversion=$(pyenv version-name)
+	local pvenv="$1"
 
-        pyenv activate ${pvenv}
-    else
-        source ${VIRTUAL_ENV}/bin/activate
-    fi
+	pyenv activate ${pvenv}
 }

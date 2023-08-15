@@ -57,3 +57,7 @@
 (package! py-yapf)
 (package! typopunct)
 (package! langtool)
+(package! numpydoc)
+(package! org-cv
+  :recipe (:host gitlab
+           :repo "Titan-C/org-cv"))

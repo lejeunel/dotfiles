@@ -129,6 +129,7 @@ Set these variables:
 #+end_src
 
 * Python
+
 Bindings and functions to add breakpoints.
 #+begin_src emacs-lisp :tangle yes
 (defvar python--pdb-breakpoint-string "breakpoint()")
@@ -158,17 +159,23 @@ Bindings and functions to add breakpoints.
       :desc "Insert breakpoint"    "d" 'python-add-breakpoint)
 #+end_src
 
-Use black for format buffer
+Generate numpy-style docstring automatically from function definition.
 #+begin_src emacs-lisp :tangle yes
+(use-package! numpydoc
+  :ensure t
+  :init
+  (setq numpydoc-insertion-style 'yas))
 
-(use-package! python-black
-  :demand t
-  :after python)
-(add-hook! 'python-mode-hook #'python-black-on-save-mode)
 (map! :localleader
-      (:map python-mode-map
-       "f" #'python-black-buffer))
+      :map python-mode-map
+      :desc "Auto docstring"    "s" 'numpydoc-generate)
 #+end_src
+
+Tell pyright where virtual environments are located.
+#+begin_src emacs-lisp :tangle yes
+(setq lsp-pyright-venv-path (concat (getenv "HOME") "/.pyenv/versions"))
+#+end_src
+
 * Org
 :PROPERTIES:
 :ID:       5472790a-3003-40f9-9b1d-138eb6d72734
@@ -251,6 +258,9 @@ Use black for format buffer
                   (apostrophe :utf-8 "’" :html "&rsquo;")))
 
 (add-to-list 'org-export-smart-quotes-alist fr-quotes)
+
+(use-package! ox-awesomecv
+  :after org)
 #+end_src
 
 ** Org-ref / bibtex

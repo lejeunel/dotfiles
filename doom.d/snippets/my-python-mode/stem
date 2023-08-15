@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: stem
-# key: i
-# --
-plt.stem(${1:arr});plt.show()
