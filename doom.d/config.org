@@ -1,6 +1,13 @@
 #+TITLE:       Doom Emacs configuration
 #+AUTHOR:      Laurent Lejeune
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://orgmode.org/worg/style/worg.css"/>
+#+SETUPFILE: setup.org
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../org/styles/org.css"/>
+
+* Introduction
+
+This uses the [[https://github.com/doomemacs/doomemacs][doom-emacs]]
+configuration framework which provides sane defaults, hence this personal config file is
+pretty minimal in itself.
 
 * General Bindings
 
@@ -24,50 +31,11 @@
 (after! org
   (setq org-return-follows-link t))
 #+end_src
-* Dictionary
-#+begin_src emacs-lisp :tangle yes
-(defface ispell-alpha-num-choice-face
-  '((t (:background "black" :foreground "red")))
-  "Face for `ispell-alpha-num-choice-face`."
-  :group 'ispell)
-
-(defface ispell-text-choice-face
-  '((t (:background "black" :foreground "forestgreen")))
-  "Face for `ispell-text-choice-face`."
-  :group 'ispell)
-
-(defun my-ispell-change-dictionaries ()
-"Switch between language dictionaries."
-(interactive)
-  (let ((choice (read-char-exclusive (concat
-          "["
-          (propertize "E" 'face 'ispell-alpha-num-choice-face)
-          "]"
-          (propertize "nglish" 'face 'ispell-text-choice-face)
-          " | ["
-          (propertize "F" 'face 'ispell-alpha-num-choice-face)
-          "]"
-          (propertize "rench" 'face 'ispell-text-choice-face)))))
-    (cond
-      ((eq choice ?E)
-        (setq flyspell-default-dictionary "english")
-        (setq ispell-dictionary "english")
-        (setq ispell-personal-dictionary "/home/laurent/aspell.en.pws")
-        (ispell-kill-ispell)
-        (message "English"))
-      ((eq choice ?F)
-        (setq flyspell-default-dictionary "french")
-        (setq ispell-dictionary "french")
-        (setq ispell-personal-dictionary "/home/laurent/aspell.fr.pws")
-        (ispell-kill-ispell)
-        (message "French"))
-      (t (message "No changes have been made."))) ))
-#+end_src
 
 * Appearance
+
 #+begin_src emacs-lisp :tangle yes
 (all-the-icons-ivy-setup)
-
 (setq doom-theme 'doom-dracula)
 (setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 19)
       doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
@@ -79,35 +47,21 @@
 (map! :localleader
       :map LaTeX-mode-map
       :desc "Master"    "m" 'TeX-command-master)
-(setq TeX-parse-self t) ; Enable parse on load.
-(setq TeX-auto-save t) ; Enable parse on save.
-
-(require 'ox-extra)
-(setq TeX-view-program-list
-      '(("zathura"
-	 ("zathura" (mode-io-correlate "-sync.sh")
-	  " "
-	  (mode-io-correlate "%n:1:%t ")
-	  "%o"))))
 #+end_src
 
 * Typopunct
+
 #+begin_src emacs-lisp :tangle yes
 (use-package! typopunct
   :config
   (typopunct-change-language 'french t))
   #+end_src
-* Iflipb
-#+begin_src emacs-lisp :tangle yes
-(use-package! iflipb
-:config
-    (setq iflipb-ignore-buffers '("(?!(\*Python\*))(^[*])")))
-#+end_src
+
 * Languagetool
-Download standalone server from https://languagetool.org/download/LanguageTool-stable.zip and unzip somewhere.
-Set these variables:
+
+Download standalone [[https://languagetool.org/][LanguageTool]] server from https://languagetool.org/download/LanguageTool-stable.zip and unzip, then set these variables:
 #+begin_src emacs-lisp :tangle yes
-(setq langtool-language-tool-jar "/home/laurent/bin/LanguageTool-5.2/languagetool-commandline.jar")
+(setq langtool-language-tool-jar (concat (getenv "HOME") "/bin/LanguageTool-5.2/languagetool-commandline.jar"))
 
 (defun langtool-autoshow-detail-popup (overlays)
   (when (require 'popup nil t)
@@ -123,6 +77,7 @@ Set these variables:
 #+end_src
 
 * YAML
+
 #+begin_src emacs-lisp :tangle yes
 (use-package! yaml-mode
   :ensure t
@@ -131,7 +86,9 @@ Set these variables:
 
 * Python
 
-Bindings and functions to add breakpoints.
+** Breakpoints
+
+Bindings and functions to add and highlight breakpoints.
 #+begin_src emacs-lisp :tangle yes
 (defvar python--pdb-breakpoint-string "breakpoint()")
 (defun python-add-breakpoint ()
@@ -160,7 +117,11 @@ Bindings and functions to add breakpoints.
       :desc "Insert breakpoint"    "d" 'python-add-breakpoint)
 #+end_src
 
-Generate numpy-style docstring automatically from function definition.
+** Docstrings
+
+Generate numpy-style docstring automatically from function definition
+with [[https://github.com/douglasdavis/numpydoc.el][numpydoc.el]].
+
 #+begin_src emacs-lisp :tangle yes
 (use-package! numpydoc
   :ensure t
@@ -171,6 +132,8 @@ Generate numpy-style docstring automatically from function definition.
       :map python-mode-map
       :desc "Auto docstring"    "s" 'numpydoc-generate)
 #+end_src
+
+** Pyright
 
 Tell pyright where virtual environments are located.
 #+begin_src emacs-lisp :tangle yes
@@ -261,7 +224,7 @@ Detect french-style quotes when exporting
 (add-to-list 'org-export-smart-quotes-alist fr-quotes)
 #+end_src
 
-Exporter for the awesomecv latex class.
+Exporter for the [[https://github.com/posquit0/Awesome-CV][awesome-cv]] latex class.
 #+begin_src emacs-lisp :tangle yes
 (use-package! ox-awesomecv
   :after org)
@@ -299,8 +262,6 @@ background of code to whatever theme I'm using's background"
         (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
             org-ref-default-bibliography "~/org/refs.bib"
             bibtex-completion-bibliography org-ref-default-bibliography
-            org-ref-pdf-directory "~/Nextcloud/papers/"
-            bibtex-completion-library-path "~/Nextcloud/papers"
             bibtex-completion-notes-path "~/org/paper-notes/paper-notes.org"
             bibtex-completion-pdf-open-function
                 (lambda (fpath)
