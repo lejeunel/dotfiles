@@ -63,7 +63,7 @@
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       (dired +ranger)             ; making dired pretty [functional]
+       dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ;;ibuffer         ; interactive buffer management
        vc                ; version-control and Emacs, sitting in a tree
@@ -76,9 +76,9 @@
        ;;vterm             ; another terminals in Emacs
 
        :checkers
-       syntax              ; tasing you for every semicolon you forget
+       ;; syntax              ; tasing you for every semicolon you forget
        ;;spell             ; tasing you for misspelling mispelling
-       ;;grammar           ; tasing grammar mistake every you make
+       grammar           ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
@@ -139,7 +139,7 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +present +roam2 +dragndrop)               ; organize your plain life in plain text
+       (org +present +roam2 +dragndrop +pretty)               ; organize your plain life in plain text
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
@@ -170,9 +170,6 @@
        ;;irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
-       (write            ; emacs for writers (fiction, notes, papers, etc.)
-        ;;+wordnut         ; wordnet (wn) search
-        +langtool)       ; a proofreader (grammar/style check) for Emacs
 
        :config
        literate

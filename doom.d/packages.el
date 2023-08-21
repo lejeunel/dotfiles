@@ -61,3 +61,4 @@
 (package! org-cv
   :recipe (:host gitlab
            :repo "Titan-C/org-cv"))
+(package! org-auto-tangle)

@@ -5,7 +5,7 @@ i3-wm.binding.exit_app: q
 i3-wm.gaps.inner.size: 15
 i3-wm.window.border.size: 4
 
-gnome.terminal.font: Hack Nerd Font 14
+gnome.terminal.font: FiraCode Nerd Font 14
 gtk.font_name: Ubuntu 13
 gtk.monospace_font_name: Ubuntu 13
 gnome.terminal.use-transparent-background: false

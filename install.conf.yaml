@@ -42,5 +42,8 @@
     command: ./install-nerd-fonts
     description: Installing nerd fonts
   -
+    command: ./install-mp-fonts
+    description: Installing mixed fonts
+  -
     command: curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |sh && mv tectonic ~/.local/bin/
     description: Installing tectonic

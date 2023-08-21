@@ -1,6 +1,5 @@
 #+TITLE:       Doom Emacs configuration
 #+AUTHOR:      Laurent Lejeune
-#+SETUPFILE: setup.org
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../org/styles/org.css"/>
 
 * Introduction
@@ -37,9 +36,16 @@ pretty minimal in itself.
 #+begin_src emacs-lisp :tangle yes
 (all-the-icons-ivy-setup)
 (setq doom-theme 'doom-dracula)
-(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 19)
-      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 20)
-      ivy-posframe-font (font-spec :family "Hack Nerd Font Mono" :size 19))
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 19 :height 1.0)
+     doom-variable-pitch-font (font-spec :family "ETBembo"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! mixed-pitch
+  :hook (org-mode . mixed-pitch-mode)
+  :config
+  (setq mixed-pitch-set-height t)
+  (set-face-attribute 'variable-pitch nil :height 1.5))
 #+end_src
 
 * LaTeX
@@ -60,6 +66,7 @@ pretty minimal in itself.
 * Languagetool
 
 Download standalone [[https://languagetool.org/][LanguageTool]] server from https://languagetool.org/download/LanguageTool-stable.zip and unzip, then set these variables:
+
 #+begin_src emacs-lisp :tangle yes
 (setq langtool-language-tool-jar (concat (getenv "HOME") "/bin/LanguageTool-5.2/languagetool-commandline.jar"))
 
@@ -85,7 +92,6 @@ Download standalone [[https://languagetool.org/][LanguageTool]] server from http
 #+end_src
 
 * Python
-
 ** Breakpoints
 
 Bindings and functions to add and highlight breakpoints.
@@ -144,17 +150,18 @@ Tell pyright where virtual environments are located.
 :PROPERTIES:
 :ID:       5472790a-3003-40f9-9b1d-138eb6d72734
 :END:
-** Appearance
+Set PDF viewer.
 #+begin_src emacs-lisp :tangle yes
 (after! org
-    (setq org-startup-folded 'overview
-        org-ellipsis " ▾ "
-        org-hide-emphasis-markers t
-        org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿")
-        org-list-demote-modify-bullet '(("+" . "-") ("-" . "+"))))
+    (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s")))
+#+end_src
 
-(add-hook! 'org-mode-hook
-           #'+org-pretty-mode)
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode)
+  :config
+  (setq org-auto-tangle-default t))
 #+end_src
 
 ** Backends/Exporters
@@ -162,66 +169,68 @@ Tell pyright where virtual environments are located.
 A couple custom LaTeX classes.
 
 #+begin_src emacs-lisp :tangle yes
-(add-to-list 'org-latex-classes
-             '("koma-article" "\\documentclass{scrartcl}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+(after! ox-latex
+    (add-to-list 'org-latex-classes
+                '("koma-article" "\\documentclass{scrartcl}"
+                ("\\section{%s}" . "\\section*{%s}")
+                ("\\subsection{%s}" . "\\subsection*{%s}")
+                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-(add-to-list 'org-latex-classes
-             '("koma-article-fr" "\\documentclass[french]{scrartcl}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+    (add-to-list 'org-latex-classes
+                '("koma-article-fr" "\\documentclass[french]{scrartcl}"
+                ("\\section{%s}" . "\\section*{%s}")
+                ("\\subsection{%s}" . "\\subsection*{%s}")
+                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-(add-to-list 'org-latex-classes
-             '("memoir-fr"
-               "\\documentclass[a4paper,11pt,titlepage, twoside]{memoir}
-                \\usepackage[utf8]{inputenc}
-                \\usepackage[T1]{fontenc}
-                \\usepackage{fixltx2e}
-                \\usepackage{hyperref}
-                \\usepackage{mathpazo}
-                \\usepackage{color}
-                \\usepackage{enumerate}
-                \\definecolor{bg}{rgb}{0.95,0.95,0.95}
-                \\tolerance=1000
-                \\linespread{1.1}
-                \\hypersetup{pdfborder=0 0 0}"
-               ("\\chapter{%s}" . "\\chapter*{%s}")
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+    (add-to-list 'org-latex-classes
+                '("memoir-fr"
+                "\\documentclass[a4paper,11pt,titlepage, twoside]{memoir}
+                    \\usepackage[utf8]{inputenc}
+                    \\usepackage[T1]{fontenc}
+                    \\usepackage{fixltx2e}
+                    \\usepackage{hyperref}
+                    \\usepackage{mathpazo}
+                    \\usepackage{color}
+                    \\usepackage{enumerate}
+                    \\definecolor{bg}{rgb}{0.95,0.95,0.95}
+                    \\tolerance=1000
+                    \\linespread{1.1}
+                    \\hypersetup{pdfborder=0 0 0}"
+                ("\\chapter{%s}" . "\\chapter*{%s}")
+                ("\\section{%s}" . "\\section*{%s}")
+                ("\\subsection{%s}" . "\\subsection*{%s}")
+                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-(add-to-list 'org-latex-classes
-             '("TMI"
-               "\\documentclass[journal, web, twoside]{ieeecolor}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+    (add-to-list 'org-latex-classes
+                '("TMI"
+                "\\documentclass[journal, web, twoside]{ieeecolor}"
+                ("\\section{%s}" . "\\section*{%s}")
+                ("\\subsection{%s}" . "\\subsection*{%s}")
+                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-
-(add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))
-
+)
 #+end_src
 
+
 Detect french-style quotes when exporting
-#+begin_src emacs-lisp :tangle yes
-(setq fr-quotes '("fr"
-                  (primary-opening :utf-8 "« " :html "&laquo;&nbsp;" :latex "\\enquote{" :texinfo "@guillemetleft{}@tie{}")
-                  (primary-closing :utf-8 " »" :html "&nbsp;&raquo;" :latex "}" :texinfo "@tie{}@guillemetright{}")
-                  (secondary-opening :utf-8 "« " :html "&laquo;&nbsp;" :latex "\\\enquote{" :texinfo "@guillemetleft{}@tie{}")
-                  (secondary-closing :utf-8 " »" :html "&nbsp;&raquo;" :latex "\\}" :texinfo "@tie{}@guillemetright{}")
-                  (apostrophe :utf-8 "’" :html "&rsquo;")))
-(add-to-list 'org-export-smart-quotes-alist fr-quotes)
+
+#+begin_src emacs-lisp :tangle no
+(after! ox
+    (setq fr-quotes '("fr"
+                    (primary-opening :utf-8 "« " :html "&laquo;&nbsp;" :latex "\\enquote{" :texinfo "@guillemetleft{}@tie{}")
+                    (primary-closing :utf-8 " »" :html "&nbsp;&raquo;" :latex "}" :texinfo "@tie{}@guillemetright{}")
+                    (secondary-opening :utf-8 "« " :html "&laquo;&nbsp;" :latex "\\\enquote{" :texinfo "@guillemetleft{}@tie{}")
+                    (secondary-closing :utf-8 " »" :html "&nbsp;&raquo;" :latex "\\}" :texinfo "@tie{}@guillemetright{}")
+                    (apostrophe :utf-8 "’" :html "&rsquo;")))
+    (add-to-list 'org-export-smart-quotes-alist fr-quotes))
 #+end_src
 
 Exporter for the [[https://github.com/posquit0/Awesome-CV][awesome-cv]] latex class.
@@ -250,7 +259,10 @@ background of code to whatever theme I'm using's background"
 (add-hook 'org-export-before-processing-hook 'my/org-inline-css-hook)
 #+end_src
 
-** Org-ref / bibtex
+** Org-ref / bibtex :ATTACH:
+:PROPERTIES:
+:DIR:      /home/laurent/.dotfiles/doom.d/
+:END:
 #+begin_src emacs-lisp :tangle yes
 (use-package! org-ref
     :init
@@ -269,5 +281,5 @@ background of code to whatever theme I'm using's background"
 
 (map! :localleader
       :map org-mode-map
-      :desc "Insert citation"    "c" 'ivy-bibtex)
+      :desc "Insert citation" "c" 'ivy-bibtex)
 #+end_src
