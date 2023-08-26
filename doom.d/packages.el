@@ -62,3 +62,6 @@
   :recipe (:host gitlab
            :repo "Titan-C/org-cv"))
 (package! org-auto-tangle)
+(package! org-appear
+  :recipe (:host github
+           :repo "awth13/org-appear"))

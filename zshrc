@@ -8,6 +8,10 @@ export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM=~/.zsh_custom/
 export ZSH_DISABLE_COMPFIX=true
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
 plugins=(
     docker
     git
@@ -44,11 +48,6 @@ export POETRY_VIRTUALENVS_CREATE=false
 export PYENV_ROOT=$HOME/.pyenv
 export PYTHON_KEYRING_BACKEND=keyring.backends.fail.Keyring
 export PATH="$PYENV_ROOT/bin:$PATH"
-
-if [ -n "$(which pyenv)" ]; then
-  eval "$(pyenv init -)"
-  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-fi
 
 if [ -n "$(which direnv)" ]; then
   eval "$(direnv hook $(basename $SHELL))"

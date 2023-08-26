@@ -4,10 +4,8 @@
 
 * Introduction
 
-This uses the [[https://github.com/doomemacs/doomemacs][doom-emacs]]
-configuration framework which provides sane defaults, hence this personal config file is
-pretty minimal in itself.
-
+This uses the [[https://github.com/doomemacs/doomemacs][doom-emacs]] configuration framework which provides sane defaults,
+hence this personal config file is pretty minimal in itself.
 * General Bindings
 
 #+begin_src emacs-lisp :tangle yes
@@ -19,16 +17,6 @@ pretty minimal in itself.
     :desc "Next buffer" "k" #'iflipb-next-buffer
     :desc "Previous buffer" "j" #'iflipb-previous-buffer
     :desc "Switch window" "TAB" #'ace-window)
-
-(after! ranger
-    (setq ranger-override-dired 'ranger)
-    (setq ranger-override-dired-mode t))
-
-(after! counsel
-  (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
-
-(after! org
-  (setq org-return-follows-link t))
 #+end_src
 
 * Appearance
@@ -45,16 +33,75 @@ pretty minimal in itself.
   :hook (org-mode . mixed-pitch-mode)
   :config
   (setq mixed-pitch-set-height t)
-  (set-face-attribute 'variable-pitch nil :height 1.5))
+  (set-face-attribute 'variable-pitch nil :height 1.2))
 #+end_src
 
+Patch theme to use different font sizes in org headings.
+
+#+begin_src emacs-lisp :tangle yes
+(custom-theme-set-faces!
+    'doom-dracula
+        '(org-level-4 :inherit outline-4 :height 1.0)
+        '(org-level-3 :inherit outline-3 :height 1.1)
+        '(org-level-2 :inherit outline-2 :height 1.3)
+        '(org-level-1 :inherit outline-1 :height 1.5)
+        '(org-document-title :height 1.5 :underline nil))
+#+end_src
+
+Define a simple custom minor-mode to writeroom that further disactivate:
+- Line numbers
+- git gutter
+- EOB tilde
+
+#+begin_src emacs-lisp :tangle yes
+(define-minor-mode ll/writeroom-mode
+  "Toggles global writeroom-mode."
+  nil   ; Initial value, nil for disabled
+  :lighter ll/writeroom-mode
+  :global t
+  (if ll/writeroom-mode
+      (progn
+        (display-line-numbers-mode -1)
+        (git-gutter-mode -1)
+        (vi-tilde-fringe-mode -1)
+        (writeroom-mode 1)
+        (message "writeroom-mode activated!"))
+    (progn
+        (display-line-numbers-mode 1)
+        (git-gutter-mode 1)
+        (vi-tilde-fringe-mode 1)
+        (writeroom-mode -1)
+        (message "writeroom-mode deactivated!"))))
+#+end_src
+
+Hide emphasis markups mark.
+#+begin_src emacs-lisp :tangle yes
+(setq org-hide-emphasis-markers t)
+#+end_src
+
+Show emphasis marker when cursor is on region.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package! org-appear
+  :config
+  (setq org-appear-autolinks t))
+(add-hook! org-mode :append #'org-appear-mode)
+#+end_src
+
+Force company to use fixed-pitch font
+#+begin_src emacs-lisp :tangle yes
+(use-package! company
+  :ensure t
+  :custom-face
+  (company-tooltip
+   ((t (:family "FiraCode Nerd Font" :height 1.0)))))
+#+end_src
 * LaTeX
 #+begin_src emacs-lisp :tangle yes
 (map! :localleader
       :map LaTeX-mode-map
       :desc "Master"    "m" 'TeX-command-master)
 #+end_src
-
 * Typopunct
 
 #+begin_src emacs-lisp :tangle yes
@@ -64,7 +111,6 @@ pretty minimal in itself.
   #+end_src
 
 * Languagetool
-
 Download standalone [[https://languagetool.org/][LanguageTool]] server from https://languagetool.org/download/LanguageTool-stable.zip and unzip, then set these variables:
 
 #+begin_src emacs-lisp :tangle yes
@@ -136,7 +182,7 @@ with [[https://github.com/douglasdavis/numpydoc.el][numpydoc.el]].
 
 (map! :localleader
       :map python-mode-map
-      :desc "Auto docstring"    "s" 'numpydoc-generate)
+      :desc "Auto docstring"  "s" 'numpydoc-generate)
 #+end_src
 
 ** Pyright
@@ -150,6 +196,13 @@ Tell pyright where virtual environments are located.
 :PROPERTIES:
 :ID:       5472790a-3003-40f9-9b1d-138eb6d72734
 :END:
+
+#+begin_src emacs-lisp :tangle yes
+(after! org
+  (setq org-return-follows-link t)
+  (setq org-directory "~/org/"))
+#+end_src
+
 Set PDF viewer.
 #+begin_src emacs-lisp :tangle yes
 (after! org
@@ -162,6 +215,12 @@ Set PDF viewer.
   :hook (org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default t))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(map! :localleader
+      :map org-mode-map
+      :desc "Write room"    "w" 'll/writeroom-mode)
 #+end_src
 
 ** Backends/Exporters
@@ -259,7 +318,7 @@ background of code to whatever theme I'm using's background"
 (add-hook 'org-export-before-processing-hook 'my/org-inline-css-hook)
 #+end_src
 
-** Org-ref / bibtex :ATTACH:
+** Org-ref / bibtex
 :PROPERTIES:
 :DIR:      /home/laurent/.dotfiles/doom.d/
 :END:
@@ -282,4 +341,11 @@ background of code to whatever theme I'm using's background"
 (map! :localleader
       :map org-mode-map
       :desc "Insert citation" "c" 'ivy-bibtex)
+#+end_src
+
+* Others
+
+#+begin_src emacs-lisp :tangle yes
+(after! counsel
+  (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
 #+end_src
