@@ -93,7 +93,7 @@ window#waybar {
 #workspaces button.focused,
 #clock {
     color: @theme_bg_color;
-    background-color: @theme_selected_bg_color;
+    background-color: #f5bde6;
 }
 
 #custom-zeit.tracking {

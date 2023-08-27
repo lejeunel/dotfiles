@@ -6,7 +6,7 @@
 set $gtk-theme Dracula
 set $icon-theme Dracula
 set $cursor-theme xcursor-breeze
-set $gui-font Roboto 11
+set $gui-font Roboto 14
 set $term-font JetBrainsMono Nerd Font 14
 set $gtk-color-scheme prefer-dark
 set $kvantum-theme Matcha-Dark
@@ -37,17 +37,34 @@ set $base      #24273a
 set $mantle    #1e2030
 set $crust     #181926
 
+set $color0  #141a1b
+set $color1  #282a2b
+set $color2  #3B758C
+set $color3  #41535B
+set $color4  #43a5d5
+set $color5  #d6d6d6
+set $color6  #eeeeee
+set $color7  #ffffff
+set $color8  #Cd3f45
+set $color9  #db7b55
+set $color10 #e6cd69
+set $color11 #9fca56
+set $color12 #16a085
+set $color13 #55b5db
+set $color14 #a074c4
+set $color15 #8a553f
+
 #$color0
-set $background-color $base
+set $background-color $color0
 #$color6
-set $text-color $blue
+set $text-color $color6
 #color1
-set $selection-color $sky
+set $selection-color $color1
 #color12
-set $accent-color $mauve
+set $accent-color $color12
 
 # class                  border     bground     text        indicator   child_border
-client.focused           $lavender  $surface0      $text       $rosewater  $lavender
+client.focused           $lavender  $surface0      $text       $rosewater  $pink
 client.focused_inactive  $mauve     $mantle     $text       $rosewater  $base
 client.focused_tab_title $mauve     $mantle     $text
 client.unfocused         $crust    $mantle       $subtext1   $rosewater  $crust
