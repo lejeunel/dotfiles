@@ -20,7 +20,8 @@ input type:keyboard {
     xkb_layout "us"
     xkb_variant "qwerty-fr"
 }
-include /etc/sway/outputs/*
+include $HOME/.config/sway/outputs/*
+include $HOME/.config/sway/outputs/*
 
 # enable modes
 include $HOME/.config/sway/modes/*
@@ -28,8 +29,7 @@ include $HOME/.config/sway/modes/*
 # only enable this if every app you use is compatible with wayland
 # xwayland disable
 
-# include additional configs e.g. to autostart applications
-include $HOME/.config/sway/config.d/*
-
 # user config
 include $HOME/.config/sway/config.d/*.conf
+
+output * bg $HOME/Pictures/dracula-wallpapers/first-collection/manjaro.png fill
