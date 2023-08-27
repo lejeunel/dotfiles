@@ -1,0 +1,6 @@
+* {
+lightbg: #24273a;
+background: #24273a;
+lightfg: #c6a0f6;
+foreground: #8aadf4;
+}

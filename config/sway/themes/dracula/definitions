@@ -1,0 +1,54 @@
+# based on Base16 Seti UI
+# Author: Appelgriebsch
+
+
+# some global theme specific variables
+set $gtk-theme Matcha-dark-sea
+set $icon-theme Papirus-Dark-Maia
+set $cursor-theme xcursor-breeze
+set $gui-font Roboto 11
+set $term-font JetBrainsMono Nerd Font 14
+set $gtk-color-scheme prefer-dark
+set $kvantum-theme Matcha-Dark
+
+set $rosewater #f4dbd6
+set $flamingo  #f0c6c6
+set $pink      #f5bde6
+set $mauve     #c6a0f6
+set $red       #ed8796
+set $maroon    #ee99a0
+set $peach     #f5a97f
+set $green     #a6da95
+set $teal      #8bd5ca
+set $sky       #91d7e3
+set $sapphire  #7dc4e4
+set $blue      #8aadf4
+set $lavender  #b7bdf8
+set $text      #cad3f5
+set $subtext1  #b8c0e0
+set $subtext0  #a5adcb
+set $overlay2  #939ab7
+set $overlay1  #8087a2
+set $overlay0  #6e738d
+set $surface2  #5b6078
+set $surface1  #494d64
+set $surface0  #363a4f
+set $base      #24273a
+set $mantle    #1e2030
+set $crust     #181926
+
+#$color0
+set $background-color $base
+#$color6
+set $text-color $blue
+#color1
+set $selection-color $sky
+#color12
+set $accent-color $mauve
+
+# class                  border     bground     text        indicator   child_border
+client.focused           $lavender  $surface0      $text       $rosewater  $lavender
+client.focused_inactive  $mauve     $mantle     $text       $rosewater  $base
+client.focused_tab_title $mauve     $mantle     $text
+client.unfocused         $crust    $mantle       $subtext1   $rosewater  $crust
+client.urgent            $peach     $surface0     $peach      $overlay0   $peach
