@@ -61,7 +61,7 @@ set $text-color $color6
 #color1
 set $selection-color $color1
 #color12
-set $accent-color $color12
+set $accent-color $pink
 
 # class                  border     bground     text        indicator   child_border
 client.focused           $lavender  $surface0      $text       $rosewater  $pink
