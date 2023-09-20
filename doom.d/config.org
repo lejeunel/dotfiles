@@ -24,8 +24,8 @@ hence this personal config file is pretty minimal in itself.
 #+begin_src emacs-lisp :tangle yes
 (all-the-icons-ivy-setup)
 (setq doom-theme 'doom-dracula)
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 19 :height 1.0))
-     ;;doom-variable-pitch-font (font-spec :family "ETBembo"))
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 19 :height 1.0)
+     doom-variable-pitch-font (font-spec :family "Alegreya"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes

@@ -56,38 +56,23 @@ $bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
 # Moving around:
 #
 # Move your focus around
-## Navigation // Move focus // $mod + ↑ ↓ ← → ##
+## Navigation // Move focus // $mod + h j k l ##
 $bindsym $mod+$left focus left
 $bindsym $mod+$down focus down
 $bindsym $mod+$up focus up
 $bindsym $mod+$right focus right
 
-$bindsym $mod+$left_alt focus left
-$bindsym $mod+$down_alt focus down
-$bindsym $mod+$up_alt focus up
-$bindsym $mod+$right_alt focus right
-
-## Navigation // Move focused window // $mod + Shift + ↑ ↓ ← → ##
+## Navigation // Move focused window // $mod + Shift + h j k l ##
 $bindsym $mod+Shift+$left move left
 $bindsym $mod+Shift+$down move down
 $bindsym $mod+Shift+$up move up
 $bindsym $mod+Shift+$right move right
 
-$bindsym $mod+Shift+$left_alt move left
-$bindsym $mod+Shift+$down_alt move down
-$bindsym $mod+Shift+$up_alt move up
-$bindsym $mod+Shift+$right_alt move right
-
-## Navigation // Move focused workspace // $mod + Alt + ↑ ↓ ← → ##
+## Navigation // Move focused workspace // $mod + Alt + h j k l ##
 #$bindsym $mod+Alt+$right move workspace to output right
 #$bindsym $mod+Alt+$left move workspace to output left
 #$bindsym $mod+Alt+$down move workspace to output down
 #$bindsym $mod+Alt+$up move workspace to output up
-#
-#$bindsym $mod+Alt+$right_alt move workspace to output right
-#$bindsym $mod+Alt+$left_alt move workspace to output left
-#$bindsym $mod+Alt+$down_alt move workspace to output down
-#$bindsym $mod+Alt+$up_alt move workspace to output up
 
 ## Navigation // List all open windows in last-recently-used order ##
 $bindsym $mod+p exec env RUST_BACKTRACE=1 swayr switch-window &>> /tmp/swayr.log
@@ -130,9 +115,6 @@ $bindsym $mod+Shift+0 move container to workspace $ws10, exec $focus_ws $ws10
 ## Launch // Open launcher in a new workspace ##
 $bindsym $mod+Shift+d exec /usr/share/sway/scripts/first-empty-workspace.py --switch, exec $menu
 
-## Navigation // Switch to a new workspace ##
-$bindsym $mod+n exec /usr/share/sway/scripts/first-empty-workspace.py --switch
-
 ## Action // Move focused window to a new workspace ##
 $bindsym $mod+Shift+n exec /usr/share/sway/scripts/first-empty-workspace.py --move
 
@@ -147,14 +129,14 @@ $bindsym $mod+b splith
 ## Setting // Split windows vertically ##
 $bindsym $mod+v splitv
 
+## Setting // Tabbed windows ##
 bindsym $mod+w layout tabbed
+
+## Setting // Stacking windows ##
 bindsym $mod+s layout stacking
 
 ## Action // Toggle fullscreen ##
 $bindsym $mod+f fullscreen
-
-## Action // Toggle global fullscreen ##
-# $bindsym $mod+Shift+f fullscreen global
 
 ## Action // Scale up  ##
 $bindsym $alt_mod+plus exec $scale_up
@@ -165,6 +147,9 @@ $bindsym $alt_mod+minus exec $scale_down
 ## Action // Toggle floating ##
 $bindsym $mod+Shift+f floating toggle
 
+## bindsym $mod+t layout toggle tabbed stacking split
+
+
 ## Navigation // Toggle focus between tiling and floating ##
 $bindsym $mod+space focus mode_toggle
 
@@ -173,9 +158,6 @@ $bindsym $mod+a focus parent
 
 ## Launch // Toggle Help ##
 $bindsym $mod+question exec $help
-
-## Launch // Open Support ##
-$bindsym $mod+Shift+s exec xdg-open https://github.com/Manjaro-Sway/manjaro-sway/blob/main/SUPPORT.md
 
 default_border pixel 1
 hide_edge_borders smart

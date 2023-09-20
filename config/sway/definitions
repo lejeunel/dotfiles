@@ -5,16 +5,10 @@ set $mod Mod1
 set $alt_mod Mod4
 
 # Direction keys
-set $left Left
-set $down Down
-set $up Up
-set $right Right
-
-# Alternative direction keys
-set $left_alt h
-set $down_alt j
-set $up_alt k
-set $right_alt l
+set $left h
+set $down j
+set $up k
+set $right l
 
 # Add --to-code to bindsym, support for non-latin layouts
 set $bindsym bindsym --to-code
@@ -139,7 +133,6 @@ set $screenshot_selection_upload $pipe_selection | $swappy_pipe | $upload_pipe
 set $autostart_dex '[ -x "$(command -v dex)" ] && gdbus wait --session org.kde.StatusNotifierWatcher && dex --autostart'
 set $flashfocus '[ -x "$(command -v flashfocus)" ] && flashfocus'
 set $wlsunset '[ -x "$(command -v wlsunset)" ] && /usr/share/sway/scripts/sunset.sh "on"'
-set $autotiling '[ -x "$(command -v autotiling-rs)" ] && autotiling-rs'
 set $foot_server '[ -x "$(command -v foot)" ] && /usr/share/sway/scripts/foot.sh --server'
 set $help_menu '[ -x "$(command -v nwg-wrapper)" ] && [ -f $HOME/.config/nwg-wrapper/help.sh ] && /usr/share/sway/scripts/help.sh'
 set $workspace_icons '[ -x "$(command -v sworkstyle)" ] && sworkstyle -d -l info &> /tmp/sworkstyle.log'
