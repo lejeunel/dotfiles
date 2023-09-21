@@ -11,3 +11,7 @@ Run install script:
 cd .dotfiles
 ./install
 #+end_src
+
+* Notes
+
+Arch package list: [[file:arch_packages][here]]

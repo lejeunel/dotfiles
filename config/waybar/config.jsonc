@@ -23,7 +23,6 @@
         // informational
         "sway/language",
         "custom/clipboard",
-        "custom/zeit",
         "cpu",
         "temperature",
         "memory",
