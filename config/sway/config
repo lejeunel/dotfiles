@@ -33,4 +33,4 @@ include $HOME/.config/sway/modes/*
 # user config
 include $HOME/.config/sway/config.d/*.conf
 
-output * bg $HOME/Pictures/dracula-wallpapers/first-collection/manjaro.png fill
+output * bg $HOME/Pictures/dracula-wallpapers-2/Art/4k/Kraken.png fill

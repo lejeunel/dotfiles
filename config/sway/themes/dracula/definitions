@@ -55,7 +55,7 @@ set $color14 #a074c4
 set $color15 #8a553f
 
 #$color0
-set $background-color $color0
+set $background-color $base
 #$color6
 set $text-color $color6
 #color1

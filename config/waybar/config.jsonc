@@ -18,7 +18,7 @@
     "position": "top",
 
     "modules-left": ["custom/menu", "sway/workspaces", "custom/scratchpad"],
-    "modules-center": ["custom/wf-recorder", "sway/mode", "custom/weather"],
+    "modules-center": ["custom/wf-recorder", "sway/mode", "sway/window"],
     "modules-right": [
         // informational
         "sway/language",
@@ -66,7 +66,7 @@
 
     "clock": {
         "interval": 60,
-        "format": "{:%e %b %Y %H:%M}",
+        "format": "{:%a %e %b %Y %H:%M}",
         "tooltip": true,
         "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>",
         "on-click": "swaymsg exec \\$calendar"
@@ -278,7 +278,7 @@
         "tooltip": true,
         "interval": 3600,
         // accepts -c/--city <city> -t/--temperature <C/F> -d/--distance <km/miles>
-        "exec": "/usr/share/sway/scripts/weather.py",
+        "exec": "/usr/share/sway/scripts/weather.py -t C -c Lyon",
         "return-type": "json",
         "format-icons": {
             "Unknown": "",

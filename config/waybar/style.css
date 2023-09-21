@@ -50,9 +50,18 @@
 
 /* The whole bar */
 window#waybar {
-    background: @theme_bg_color;
-    color: @wm_icon_bg;
-    font-size: 14px;
+	background-color: transparent;
+    font-size: 16px;
+}
+window#waybar:first-child > box {
+    /*margin: 4px;
+    padding: 0px 4px 0px 4px;
+    border-radius: 10px 10px ;*/
+    background-color: #282a36 ;
+    color: #f8f8f2;
+    /*border-bottom: 1px solid #bd93f9;
+    border-top: 1px solid #50fa7b;*/
+
 }
 
 /* Each module */
@@ -82,11 +91,13 @@ window#waybar {
 #tray {
     padding-left: 10px;
     padding-right: 10px;
+    border-radius: 10px;
 }
 
 /* -----------------------------------------------------------------------------
  * Module styles
  * -------------------------------------------------------------------------- */
+
 
 #custom-scratchpad,
 #custom-menu,
@@ -94,7 +105,14 @@ window#waybar {
 #clock {
     color: @theme_bg_color;
     background-color: #f5bde6;
+    border-radius: 10px;
 }
+
+/* #workspaces button.hover */
+/*  { */
+/*     color: #f0c6c6; */
+/*     border-radius: 10px; */
+/* } */
 
 #custom-zeit.tracking {
     background-color: @warning_color;
@@ -139,6 +157,7 @@ window#waybar {
 #custom-menu {
     padding-left: 8px;
     padding-right: 13px;
+    margin: 0 5px;
 }
 
 #memory {
@@ -180,10 +199,6 @@ window#waybar {
     padding-left: 10px;
     padding-right: 10px;
     color: @theme_selected_bg_color;
-}
-
-#workspaces button.focused {
-    border-color: @theme_selected_bg_color;
 }
 
 #workspaces button.urgent {
