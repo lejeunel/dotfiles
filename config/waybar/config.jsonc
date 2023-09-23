@@ -35,7 +35,7 @@
         // media
         "custom/playerctl",
         "idle_inhibitor",
-        "custom/dnd",
+        "custom/notification",
         "pulseaudio",
         "backlight",
 
@@ -68,8 +68,9 @@
         "interval": 60,
         "format": "{:%a %e %b %Y %H:%M}",
         "tooltip": true,
-        "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>",
+        "tooltip-format": "<tt>{calendar}</tt>",
         "on-click": "swaymsg exec \\$calendar"
+
     },
 
     "cpu": {
@@ -119,8 +120,8 @@
             "deactivated": "󰒲"
         },
         "tooltip": true,
-        "tooltip-format-activated": "power-saving disabled",
-        "tooltip-format-deactivated": "power-saving enabled"
+        "tooltip-format-activated": "idle inhibitor disabled",
+        "tooltip-format-deactivated": "idle inhibitor enabled"
     },
 
     "backlight": {
@@ -317,18 +318,25 @@
         "signal": 10
     },
 
-    "custom/dnd": {
-        "interval": "once",
-        "return-type": "json",
-        "format": "{}{icon}",
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
         "format-icons": {
-            "default": "󰚢",
-            "dnd": "󰚣"
+        "notification": "<span foreground='red'><sup></sup></span>",
+        "none": "",
+        "dnd-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-none": "",
+        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-inhibited-none": ""
         },
-        "on-click": "makoctl mode | grep 'do-not-disturb' && makoctl mode -r do-not-disturb || makoctl mode -a do-not-disturb; pkill -RTMIN+11 waybar",
-        "on-click-right": "makoctl restore",
-        "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'do-not-disturb' && echo dnd || echo default) $(makoctl mode | tail -1)",
-        "signal": 11
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     },
 
     "custom/adaptive-light": {
