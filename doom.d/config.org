@@ -24,7 +24,7 @@ hence this personal config file is pretty minimal in itself.
 #+begin_src emacs-lisp :tangle yes
 (all-the-icons-ivy-setup)
 (setq doom-theme 'doom-dracula)
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 18 :height 1.0)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 20 :height 1.0)
      doom-variable-pitch-font (font-spec :family "Alegreya"))
 #+end_src
 
@@ -94,7 +94,7 @@ Force company to use fixed-pitch font
   :ensure t
   :custom-face
   (company-tooltip
-   ((t (:family "FiraCode Nerd Font" :height 1.0)))))
+   ((t (:family "JetBrainsMono Nerd Font" :height 1.0)))))
 #+end_src
 * LaTeX
 #+begin_src emacs-lisp :tangle yes
