@@ -5,12 +5,6 @@
 # Read `man 5 sway` for a complete reference.
 # workspace_layout stacking
 
-# styles - set the folder for your theme definition file
-set $theme $HOME/.config/sway/themes/dracula
-
-# theme variables
-include $theme/definitions
-
 # global variables
 include $HOME/.config/sway/definitions
 
@@ -24,14 +18,48 @@ input type:keyboard {
 include $HOME/.config/sway/outputs/*
 include $HOME/.config/sway/outputs/*
 
-# enable modes
-include $HOME/.config/sway/modes/*
-
 # only enable this if every app you use is compatible with wayland
 # xwayland disable
+
+
+# appearance
+include $HOME/.config/sway/themes/theme
+output * bg $background fill
 
 # user config
 include $HOME/.config/sway/config.d/*.conf
 
-output * bg $HOME/Pictures/dracula-wallpapers-2/Art/4k/Kraken.png fill
-font pango:JetBrainsMono Nerd Font 14
+
+
+## Colors ##
+# Start flavours
+## Base16 Dracula
+# Author: Mike Barkmin (http://github.com/mikebarkmin) based on Dracula Theme (http://github.com/dracula)
+
+set $base00 #282936
+set $base01 #3a3c4e
+set $base02 #4d4f68
+set $base03 #626483
+set $base04 #62d6e8
+set $base05 #e9e9f4
+set $base06 #f1f2f8
+set $base07 #f7f7fb
+set $base08 #ea51b2
+set $base09 #b45bcf
+set $base0A #00f769
+set $base0B #ebff87
+set $base0C #a1efe4
+set $base0D #62d6e8
+set $base0E #b45bcf
+set $base0F #00f769
+# End flavours
+#
+# class                  border     bground     text        indicator   child_border
+client.focused           $base00 $base01 $base04 $base00 $base08
+client.unfocused         $base00 $base00 $base03 $base00 $base00
+client.focused_inactive  $base00 $base00 $base04 $base00 $base00
+client.urgent            $base00 $base00 $base04 $base00 $base00
+
+# enable modes
+include $HOME/.config/sway/modes/*
+

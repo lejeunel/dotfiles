@@ -1,8 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
-#	name = krakapwa
-#	email = olol85@gmail.com
+	name = Laurent Lejeune
+	email = me@lejeunel.org
 [alias]
 	co = checkout
 	br = branch
@@ -15,3 +14,5 @@
 	name = olol85
 [init]
 	defaultBranch = main
+[credential]
+	helper = store

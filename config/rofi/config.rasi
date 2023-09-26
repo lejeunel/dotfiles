@@ -14,23 +14,15 @@ configuration {
 
 * {
     font: "Cantarell 14";
-    foreground: #f8f8f2;
-    background-color: #282a36;
-    active-background: #6272a4;
-    urgent-background: #ff5555;
-    urgent-foreground: #282a36;
-    selected-background: @active-background;
-    selected-urgent-background: @urgent-background;
-    selected-active-background: @active-background;
-    separatorcolor: @active-background;
-    bordercolor: @active-background;
 }
 
+@import "/home/laurent/.config/rofi/themes/colors.rasi"
+
 #window {
-    background-color: @background-color;
-    border:           5;
+    background-color: @background;
+    border:           4;
     border-radius:    6;
-    border-color:     @bordercolor;
+    border-color:     @border-color;
     padding:          15;
 }
 #mainbox {
@@ -48,7 +40,7 @@ configuration {
 #listview {
     fixed-height: 0;
     border:       0px;
-    border-color: @bordercolor;
+    border-color: @border-color;
     spacing:      2px ;
     scrollbar:    false;
     padding:      2px 0px 0px ;
@@ -70,8 +62,8 @@ configuration {
     text-color:       @foreground;
 }
 #element.selected.normal {
-    background-color: @selected-background;
-    text-color:       @foreground;
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;
@@ -104,7 +96,7 @@ configuration {
     border-color: @separatorcolor;
 }
 #button.selected {
-    background-color: @selected-background;
+    background-color: @selected-normal-background;
     text-color:       @foreground;
 }
 #inputbar {
@@ -137,3 +129,4 @@ element-text, element-icon {
     background-color: inherit;
     text-color: inherit;
 }
+

@@ -1,7 +1,9 @@
-set $mode_resize "<span foreground='$color10'>󰉸</span>  \
-<span foreground='$color5'><b>Resize</b></span> <span foreground='$color10'>(<b>↑ ↓ ← →</b>)</span> \
-<span foreground='$color5'><b>Increase Gaps</b></span> <span foreground='$color10'>(<b>+</b>)</span> \
-<span foreground='$color5'><b>Decrease Gaps</b></span> <span foreground='$color10'>(<b>-</b>)</span>"
+set $mode_resize "<span foreground='$base06'>󰉸</span>  \
+<span foreground='$base06'><b>Resize</b></span> <span foreground='$base04'>(<b>↑ ↓ ← →</b>)</span> \
+<span foreground='$base06'><b>Increase Gaps</b></span> <span foreground='$base04'>(<b>+</b>)</span> \
+<span foreground='$base06'><b>Decrease Gaps</b></span> <span foreground='$base04'>(<b>-</b>)</span> \
+<span> -</span>  \
+"
 
 mode --pango_markup $mode_resize {
     # left will shrink the containers width
@@ -28,5 +30,3 @@ mode --pango_markup $mode_resize {
 }
 ## Launch // Resize Mode ##
 $bindsym $mod+r mode $mode_resize
-gaps inner 5px
-gaps outer 5px
