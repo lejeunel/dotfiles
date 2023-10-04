@@ -40,7 +40,7 @@ alias o='mimeopen'
 alias e='emacsclient -nc'
 alias ll='ls -lah'
 
-export EDITOR="vim"
+export EDITOR="emacsclient -nc"
 
 # python
 export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
