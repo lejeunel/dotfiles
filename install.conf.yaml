@@ -20,10 +20,7 @@
 
 - shell:
   -
-    command: curl https://pyenv.run | bash
-    description: Installing pyenv
-  -
-    command: ~/.emacs.d/bin/doom install
+    command: git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d && ~/.emacs.d/bin/doom install
     description: Installing Doom Emacs
     stdin: true
     stdout: true
@@ -33,6 +30,13 @@
     stdin: true
     stdout: true
     stderr: true
+  -
+
+    command: curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+    description: Oh-my-zsh
+    stderr: true
+    stdin: true
+    stdout: true
   -
     command: curl -sS https://starship.rs/install.sh | sh
     description: Starship shell

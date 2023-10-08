@@ -22,7 +22,6 @@ plugins=(
     extract
     z
     pyenv
-    zsh-autosuggestions
 )
 
 

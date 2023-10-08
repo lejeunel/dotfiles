@@ -22,10 +22,10 @@ hence this personal config file is pretty minimal in itself.
 * Appearance
 
 #+begin_src emacs-lisp :tangle yes
-(all-the-icons-ivy-setup)
+;; (all-the-icons-install-fonts)
 (setq doom-theme 'doom-dracula)
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 20 :height 1.0)
-     doom-variable-pitch-font (font-spec :family "Alegreya" :height 1.2))
+     doom-variable-pitch-font (font-spec :family "ETBembo" :height 1.2))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes

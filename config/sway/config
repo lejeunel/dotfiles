@@ -1,35 +1,8 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-# workspace_layout stacking
-
-# global variables
-include $HOME/.config/sway/definitions
-
-# user variables
-include $HOME/.config/sway/definitions.d/*.conf
-
 input type:keyboard {
-    xkb_layout "us"
-    xkb_variant "qwerty-fr"
+	xkb_layout "us"
+	xkb_variant "qwerty-fr"
+	xkb_options caps:swapescape
 }
-include $HOME/.config/sway/outputs/*
-include $HOME/.config/sway/outputs/*
-
-# only enable this if every app you use is compatible with wayland
-# xwayland disable
-
-
-# appearance
-include $HOME/.config/sway/themes/theme
-output * bg $background fill
-
-# user config
-include $HOME/.config/sway/config.d/*.conf
-
-
 
 ## Colors ##
 # Start flavours
@@ -60,6 +33,6 @@ client.unfocused         $base00 $base00 $base03 $base00 $base00
 client.focused_inactive  $base00 $base00 $base04 $base00 $base00
 client.urgent            $base00 $base00 $base04 $base00 $base00
 
-# enable modes
+include $HOME/.config/sway/definitions
+include $HOME/.config/sway/config.d/*
 include $HOME/.config/sway/modes/*
-
