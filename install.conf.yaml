@@ -17,6 +17,7 @@
     ~/.toprc: toprc
     ~/.vlc: vlc
     ~/.wallpapers: wallpapers
+    ~/.bin: bin
 
 - shell:
   -
@@ -30,25 +31,3 @@
     stdin: true
     stdout: true
     stderr: true
-  -
-
-    command: curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
-    description: Oh-my-zsh
-    stderr: true
-    stdin: true
-    stdout: true
-  -
-    command: curl -sS https://starship.rs/install.sh | sh
-    description: Starship shell
-    stderr: true
-    stdin: true
-    stdout: true
-  -
-    command: ./install-nerd-fonts
-    description: Installing nerd fonts
-  -
-    command: ./install-mp-fonts
-    description: Installing mixed fonts
-  -
-    command: curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |sh && mv tectonic ~/.local/bin/
-    description: Installing tectonic

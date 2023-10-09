@@ -1,7 +1,3 @@
-### Key bindings
-#
-# Basics:
-#
 ## Launch // Terminal ##
 $bindsym $mod+Return exec $term
 
@@ -10,6 +6,9 @@ $bindsym $mod+q kill
 
 ## Launch // Open launcher ##
 $bindsym $mod+d exec $menu
+
+## Launch // Open notification center ##
+$bindsym $mod+n exec $notification
 
 ## Launch // Open clipboard ##
 $bindsym $mod+Shift+p exec $clipboard
@@ -22,7 +21,7 @@ $bindsym $mod+Shift+p exec $clipboard
 floating_modifier $mod normal
 
 ## Action // Reload Sway Configuration ##
-$bindsym $mod+Shift+c reload
+$bindsym $mod+Shift+r reload
 
 ## Action // Toggle Waybar ##    
 $bindsym $mod+Shift+b exec pkill -SIGUSR1 waybar

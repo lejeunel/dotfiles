@@ -1,0 +1,18 @@
+window {
+    background-color: rgba (0, 0, 0, 0.0);
+}
+
+#box-outer {
+    /* Define attributes of the box surrounding icons here */
+    background-color: rgba (255, 255, 255, 0.0)
+}
+
+#box-inner {
+    background-color: #363a4f;
+    border-radius: 6px;
+    margin: 0px 9px 9px 0px;
+    padding: 20px;
+    box-shadow: 0px 3px 5px black
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 18px;
+}

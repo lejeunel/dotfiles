@@ -1,6 +1,3 @@
-### Variables
-#
-# Logo key. Use Mod1 for Alt and Mod4 for Super.
 set $mod Mod1
 set $alt_mod Mod4
 
@@ -32,21 +29,22 @@ set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && p
 set $clipboard cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy
 set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to delete" -lines 10 -width 35 | cliphist delete
 
-# zeit tracking
-set $zeit_list zeit list --only-projects-and-tasks --append-project-id-to-task | \
-    rofi -dmenu -font "$gui-font" -p "Select task to track" -lines 10 -width 35 | \
-    /usr/share/sway/scripts/zeit.sh track && \
-    pkill -RTMIN+10 waybar
-
 # Your preferred application launcher
-# set $menu fuzzel
 set $menu rofi -show combi -combi-modi "drun" -terminal $term -ssh-command "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} -e {cmd}" -show-icons -font "$gui-font" -lines 10 -width 35
+
+### Notification
+set $notification swaync-client -t
 
 ### Lockscreen configuration
 set $locking swaylock --daemonize --fade-in 0.4 --ignore-empty-password --screenshots --clock
 
 # bluetooth menu
 set $bluetooth $once $term_float bluetuith
+
+# brightness control
+set $brightness brightnessctl
+set $brightness_up brightnessctl s 50+
+set $brightness_down brightnessctl s 50-
 
 ### Idle configuration
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -76,7 +74,7 @@ set $waybar_position top
 set $pulseaudio $term_float pulsemixer
 
 # help command
-set $help $HOME/.config/sway/scripts/help.sh
+set $help $HOME/.bin/sway/scripts/help.sh
 
 # calendar application
 set $calendar $term_float calcurse
