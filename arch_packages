@@ -61,6 +61,7 @@ tectonic
 tmux
 ttf-et-book
 ttf-jetbrains-mono-nerd
+ttf-joypixels
 unzip
 vim
 waybar
@@ -74,3 +75,4 @@ xorg-xwayland
 yay-git
 zram-generator
 zsh
+zsh-autosuggestions

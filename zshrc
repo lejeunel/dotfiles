@@ -5,7 +5,7 @@ export DISABLE_AUTO_UPDATE="true"
 
 # zsh
 export ZSH=$HOME/.oh-my-zsh
-export ZSH_CUSTOM=~/.zsh_custom/
+export ZSH_CUSTOM=$ZSH/custom
 export ZSH_DISABLE_COMPFIX=true
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -21,7 +21,7 @@ plugins=(
     command-not-found
     extract
     z
-    pyenv
+    zsh-autosuggestions
 )
 
 
@@ -53,3 +53,7 @@ if [ -n "$(which direnv)" ]; then
 fi
 
 eval "$(starship init zsh)"
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
