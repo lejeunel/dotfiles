@@ -1,6 +1,3 @@
-### Variables
-#
-# Logo key. Use Mod1 for Alt and Mod4 for Super.
 set $mod Mod1
 set $alt_mod Mod4
 
@@ -16,27 +13,9 @@ set $bindsym bindsym --to-code
 # For user's convenience, the same for unbindsym
 set $unbindsym unbindsym --to-code
 
-# background
-set $background $HOME/Pictures/wallpaper/first-collection/manjaro.png
-
-# once-script
-set $once /usr/share/sway/scripts/once.sh
-
 # Your preferred terminal emulator
 set $term alacritty
 set $term_float /usr/bin/alacritty --class floating_shell -e
-
-# onscreen bar
-set $onscreen_bar /usr/share/sway/scripts/wob.sh "$accent-color" "$background-color"
-
-# brightness control
-set $brightness /usr/share/sway/scripts/brightness.sh
-set $brightness_up $brightness up | $onscreen_bar
-set $brightness_down $brightness down | $onscreen_bar
-
-# scaling
-set $scale_up /usr/share/sway/scripts/scale.sh up
-set $scale_down /usr/share/sway/scripts/scale.sh down
 
 # audio control
 set $sink_volume pactl get-sink-volume @DEFAULT_SINK@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
@@ -50,21 +29,22 @@ set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && p
 set $clipboard cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy
 set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to delete" -lines 10 -width 35 | cliphist delete
 
-# zeit tracking
-set $zeit_list zeit list --only-projects-and-tasks --append-project-id-to-task | \
-    rofi -dmenu -font "$gui-font" -p "Select task to track" -lines 10 -width 35 | \
-    /usr/share/sway/scripts/zeit.sh track && \
-    pkill -RTMIN+10 waybar
-
 # Your preferred application launcher
-# set $menu fuzzel
 set $menu rofi -show combi -combi-modi "drun" -terminal $term -ssh-command "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} -e {cmd}" -show-icons -font "$gui-font" -lines 10 -width 35
+
+### Notification
+set $notification swaync-client -t
 
 ### Lockscreen configuration
 set $locking swaylock --daemonize --fade-in 0.4 --ignore-empty-password --screenshots --clock
 
 # bluetooth menu
 set $bluetooth $once $term_float bluetuith
+
+# brightness control
+set $brightness brightnessctl
+set $brightness_up brightnessctl s 50+
+set $brightness_down brightnessctl s 50-
 
 ### Idle configuration
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -94,7 +74,7 @@ set $waybar_position top
 set $pulseaudio $term_float pulsemixer
 
 # help command
-set $help $HOME/.config/sway/scripts/help.sh
+set $help $HOME/.bin/sway/scripts/help.sh
 
 # calendar application
 set $calendar $term_float calcurse

@@ -35,7 +35,7 @@
         // media
         "custom/playerctl",
         "idle_inhibitor",
-        "custom/notification",
+        // "custom/notification",
         "pulseaudio",
         "backlight",
 

@@ -12,18 +12,15 @@
     ~/.config: config
     ~/.local: local
     ~/.doom.d: doom.d
-    ~/.emacs.d: emacs.d
     ~/.oh-my-zsh: oh-my-zsh
     ~/.toprc: toprc
     ~/.vlc: vlc
     ~/.wallpapers: wallpapers
+    ~/.bin: bin
 
 - shell:
   -
-    command: curl https://pyenv.run | bash
-    description: Installing pyenv
-  -
-    command: ~/.emacs.d/bin/doom install
+    command: git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d && ~/.emacs.d/bin/doom install
     description: Installing Doom Emacs
     stdin: true
     stdout: true
@@ -33,18 +30,3 @@
     stdin: true
     stdout: true
     stderr: true
-  -
-    command: curl -sS https://starship.rs/install.sh | sh
-    description: Starship shell
-    stderr: true
-    stdin: true
-    stdout: true
-  -
-    command: ./install-nerd-fonts
-    description: Installing nerd fonts
-  -
-    command: ./install-mp-fonts
-    description: Installing mixed fonts
-  -
-    command: curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |sh && mv tectonic ~/.local/bin/
-    description: Installing tectonic
