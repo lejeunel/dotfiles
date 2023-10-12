@@ -25,7 +25,7 @@ hence this personal config file is pretty minimal in itself.
 (all-the-icons-ivy-setup)
 (setq doom-theme 'doom-dracula)
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 20 :height 1.0)
-     doom-variable-pitch-font (font-spec :family "Alegreya" :height 1.2))
+     doom-variable-pitch-font (font-spec :family "ETBembo"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -33,7 +33,7 @@ hence this personal config file is pretty minimal in itself.
   :hook (org-mode . mixed-pitch-mode)
   :config
   (setq mixed-pitch-set-height t)
-  (set-face-attribute 'variable-pitch nil :height 1.2))
+  (set-face-attribute 'variable-pitch nil :height 1.5))
 #+end_src
 
 Patch theme to use different font sizes in org headings.
@@ -71,6 +71,7 @@ Define a simple custom minor-mode to writeroom that further disactivate:
         (git-gutter-mode 1)
         (vi-tilde-fringe-mode 1)
         (writeroom-mode -1)
+        (mixed-pitch-mode 1)
         (message "writeroom-mode deactivated!"))))
 #+end_src
 
