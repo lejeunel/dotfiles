@@ -1,0 +1,1 @@
+export QT_FONT_DPI=140
