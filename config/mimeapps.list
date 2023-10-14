@@ -9,7 +9,7 @@ x-scheme-handler/http=firefox_firefox.desktop
 x-scheme-handler/https=firefox_firefox.desktop
 x-scheme-handler/about=firefox_firefox.desktop
 x-scheme-handler/unknown=firefox_firefox.desktop
-x-scheme-handler/mailto=userapp-Evolution-HBKPB2.desktop
+x-scheme-handler/mailto=userapp-Evolution-OLHTC2.desktop
 
 [Added Associations]
 application/x-lyx=userapp-lyx-DIY4FY.desktop;
@@ -20,7 +20,7 @@ audio/mpeg=vlc.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
 video/x-matroska=org.gnome.Totem.desktop;
 application/octet-stream=gvim.desktop;
-x-scheme-handler/mailto=exo-mail-reader.desktop;userapp-Evolution-HBKPB2.desktop;
+x-scheme-handler/mailto=exo-mail-reader.desktop;userapp-Evolution-HBKPB2.desktop;userapp-Evolution-OLHTC2.desktop;
 image/x-eps=evince.desktop;
 application/gzip=engrampa.desktop;
 application/vnd.openxmlformats-officedocument.presentationml.presentation=libreoffice-impress.desktop;
