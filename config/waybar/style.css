@@ -92,7 +92,6 @@ window#waybar:first-child > box {
 #tray {
     padding-left: 10px;
     padding-right: 10px;
-    border-radius: 10px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -106,14 +105,29 @@ window#waybar:first-child > box {
 #clock {
     color: @base00;
     background-color: @base04;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
-/* #workspaces button.hover */
-/*  { */
-/*     color: #f0c6c6; */
-/*     border-radius: 10px; */
-/* } */
+#workspaces button {
+    border-top: 2px solid transparent;
+    /* To compensate for the top border and still have vertical centering */
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: @base05;
+}
+
+#workspaces button.urgent {
+    border-color: @base08;
+    color: @base08;
+}
+
+button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: @base02;
+    border-radius: 8px;
+}
 
 #custom-zeit.tracking {
     background-color: @base0B;
@@ -193,19 +207,6 @@ window#waybar:first-child > box {
     color: @base08;
 }
 
-#workspaces button {
-    border-top: 2px solid transparent;
-    /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: @base03;
-}
-
-#workspaces button.urgent {
-    border-color: @base08;
-    color: @base08;
-}
 
 #custom-pacman {
     color: @base0B;
