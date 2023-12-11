@@ -13,10 +13,8 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
 plugins=(
-    docker
     git
     vi-mode
-    pip
     colored-man-pages
     command-not-found
     extract
@@ -31,7 +29,7 @@ bindkey "^K" up-line-or-search
 bindkey "^J" down-line-or-search
 bindkey '^ ' autosuggest-accept
 autoload -U zranger
-bindkey -s '^O' 'zranger^M'
+bindkey -s '^O' 'lf^M'
 alias pdfjoin="pdfjoin --paper a4paper --rotateoversize false"
 
 alias tmux='tmux -u'
