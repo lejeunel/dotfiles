@@ -1,0 +1,7 @@
+set $background $HOME/Pictures/dracula-wallpapers-2/Art/4k/Kraken.png
+set $gtk-theme FlatColor
+set $icon-theme Papirus-Dark
+set $cursor-theme xcursor-breeze
+set $gui-font Roboto 12
+set $term-font JetBrainsMono Nerd Font 14
+font pango:JetBrainsMono Nerd Font 14
