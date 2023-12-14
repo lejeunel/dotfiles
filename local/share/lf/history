@@ -1,0 +1,26 @@
+: cmd-lowercase-word 
+: reload 
+: bulk-rename 
+: bulk-rename 
+: copy-to-clipboard 
+: filter
+: find
+: fiter
+: filter
+: rename 
+: open 
+: open notes.org 
+: delete 
+: delete
+: reload 
+: doc
+: trash 
+$ mkdir test
+: bulk-rename 
+: bulk-rename 
+: bulk-rename 
+: bulk-rename 
+: bulk-rename 
+: bulk-rename 
+: delete 
+: delete 

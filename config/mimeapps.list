@@ -20,6 +20,9 @@ text/plain=emacsclient.desktop
 application/x-shellscript=emacsclient.desktop
 application/x-makefile=emacsclient.desktop
 application/toml=emacsclient.desktop
+text/x-makefile=emacsclient.desktop
+text/markdown=emacsclient.desktop
+application/pdf=org.pwmt.zathura-pdf-poppler.desktop
 
 [Added Associations]
 application/x-lyx=userapp-lyx-DIY4FY.desktop;
@@ -85,7 +88,7 @@ application/x-partial-download=vlc.desktop;
 text/x-python=emacsclient.desktop;
 application/x-shellscript=emacsclient.desktop;
 image/png=imv.desktop;
-application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-BLAKF2.desktop;
 text/x-tex=emacsclient.desktop;
 text/plain=emacsclient.desktop;
+application/pdf=org.pwmt.zathura-pdf-poppler.desktop;

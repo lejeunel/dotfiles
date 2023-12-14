@@ -2,9 +2,9 @@ $mkdir -p ~/.trash
 
 cmd trash $IFS="$(printf '\n\t')"; mv $fx ~/.trash
 
-map D trash
+map DD trash
 
-set icons
+set icons true
 
 cmd bulk-rename ${{
     old="$(mktemp)"
@@ -16,7 +16,7 @@ cmd bulk-rename ${{
     fi
     printf '%s\n' "$fs" >"$old"
     printf '%s\n' "$fs" >"$new"
-    $EDITOR "$new"
+    vim "$new"
     [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
     paste "$old" "$new" | while IFS= read -r names; do
         src="$(printf '%s' "$names" | cut -f1)"
