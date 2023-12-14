@@ -24,7 +24,6 @@ config/gtk-2.0
 pyenv-installer*
 config/pavucontrol.ini
 lsyncd/log
-local
 *.pyc
 /*.zip
 /bin/zathura_sync.sh

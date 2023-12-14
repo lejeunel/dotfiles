@@ -24,7 +24,7 @@ hence this personal config file is pretty minimal in itself.
 #+begin_src emacs-lisp :tangle yes
 ;; (all-the-icons-install-fonts)
 (setq doom-theme 'doom-dracula)
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18 :height 1.0)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 19 :height 1.0)
      doom-variable-pitch-font (font-spec :family "ETBembo" :height 1.2))
 #+end_src
 
