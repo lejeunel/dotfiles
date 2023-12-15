@@ -42,8 +42,7 @@
         // system
         "custom/adaptive-light",
         "custom/sunset",
-        "custom/pacman",
-
+        // "custom/pacman",
         "tray",
         "clock"
     ],
