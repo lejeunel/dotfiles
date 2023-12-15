@@ -21,7 +21,7 @@
     "modules-center": ["custom/wf-recorder", "sway/mode", "sway/window"],
     "modules-right": [
         // informational
-        "sway/language",
+        // "sway/language",
         "custom/clipboard",
         "cpu",
         "temperature",

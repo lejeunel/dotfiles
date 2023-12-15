@@ -31,6 +31,9 @@ bindkey '^ ' autosuggest-accept
 autoload -U zranger
 bindkey -s '^O' 'lf^M'
 alias pdfjoin="pdfjoin --paper a4paper --rotateoversize false"
+alias cat="bat"
+alias ls="eza"
+alias ll="eza -lG --git"
 
 alias tmux='tmux -u'
 alias o='mimeopen'
