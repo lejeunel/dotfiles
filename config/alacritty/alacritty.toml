@@ -1,0 +1,11 @@
+import = [ "~/.config/alacritty/catppuccin/catppuccin-macchiato.toml" ]
+
+[font]
+size = 16
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+
+[window.padding]
+x = 10
+y = 10
