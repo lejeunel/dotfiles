@@ -92,3 +92,4 @@ x-scheme-handler/mid=userapp-Thunderbird-BLAKF2.desktop;
 text/x-tex=emacsclient.desktop;
 text/plain=emacsclient.desktop;
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
+text/x-lua=emacsclient.desktop;

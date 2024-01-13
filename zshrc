@@ -10,18 +10,13 @@ export ZSH_DISABLE_COMPFIX=true
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+export VI_MODE_SET_CURSOR=true
 
 plugins=(
-    git
     vi-mode
-    colored-man-pages
-    command-not-found
-    extract
-    z
     zsh-autosuggestions
+    fzf
 )
-
 
 source $ZSH/oh-my-zsh.sh
 
@@ -39,6 +34,8 @@ alias tmux='tmux -u'
 alias o='mimeopen'
 alias e='emacsclient -nc'
 alias ll='ls -lah'
+alias go="grc go"
+alias vim="nvim"
 
 export EDITOR="emacsclient -nc"
 
@@ -48,6 +45,9 @@ export POETRY_VIRTUALENVS_CREATE=false
 export PYENV_ROOT=$HOME/.pyenv
 export PYTHON_KEYRING_BACKEND=keyring.backends.fail.Keyring
 export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv virtualenv-init -)"
+export GOPATH=~/Documents/go/
+
 
 if [ -n "$(which direnv)" ]; then
   eval "$(direnv hook $(basename $SHELL))"
@@ -58,5 +58,3 @@ eval "$(starship init zsh)"
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
-
-

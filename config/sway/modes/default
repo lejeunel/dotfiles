@@ -29,6 +29,9 @@ $bindsym $mod+Shift+b exec pkill -SIGUSR1 waybar
 ## Action // Launch Emacs client ##
 $bindsym $mod+e exec emacsclient -nc
 
+## Action // Launch File Manager ##
+$bindsym $mod+o exec $term -e lf
+
 # --locked flags allow the buttons to be used whilst the screen is locked.
 $bindsym --locked XF86AudioRaiseVolume exec $volume_up
 

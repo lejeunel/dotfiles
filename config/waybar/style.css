@@ -55,13 +55,8 @@ window#waybar {
 	background-color: transparent;
 }
 window#waybar:first-child > box {
-    /*margin: 4px;
-    padding: 0px 4px 0px 4px;
-    border-radius: 10px 10px ;*/
-    background-color: #282a36 ;
+    background-color: @base00;
     color: #f8f8f2;
-    /*border-bottom: 1px solid #bd93f9;
-    border-top: 1px solid #50fa7b;*/
 
 }
 
@@ -104,7 +99,7 @@ window#waybar:first-child > box {
 #workspaces button.focused,
 #clock {
     color: @base00;
-    background-color: @base04;
+    background-color: @base0D;
     border-radius: 8px;
 }
 
