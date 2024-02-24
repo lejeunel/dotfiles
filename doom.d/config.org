@@ -8,7 +8,6 @@ This uses the [[https://github.com/doomemacs/doomemacs][doom-emacs]] configurati
 hence this personal config file is pretty minimal in itself.
 
 * General Bindings
-
 #+begin_src emacs-lisp :tangle yes
 (map! :leader
     :desc "Kill buffer" "x" #'kill-this-buffer
@@ -21,7 +20,6 @@ hence this personal config file is pretty minimal in itself.
 #+end_src
 
 * Appearance
-
 #+begin_src emacs-lisp :tangle yes
 ;; (all-the-icons-install-fonts)
 (setq doom-theme 'catppuccin)
@@ -101,12 +99,14 @@ Force company to use fixed-pitch font
   (company-tooltip
    ((t (:family "JetBrainsMono Nerd Font" :height 1.0)))))
 #+end_src
+
 * LaTeX
 #+begin_src emacs-lisp :tangle yes
 (map! :localleader
       :map LaTeX-mode-map
       :desc "Master"    "m" 'TeX-command-master)
 #+end_src
+
 * Typopunct
 
 #+begin_src emacs-lisp :tangle yes
@@ -135,7 +135,6 @@ Download standalone [[https://languagetool.org/][LanguageTool]] server from http
 #+end_src
 
 * YAML
-
 #+begin_src emacs-lisp :tangle yes
 (use-package! yaml-mode
   :ensure t
@@ -143,6 +142,11 @@ Download standalone [[https://languagetool.org/][LanguageTool]] server from http
 #+end_src
 
 * Python
+** Interpreter
+#+begin_src emacs-lisp :tangle yes
+(setq python-shell-interpreter "ipython"
+    python-shell-interpreter-args "-i --simple-prompt")
+#+end_src
 ** Breakpoints
 
 Bindings and functions to add and highlight breakpoints.
@@ -160,14 +164,14 @@ Bindings and functions to add and highlight breakpoints.
 
 
 (defun python-set-debug-highlight ()
-(interactive)
-(highlight-lines-matching-regexp "breakpoint[.]?" 'hi-red-b))
+    (interactive)
+    (highlight-lines-matching-regexp "breakpoint[.]?" 'hi-red-b))
 
 (defun python-add-debug-highlight ()
-"Adds a highlighter for use by `python--pdb-breakpoint-string'"
-(interactive)
-(python-set-debug-highlight))
-(add-hook 'python-mode-hook 'python-add-debug-highlight)
+    "Adds a highlighter for use by `python--pdb-breakpoint-string'"
+    (interactive)
+    (python-set-debug-highlight))
+    (add-hook 'python-mode-hook 'python-add-debug-highlight)
 
 (map! :localleader
       :map python-mode-map
@@ -204,8 +208,10 @@ Tell pyright where virtual environments are located.
 
 #+begin_src emacs-lisp :tangle yes
 (after! org
-  (setq org-return-follows-link t)
-  (setq org-directory "~/org/"))
+  (setq org-export-use-babel t)
+  (setq org-directory "~/org/")
+    (load-library "ox-reveal")
+  )
 #+end_src
 
 Set PDF viewer.
@@ -353,4 +359,11 @@ background of code to whatever theme I'm using's background"
 #+begin_src emacs-lisp :tangle yes
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(after! iflipb
+  (setq iflipb-ignore-buffers "$^")
+  )
 #+end_src

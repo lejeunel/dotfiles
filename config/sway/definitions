@@ -1,23 +1,16 @@
 set $mod Mod1
 set $alt_mod Mod4
 
-# Direction keys
 set $left h
 set $down j
 set $up k
 set $right l
 
-# Add --to-code to bindsym, support for non-latin layouts
-set $bindsym bindsym --to-code
-
-# For user's convenience, the same for unbindsym
-set $unbindsym unbindsym --to-code
-
-# Your preferred terminal emulator
 set $term alacritty
 set $term_float /usr/bin/alacritty --class floating_shell -e
 
-# audio control
+set $menu rofi -show combi -combi-modi "drun" -terminal $term -ssh-command "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} -e {cmd}" -show-icons -font "$gui-font" -lines 10 -width 35
+
 set $sink_volume pactl get-sink-volume @DEFAULT_SINK@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
 set $source_volume pactl get-source-volume @DEFAULT_SOURCE@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
 set $volume_down $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ -5% && $sink_volume)
@@ -25,33 +18,19 @@ set $volume_up $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ +5% && $sink
 set $volume_mute $onscreen_bar $(pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl get-sink-mute @DEFAULT_SINK@ | sed -En "/no/ s/.*/$($sink_volume)/p; /yes/ s/.*/0/p")
 set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && pactl get-source-mute @DEFAULT_SOURCE@ | sed -En "/no/ s/.*/$($source_volume)/p; /yes/ s/.*/0/p")
 
-# clipboard history
 set $clipboard cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy
 set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to delete" -lines 10 -width 35 | cliphist delete
 
-# Your preferred application launcher
-set $menu rofi -show combi -combi-modi "drun" -terminal $term -ssh-command "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} -e {cmd}" -show-icons -font "$gui-font" -lines 10 -width 35
-
-### Notification
 set $notification swaync-client -t
 
-### Lockscreen configuration
-# set $locking swaylock --daemonize --fade-in 0.4 --ignore-empty-password --screenshots --clock
 set $locking gtklock --daemonize
 
-# bluetooth menu
 set $bluetooth $once $term_float bluetuith
 
-# brightness control
 set $brightness brightnessctl
 set $brightness_up brightnessctl s 50+
 set $brightness_down brightnessctl s 50-
 
-### Idle configuration
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-#
 set $idle_timeout 240
 set $locking_timeout 300
 set $screen_timeout 600
@@ -67,33 +46,16 @@ set $swayidle swayidle -w \
     before-sleep 'playerctl pause' \
     before-sleep 'exec $locking & sleep $sleep_delay'
 
-# statusbar command
 set $statusbar waybar
 set $waybar_position top
 
-# pulseaudio command
 set $pulseaudio $term_float pulsemixer
 
-# help command
 set $help $HOME/.bin/sway/scripts/help.sh
 
-# calendar application
 set $calendar $term_float calcurse
 
-# workspace names
-set $ws1 number 1
-set $ws2 number 2
-set $ws3 number 3
-set $ws4 number 4
-set $ws5 number 5
-set $ws6 number 6
-set $ws7 number 7
-set $ws8 number 8
-set $ws9 number 9
-set $ws10 number 10
-
-# screenshot 
-set $grimshot /usr/share/sway/scripts/grimshot
+set $grimshot /usr/bin/grimshot
 set $pipe_output $grimshot save output -
 set $pipe_selection $grimshot save window -
 set $notify_paste  [[ $(wl-paste -l) == "image/png" ]] && notify-send "Screenshot copied to clipboard"
@@ -102,12 +64,11 @@ set $swappy_pipe swappy -f - -o -
 set $upload_pipe curl -s -F "file=@-;filename=.png" https://x0.at/ | tee >(wl-copy) >(xargs notify-send)
 
 set $screenshot_screen $pipe_output | $swappy && $notify_paste
-set $screenshot_screen_upload $pipe_output | $swappy_pipe | $upload_pipe 
+set $screenshot_screen_upload $pipe_output | $swappy_pipe | $upload_pipe
 
 set $screenshot_selection $pipe_selection | $swappy && $notify_paste
 set $screenshot_selection_upload $pipe_selection | $swappy_pipe | $upload_pipe
 
-# autostarts
 set $autostart_dex '[ -x "$(command -v dex)" ] && gdbus wait --session org.kde.StatusNotifierWatcher && dex --autostart'
 set $flashfocus '[ -x "$(command -v flashfocus)" ] && flashfocus'
 set $wlsunset '[ -x "$(command -v wlsunset)" ] && /usr/share/sway/scripts/sunset.sh "on"'
@@ -119,7 +80,6 @@ set $xdg-dirs '[ -x "$(command -v xdg-user-dirs-update)" ] && exec xdg-user-dirs
 # apply the keyboard layout from localectl if no keyboard layout has been set via config.d
 set $auto_xdg_keyboard 'grep -q xkb_layout ~/.config/sway/config.d/*.conf || /usr/share/sway/scripts/keyboard.sh'
 
-# daemons
 set $swaync '[ -x "$(command -v swaync)" ] && swaync'
 set $swappy_notify '[ -x "$(command -v swappy)" ] && /usr/share/sway/scripts/screenshot-notify.sh'
 set $poweralert '[ -x "$(command -v poweralertd)" ] && pkill poweralertd; poweralertd -s -i "line power" &'
@@ -129,3 +89,14 @@ set $cliphist_store '[ -x "$(command -v wl-paste)" ] && [ -x "$(command -v cliph
 set $calendar_daemon 'calcurse --daemon'
 set $nm_applet '[ -x "$(command -v nm-applet)" ] && nm-applet'
 set $watch_playerctl '[ -x "$(command -v playerctl)" ] && pkill playerctl; playerctl -a metadata --format \'{{status}} {{title}}\' --follow | while read line; do pkill -RTMIN+5 waybar; done'
+
+set $ws1 number 1
+set $ws2 number 2
+set $ws3 number 3
+set $ws4 number 4
+set $ws5 number 5
+set $ws6 number 6
+set $ws7 number 7
+set $ws8 number 8
+set $ws9 number 9
+set $ws10 number 10

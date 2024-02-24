@@ -66,3 +66,5 @@
   :recipe (:host github
            :repo "awth13/org-appear"))
 (package! catppuccin-theme)
+(package! org-reveal)
+(package! ox-reveal)
