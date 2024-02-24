@@ -1,7 +1,29 @@
 #+title: SwayWM config
 #+auto_tangle: t
 
+* Requirements/Dependencies
+
+These can be installed from standard repository or AUR.
+
+#+begin_src sh
+aur/xkb-qwerty-fr
+extra/ttf-jetbrains-mono-nerd
+extra/alacritty
+extra/calcurse
+aur/bluetuith
+extra/swayidle
+extra/cliphist
+extra/waybar
+aur/swayfx
+aur/swaync
+extra/kanshi
+aur/grimshot
+aur/gtklock
+extra/brightnessctl
+#+end_src
+
 * Master
+Import connex files to master ~config~ file.
 
 #+begin_src sh :tangle config
 include $HOME/.config/sway/definitions
@@ -307,11 +329,6 @@ bar {
 set $pulseaudio $term_float pulsemixer
 #+end_src
 
-** Help
-#+begin_src sh :tangle definitions
-set $help $HOME/.bin/sway/scripts/help.sh
-#+end_src
-
 ** Calendar
 #+begin_src sh :tangle definitions
 set $calendar $term_float calcurse
@@ -376,7 +393,6 @@ set $ws10 number 10
 #+end_src
 
 * Appearance
-
 ** Color definitions
 
 #+begin_src sh :tangle config.d/10-colors.conf
@@ -444,8 +460,9 @@ exec_always {
 #+end_src
 
 * Inputs
-
 ** Keyboard
+Install the [[https://github.com/qwerty-fr/qwerty-fr#readme][qwerty-fr]]  layout.
+
 #+begin_src sh :tangle config.d/20-inputs.conf
 input type:keyboard {
 	xkb_layout "us"

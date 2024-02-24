@@ -51,8 +51,6 @@ set $waybar_position top
 
 set $pulseaudio $term_float pulsemixer
 
-set $help $HOME/.bin/sway/scripts/help.sh
-
 set $calendar $term_float calcurse
 
 set $grimshot /usr/bin/grimshot
