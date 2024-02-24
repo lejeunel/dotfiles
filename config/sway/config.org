@@ -1,0 +1,605 @@
+#+title: SwayWM config
+#+auto_tangle: t
+
+* Master
+
+#+begin_src sh :tangle config
+include $HOME/.config/sway/definitions
+include $HOME/.config/sway/config.d/*
+include $HOME/.config/sway/modes/*
+#+end_src
+
+* Keybindings
+** Modifiers
+#+begin_src sh :tangle definitions
+set $mod Mod1
+set $alt_mod Mod4
+#+end_src
+
+** Motion
+#+begin_src sh :tangle definitions
+set $left h
+set $down j
+set $up k
+set $right l
+#+end_src
+
+** Default
+
+#+begin_src sh :tangle modes/default
+## Launch // Terminal ##
+$bindsym $mod+Return exec $term
+
+## Action // Kill focused window ##
+$bindsym $mod+q kill
+
+## Launch // Open launcher ##
+$bindsym $mod+d exec $menu
+
+## Launch // Open notification center ##
+$bindsym $mod+n exec $notification
+
+## Launch // Open clipboard ##
+$bindsym $mod+Shift+p exec $clipboard
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+## Action // Reload Sway Configuration ##
+$bindsym $mod+Shift+r reload
+
+## Action // Toggle Waybar ##
+$bindsym $mod+Shift+b exec pkill -SIGUSR1 waybar
+
+## Action // Launch Emacs client ##
+$bindsym $mod+e exec emacsclient -nc
+
+## Action // Launch File Manager ##
+$bindsym $mod+o exec $term -e lf
+
+# --locked flags allow the buttons to be used whilst the screen is locked.
+$bindsym --locked XF86AudioRaiseVolume exec $volume_up
+
+$bindsym --locked XF86AudioLowerVolume exec $volume_down
+
+$bindsym --locked XF86AudioMute exec $volume_mute
+
+$bindsym XF86AudioMicMute exec $mic_mute
+
+$bindsym --locked XF86MonBrightnessUp exec $brightness_up
+
+$bindsym --locked XF86MonBrightnessDown exec $brightness_down
+
+$bindsym --locked XF86AudioPlay exec playerctl play-pause
+
+$bindsym XF86AudioNext exec playerctl next
+
+$bindsym XF86AudioPrev exec playerctl previous
+
+$bindsym XF86Search exec $menu
+
+$bindsym XF86PowerOff exec $shutdown
+
+$bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
+
+# Moving around:
+#
+# Move your focus around
+## Navigation // Move focus // $mod + h j k l ##
+$bindsym $mod+$left focus left
+$bindsym $mod+$down focus down
+$bindsym $mod+$up focus up
+$bindsym $mod+$right focus right
+
+## Navigation // Move focused window // $mod + Shift + h j k l ##
+$bindsym $mod+Shift+$left move left
+$bindsym $mod+Shift+$down move down
+$bindsym $mod+Shift+$up move up
+$bindsym $mod+Shift+$right move right
+
+## Navigation // Move focused workspace // $mod + Alt + h j k l ##
+#$bindsym $mod+Alt+$right move workspace to output right
+#$bindsym $mod+Alt+$left move workspace to output left
+#$bindsym $mod+Alt+$down move workspace to output down
+#$bindsym $mod+Alt+$up move workspace to output up
+
+## Navigation // List all open windows in last-recently-used order ##
+$bindsym $mod+p exec env RUST_BACKTRACE=1 swayr switch-window &>> /tmp/swayr.log
+
+## Navigation // Switch to the last recently used window ##
+$bindsym Mod1+Tab exec env RUST_BACKTRACE=1 swayr switch-to-urgent-or-lru-window &>> /tmp/swayr.log
+
+## Navigation // Switch to the last recently used workspace ##
+#$bindsym $mod+Tab workspace back_and_forth
+
+#
+# Workspaces:
+#
+## Navigation // Switch workspace // $mod + [number] ##
+$bindsym $mod+1 workspace $ws1
+$bindsym $mod+2 workspace $ws2
+$bindsym $mod+3 workspace $ws3
+$bindsym $mod+4 workspace $ws4
+$bindsym $mod+5 workspace $ws5
+$bindsym $mod+6 workspace $ws6
+$bindsym $mod+7 workspace $ws7
+$bindsym $mod+8 workspace $ws8
+$bindsym $mod+9 workspace $ws9
+$bindsym $mod+0 workspace $ws10
+
+set $focus_ws [ "$focus_after_move" == 'true' ] && swaymsg workspace
+
+## Action // Move focused window to workspace // $mod + Shift + [number] ##
+$bindsym $mod+Shift+1 move container to workspace $ws1, exec $focus_ws $ws1
+$bindsym $mod+Shift+2 move container to workspace $ws2, exec $focus_ws $ws2
+$bindsym $mod+Shift+3 move container to workspace $ws3, exec $focus_ws $ws3
+$bindsym $mod+Shift+4 move container to workspace $ws4, exec $focus_ws $ws4
+$bindsym $mod+Shift+5 move container to workspace $ws5, exec $focus_ws $ws5
+$bindsym $mod+Shift+6 move container to workspace $ws6, exec $focus_ws $ws6
+$bindsym $mod+Shift+7 move container to workspace $ws7, exec $focus_ws $ws7
+$bindsym $mod+Shift+8 move container to workspace $ws8, exec $focus_ws $ws8
+$bindsym $mod+Shift+9 move container to workspace $ws9, exec $focus_ws $ws9
+$bindsym $mod+Shift+0 move container to workspace $ws10, exec $focus_ws $ws10
+
+## Launch // Setup displays ##
+$bindsym $mod+Shift+d exec /usr/bin/wdisplays
+
+## Action // Move focused window to a new workspace ##
+$bindsym $mod+Shift+n exec /usr/share/sway/scripts/first-empty-workspace.py --move
+
+## Action // Move focused window to a new workspace and switch there ##
+$bindsym $mod+Shift+m exec /usr/share/sway/scripts/first-empty-workspace.py --move --switch
+
+#
+# Layout stuff:
+#
+## Setting // Split windows horizontally ##
+$bindsym $mod+b splith
+## Setting // Split windows vertically ##
+$bindsym $mod+v splitv
+
+## Setting // Tabbed windows ##
+bindsym $mod+w layout tabbed
+
+## Setting // Stacking windows ##
+bindsym $mod+s layout stacking
+
+## Action // Toggle fullscreen ##
+$bindsym $mod+f fullscreen
+
+## Action // Scale up  ##
+$bindsym $alt_mod+plus exec $scale_up
+
+## Action // Scale down  ##
+$bindsym $alt_mod+minus exec $scale_down
+
+## Action // Toggle floating ##
+$bindsym $mod+Shift+f floating toggle
+
+## bindsym $mod+t layout toggle tabbed stacking split
+
+
+## Navigation // Toggle focus between tiling and floating ##
+$bindsym $mod+space focus mode_toggle
+
+## Navigation // Swap focus to the parent window ##
+$bindsym $mod+a focus parent
+
+## Launch // Toggle Help ##
+$bindsym $mod+question exec $help
+
+# allow to kill focused floating shell windows using Esc
+$bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
+#+end_src
+
+
+* Applications
+
+** Autostart
+#+begin_src sh :tangle config.d/99-autostart-applications.conf
+exec {
+    $xdg-dirs
+    $swaync
+    $swayidle
+    $autostart_dex
+    $cliphist_store
+    $cliphist_watch
+    $workspace_icons
+}
+
+exec_always {
+    $kanshi
+    $calendar_daemon
+    $swayr_daemon
+}
+#+end_src
+
+** Terminal
+#+begin_src sh :tangle definitions
+set $term alacritty
+set $term_float /usr/bin/alacritty --class floating_shell -e
+#+end_src
+
+** Launcher
+#+begin_src sh :tangle definitions
+set $menu rofi -show combi -combi-modi "drun" -terminal $term -ssh-command "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} -e {cmd}" -show-icons -font "$gui-font" -lines 10 -width 35
+#+end_src
+
+** Audio Control
+#+begin_src sh :tangle definitions
+set $sink_volume pactl get-sink-volume @DEFAULT_SINK@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
+set $source_volume pactl get-source-volume @DEFAULT_SOURCE@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
+set $volume_down $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ -5% && $sink_volume)
+set $volume_up $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ +5% && $sink_volume)
+set $volume_mute $onscreen_bar $(pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl get-sink-mute @DEFAULT_SINK@ | sed -En "/no/ s/.*/$($sink_volume)/p; /yes/ s/.*/0/p")
+set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && pactl get-source-mute @DEFAULT_SOURCE@ | sed -En "/no/ s/.*/$($source_volume)/p; /yes/ s/.*/0/p")
+#+end_src
+
+** Clipboard
+#+begin_src sh :tangle definitions
+set $clipboard cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy
+set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to delete" -lines 10 -width 35 | cliphist delete
+#+end_src
+
+** Notifications
+#+begin_src sh :tangle definitions
+set $notification swaync-client -t
+#+end_src
+
+** Lockscreen
+#+begin_src sh :tangle definitions
+set $locking gtklock --daemonize
+#+end_src
+
+** Bluetooth
+#+begin_src sh :tangle definitions
+set $bluetooth $once $term_float bluetuith
+#+end_src
+
+** Brightness
+#+begin_src sh :tangle definitions
+set $brightness brightnessctl
+set $brightness_up brightnessctl s 50+
+set $brightness_down brightnessctl s 50-
+#+end_src
+
+** Idle
+
+#+begin_src sh :tangle definitions
+set $idle_timeout 240
+set $locking_timeout 300
+set $screen_timeout 600
+set $sleep_timeout 900
+set $sleep_delay 2
+#+end_src
+
+#+begin_src sh :tangle definitions
+set $swayidle swayidle -w \
+    timeout $idle_timeout 'light -G > /tmp/brightness && light -S 10' resume 'light -S $([ -f /tmp/brightness ] && cat /tmp/brightness || echo 100%)' \
+    timeout $locking_timeout 'exec $locking' \
+    timeout $screen_timeout 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    timeout $sleep_timeout 'swaymsg "output * dpms on"; sleep $sleep_delay; systemctl suspend' \
+    before-sleep 'playerctl pause' \
+    before-sleep 'exec $locking & sleep $sleep_delay'
+#+end_src
+
+** Status bar
+#+begin_src sh :tangle definitions
+set $statusbar waybar
+set $waybar_position top
+#+end_src
+
+#+begin_src sh :tangle config.d/96-waybar-config.conf
+bar {
+    id default
+    swaybar_command $statusbar
+    position $waybar_position
+}
+#+end_src
+
+** Pulseaudio
+#+begin_src sh :tangle definitions
+set $pulseaudio $term_float pulsemixer
+#+end_src
+
+** Help
+#+begin_src sh :tangle definitions
+set $help $HOME/.bin/sway/scripts/help.sh
+#+end_src
+
+** Calendar
+#+begin_src sh :tangle definitions
+set $calendar $term_float calcurse
+#+end_src
+
+** Screenshot
+#+begin_src sh :tangle definitions
+set $grimshot /usr/bin/grimshot
+set $pipe_output $grimshot save output -
+set $pipe_selection $grimshot save window -
+set $notify_paste  [[ $(wl-paste -l) == "image/png" ]] && notify-send "Screenshot copied to clipboard"
+set $swappy swappy -f -
+set $swappy_pipe swappy -f - -o -
+set $upload_pipe curl -s -F "file=@-;filename=.png" https://x0.at/ | tee >(wl-copy) >(xargs notify-send)
+
+set $screenshot_screen $pipe_output | $swappy && $notify_paste
+set $screenshot_screen_upload $pipe_output | $swappy_pipe | $upload_pipe
+
+set $screenshot_selection $pipe_selection | $swappy && $notify_paste
+set $screenshot_selection_upload $pipe_selection | $swappy_pipe | $upload_pipe
+#+end_src
+
+** Autostarts
+#+begin_src sh :tangle definitions
+set $autostart_dex '[ -x "$(command -v dex)" ] && gdbus wait --session org.kde.StatusNotifierWatcher && dex --autostart'
+set $flashfocus '[ -x "$(command -v flashfocus)" ] && flashfocus'
+set $wlsunset '[ -x "$(command -v wlsunset)" ] && /usr/share/sway/scripts/sunset.sh "on"'
+set $workspace_icons '[ -x "$(command -v sworkstyle)" ] && sworkstyle -d -l info &> /tmp/sworkstyle.log'
+set $mounting_daemon '[ -x "$(command -v pcmanfm)" ] && pcmanfm -d'
+# restart kanshi https://github.com/emersion/kanshi/issues/43#issuecomment-531679213
+set $kanshi '[ -x "$(command -v kanshi)" ] && pkill kanshi; exec kanshi'
+set $xdg-dirs '[ -x "$(command -v xdg-user-dirs-update)" ] && exec xdg-user-dirs-update'
+# apply the keyboard layout from localectl if no keyboard layout has been set via config.d
+set $auto_xdg_keyboard 'grep -q xkb_layout ~/.config/sway/config.d/*.conf || /usr/share/sway/scripts/keyboard.sh'
+#+end_src
+
+** Daemons
+#+begin_src sh :tangle definitions
+set $swaync '[ -x "$(command -v swaync)" ] && swaync'
+set $swappy_notify '[ -x "$(command -v swappy)" ] && /usr/share/sway/scripts/screenshot-notify.sh'
+set $poweralert '[ -x "$(command -v poweralertd)" ] && pkill poweralertd; poweralertd -s -i "line power" &'
+set $swayr_daemon '[ -x "$(command -v swayrd)" ] && pkill swayrd; RUST_BACKTRACE=1 RUST_LOG=swayr=debug swayrd &> /tmp/swayrd.log'
+set $cliphist_watch '[ -x "$(command -v wl-paste)" ] && [ -x "$(command -v cliphist)" ] && wl-paste --watch pkill -RTMIN+9 waybar'
+set $cliphist_store '[ -x "$(command -v wl-paste)" ] && [ -x "$(command -v cliphist)" ] && wl-paste --watch cliphist store'
+set $calendar_daemon 'calcurse --daemon'
+set $nm_applet '[ -x "$(command -v nm-applet)" ] && nm-applet'
+set $watch_playerctl '[ -x "$(command -v playerctl)" ] && pkill playerctl; playerctl -a metadata --format \'{{status}} {{title}}\' --follow | while read line; do pkill -RTMIN+5 waybar; done'
+#+end_src
+
+* Workspaces
+#+begin_src sh :tangle definitions
+set $ws1 number 1
+set $ws2 number 2
+set $ws3 number 3
+set $ws4 number 4
+set $ws5 number 5
+set $ws6 number 6
+set $ws7 number 7
+set $ws8 number 8
+set $ws9 number 9
+set $ws10 number 10
+#+end_src
+
+* Appearance
+
+** Color definitions
+
+#+begin_src sh :tangle config.d/10-colors.conf
+set $base00 #24273a
+set $base01 #1e2030
+set $base02 #363a4f
+set $base03 #494d64
+set $base04 #5b6078
+set $base05 #cad3f5
+set $base06 #f4dbd6
+set $base07 #b7bdf8
+set $base08 #ed8796
+set $base09 #f5a97f
+set $base0A #eed49f
+set $base0B #a6da95
+set $base0C #8bd5ca
+set $base0D #8aadf4
+set $base0E #c6a0f6
+set $base0F #f0c6c6
+#+end_src
+
+** Colorize borders and text
+#+begin_src sh :tangle config.d/10-colors.conf
+# class                  border     bground     text        indicator   child_border
+client.focused           $base00 $base01 $base07 $base00 $base07
+client.unfocused         $base00 $base00 $base03 $base00 $base00
+client.focused_inactive  $base00 $base00 $base0F $base00 $base00
+client.urgent            $base00 $base00 $base04 $base00 $base00
+#+end_src
+
+** Container borders and gaps
+
+#+begin_src sh :tangle config.d/25-borders.conf
+hide_edge_borders smart
+default_border pixel 4
+titlebar_border_thickness 4
+gaps inner 15px
+blur enable
+corner_radius 7
+shadows enable
+default_dim_inactive 0.15
+smart_gaps on
+#+end_src
+
+** Wallpaper
+#+begin_src sh :tangle config.d/12-wallpaper.conf
+output * bg $HOME/Pictures/catppuccin-wallpapers/minimalistic/hashtags-black.png fit
+#+end_src
+
+** Font
+#+begin_src sh :tangle config.d/15-fonts.conf
+font pango:JetBrainsMono Nerd Font 14
+#+end_src
+
+** GTK theme
+#+begin_src sh :tangle config.d/30-gtk.conf
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Catppuccin-Frappe-Standard-Sky-Dark'
+    gsettings set $gnome-schema icon-theme 'Dracula'
+    gsettings set $gnome-schema cursor-theme 'xcursor-breeze'
+    gsettings set $gnome-schema font-name 'Cantarell 14'
+}
+#+end_src
+
+* Inputs
+
+** Keyboard
+#+begin_src sh :tangle config.d/20-inputs.conf
+input type:keyboard {
+	xkb_layout "us"
+	xkb_variant "qwerty-fr"
+}
+#+end_src
+
+** Mouse
+#+begin_src sh :tangle config.d/20-inputs.conf
+input * {
+	pointer_accel -0.1
+	accel_profile "flat"
+	scroll_factor 1.
+	scroll_method "none"
+}
+#+end_src
+
+* Systemd
+Sway does not set DISPLAY/WAYLAND_DISPLAY in the systemd user environment. See FS#63021.
+Adapted from xorg's 50-systemd-user.sh, which achieves a similar goal.
+
+#+begin_src sh :tangle config.d/50-systemd-user.conf
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+#+end_src
+
+* Modes
+Sets keybindings and notifications for modes (resize, shutdown, ...)
+
+** Resize
+#+begin_src sh :tangle modes/resize
+set $mode_resize "<span foreground='$base06'>󰉸</span>  \
+<span foreground='$base06'><b>Resize</b></span> <span foreground='$base04'>(<b>↑ ↓ ← →</b>)</span> \
+<span foreground='$base06'><b>Increase Gaps</b></span> <span foreground='$base04'>(<b>+</b>)</span> \
+<span foreground='$base06'><b>Decrease Gaps</b></span> <span foreground='$base04'>(<b>-</b>)</span> \
+<span> -</span>  \
+"
+#+end_src
+
+#+begin_src sh :tangle modes/resize
+mode --pango_markup $mode_resize {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    $bindsym $left resize shrink width 10px
+    $bindsym $down resize grow height 10px
+    $bindsym $up resize shrink height 10px
+    $bindsym $right resize grow width 10px
+
+    $bindsym Shift+$left resize shrink width 50px
+    $bindsym Shift+$down resize grow height 50px
+    $bindsym Shift+$up resize shrink height 50px
+    $bindsym Shift+$right resize grow width 50px
+
+    ## Resize // Window Gaps // + - ##
+    $bindsym minus gaps inner current minus 5px
+    $bindsym plus gaps inner current plus 5px
+
+    # Return to default mode
+    $bindsym Return mode "default"
+    $bindsym Escape mode "default"
+}
+## Launch // Resize Mode ##
+$bindsym $mod+r mode $mode_resize
+
+#+end_src
+
+** Shutdown
+#+begin_src sh :tangle modes/shutdown
+set $mode_shutdown "\
+<span></span>  \
+<span foreground='$base06'> \
+<span foreground='$base04'>(<b>h</b>)</span>hibernate \
+<span foreground='$base04'>(<b>l</b>)</span>lock \
+<span foreground='$base04'>(<b>e</b>)</span>logout \
+<span foreground='$base04'>(<b>r</b>)</span>reboot \
+<span foreground='$base04'>(<b>u</b>)</span>suspend \
+<span foreground='$base04'>(<b>s</b>)</span>shutdown \
+<span> -</span>  \
+</span>"
+#+end_src
+
+#+begin_src sh :tangle modes/shutdown
+set $purge_cliphist [ $purge_cliphist_logout == 'true' ] && rm -f $HOME/.cache/cliphist/db || exit 0
+
+
+mode --pango_markup $mode_shutdown {
+    # lock
+    $bindsym l mode "default", exec $locking
+
+    # logout
+    # $bindsym e exec $purge_cliphist; exec loginctl terminate-user $USER
+    $bindsym e exec loginctl terminate-user $USER
+
+    # suspend
+    $bindsym u mode "default", exec systemctl suspend
+
+    # hibernate
+    $bindsym h mode "default", exec systemctl hibernate
+
+    # shutdown
+    $bindsym s exec $purge_cliphist; exec systemctl poweroff
+
+    # reboot
+    $bindsym r exec $purge_cliphist; exec systemctl reboot
+
+    # Return to default mode.
+    $bindsym Escape mode "default"
+}
+
+## Launch // Exit Menu ##
+$bindsym $mod+Shift+e mode $mode_shutdown
+#+end_src
+
+** Screenshot
+
+#+begin_src sh :tangle modes/screenshot
+set $mode_screenshot "<span foreground='$base04'>󰄄</span>  \
+<span foreground='$base06'><b>Pick</b></span> <span foreground='$base04'>(<b>p</b>)</span> \
+<span foreground='$base06'><b>Output</b></span> <span foreground='$base04'>(<b>o</b>)</span> \
+<span foreground='$base07'>+ <span foreground='$base04'><b>Shift</b></span> for </span> \
+<span> -</span>  \
+"
+
+mode --pango_markup $mode_screenshot {
+    # output = currently active output
+    $bindsym o mode "default", exec $screenshot_screen
+    $bindsym Shift+o mode "default", exec $screenshot_screen_upload
+
+    # pick the region to screenshot
+    $bindsym p mode "default", exec $screenshot_selection
+    $bindsym Shift+p mode "default", exec $screenshot_selection_upload
+
+    # Return to default mode.
+    $bindsym Escape mode "default"
+}
+
+## Launch // Screenshot Mode ##
+$bindsym $mod+Shift+s mode $mode_screenshot
+#+end_src
+
+** Scratchpad
+#+begin_src sh :tangle modes/scratchpad
+# Scratchpad:
+#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+## Action // Move window to scratchpad ##
+$bindsym $mod+Shift+minus move scratchpad, exec "pkill -RTMIN+7 waybar"
+
+# If there are multiple scratchpad windows, this command cycles through them.
+## Action // Toggle scratchpad ##
+$bindsym $mod+minus scratchpad show, exec "pkill -RTMIN+7 waybar"
+#+end_src

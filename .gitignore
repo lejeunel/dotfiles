@@ -24,16 +24,16 @@ config/gtk-2.0
 pyenv-installer*
 config/pavucontrol.ini
 lsyncd/log
-*.pyc
-/*.zip
-/bin/zathura_sync.sh
-/config/teams/
-/config/transmission/
-/config/Nextcloud/
-/config/Microsoft/
-/config/NVIDIA Corporation/
-/doom.d/config.el
-/doom.d/config.emacs-lip
-/doom.d/config.emas-lisp
-/doom.d/config.html
-/doom.d/custom.el
+bin/zathura_sync.sh
+config/teams/
+config/transmission/
+config/Nextcloud/
+config/Microsoft/
+config/NVIDIA Corporation/
+doom.d/config.el
+doom.d/config.emacs-lip
+doom.d/config.emas-lisp
+doom.d/config.html
+doom.d/custom.el
+local/share
+local/state
