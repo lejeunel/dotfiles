@@ -31,6 +31,11 @@ include $HOME/.config/sway/config.d/*
 include $HOME/.config/sway/modes/*
 #+end_src
 
+#+begin_src sh :tangle definitions
+# Add --to-code to bindsym, support for non-latin layouts
+set $bindsym bindsym --to-code
+#+end_src
+
 * Keybindings
 ** Modifiers
 #+begin_src sh :tangle definitions

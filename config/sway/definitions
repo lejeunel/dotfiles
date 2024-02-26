@@ -1,3 +1,6 @@
+# Add --to-code to bindsym, support for non-latin layouts
+set $bindsym bindsym --to-code
+
 set $mod Mod1
 set $alt_mod Mod4
 
