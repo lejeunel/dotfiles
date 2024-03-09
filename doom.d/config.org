@@ -330,6 +330,9 @@ background of code to whatever theme I'm using's background"
 #+end_src
 
 ** Org-ref / bibtex
+- We define in ~org-ref-default-bibliography~ a default ~bib~ file.
+- We use [[https://tectonic-typesetting.github.io/en-US/][tectonic]]  to generate ~pdf~ files from LaTeX.
+
 :PROPERTIES:
 :DIR:      /home/laurent/.dotfiles/doom.d/
 :END:
