@@ -27,7 +27,7 @@ hence this personal config file is pretty minimal in itself.
 ;; (catppuccin-reload)
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 21 :height 1.0 :weight 'normal)
-     doom-variable-pitch-font (font-spec :family "ETBembo" :height 1.4))
+     doom-variable-pitch-font (font-spec :family "ETBembo" :height 1.7))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -337,10 +337,7 @@ background of code to whatever theme I'm using's background"
 (use-package! org-ref
     :init
         (setq org-latex-pdf-process
-            '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-            "bibtex %b"
-            "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-            "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+            '("tectonic %f"))
         (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
             org-ref-default-bibliography "~/org/refs.bib"
             bibtex-completion-bibliography org-ref-default-bibliography

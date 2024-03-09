@@ -160,8 +160,5 @@ $bindsym $mod+space focus mode_toggle
 ## Navigation // Swap focus to the parent window ##
 $bindsym $mod+a focus parent
 
-## Launch // Toggle Help ##
-$bindsym $mod+question exec $help
-
 # allow to kill focused floating shell windows using Esc
 $bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
