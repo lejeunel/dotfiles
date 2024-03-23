@@ -21,14 +21,20 @@ hence this personal config file is pretty minimal in itself.
 
 * Appearance
 #+begin_src emacs-lisp :tangle yes
-;; (all-the-icons-install-fonts)
 (setq doom-theme 'catppuccin)
 (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
 ;; (catppuccin-reload)
 
+(setq highlight-indent-guides-auto-odd-face-perc 50)
+(setq highlight-indent-guides-auto-even-face-perc 50)
+(setq highlight-indent-guides-auto-character-face-perc 50)
+
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 21 :height 1.0 :weight 'normal)
      doom-variable-pitch-font (font-spec :family "ETBembo" :height 1.7))
+(setq)
 #+end_src
+
+#+RESULTS:
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! mixed-pitch
@@ -86,6 +92,7 @@ Show emphasis marker when cursor is on region.
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! org-appear
+  :defer t
   :config
   (setq org-appear-autolinks t))
 (add-hook! org-mode :append #'org-appear-mode)
@@ -94,23 +101,72 @@ Show emphasis marker when cursor is on region.
 Force company to use fixed-pitch font
 #+begin_src emacs-lisp :tangle yes
 (use-package! company
-  :ensure t
+  :defer t
   :custom-face
   (company-tooltip
    ((t (:family "JetBrainsMono Nerd Font" :height 1.0)))))
 #+end_src
 
 * LaTeX
+Bind main AucTex menu:
+
 #+begin_src emacs-lisp :tangle yes
 (map! :localleader
       :map LaTeX-mode-map
       :desc "Master"    "m" 'TeX-command-master)
 #+end_src
 
+Setup default compilation engine.
+
+- The first element of the list is the symbol that AucTeX recognizes.
+- The second element is a string with the name of the TeX distribution.
+- The third element is the shell command for compiling plain TeX documents.
+- The fourth element is the shell command for compiling LaTeX documents.
+   Here we are assuming the user is using a Tectonic project (generated using ~tectonic -X new <proj-name>~).
+- The last element is the shell command for compiling ConTeXt documents, left unconfigured for now.
+
+#+begin_src emacs-lisp :tangle yes
+(setq TeX-engine-alist '((default
+                          "Tectonic"
+                          "tectonic -X compile -f plain %T"
+                          "tectonic -X watch"
+                          nil)))
+#+end_src
+
+Next, modify the ~LaTeX-command-style~ so that AucTex doesn’t add extra options to it that Tectonic does not recognize.
+We simply set it to the ~%(latex)~ expansion (from ~TeX-expand-list-builtin~), removing any other extra options.
+
+#+begin_src emacs-lisp :tangle yes
+(setq LaTeX-command-style '(("" "%(latex)")))
+#+end_src
+
+We need to set the ~TeX-check-TeX~ variable to ~nil~ since AucTeX will try to find a traditional distribution like ~TeXLive~ or others, and will fail since Tectonic doesn’t meet its criteria.
+
+Additionally, we should also set ~TeX-process-asynchronous~ to ~t~, so that running Tectonic in watch mode doesn’t hang up Emacs.
+
+We’ll also just ensure that the ~TeX-engine~ is set to ~default~.
+
+#+begin_src emacs-lisp :tangle yes
+(setq TeX-process-asynchronous t
+      TeX-check-TeX nil
+      TeX-engine 'default)
+#+end_src
+
+Finally, modify the ~TeX-command-list~ to use the appropriate commands and not pass in extra metadata and options to Tectonic that cause it to error out. This needs to be done in place.
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook! LaTeX-mode
+(let ((tex-list (assoc "TeX" TeX-command-list))
+      (latex-list (assoc "LaTeX" TeX-command-list)))
+  (setf (cadr tex-list) "%(tex)"
+        (cadr latex-list) "%l")))
+#+end_src
+
 * Typopunct
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! typopunct
+  :defer t
   :config
   (typopunct-change-language 'french t))
   #+end_src
@@ -137,7 +193,7 @@ Download standalone [[https://languagetool.org/][LanguageTool]] server from http
 * YAML
 #+begin_src emacs-lisp :tangle yes
 (use-package! yaml-mode
-  :ensure t
+  :defer t
   :mode ("\\.ya?ml\\'" . yaml-mode))
 #+end_src
 
@@ -185,7 +241,7 @@ with [[https://github.com/douglasdavis/numpydoc.el][numpydoc.el]].
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! numpydoc
-  :ensure t
+  :defer t
   :init
   (setq numpydoc-insertion-style 'yas))
 
@@ -194,30 +250,18 @@ with [[https://github.com/douglasdavis/numpydoc.el][numpydoc.el]].
       :desc "Auto docstring"  "s" 'numpydoc-generate)
 #+end_src
 
-** Pyright
-
-Tell pyright where virtual environments are located.
-#+begin_src emacs-lisp :tangle yes
-(setq lsp-pyright-venv-path (concat (getenv "HOME") "/.pyenv/versions"))
-#+end_src
-
 * Org
-:PROPERTIES:
-:ID:       5472790a-3003-40f9-9b1d-138eb6d72734
-:END:
 
 #+begin_src emacs-lisp :tangle yes
-(after! org
-  (setq org-export-use-babel t)
-  (setq org-directory "~/org/")
-    (load-library "ox-reveal")
-  )
+(setq org-export-use-babel t)
+(setq org-directory "~/org/")
+(load-library "ox-reveal")
+(setq org-latex-pdf-process '("tectonic %f"))
 #+end_src
 
 Set PDF viewer.
 #+begin_src emacs-lisp :tangle yes
-(after! org
-    (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s")))
+(add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
@@ -333,14 +377,9 @@ background of code to whatever theme I'm using's background"
 - We define in ~org-ref-default-bibliography~ a default ~bib~ file.
 - We use [[https://tectonic-typesetting.github.io/en-US/][tectonic]]  to generate ~pdf~ files from LaTeX.
 
-:PROPERTIES:
-:DIR:      /home/laurent/.dotfiles/doom.d/
-:END:
 #+begin_src emacs-lisp :tangle yes
 (use-package! org-ref
     :init
-        (setq org-latex-pdf-process
-            '("tectonic %f"))
         (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
             org-ref-default-bibliography "~/org/refs.bib"
             bibtex-completion-bibliography org-ref-default-bibliography
@@ -351,7 +390,7 @@ background of code to whatever theme I'm using's background"
 
 (map! :localleader
       :map org-mode-map
-      :desc "Insert citation" "c" 'ivy-bibtex)
+      :desc "Insert citation" "c" 'org-cite-insert)
 #+end_src
 
 * Others
@@ -366,4 +405,10 @@ background of code to whatever theme I'm using's background"
 (after! iflipb
   (setq iflipb-ignore-buffers "$^")
   )
+#+end_src
+
+Enable tree-sitter syntax highlighting for all languages.
+
+#+begin_src emacs-lisp :tangle yes
+(setq +tree-sitter-hl-enabled-modes t)
 #+end_src
