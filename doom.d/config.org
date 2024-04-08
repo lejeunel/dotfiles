@@ -8,6 +8,7 @@ This uses the [[https://github.com/doomemacs/doomemacs][doom-emacs]] configurati
 hence this personal config file is pretty minimal in itself.
 
 * General Bindings
+
 #+begin_src emacs-lisp :tangle yes
 (map! :leader
     :desc "Kill buffer" "x" #'kill-this-buffer
@@ -19,29 +20,39 @@ hence this personal config file is pretty minimal in itself.
     :desc "Switch window" "TAB" #'ace-window)
 #+end_src
 
+Disable evil-snipe to use standard vim substitute bindings: ~s/S~.
+#+begin_src emacs-lisp :tangle yes
+(remove-hook 'doom-first-input-hook
+    #'evil-snipe-mode)
+#+end_src
+
+Evil-mode does not conform precisely to vim's standard keybinding.
+We reset these here:
+#+begin_src emacs-lisp :tangle yes
+(define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
+(define-key evil-insert-state-map (kbd "C-h") 'backward-delete-char)
+#+end_src
+
 * Appearance
 #+begin_src emacs-lisp :tangle yes
-(setq doom-theme 'catppuccin)
-(setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
-;; (catppuccin-reload)
+(setq doom-theme 'doom-dracula)
 
 (setq highlight-indent-guides-auto-odd-face-perc 50)
 (setq highlight-indent-guides-auto-even-face-perc 50)
 (setq highlight-indent-guides-auto-character-face-perc 50)
+(setq display-line-numbers-type 'relative)
 
 (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 21 :height 1.0 :weight 'normal)
-     doom-variable-pitch-font (font-spec :family "ETBembo" :height 1.7))
-(setq)
+     doom-variable-pitch-font (font-spec :family "ETBembo" :height 1.4))
 #+end_src
-
-#+RESULTS:
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! mixed-pitch
   :hook (org-mode . mixed-pitch-mode)
   :config
   (setq mixed-pitch-set-height t)
-  (set-face-attribute 'variable-pitch nil :height 1.5))
+  (set-face-attribute 'variable-pitch nil :height 1.4))
 #+end_src
 
 Patch theme to use different font sizes in org headings.
@@ -257,6 +268,7 @@ with [[https://github.com/douglasdavis/numpydoc.el][numpydoc.el]].
 (setq org-directory "~/org/")
 (load-library "ox-reveal")
 (setq org-latex-pdf-process '("tectonic %f"))
+(setq org-export-in-background t)
 #+end_src
 
 Set PDF viewer.

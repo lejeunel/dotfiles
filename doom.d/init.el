@@ -107,7 +107,7 @@
        yaml
        ;;agda              ; types of types of types of types...
        ;;assembly          ; assembly for fun or debugging
-       (cc +cmake +lsp)    ; C/C++/Obj-C madness
+       (cc +lsp +tree-sitter)    ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
@@ -123,7 +123,7 @@
        ;;faust             ; dsp, but you get to keep your soul
        ;;fsharp           ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
-       (go +lsp)                ; the hipster dialect
+       (go +lsp +tree-sitter)                ; the hipster dialect
        ;;(haskell +dante)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
@@ -135,7 +135,7 @@
        ;;lean
        ;;factor
        ;;ledger            ; an accounting system in Emacs
-       ;;lua               ; one-based indices? one-based indices
+       (lua +tree-sitter)               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"

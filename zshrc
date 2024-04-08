@@ -1,5 +1,9 @@
 export PATH=$HOME/.local/bin:$HOME/bin:$HOME/.bin:/usr/bin/vendor_perl:$PATH
 export FPATH=$HOME/.zsh_custom:$FPATH
+
+export GEM_HOME="$(gem env user_gemhome)"
+export PATH="$PATH:$GEM_HOME/bin"
+
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
 export DISABLE_AUTO_UPDATE="true"
 

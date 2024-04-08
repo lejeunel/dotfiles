@@ -51,8 +51,6 @@
                                         ;(package! builtin-package :recipe (:branch "develop"))
 
 (package! iflipb)
-(package! ivy-bibtex)
-(package! all-the-icons-ivy)
 (package! org-ref)
 (package! py-yapf)
 (package! typopunct)
@@ -65,6 +63,5 @@
 (package! org-appear
   :recipe (:host github
            :repo "awth13/org-appear"))
-(package! catppuccin-theme)
 (package! org-reveal)
 (package! ox-reveal)

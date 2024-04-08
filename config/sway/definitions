@@ -58,7 +58,7 @@ set $calendar $term_float calcurse
 
 set $grimshot /usr/bin/grimshot
 set $pipe_output $grimshot save output -
-set $pipe_selection $grimshot save window -
+set $pipe_selection $grimshot save area -
 set $notify_paste  [[ $(wl-paste -l) == "image/png" ]] && notify-send "Screenshot copied to clipboard"
 set $swappy swappy -f -
 set $swappy_pipe swappy -f - -o -
