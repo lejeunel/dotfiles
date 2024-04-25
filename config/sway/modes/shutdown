@@ -18,7 +18,6 @@ mode --pango_markup $mode_shutdown {
     $bindsym l mode "default", exec $locking
 
     # logout
-    # $bindsym e exec $purge_cliphist; exec loginctl terminate-user $USER
     $bindsym e exec loginctl terminate-user $USER
 
     # suspend

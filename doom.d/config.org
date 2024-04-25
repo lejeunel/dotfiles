@@ -1,5 +1,5 @@
-#+TITLE:       Doom Emacs configuration
-#+AUTHOR:      Laurent Lejeune
+#+TITLE: Doom Emacs configuration
+#+AUTHOR: Laurent Lejeune
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../org/styles/org.css"/>
 
 * Introduction
@@ -20,18 +20,11 @@ hence this personal config file is pretty minimal in itself.
     :desc "Switch window" "TAB" #'ace-window)
 #+end_src
 
-Disable evil-snipe to use standard vim substitute bindings: ~s/S~.
-#+begin_src emacs-lisp :tangle yes
-(remove-hook 'doom-first-input-hook
-    #'evil-snipe-mode)
-#+end_src
-
 Evil-mode does not conform precisely to vim's standard keybinding.
 We reset these here:
 #+begin_src emacs-lisp :tangle yes
 (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
-(define-key evil-insert-state-map (kbd "C-h") 'backward-delete-char)
 #+end_src
 
 * Appearance
@@ -65,33 +58,6 @@ Patch theme to use different font sizes in org headings.
         '(org-level-2 :inherit outline-2 :height 1.3)
         '(org-level-1 :inherit outline-1 :height 1.5)
         '(org-document-title :height 1.5 :underline nil))
-#+end_src
-
-Define a simple custom minor-mode to writeroom that further disactivate:
-- Line numbers
-- git gutter
-- EOB tilde
-
-#+begin_src emacs-lisp :tangle yes
-(define-minor-mode ll/writeroom-mode
-  "Toggles global writeroom-mode."
-  nil   ; Initial value, nil for disabled
-  :lighter ll/writeroom-mode
-  :global t
-  (if ll/writeroom-mode
-      (progn
-        (display-line-numbers-mode -1)
-        (git-gutter-mode -1)
-        (vi-tilde-fringe-mode -1)
-        (writeroom-mode 1)
-        (message "writeroom-mode activated!"))
-    (progn
-        (display-line-numbers-mode 1)
-        (git-gutter-mode 1)
-        (vi-tilde-fringe-mode 1)
-        (writeroom-mode -1)
-        (mixed-pitch-mode 1)
-        (message "writeroom-mode deactivated!"))))
 #+end_src
 
 Hide emphasis markups mark.
@@ -261,6 +227,19 @@ with [[https://github.com/douglasdavis/numpydoc.el][numpydoc.el]].
       :desc "Auto docstring"  "s" 'numpydoc-generate)
 #+end_src
 
+* Harpoon.el
+#+begin_src emacs-lisp :tangle yes
+(map! :leader
+      (:prefix-map ("r" . "Harpoon")
+       (:desc "Menu" "m" #'harpoon-quick-menu-hydra
+        :desc "Add file" "a" #'harpoon-add-file
+        :desc "Clear" "c" 'harpoon-clear)))
+
+(map! :leader "1" 'harpoon-go-to-1)
+(map! :leader "2" 'harpoon-go-to-2)
+(map! :leader "3" 'harpoon-go-to-3)
+(map! :leader "4" 'harpoon-go-to-4)
+#+end_src
 * Org
 
 #+begin_src emacs-lisp :tangle yes
@@ -282,12 +261,6 @@ Set PDF viewer.
   :hook (org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default t))
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
-(map! :localleader
-      :map org-mode-map
-      :desc "Write room"    "w" 'll/writeroom-mode)
 #+end_src
 
 ** Backends/Exporters
@@ -391,6 +364,7 @@ background of code to whatever theme I'm using's background"
 
 #+begin_src emacs-lisp :tangle yes
 (use-package! org-ref
+  :defer t
     :init
         (setq org-ref-bibliography-notes "~/org/paper-notes/paper-notes.org"
             org-ref-default-bibliography "~/org/refs.bib"
@@ -410,7 +384,6 @@ background of code to whatever theme I'm using's background"
 #+begin_src emacs-lisp :tangle yes
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
-
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes

@@ -18,7 +18,7 @@ aur/swayfx
 aur/swaync
 extra/kanshi
 aur/grimshot
-aur/gtklock
+aur/swaylock-effects-git
 extra/brightnessctl
 #+end_src
 
@@ -272,10 +272,6 @@ set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item
 set $notification swaync-client -t
 #+end_src
 
-** Lockscreen
-#+begin_src sh :tangle definitions
-set $locking gtklock --daemonize
-#+end_src
 
 ** Bluetooth
 #+begin_src sh :tangle definitions
@@ -289,25 +285,43 @@ set $brightness_up brightnessctl s 50+
 set $brightness_down brightnessctl s 50-
 #+end_src
 
+** Locking
+
+#+begin_src sh :tangle scripts/lock.sh :tangle-mode (identity #o755)
+#!/bin/bash
+swayidle -w \
+		timeout 30 'swaymsg "output * dpms off"' \
+    timeout 60 'systemctl suspend' \
+		resume 'swaymsg "output * dpms on"' &
+
+
+# Lock screen immediately
+swaylock \
+	--screenshots \
+	--clock \
+	--indicator \
+	--indicator-radius 100 \
+	--indicator-thickness 7 \
+	--effect-blur 7x5 \
+	--effect-vignette 0.5:0.5 \
+	--ring-color bb00cc \
+	--key-hl-color 880033 \
+	--line-color 00000000 \
+	--inside-color 00000088 \
+	--separator-color 00000000 \
+	--grace 2 \
+	--fade-in 0.2
+
+# Kill the last instance of swayidle so the timer doesn't keep running in background
+pkill --newest swayidle
+#+end_src
+
 ** Idle
 
 #+begin_src sh :tangle definitions
-set $idle_timeout 240
-set $locking_timeout 300
-set $screen_timeout 600
-set $sleep_timeout 900
-set $sleep_delay 2
-#+end_src
-
-#+begin_src sh :tangle definitions
-set $swayidle swayidle -w \
-    timeout $idle_timeout 'light -G > /tmp/brightness && light -S 10' resume 'light -S $([ -f /tmp/brightness ] && cat /tmp/brightness || echo 100%)' \
-    timeout $locking_timeout 'exec $locking' \
-    timeout $screen_timeout 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    timeout $sleep_timeout 'swaymsg "output * dpms on"; sleep $sleep_delay; systemctl suspend' \
-    before-sleep 'playerctl pause' \
-    before-sleep 'exec $locking & sleep $sleep_delay'
+exec swayidle -w \
+          timeout 240 '$HOME/.config/sway/scripts/lock.sh' \
+          before-sleep '$HOME/.config/sway/scripts/lock.sh'
 #+end_src
 
 ** Status bar
@@ -555,7 +569,6 @@ mode --pango_markup $mode_shutdown {
     $bindsym l mode "default", exec $locking
 
     # logout
-    # $bindsym e exec $purge_cliphist; exec loginctl terminate-user $USER
     $bindsym e exec loginctl terminate-user $USER
 
     # suspend

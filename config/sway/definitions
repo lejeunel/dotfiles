@@ -26,28 +26,15 @@ set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item
 
 set $notification swaync-client -t
 
-set $locking gtklock --daemonize
-
 set $bluetooth $once $term_float bluetuith
 
 set $brightness brightnessctl
 set $brightness_up brightnessctl s 50+
 set $brightness_down brightnessctl s 50-
 
-set $idle_timeout 240
-set $locking_timeout 300
-set $screen_timeout 600
-set $sleep_timeout 900
-set $sleep_delay 2
-
-set $swayidle swayidle -w \
-    timeout $idle_timeout 'light -G > /tmp/brightness && light -S 10' resume 'light -S $([ -f /tmp/brightness ] && cat /tmp/brightness || echo 100%)' \
-    timeout $locking_timeout 'exec $locking' \
-    timeout $screen_timeout 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    timeout $sleep_timeout 'swaymsg "output * dpms on"; sleep $sleep_delay; systemctl suspend' \
-    before-sleep 'playerctl pause' \
-    before-sleep 'exec $locking & sleep $sleep_delay'
+exec swayidle -w \
+          timeout 240 '$HOME/.config/sway/scripts/lock.sh' \
+          before-sleep '$HOME/.config/sway/scripts/lock.sh'
 
 set $statusbar waybar
 set $waybar_position top
