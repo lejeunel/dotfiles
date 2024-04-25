@@ -16,7 +16,21 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
-    -- ... and there is more!
-    --  Check out: https://github.com/echasnovski/mini.nvim
+    require('mini.move').setup {
+      -- Module mappings. Use `''` (empty string) to disable one.
+      mappings = {
+        -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+        left = '<S-h>',
+        right = '<S-l>',
+        down = '<S-j>',
+        up = '<S-k>',
+
+        -- Move current line in Normal mode
+        line_left = '<S-h>',
+        line_right = '<S-l>',
+        line_down = '<S-j>',
+        line_up = '<S-k>',
+      },
+    }
   end,
 }
