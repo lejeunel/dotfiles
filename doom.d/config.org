@@ -27,6 +27,11 @@ We reset these here:
 (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
 #+end_src
 
+Function that allow to move around selections:
+#+begin_src emacs-lisp :tangle yes
+(define-key evil-visual-state-map (kbd "K") 'drag-stuff-up)
+(define-key evil-visual-state-map (kbd "J") 'drag-stuff-down)
+#+end_src
 * Appearance
 #+begin_src emacs-lisp :tangle yes
 (setq doom-theme 'doom-dracula)
@@ -81,7 +86,11 @@ Force company to use fixed-pitch font
   :defer t
   :custom-face
   (company-tooltip
-   ((t (:family "JetBrainsMono Nerd Font" :height 1.0)))))
+   ((t (:family "JetBrainsMono Nerd Font" :height 1.0))))
+  :config
+        (define-key evil-insert-state-map (kbd "C-l") 'company-complete)
+        (define-key company-active-map (kbd "RET") nil)
+  )
 #+end_src
 
 * LaTeX

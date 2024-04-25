@@ -57,6 +57,7 @@
 (package! langtool)
 (package! numpydoc)
 (package! harpoon)
+(package! drag-stuff)
 (package! org-cv
   :recipe (:host gitlab
            :repo "Titan-C/org-cv"))
