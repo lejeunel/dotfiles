@@ -287,6 +287,7 @@ set $brightness_down brightnessctl s 50-
 ** Locking
 
 #+begin_src sh :tangle definitions
+set $locking "$HOME/.config/sway/scripts/mylock-rofi-menu"
 
 set $lockingmenu rofi -show lock-mode -modes "lock-mode:$HOME/.config/sway/scripts/mylock-rofi-menu"
 $bindsym $mod+Shift+w exec $lockingmenu
