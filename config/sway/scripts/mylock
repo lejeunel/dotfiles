@@ -1,0 +1,307 @@
+#!/usr/bin/env bash
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at
+# your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+PROG=$( basename "$0" )
+
+# config file:
+CFG_FILE=${XDG_CONFIG_DIR:-$HOME/.config}/$PROG/config
+
+DEFAULT_CONFIG='
+# time between events (secs)
+TIMEOUT=600
+# Countdown to locking/suspend (requires sway-count+nwg-wrapper)
+COUNTDOWN=0
+BINDINGS_FILE=${XDG_CONFIG_DIR:-$HOME/.config}/sway/config
+VERBOSE=""
+'
+
+eval "$DEFAULT_CONFIG"
+
+MODES="\
+lock-now:    lock the screen
+safe:        auto-blanking, auto-lock & auto-suspend (default mode after boot or suspend)
+at-home:     auto-blanking but no auto-lock; auto-suspend after 1 hour
+download:    auto-blanking and auto-lock but no auto-suspend
+desktop:     same as download-mode
+movie:       no auto-blanking, auto-lock or auto-suspend
+"
+
+usage() {
+    cat << EOF
+Usage: $PROG [OPTIONS] [seconds] [mode [mode ...]]
+
+Set up swayidle with automatic screen blanking, lock and/or suspend
+after an idle period according to your desired 'mode':
+
+safe          should be the default at startup in the sway config.
+at-home       if you're in a safe environment and don't need auto-locking eg. at home
+download      while downloading - locks the screen but no suspend
+desktop       is a synonym for download-mode
+movie-mode    eg at home watching a movie - no suspend nor locking nor blanking
+
+You can put default settings in the config file $CFG_FILE
+
+OPTIONS:
+
+-c|--config <file>   config file
+
+-q|--quiet           don't popup confirmation dialog
+                     Or put QUIET=true in the config file.
+
+-n|--no-notify       don't send notification
+                     Or put NOTIFY="" in the config file.
+
+-p|--print-status print the current arguments of swayidle (as the
+                     output of ps is not very helpful)
+
+-m|--mode print the current mode
+
+-C|--countdown <secs>
+                     Countdown to locking/suspend (requires sway-count +
+                     nwg-wrapper). Or put COUNTDOWN=<secs> in the config file.
+                     NB Countdown in the lockscreen is only supported with
+
+-v|--verbose         Be verbose
+
+'seconds' is the time before an idle event is triggered (default 600 = 10m)
+Or put TIMEOUT=<seconds> in the config file.
+
+'mode' is one of:
+$MODES
+
+If no argument is given then a wofi dialog pops up to select one of
+the above modes.
+
+In all modes (except movie-mode), the screen is blanked after the
+first timeout. Locking, if enabled, happens on the next timeout and
+then suspend, if enabled. For all modes, after a suspend, safe-mode is
+enabled and the screen is locked.
+
+Dependencies: rofi, swayidle, swaylock.
+
+I suggest the following key bindings and startup for sway's config file:
+
+# this first one pops up the dialog to select the mode:
+bindsym  \$mod+l                exec $PROG
+bindsym  Shift+\$mod+l          exec $PROG at-home-mode
+bindsym  Control+\$mod+l        exec $PROG safe-mode
+bindsym  Control+Shift+\$mod+l  exec $PROG lock-now
+...
+
+It is recommended to have the following in your sway config to start
+swayidle with safe defaults:
+
+exec $PROG safe-mode
+or
+exec $PROG desktop
+
+Sample config file:
+$DEFAULT_CONFIG
+EOF
+}
+
+# defaults:
+SELF=$0
+COUNTDOWN=0
+WAIT='-w'
+VERBOSE=""
+
+# shellcheck disable=SC1090
+[[ -r "$CFG_FILE" ]] && source "$CFG_FILE"
+
+# process options:
+TEMP=$( getopt --options c:dhi:pqnmrC:v --longoptions config:,help,image:,print,quiet,mode,no-notify,random,countdown:,verbose -- "$@" ) || exit 1
+eval set -- "$TEMP"
+
+get_current_idle() {
+    IDLE="$( tr '\0' '\n' < /proc/"$( pgrep -u "$USER" -n swayidle )"/cmdline )"
+
+    MASK=0
+    if echo "$IDLE" | grep -q 'mylock .* lock-now'; then
+        LOCKING="on"
+        MASK=$(( MASK + 100 ))
+    else
+        LOCKING="off"
+    fi
+    if echo "$IDLE" | grep -Eq 'zzz|suspend'; then
+        SUSPEND="on"
+        MASK=$(( MASK + 10 ))
+    else
+        SUSPEND="off"
+    fi
+    if echo "$IDLE" | grep -q 'output.*off'; then
+        BLANKING="on"
+        MASK=$(( MASK + 1 ))
+    else
+        BLANKING="off"
+    fi
+    case $MASK in
+        0)   MODE="movie-mode" ;;
+        11)  MODE="at-home-mode" ;;
+        111) MODE="safe-mode" ;;
+        101) MODE="download-mode" ;;
+        *)   MODE="unknown mode!" ;;
+    esac
+
+    echo "$MODE: blanking=$BLANKING auto-lock=$LOCKING auto-suspend=$SUSPEND"
+}
+
+CFG_OPT=
+C_OPT=
+R_OPT=
+D_OPT=
+I_OPT=
+Q_OPT=
+N_OPT=
+V_OPT=
+for i in "$@"; do
+    case $i in
+        -c|--config)
+            # load settings from config file:
+            CFG_FILE="$2"
+            CFG_OPT="-c $CFG_FILE"
+            shift 2
+            ;;
+
+        -C|--countdown)
+            COUNTDOWN="$2"
+            C_OPT="-C $COUNTDOWN"
+            shift 2
+            ;;
+        -q|--quiet)
+            Q_OPT="-q"
+            shift
+            ;;
+        -p|--print-status)
+            pid="$( pidof swayidle )"
+            [[ "$pid" ]] && tr '\0' '\n' < "/proc/$pid/cmdline"
+            exit 0
+            ;;
+        -m|--mode)
+            echo "$( get_current_idle | head -n 1 | cut -f 1 -d ':')"
+            exit 0
+            ;;
+        -h|--help) usage; exit 0;;
+        -v|--verbose)
+            VERBOSE="set"
+            V_OPT="-v"
+            shift
+            ;;
+        --) shift; break;;
+    esac
+done
+
+type "$PROG" &>/dev/null || PATH+=":$( dirname "$0" )"
+
+
+[[ "$VERBOSE" ]] && set -x
+
+# set timeout value:
+[[ "$1" && $1 =~ [0-9]+ ]] && {
+    TIMEOUT=$1
+    shift
+}
+
+TIMEOUT2=$(( TIMEOUT * 2 ))
+TIMEOUT3=$(( TIMEOUT * 3 ))
+(( COUNTDOWN > TIMEOUT )) && COUNTDOWN=""
+(( COUNTDOWN < 1 )) && COUNTDOWN=""
+LONG_TIME=$(( 60 * 60 * 2 ))
+
+
+swaymsg -q "output * power on"
+
+C_OPT=""
+[[ "$COUNTDOWN" ]] && C_OPT="-C $COUNTDOWN"
+START_COUNTDOWN=""
+COUNTDOWN_KILL="true"
+type sway-count &>/dev/null && [[ "$COUNTDOWN" ]] && {
+    START_COUNTDOWN="; sway-count $COUNTDOWN &"
+    COUNTDOWN_KILL="sway-count -k"
+}
+
+ALL_OPTS="$CFG_OPT $D_OPT $I_OPT $Q_OPT $N_OPT $R_OPT $C_OPT $V_OPT"
+
+do_suspend="$SELF $ALL_OPTS $TIMEOUT safe lock-now; systemctl suspend"
+
+while [[ "$1" ]]; do
+    MODE="$1"
+    shift
+    case "$MODE" in
+        "lock-now"*)
+
+            swaylock --clock --indicator
+            ;;
+
+        "safe"*)
+            # NB I have not been able to get nwg-wrapper to display
+            # anything on top of swaylock unless it starts at least 1s
+            # earlier. Weird. Bug in wlroots? This works:
+            # nwg-wrapper -p right -a start --layer 3 -s /bin/date -r 1000 & sleep 2; swaylock &
+            # It does not work without the sleep. Nor does starting swaylock first:
+            # swaylock & nwg-wrapper -p right -a start --layer 3 -s /bin/date -r 1000
+            #
+
+            pkill -u "$USER" -9 swayidle
+            swayidle $WAIT \
+                  timeout "$TIMEOUT"                  "swaymsg -q 'output * power off'" \
+                  resume                              "swaymsg -q 'output * power on'" \
+                  timeout $(( TIMEOUT2 - COUNTDOWN )) "swaymsg -q 'output * power on'$START_COUNTDOWN" \
+                  resume                              "$COUNTDOWN_KILL" \
+                  timeout "$TIMEOUT2"                 "$SELF $ALL_OPTS lock-now" \
+                  timeout "$TIMEOUT3"                 "sudo $do_suspend" \
+                  before-sleep                        "$SELF lock-now"
+
+            ;;
+
+        *"home"*)
+            pkill -u "$USER" -9 swayidle
+            swayidle $WAIT \
+                  timeout "$TIMEOUT"                  "swaymsg -q 'output * power off'" \
+                  resume                              "swaymsg -q 'output * power on'" \
+                  timeout $(( LONG_TIME - COUNTDOWN )) "swaymsg -q 'output * power on'$START_COUNTDOWN" \
+                  resume                              "$COUNTDOWN_KILL" \
+                  timeout "$LONG_TIME"                "sudo $do_suspend" \
+                  before-sleep                        "$SELF lock-now"
+            ;;
+
+        "download"*|"desktop"*)
+            pkill -u "$USER" -9 swayidle
+            swayidle $WAIT \
+                  timeout "$TIMEOUT"                  "swaymsg -q 'output * power off'" \
+                  resume                              "swaymsg -q 'output * power on'" \
+                  timeout $(( TIMEOUT2 - COUNTDOWN )) "swaymsg -q 'output * power on'$START_COUNTDOWN" \
+                  resume                              "$COUNTDOWN_KILL" \
+                  timeout "$TIMEOUT2"                 "$SELF $ALL_OPTS lock-now" \
+                  timeout "$TIMEOUT3"                 "swaymsg -q 'output * power off'" \
+                  resume                              "swaymsg -q 'output * power on'" \
+                  before-sleep                        "$SELF lock-now"
+            ;;
+
+        "movie"*)
+            pkill -u "$USER" -9 swayidle
+            swayidle $WAIT \
+                  after-resume    "SELF safe-mode" \
+                  before-sleep                        "$SELF lock-now"
+            ;;
+
+        *)
+            echo "$PROG: no such locking mode '$MODE'" >&2
+            exit 1
+            ;;
+    esac
+done
+
+exit 0

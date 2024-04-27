@@ -32,7 +32,8 @@ set $brightness brightnessctl
 set $brightness_up brightnessctl s 50+
 set $brightness_down brightnessctl s 50-
 
-set $locking ${HOME}/.config/sway/scripts/mylock
+set $lockingmenu rofi -show lock-mode -modes "lock-mode:$HOME/.config/sway/scripts/mylock-rofi-menu"
+$bindsym $mod+Shift+w exec $lockingmenu
 
 exec $HOME/.config/sway/scripts/mylock safe
 

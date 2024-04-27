@@ -287,7 +287,9 @@ set $brightness_down brightnessctl s 50-
 ** Locking
 
 #+begin_src sh :tangle definitions
-set $locking ${HOME}/.config/sway/scripts/mylock
+
+set $lockingmenu rofi -show lock-mode -modes "lock-mode:$HOME/.config/sway/scripts/mylock-rofi-menu"
+$bindsym $mod+Shift+w exec $lockingmenu
 #+end_src
 
 Swaylock config taken from [[https://github.com/catppuccin/swaylock/blob/main/themes/macchiato.conf][here]].
@@ -642,31 +644,4 @@ $bindsym $mod+Shift+minus move scratchpad, exec "pkill -RTMIN+7 waybar"
 # If there are multiple scratchpad windows, this command cycles through them.
 ## Action // Toggle scratchpad ##
 $bindsym $mod+minus scratchpad show, exec "pkill -RTMIN+7 waybar"
-#+end_src
-
-** Locking
-#+begin_src sh :tangle modes/locking
-set $mode_locking "\
-<span>🔒</span> \
-<span foreground='$base06'> \
-<span foreground='$base04'>(<b>s</b>)</span>safe \
-<span foreground='$base04'>(<b>m</b>)</span>movie \
-<span foreground='$base04'>(<b>h</b>)</span>home \
-<span foreground='$base04'>(<b>d</b>)</span>download \
-<span> -</span>  \
-</span>"
-#+end_src
-
-#+begin_src sh :tangle modes/locking
-mode --pango_markup $mode_locking {
-    $bindsym s exec $locking safe
-    $bindsym m exec $locking movie
-    $bindsym h exec $locking home
-    $bindsym d exec $locking download
-
-    # Return to default mode.
-    $bindsym Escape mode "default"
-}
-
-$bindsym $mod+Shift+w mode $mode_locking
 #+end_src
