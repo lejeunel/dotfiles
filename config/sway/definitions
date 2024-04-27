@@ -32,9 +32,9 @@ set $brightness brightnessctl
 set $brightness_up brightnessctl s 50+
 set $brightness_down brightnessctl s 50-
 
-exec swayidle -w \
-          timeout 240 '$HOME/.config/sway/scripts/lock.sh' \
-          before-sleep '$HOME/.config/sway/scripts/lock.sh'
+set $locking ${HOME}/.config/sway/scripts/mylock
+
+exec $HOME/.config/sway/scripts/mylock safe
 
 set $statusbar waybar
 set $waybar_position top

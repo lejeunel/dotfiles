@@ -14,6 +14,7 @@ aur/bluetuith
 extra/swayidle
 extra/cliphist
 extra/waybar
+extra/rofi
 aur/swayfx
 aur/swaync
 extra/kanshi
@@ -245,7 +246,6 @@ exec_always {
 set $term alacritty
 set $term_float /usr/bin/alacritty --class floating_shell -e
 #+end_src
-
 ** Launcher
 #+begin_src sh :tangle definitions
 set $menu rofi -show combi -combi-modi "drun" -terminal $term -ssh-command "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} -e {cmd}" -show-icons -font "$gui-font" -lines 10 -width 35
@@ -272,7 +272,6 @@ set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item
 set $notification swaync-client -t
 #+end_src
 
-
 ** Bluetooth
 #+begin_src sh :tangle definitions
 set $bluetooth $once $term_float bluetuith
@@ -287,41 +286,52 @@ set $brightness_down brightnessctl s 50-
 
 ** Locking
 
-#+begin_src sh :tangle scripts/lock.sh :tangle-mode (identity #o755)
-#!/bin/bash
-swayidle -w \
-		timeout 30 'swaymsg "output * dpms off"' \
-    timeout 60 'systemctl suspend' \
-		resume 'swaymsg "output * dpms on"' &
-
-
-# Lock screen immediately
-swaylock \
-	--screenshots \
-	--clock \
-	--indicator \
-	--indicator-radius 100 \
-	--indicator-thickness 7 \
-	--effect-blur 7x5 \
-	--effect-vignette 0.5:0.5 \
-	--ring-color bb00cc \
-	--key-hl-color 880033 \
-	--line-color 00000000 \
-	--inside-color 00000088 \
-	--separator-color 00000000 \
-	--grace 2 \
-	--fade-in 0.2
-
-# Kill the last instance of swayidle so the timer doesn't keep running in background
-pkill --newest swayidle
+#+begin_src sh :tangle definitions
+set $locking ${HOME}/.config/sway/scripts/mylock
 #+end_src
 
-** Idle
+Swaylock config taken from [[https://github.com/catppuccin/swaylock/blob/main/themes/macchiato.conf][here]].
+
+#+begin_src sh :tangle ../swaylock/config :tangle-mode
+color=24273a
+bs-hl-color=f4dbd6
+caps-lock-bs-hl-color=f4dbd6
+caps-lock-key-hl-color=a6da95
+inside-color=00000000
+inside-clear-color=00000000
+inside-caps-lock-color=00000000
+inside-ver-color=00000000
+inside-wrong-color=00000000
+key-hl-color=a6da95
+layout-bg-color=00000000
+layout-border-color=00000000
+layout-text-color=cad3f5
+line-color=00000000
+line-clear-color=00000000
+line-caps-lock-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+ring-color=b7bdf8
+ring-clear-color=f4dbd6
+ring-caps-lock-color=f5a97f
+ring-ver-color=8aadf4
+ring-wrong-color=ee99a0
+separator-color=00000000
+text-color=cad3f5
+text-clear-color=f4dbd6
+text-caps-lock-color=f5a97f
+text-ver-color=8aadf4
+text-wrong-color=ee99a0
+indicator-radius=100
+indicator-thickness=7
+grace=2
+fade-in=0.3
+#+end_src
+
+** Idle/Locking daemon
 
 #+begin_src sh :tangle definitions
-exec swayidle -w \
-          timeout 240 '$HOME/.config/sway/scripts/lock.sh' \
-          before-sleep '$HOME/.config/sway/scripts/lock.sh'
+exec $HOME/.config/sway/scripts/mylock safe
 #+end_src
 
 ** Status bar
@@ -410,22 +420,22 @@ set $ws10 number 10
 ** Color definitions
 
 #+begin_src sh :tangle config.d/10-colors.conf
-set $base00 #282936
-set $base01 #3a3c4e
-set $base02 #4d4f68
-set $base03 #626483
-set $base04 #62d6e8
-set $base05 #e9e9f4
-set $base06 #f1f2f8
-set $base07 #f7f7fb
-set $base08 #ea51b2
-set $base09 #b45bcf
-set $base0A #00f769
-set $base0B #ebff87
-set $base0C #a1efe4
-set $base0D #62d6e8
-set $base0E #b45bcf
-set $base0F #00f769
+set $base00 #24273a
+set $base01 #1e2030
+set $base02 #363a4f
+set $base03 #494d64
+set $base04 #5b6078
+set $base05 #cad3f5
+set $base06 #f4dbd6
+set $base07 #b7bdf8
+set $base08 #ed8796
+set $base09 #f5a97f
+set $base0A #eed49f
+set $base0B #a6da95
+set $base0C #8bd5ca
+set $base0D #8aadf4
+set $base0E #c6a0f6
+set $base0F #f0c6c6
 #+end_src
 
 ** Colorize borders and text
@@ -452,7 +462,8 @@ smart_gaps on
 
 ** Wallpaper
 #+begin_src sh :tangle config.d/12-wallpaper.conf
-output * bg $HOME/Pictures/dracula-wallpapers/Art/4k/Kraken.png fit
+# output * bg $HOME/Pictures/dracula-wallpapers/Art/4k/Kraken.png fit
+output * bg $HOME/Pictures/catppuccin-wallpapers/misc/lonely-fish.png fit
 #+end_src
 
 ** Font
@@ -566,7 +577,7 @@ set $purge_cliphist [ $purge_cliphist_logout == 'true' ] && rm -f $HOME/.cache/c
 
 mode --pango_markup $mode_shutdown {
     # lock
-    $bindsym l mode "default", exec $locking
+    $bindsym l mode "default", exec $locking lock-now
 
     # logout
     $bindsym e exec loginctl terminate-user $USER
@@ -631,4 +642,31 @@ $bindsym $mod+Shift+minus move scratchpad, exec "pkill -RTMIN+7 waybar"
 # If there are multiple scratchpad windows, this command cycles through them.
 ## Action // Toggle scratchpad ##
 $bindsym $mod+minus scratchpad show, exec "pkill -RTMIN+7 waybar"
+#+end_src
+
+** Locking
+#+begin_src sh :tangle modes/locking
+set $mode_locking "\
+<span>🔒</span> \
+<span foreground='$base06'> \
+<span foreground='$base04'>(<b>s</b>)</span>safe \
+<span foreground='$base04'>(<b>m</b>)</span>movie \
+<span foreground='$base04'>(<b>h</b>)</span>home \
+<span foreground='$base04'>(<b>d</b>)</span>download \
+<span> -</span>  \
+</span>"
+#+end_src
+
+#+begin_src sh :tangle modes/locking
+mode --pango_markup $mode_locking {
+    $bindsym s exec $locking safe
+    $bindsym m exec $locking movie
+    $bindsym h exec $locking home
+    $bindsym d exec $locking download
+
+    # Return to default mode.
+    $bindsym Escape mode "default"
+}
+
+$bindsym $mod+Shift+w mode $mode_locking
 #+end_src
