@@ -67,3 +67,4 @@
            :repo "awth13/org-appear"))
 (package! org-reveal)
 (package! ox-reveal)
+(package! catppuccin-theme)
