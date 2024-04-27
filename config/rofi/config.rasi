@@ -22,4 +22,4 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "dracula"
+@theme "catppuccin-macchiato"

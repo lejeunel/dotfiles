@@ -1,4 +1,4 @@
-import = [ "~/.config/alacritty/dracula/dracula.toml" ]
+import = [ "~/.config/alacritty/catppuccin/catppuccin-macchiato.toml" ]
 
 [font]
 size = 16
