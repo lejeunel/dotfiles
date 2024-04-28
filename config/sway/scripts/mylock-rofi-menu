@@ -2,6 +2,7 @@
 if [ $# -eq 0 ]
 then
     echo "safe"
+    echo "home"
     echo "movie"
 else
   coproc ("/home/laurent/.config/sway/scripts/mylock" "$@" & >& /dev/null &)

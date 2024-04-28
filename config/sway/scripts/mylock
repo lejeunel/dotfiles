@@ -42,7 +42,7 @@ Set up swayidle with automatic screen blanking, lock and/or suspend
 after an idle period according to your desired 'mode':
 
 safe          should be the default at startup in the sway config.
-movie         eg at home watching a movie - no suspend nor locking nor blanking
+movie         at home watching a movie - no suspend nor locking nor blanking
 
 You can put default settings in the config file $CFG_FILE
 
@@ -110,7 +110,6 @@ SELF=$0
 WAIT='-w'
 VERBOSE=""
 
-# shellcheck disable=SC1090
 [[ -r "$CFG_FILE" ]] && source "$CFG_FILE"
 
 # process options:
@@ -118,11 +117,7 @@ TEMP=$( getopt --options c:dhi:pqnmrC:v --longoptions config:,help,image:,print,
 eval set -- "$TEMP"
 
 CFG_OPT=
-R_OPT=
-D_OPT=
-I_OPT=
 Q_OPT=
-N_OPT=
 V_OPT=
 for i in "$@"; do
     case $i in
@@ -136,11 +131,6 @@ for i in "$@"; do
         -q|--quiet)
             Q_OPT="-q"
             shift
-            ;;
-        -p|--print-status)
-            pid="$( pidof swayidle )"
-            [[ "$pid" ]] && tr '\0' '\n' < "/proc/$pid/cmdline"
-            exit 0
             ;;
         -h|--help) usage; exit 0;;
         -v|--verbose)
@@ -160,9 +150,9 @@ type "$PROG" &>/dev/null || PATH+=":$( dirname "$0" )"
 
 swaymsg -q "output * power on"
 
-ALL_OPTS="$CFG_OPT $D_OPT $I_OPT $Q_OPT $N_OPT $R_OPT $V_OPT"
-
+ALL_OPTS="$CFG_OPT $Q_OPT $V_OPT"
 do_suspend="$SELF $ALL_OPTS safe; systemctl suspend"
+
 
 while [[ "$1" ]]; do
     MODE="$1"
@@ -181,7 +171,14 @@ while [[ "$1" ]]; do
                   timeout "$MYLOCK_TIMEOUT_SUSPEND" "sudo $do_suspend" \
                   resume                            "swaymsg -q 'output * power on'" \
                   before-sleep                      "$SELF lock-now"
+            ;;
 
+        "home"*)
+            pkill -u "$USER" -9 swayidle
+            swayidle $WAIT \
+                  timeout "$MYLOCK_TIMEOUT_TURNOFF" "swaymsg -q 'output * power off'" \
+                  timeout "$MYLOCK_TIMEOUT_SUSPEND" "sudo $do_suspend" \
+                  resume                            "swaymsg -q 'output * power on'" \
             ;;
 
         "movie"*)

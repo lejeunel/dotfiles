@@ -256,6 +256,7 @@ with [[https://github.com/douglasdavis/numpydoc.el][numpydoc.el]].
       (:prefix-map ("r" . "Harpoon")
        (:desc "Menu" "m" #'harpoon-quick-menu-hydra
         :desc "Add file" "a" #'harpoon-add-file
+        :desc "Edit file" "r" #'harpoon-toggle-file
         :desc "Clear" "c" 'harpoon-clear)))
 
 (map! :leader "1" 'harpoon-go-to-1)

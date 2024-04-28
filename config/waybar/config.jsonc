@@ -34,6 +34,7 @@
 
         // media
         "custom/playerctl",
+        "idle_inhibitor",
         // "custom/notification",
         "pulseaudio",
         "backlight",
@@ -109,6 +110,18 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>",
         "tooltip": false
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰒳",
+            "deactivated": "󰒲"
+        },
+        "tooltip": true,
+        "tooltip-format-activated": "idle inhibitor enabled",
+        "tooltip-format-deactivated": "idle inhibitor disabled",
+        "on-click-right": "swaymsg exec \\$lockingmenu"
     },
 
     "backlight": {
