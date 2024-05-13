@@ -15,4 +15,4 @@ map [fullscreen] f toggle_fullscreen
 map c recolor
 map p print
 
-include "themes/dracula"
+include "themes/catppuccin-macchiato"
