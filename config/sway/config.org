@@ -491,6 +491,12 @@ exec_always {
 }
 #+end_src
 
+** Workspace icons
+Sets icons in workspace switcher by inspecting running application and matching their name.
+#+begin_src sh :tangle ../sworkstyle/config.toml
+[matching]
+'Emacs' = ''
+#+end_src
 * Inputs
 ** Keyboard
 Install the [[https://github.com/qwerty-fr/qwerty-fr#readme][qwerty-fr]]  layout.

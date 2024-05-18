@@ -20,6 +20,7 @@ hence this personal config file is pretty minimal in itself.
     :desc "Next buffer" "k" #'iflipb-next-buffer
     :desc "Previous buffer" "j" #'iflipb-previous-buffer
     :desc "Search buffer" "/" #'+default/search-buffer
+    :desc "Search buffer" "ps" #'+default/search-project
     :desc "Switch window" "TAB" #'ace-window)
 #+end_src
 
