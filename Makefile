@@ -9,7 +9,7 @@ switch: home-manager doom
 	home-manager switch --flake .#laurent
 
 doom:
-	./doom.d/maybe-install.sh
+	./editors/doom/maybe-install.sh
 
 clean:
 	nix-collect-garbage --delete-old
