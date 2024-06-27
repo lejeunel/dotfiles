@@ -22,11 +22,12 @@
 
           modules = [
             ({ config, pkgs, ...}: {
-              # install the overlay
               nixpkgs.overlays = [ alacritty-theme.overlays.default ];
             })
             ./home.nix ];
           extraSpecialArgs = {
+            # we bundle in this repo our editors config, these are
+            # linked to $HOME/.config/ from ${HOME}/${editorsCfgPath}
             editorsCfgPath = "dotfiles/editors";
           };
       };
