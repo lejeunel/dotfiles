@@ -4,11 +4,9 @@ let
   username = "laurent";
   email = "me@lejeunel.org";
   fullname = "Laurent Lejeune";
+  font = "JetBrainsMono Nerd Font";
 in {
   home = {
-    packages = with pkgs; [
-      hello
-    ];
     inherit username;
 
     homeDirectory = "/home/${username}";
@@ -18,19 +16,31 @@ in {
 
   home.file.".config/nvim" = {
     source =  ./nvim;
-    recursive = true;
 
   };
 
   home.file.".config/doom.d" = {
     source =  ./doom.d;
-    recursive = true;
 
   };
 
   programs = {
     bat = {
       enable = true;
+      themes = {
+        catppuccin = {
+          src = pkgs.fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "bat";
+            rev = "d714cc1d358ea51bfc02550dabab693f70cccea0";
+            sha256 = "Q5B4NDrfCIK3UAMs94vdXnR42k4AXCqZz6sRn8bzmf4=";
+          };
+          file = "themes/Catppuccin Macchiato.tmTheme";
+        };
+      };
+      config = {
+        theme = "catppuccin";
+      };
     };
     eza = {
       enable = true;
@@ -111,28 +121,11 @@ in {
         ];
       };
 
-
     };
 
     starship = {
       enable = true;
       enableZshIntegration = true;
-    };
-    alacritty = {
-      enable = true;
-      settings = {
-        import = [ pkgs.alacritty-theme.catppuccin_macchiato ];
-        font = {
-          size = 13;
-          normal.family = "JetBrainsMono Nerd Font";
-        };
-        window.padding = {
-          x = 10;
-          y = 10;
-        };
-        env.term = "xterm-256color";
-
-      };
     };
 
     neovim = {
@@ -159,6 +152,22 @@ in {
       };
     };
 
+    alacritty = {
+      enable = true;
+      settings = {
+        import = [ pkgs.alacritty-theme.catppuccin_macchiato ];
+        font = {
+          size = 13;
+          normal.family = font;
+        };
+        window.padding = {
+          x = 10;
+          y = 10;
+        };
+        env.term = "xterm-256color";
+
+      };
+    };
 
   };
 
@@ -173,6 +182,5 @@ in {
         WantedBy = [ "default.target" ];
       };
     };
-
 
 }
