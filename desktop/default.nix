@@ -1,5 +1,9 @@
 { inputs, pkgs, font, ...}:{
 
+  imports = [
+    ./i3
+  ];
+
   programs = {
 
     zathura = {
