@@ -82,13 +82,13 @@
     bars = {
       top = {
         blocks = [
-         {
-           block = "time";
-           interval = 60;
-           format = {
-             full = "$timestamp.datetime(f:'%a %d/%m/%Y %R', l:en_US) ";
-             short = "$timestamp.datetime(f:%R) ";
-           };
+          {
+            block = "time";
+            interval = 60;
+            format = {
+              full = "$timestamp.datetime(f:'%a %d/%m/%Y %R', l:en_US) ";
+              short = "$timestamp.datetime(f:%R) ";
+          };
          }
        ];
       };

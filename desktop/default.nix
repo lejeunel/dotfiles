@@ -11,7 +11,7 @@
       options = {
         window-title-basename = "true";
         selection-clipboard = "clipboard";
-        font = "${font}" + " 15";
+        font = "${font}" + " 12";
         adjust-open = "width";
         show-scrollbars = true;
       };
