@@ -6,6 +6,18 @@
     enable = true;
     package = pkgs.i3-gaps;
     config = rec {
+      bars = [
+        {
+          fonts = {
+            names = ["${font}"];
+            size = 12.0;
+
+          };
+          position = "top";
+          statusCommand = "/usr/bin/i3status-rs /home/laurent/.config/i3status-rust/config-top.toml";
+        }
+      ];
+
       fonts = {
         names = ["${font}"];
         size = 12.0;
@@ -52,16 +64,35 @@
 
       startup = [
         {
-          command = "exec i3-msg workspace 1";
+          command = "/usr/bin/feh --bg-scale ~/Pictures/catppuccin-wallpapers/misc/lonely-fish.png";
           always = true;
           notification = false;
         }
         {
-          command = "/usr/bin/feh --bg-scale ~/Pictures/catppuccin-wallpapers/misc/lonely-fish.png";
+          command = "/usr/bin/setxkbmap us_qwerty-fr";
           always = true;
           notification = false;
         }
       ];
     };
   };
+
+  programs.i3status-rust = {
+    enable = true;
+    bars = {
+      top = {
+        blocks = [
+         {
+           block = "time";
+           interval = 60;
+           format = {
+             full = "$timestamp.datetime(f:'%a %d/%m/%Y %R', l:en_US) ";
+             short = "$timestamp.datetime(f:%R) ";
+           };
+         }
+       ];
+      };
+    };
+  };
+
 }
