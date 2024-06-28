@@ -1,6 +1,6 @@
 {pkgs, ...}:{
 
-  imports = [./shell/lf.nix];
+  imports = [./lf];
 
   programs = {
 

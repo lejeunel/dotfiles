@@ -15,7 +15,7 @@ in {
 
   };
 
-  imports = [./shell.nix ./editors.nix];
+  imports = [./shell ./editors];
 
 
 
