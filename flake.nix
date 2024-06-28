@@ -26,7 +26,7 @@
             })
             ./home.nix ];
           extraSpecialArgs = {
-            # we bundle in this repo our editors config, these are
+            # we bundle in this repo our editors config, these will be
             # linked to $HOME/.config/ from ${HOME}/${editorsCfgPath}
             editorsCfgPath = "dotfiles/editors";
           };
