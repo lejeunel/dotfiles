@@ -29,6 +29,15 @@
             # we bundle in this repo our editors config, these will be
             # linked to $HOME/.config/ from ${HOME}/${editorsCfgPath}
             editorsCfgPath = "dotfiles/editors";
+            homeDirectory = "/home/laurent";
+            username = "laurent";
+            font = "JetBrainsMono Nerd Font";
+            gitIdentity = {
+              email = "me@lejeunel.org";
+              fullname = "Laurent Lejeune";
+              username = "lejeunel";
+            };
+
           };
       };
     };

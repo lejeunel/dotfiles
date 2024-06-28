@@ -1,8 +1,25 @@
-{pkgs, ...}:{
+{ inputs, pkgs, lib, config, gitIdentity, homeDirectory, ...}:{
 
   imports = [./lf];
 
   programs = {
+
+    git = {
+      enable = true;
+      userEmail = "${gitIdentity.email}";
+      userName = "${gitIdentity.username}";
+      aliases = {co = "checkout";
+                br = "branch";
+                ci = "commit";
+                st = "status";
+                unstage = "reset HEAD --";
+                last = "log -1 HEAD";
+                };
+      extraConfig = {
+        credential.helper = "store";
+        init.defaultBranch = "main";
+      };
+    };
 
     direnv = {
       enable = true;
@@ -87,6 +104,11 @@
       enableZshIntegration = true;
     };
 
+    pyenv = {
+      enable = true;
+      enableZshIntegration = true;
+      rootDirectory = "${homeDirectory}/.pyenv";
+    };
 
   };
 
