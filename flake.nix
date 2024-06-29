@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+    nix-colors.url = "github:misterio77/nix-colors";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,7 +11,7 @@
 
   };
 
-  outputs = { nixpkgs, alacritty-theme, home-manager, ... }:
+  outputs = { nixpkgs, alacritty-theme, nix-colors, home-manager, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -37,6 +38,7 @@
               fullname = "Laurent Lejeune";
               username = "lejeunel";
             };
+            inherit nix-colors;
 
           };
       };

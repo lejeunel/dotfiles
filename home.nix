@@ -1,7 +1,6 @@
-{ lib, pkgs, config, homeDirectory, username, ... }:
-
-
+{ lib, pkgs, config, homeDirectory, username, nix-colors, ... }:
 {
+
   home = {
 
     homeDirectory = "${homeDirectory}";
@@ -11,9 +10,12 @@
   };
 
   imports = [
+    nix-colors.homeManagerModules.default
     ./shell
     ./editors
     ./desktop
   ];
+
+  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
 }
