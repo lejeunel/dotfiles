@@ -2,6 +2,7 @@
 
   imports = [
     ./i3
+    ./rofi
   ];
 
   programs = {
