@@ -1,0 +1,4 @@
+#+title: Readme
+
+* Resources
+- i3, doom emacs: [[https://github.com/kenranunderscore/dotfiles/blob/bb0d038f1f31d52acef0da777621dfc1ea4b8a6d/modules/doom/default.nix][kenranunderscore/dotfiles]]
