@@ -3,7 +3,9 @@
     term_float = "/usr/bin/alacritty --class floating_shell -e";
     calendar = "${term_float}" + " calcurse";
     bluetooth = "${term_float}" + " bluetuith";
+    audio = "${term_float}" + " pulsemixer";
     bluetooth_mac_addr = "/usr/bin/bluetoothctl list | cut -d\  -f2";
+    lock = "/usr/bin/i3lock";
 
 in {
 
@@ -146,6 +148,11 @@ in {
             always = true;
             notification = false;
           }
+          {
+            command = "/usr/bin/xss-lock --transfer-sleep-lock -- ${lock} --no-fork";
+            always = true;
+            notification = false;
+          }
         ];
       };
     };
@@ -177,7 +184,15 @@ in {
               interval = 1;
               format = " $icon $1m ";
             }
-            { block = "sound"; }
+            { block = "sound";
+              click = [
+                {
+                  button = "left";
+                  cmd = "${audio}";
+                }
+              ];
+
+            }
             {
               block = "bluetooth";
               mac = "${bluetooth_mac_addr}";
