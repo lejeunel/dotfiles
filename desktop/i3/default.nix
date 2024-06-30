@@ -19,11 +19,19 @@ in {
       enable = true;
       package = pkgs.i3-gaps;
       config = rec {
+        window.hideEdgeBorders = "smart";
+
         window.commands = [
           {
             command = "floating enable, sticky enable, resize set 1000 700, border pixel 1";
             criteria = {
               class = "floating_shell";
+            };
+          }
+          {
+            command = "border pixel 5";
+            criteria = {
+              class = "^.*";
             };
           }
         ];

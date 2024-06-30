@@ -5,6 +5,7 @@ let
 in
 {
 
+
   home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${editorsCfgPath}/doom";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${editorsCfgPath}/nvim";
 
