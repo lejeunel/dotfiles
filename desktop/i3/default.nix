@@ -5,10 +5,13 @@
     bluetooth = "${term_float}" + " bluetuith";
     audio = "${term_float}" + " pulsemixer";
     bluetooth_mac_addr = "/usr/bin/bluetoothctl list | cut -d\  -f2";
-    lock = "/usr/bin/i3lock";
+    xrandr = "/usr/bin/xrandr";
+    systemctl = "/usr/bin/systemctl";
+    locker = "/usr/bin/i3lock-fancy";
+    xidlehook = "/usr/bin/xidlehook";
+    idlehook = "${xidlehook} --not-when-fullscreen --not-when-audio --timer 60 '${locker}' '' --timer 120 '${systemctl} suspend' ''";
 
 in {
-
 
     xsession.windowManager.i3 = {
       enable = true;
@@ -149,7 +152,7 @@ in {
             notification = false;
           }
           {
-            command = "/usr/bin/xss-lock --transfer-sleep-lock -- ${lock} --no-fork";
+            command = "${idlehook}";
             always = true;
             notification = false;
           }
@@ -162,6 +165,11 @@ in {
       bars = {
         top = {
           blocks = [
+            {
+              block = "focused_window";
+              format.full = " $title.str(max_w:100) |";
+              format.short = " $title.str(max_w:80) |";
+            }
             {
               block = "disk_space";
               path = "/";
@@ -228,5 +236,4 @@ in {
         };
       };
     };
-
 }
