@@ -6,6 +6,6 @@ if [ ! -d "$DOOM" ]; then
 		--single-branch \
 		https://github.com/hlissner/doom-emacs.git $DOOM
 	$DOOM/bin/doom install
+	$DOOM/bin/doom sync
 fi
 
-$DOOM/bin/doom sync
