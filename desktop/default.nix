@@ -5,8 +5,6 @@
     ./rofi
     ./alacritty
     ./zathura
+    ./imv
   ];
-
-
-
 }

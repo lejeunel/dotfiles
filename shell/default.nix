@@ -87,7 +87,7 @@ in {
         bindkey "^K" up-line-or-search
         bindkey "^J" down-line-or-search
         bindkey '^ ' autosuggest-accept
-        bindkey -s '^O' '${lf}^M'
+        bindkey -s '^O' 'lf^M'
       '';
 
       oh-my-zsh = {
