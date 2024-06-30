@@ -9,6 +9,7 @@
     systemctl = "/usr/bin/systemctl";
     locker = "/usr/bin/i3lock-fancy";
     xidlehook = "/usr/bin/xidlehook";
+    screenshoter = "/usr/bin/gnome-screenshot -i";
     idlehook = "${xidlehook} --not-when-fullscreen --not-when-audio --timer 60 '${locker}' '' --timer 120 '${systemctl} suspend' ''";
     mode_system = "System (l) lock, (e) logout, (s) suspend";
 
@@ -45,9 +46,9 @@ in {
                 text = border;
               };
               focusedWorkspace = {
-                background = "#${config.colorScheme.palette.base02}";
-                border = "#${config.colorScheme.palette.base08}";
-                text = "#${config.colorScheme.palette.base08}";
+                background = "#${config.colorScheme.palette.base0D}";
+                border = "#${config.colorScheme.palette.base07}";
+                text = "#${config.colorScheme.palette.base00}";
               };
               activeWorkspace = {
                 inherit background;
@@ -71,6 +72,7 @@ in {
         gaps = {
           inner = 10;
           outer = 5;
+          smartGaps = true;
         };
         colors = {
           focused = {
@@ -114,7 +116,8 @@ in {
 
         };
         keybindings = lib.mkOptionDefault {
-          "${modifier}+Shift+s" = ''mode "${mode_system}"'';
+          "${modifier}+Shift+e" = ''mode "${mode_system}"'';
+          "${modifier}+Shift+s" = "exec --no-startup-id ${screenshoter}";
 
           "XF86AudioMute" = "exec amixer set Master toggle";
           "XF86AudioLowerVolume" = "exec amixer set Master 4%-";
