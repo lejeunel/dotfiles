@@ -1,7 +1,6 @@
 { config, lib, pkgs, editorsCfgPath, ... }:
 let
   cfg = config.editors;
-
 in
 {
 

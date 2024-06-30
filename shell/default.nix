@@ -1,4 +1,7 @@
-{ inputs, pkgs, lib, config, gitIdentity, homeDirectory, ...}:{
+{ inputs, pkgs, lib, config, gitIdentity, homeDirectory, ...}:
+let
+  lf = "/usr/bin/lf";
+in {
 
   imports = [./lf];
 
@@ -84,7 +87,7 @@
         bindkey "^K" up-line-or-search
         bindkey "^J" down-line-or-search
         bindkey '^ ' autosuggest-accept
-        bindkey -s '^O' 'lf^M'
+        bindkey -s '^O' '${lf}^M'
       '';
 
       oh-my-zsh = {
@@ -111,6 +114,5 @@
     };
 
   };
-
 
 }

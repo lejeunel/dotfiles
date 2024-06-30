@@ -5,7 +5,7 @@
     settings = {
       colors = {
         primary = {
-          foreground = "#${config.colorScheme.palette.base07}";
+          foreground = "#${config.colorScheme.palette.base05}";
           background = "#${config.colorScheme.palette.base00}";
           dim_foreground = "#${config.colorScheme.palette.base05}";
           bright_foreground = "#${config.colorScheme.palette.base05}";
