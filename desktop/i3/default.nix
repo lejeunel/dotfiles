@@ -116,7 +116,7 @@ in {
         modes = {
           "${mode_system}" = {
             "l" = "exec --no-startup-id ${locker}, mode \"default\"";
-            "e" = "exec --no-startup-id i3msg exit, mode \"default\"";
+            "e" = "exec i3-msg exit, mode \"default\"";
             "s" = "exec --no-startup-id ${locker} && ${systemctl} suspend, mode \"default\"";
 
             Escape = ''mode "default"'';
