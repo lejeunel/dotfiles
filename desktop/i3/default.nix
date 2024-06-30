@@ -10,6 +10,7 @@
     locker = "/usr/bin/i3lock-fancy";
     xidlehook = "/usr/bin/xidlehook";
     idlehook = "${xidlehook} --not-when-fullscreen --not-when-audio --timer 60 '${locker}' '' --timer 120 '${systemctl} suspend' ''";
+    mode_system = "System (l) lock, (e) logout, (s) suspend";
 
 in {
 
@@ -101,7 +102,20 @@ in {
             childBorder = "#${config.colorScheme.palette.base00}";
           };
         };
+
+        modes = {
+          "${mode_system}" = {
+            "l" = "exec --no-startup-id ${locker}, mode \"default\"";
+            "e" = "exec --no-startup-id i3msg exit, mode \"default\"";
+            "s" = "exec --no-startup-id ${locker} && ${systemctl} suspend, mode \"default\"";
+
+            Escape = ''mode "default"'';
+          };
+
+        };
         keybindings = lib.mkOptionDefault {
+          "${modifier}+Shift+s" = ''mode "${mode_system}"'';
+
           "XF86AudioMute" = "exec amixer set Master toggle";
           "XF86AudioLowerVolume" = "exec amixer set Master 4%-";
           "XF86AudioRaiseVolume" = "exec amixer set Master 4%+";
@@ -111,7 +125,6 @@ in {
           "${modifier}+e" = "exec /usr/bin/emacsclient -nc";
           "${modifier}+Shift+d" = "exec /usr/bin/rofi -show window";
           "${modifier}+d" = "exec /usr/bin/rofi -modi drun -show drun";
-          "${modifier}+Shift+e" = "exec systemctl suspend";
 
           "${modifier}+q" = "kill";
 
