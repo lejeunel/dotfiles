@@ -1,4 +1,4 @@
-{ lib, pkgs, config, homeDirectory, username, nix-colors, ... }:
+{ lib, pkgs, config, homeDirectory, username, nix-colors, wallpaper, ... }:
 {
 
   home = {

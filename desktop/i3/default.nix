@@ -1,4 +1,4 @@
-{ config, lib, pkgs, font, nix-colors, ... }:
+{ config, lib, pkgs, font, nix-colors, wallpaper, ... }:
   let
     term_float = "/usr/bin/alacritty --class floating_shell -e";
     calendar = "${term_float}" + " calcurse";
@@ -149,6 +149,9 @@ in {
           "${modifier}+Shift+k" = "move up";
           "${modifier}+Shift+l" = "move right";
 
+          "${modifier}+Ctrl+h" = "workspace prev";
+          "${modifier}+Ctrl+l" = "workspace next";
+
           "${modifier}+s" = "layout stacking";
           "${modifier}+w" = "layout tabbed";
 
@@ -166,7 +169,7 @@ in {
             notification = false;
           }
           {
-            command = "/usr/bin/feh --bg-scale ~/Pictures/catppuccin-wallpapers/misc/lonely-fish.png";
+            command = "/usr/bin/feh --bg-scale ${wallpaper}";
             always = true;
             notification = false;
           }

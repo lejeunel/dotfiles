@@ -28,6 +28,7 @@
             homeDirectory = "/home/laurent";
             username = "laurent";
             font = "JetBrainsMono Nerd Font";
+            wallpaper = "~/Pictures/catppuccin-wallpapers/misc/lonely-fish.png";
             gitIdentity = {
               email = "me@lejeunel.org";
               fullname = "Laurent Lejeune";
