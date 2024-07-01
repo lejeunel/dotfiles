@@ -3,9 +3,10 @@
 {
   imports = [];
 
-  boot.initrd.availableKernelModules = ["ata_piix"
+  boot.initrd.availableKernelModules = [
                                         "ohci_pci"
                                         "ehci_pci"
+                                        "usb_storage"
                                         "ahci"
                                         "sd_mod"
                                         "sr_mod"];
@@ -27,9 +28,12 @@
     options = ["fmask=0022" "dmask=0022"];
   };
 
-  swapDevices = [];
+  swapDevices = [
+    {
+      device = "/dev/disk/by-label/swap";
+    }
+                ];
 
-  networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   virtualisation.virtualbox.guest.enable = true;
 
