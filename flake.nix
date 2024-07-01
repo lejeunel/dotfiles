@@ -20,7 +20,15 @@
     in {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
-      hosts = builtins.mapModules ./hosts import;
+      nixosConfigurations = {
+        # FIXME replace with your hostname
+        vm = nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs outputs;};
+          modules = [
+            ./nixos/configuration.nix
+          ];
+        };
+      };
 
 
       homeConfigurations = {
