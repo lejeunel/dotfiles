@@ -5,15 +5,16 @@
     bluetooth = "${term_float}" + " bluetuith";
     audio = "${term_float}" + " pulsemixer";
     bluetooth_mac_addr = "/usr/bin/bluetoothctl list | cut -d\  -f2";
-    xrandr = "/usr/bin/xrandr";
     systemctl = "/usr/bin/systemctl";
     locker = "/usr/bin/i3lock-fancy";
-    xidlehook = "/usr/bin/xidlehook";
+    xidlehook = "${pkgs.xidlehook}/bin/xidlehook";
     screenshoter = "/usr/bin/gnome-screenshot -i";
     idlehook = "${xidlehook} --not-when-fullscreen --not-when-audio --timer 60 '${locker}' '' --timer 120 '${systemctl} suspend' ''";
     mode_system = "System (l) lock, (e) logout, (s) suspend";
+    # local_layouts_dir = ".local/share/X11/xkb/symbols";
 
 in {
+
 
     xsession.windowManager.i3 = {
       enable = true;
@@ -118,7 +119,6 @@ in {
             "l" = "exec --no-startup-id ${locker}, mode \"default\"";
             "e" = "exec i3-msg exit, mode \"default\"";
             "s" = "exec --no-startup-id ${locker} && ${systemctl} suspend, mode \"default\"";
-
             Escape = ''mode "default"'';
           };
 
@@ -133,9 +133,9 @@ in {
           "XF86MonBrightnessDown" = "exec brightnessctl set 4%-";
           "XF86MonBrightnessUp" = "exec brightnessctl set 4%+";
           "${modifier}+Return" = "exec /usr/bin/alacritty";
-          "${modifier}+e" = "exec /usr/bin/emacsclient -nc";
-          "${modifier}+Shift+d" = "exec /usr/bin/rofi -show window";
-          "${modifier}+d" = "exec /usr/bin/rofi -modi drun -show drun";
+          "${modifier}+e" = "exec ${pkgs.emacs}/bin/emacsclient -nc";
+          "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
+          "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun";
 
           "${modifier}+q" = "kill";
 
@@ -169,12 +169,12 @@ in {
             notification = false;
           }
           {
-            command = "/usr/bin/feh --bg-scale ${wallpaper}";
+            command = "${pkgs.feh}/bin/feh --bg-scale ${wallpaper}";
             always = true;
             notification = false;
           }
           {
-            command = "/usr/bin/setxkbmap us_qwerty-fr";
+            command = "${pkgs.xorg.setxkbmap}/bin/setxkbmap us_qwerty-fr";
             always = true;
             notification = false;
           }
@@ -185,6 +185,10 @@ in {
           }
         ];
       };
+    };
+
+    programs.feh = {
+      enable = true;
     };
 
     programs.i3status-rust = {

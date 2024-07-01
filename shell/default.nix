@@ -1,6 +1,6 @@
 { inputs, pkgs, lib, config, gitIdentity, homeDirectory, ...}:
 let
-  lf = "/usr/bin/lf";
+  lf = "${pkgs.lf}/bin/lf";
 in {
 
   imports = [./lf];

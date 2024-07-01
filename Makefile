@@ -5,7 +5,7 @@ home-manager:
 	@nix-channel --update
 	@nix-shell '<home-manager>' -A install
 
-switch: home-manager doom
+switch: home-manager
 	home-manager switch --flake .#laurent
 
 doom:

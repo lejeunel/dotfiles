@@ -17,7 +17,7 @@
     emacsclient = {
       name = "Emacs Client";
       genericName = "Text Editor";
-      exec = "/usr/bin/emacsclient -nc %f";
+      exec = "${pkgs.emacs}/bin/emacsclient -nc %f";
       icon = "emacs";
     };
   };

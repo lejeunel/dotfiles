@@ -24,7 +24,7 @@
           extraSpecialArgs = {
             # we bundle in this repo our editors config, these will be
             # linked to $HOME/.config/ from ${HOME}/${editorsCfgPath}
-            editorsCfgPath = "dotfiles/editors";
+            dotfilesPath = "dotfiles";
             homeDirectory = "/home/laurent";
             username = "laurent";
             font = "JetBrainsMono Nerd Font";

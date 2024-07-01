@@ -1,11 +1,11 @@
-{ config, lib, pkgs, editorsCfgPath, ... }:
+{ config, lib, pkgs, dotfilesPath, ... }:
 let
   cfg = config.editors;
 in
 {
 
-  home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${editorsCfgPath}/doom";
-  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${editorsCfgPath}/nvim";
+  home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/editors/doom";
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/editors/nvim";
 
   programs = {
     neovim = {
@@ -13,6 +13,9 @@ in
         viAlias = true;
         vimAlias = true;
         vimdiffAlias = true;
+    };
+    emacs = {
+      enable = true;
     };
 
   };
@@ -24,8 +27,8 @@ in
     };
     Service = {
       Type = "forking";
-      ExecStart = "/usr/bin/emacs --daemon";
-      ExecStop = "/usr/bin/emacsclient --eval \"(kill-emacs)\"";
+      ExecStart = "${pkgs.emacs}/bin/emacs --daemon";
+      ExecStop = "${pkgs.emacs}/bin/emacsclient --eval \"(kill-emacs)\"";
       Restart = "on-failure";
     };
     Install = {
