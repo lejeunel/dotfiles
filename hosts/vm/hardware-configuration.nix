@@ -1,9 +1,20 @@
-# This is just an example, you should generate yours with nixos-generate-config and put it in here.
+{config, lib, pkgs, modulesPath, ...}:
+
 {
+  imports = [];
+
   boot.loader.grub.devices = ["nodev"];
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.efiSupport = true;
+  boot.initrd.availableKernelModules = ["ata_piix"
+                                        "ohci_pci"
+                                        "ehci_pci"
+                                        "ahci"
+                                        "sd_mod"
+                                        "sr_mod"];
+  boot.initrd.KernelModules = [];
+  boot.KernelModules = [];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
@@ -16,8 +27,13 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
   };
 
-  # Set your system kind (needed for flakes)
-  nixpkgs.hostPlatform = "x86_64-linux";
+  swapDevices = [];
+
+  networking.useDHCP = lib.mkDefault true;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  virtualisation.virtualbox.guest.enable = true;
+
 }
