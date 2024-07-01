@@ -21,7 +21,6 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        # FIXME replace with your hostname
         vm = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs outputs;};
           modules = [
@@ -29,7 +28,6 @@
           ];
         };
       };
-
 
       homeConfigurations = {
         laurent = home-manager.lib.homeManagerConfiguration {
