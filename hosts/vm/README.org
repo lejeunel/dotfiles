@@ -10,7 +10,7 @@ My daily NixOS driver, for work and play.
 ** /dev/sda
 
 #+begin_src sh
-parted /dev/sda -- mklabel gpt
+parted /dev/sda -- mklabel mbr
 parted /dev/sda -- mkpart ESP fat32 1MiB 512MiB
 parted /dev/sda -- mkpart primary 512MiB 700GiB
 parted /dev/sda -- mkpart primary 700GiB 100%
