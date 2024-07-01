@@ -1,6 +1,8 @@
 # This is just an example, you should generate yours with nixos-generate-config and put it in here.
 {
   boot.loader.grub.devices = ["nodev"];
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
   boot.loader.grub.efiSupport = true;
 
   fileSystems."/" = {
