@@ -20,11 +20,11 @@
         laurent = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
-          modules = [ ./home.nix ];
+          modules = [ ./home/home.nix ];
           extraSpecialArgs = {
             # we bundle in this repo our editors config, these will be
             # linked to $HOME/.config/ from ${HOME}/${editorsCfgPath}
-            dotfilesPath = "dotfiles";
+            dotfilesPath = "home/dotfiles";
             homeDirectory = "/home/laurent";
             username = "laurent";
             font = "JetBrainsMono Nerd Font";
