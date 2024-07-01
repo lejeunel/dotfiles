@@ -24,10 +24,25 @@
     ./hardware-configuration.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 2;
-
+  boot.loader = {
+          grub = {
+              enable                = true;
+              useOSProber           = true;
+              copyKernels           = true;
+              efiInstallAsRemovable = true;
+              efiSupport            = true;
+              fsIdentifier          = "label";
+              devices               = [ "nodev" ];
+              extraEntries = ''
+                  menuentry "Reboot" {
+                      reboot
+                  }
+                  menuentry "Poweroff" {
+                      halt
+                  }
+              '';
+          };
+      };
 
   nixpkgs = {
     # Configure your nixpkgs instance
