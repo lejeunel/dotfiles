@@ -20,15 +20,10 @@
     in {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
+
       nixosConfigurations = {
         # FIXME replace with your hostname
         tartopom = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs outputs;};
-          modules = [
-            ./nixos/configuration.nix
-          ];
-        };
-        vm = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs outputs;};
           modules = [
             ./nixos/configuration.nix
@@ -38,7 +33,7 @@
 
 
       homeConfigurations = {
-        laurent = home-manager.lib.homeManagerConfiguration {
+        "laurent@vm" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
           modules = [ ./home/home.nix ];

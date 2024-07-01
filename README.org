@@ -37,6 +37,12 @@ sudo nixos-install \
 
 Where host corresponds to a host defined in ~hosts/~
 
+8. Copy dotfiles over to new partition
+#+begin_src shell
+sudo mkdir -p /mnt/etc/nixos
+sudo cp -R $PWD /mnt/etc/nixos/dotfiles
+#+end_src
+
 8. Then reboot and you're good to go!
 
 [!WARNING]

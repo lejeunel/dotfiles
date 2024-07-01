@@ -8,15 +8,9 @@ with builtins;
   system = "x86_64-linux";
 
   modules = {
-    xdg.ssh.enable = true;
-
     profiles = {
       role = "vm";
       user = "laurent";
-      hardware = [
-        "cpu/amd"
-        "ssd"
-      ];
     };
 
     desktop = {
@@ -54,21 +48,6 @@ with builtins;
   };
 
   hardware = { ... }: {
-    boot.supportedFilesystems = [ "ntfs" ];
-
-    networking.interfaces.eno1.useDHCP = true;
-
-    # Disable all USB wakeup events to ensure restful sleep. This system has
-    # many peripherals attached to it (shared between Windows and Linux) that
-    # can unpredictably wake it otherwise.
-    systemd.services.fixSuspend = {
-      script = ''
-        for ev in $(grep enabled /proc/acpi/wakeup | cut --delimiter=\  --fields=1); do
-           echo $ev > /proc/acpi/wakeup
-        done
-      '';
-      wantedBy = [ "multi-user.target" ];
-    };
 
     fileSystems = {
       "/" = {
@@ -77,7 +56,7 @@ with builtins;
         options = [ "noatime" "errors=remount-ro" ];
       };
       "/boot" = {
-        device = "/dev/sda1";
+        device = "/dev/disk/by-label/boot";
         fsType = "vfat";
       };
       "/home" = {
