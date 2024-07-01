@@ -3,9 +3,8 @@
 
 * Quick start
 
-1. Acquire or build a NixOS 24.05+ image:
+1. Acquire a NixOS 24.05+ image:
 #+begin_src shell
-# Yoink nixos-unstable from upstream
 wget -O nixos.iso https://channels.nixos.org/nixos-unstable/latest-nixos-minimal-x86_64-linux.iso
 #+end_src
 
