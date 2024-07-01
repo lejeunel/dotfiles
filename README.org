@@ -28,14 +28,14 @@ git clone https://github.com/lejeunel/hm-dotfiles
 
 7. Run the installer:
 #+begin_src shell
-USER=laurent
-HOSTNAME=tartopom
-dotfiles/install.zsh \
-         --root /mnt \
-         --flake /mnt/etc/dotfiles \
-         --user "$USER" \
-         --host "$HOSTNAME" \
+sudo nixos-install \
+    --impure \
+    --show-trace \
+    --root /mnt \
+    --flake .#host
 #+end_src
+
+Where host corresponds to a host defined in ~hosts/~
 
 8. Then reboot and you're good to go!
 

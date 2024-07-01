@@ -21,8 +21,7 @@ mkfs.ext4 -L home /dev/sda3
 #+END_SRC
 
 ** Mount filesystems
-The final step in the install process, before running ~$DOTFILES_HOME/bin/hey
-install~:
+
 #+BEGIN_SRC sh
 mount /dev/disk/by-label/nixos /mnt
 

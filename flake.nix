@@ -25,7 +25,12 @@
         tartopom = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs outputs;};
           modules = [
-            # > Our main nixos configuration file <
+            ./nixos/configuration.nix
+          ];
+        };
+        vm = nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs outputs;};
+          modules = [
             ./nixos/configuration.nix
           ];
         };
