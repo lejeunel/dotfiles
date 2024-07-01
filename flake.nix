@@ -10,12 +10,28 @@
 
   };
 
-  outputs = { nixpkgs, nix-colors, home-manager, ... }:
+  outputs = { self, nixpkgs, nix-colors, home-manager, ... } @inputs:
     let
+
+      inherit (self) outputs;
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
     in {
+      # NixOS configuration entrypoint
+      # Available through 'nixos-rebuild --flake .#your-hostname'
+      nixosConfigurations = {
+        # FIXME replace with your hostname
+        tartopom = nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs outputs;};
+          modules = [
+            # > Our main nixos configuration file <
+            ./nixos/configuration.nix
+          ];
+        };
+      };
+
+
       homeConfigurations = {
         laurent = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
