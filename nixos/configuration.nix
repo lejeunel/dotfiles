@@ -24,7 +24,7 @@
     ./hardware-configuration.nix
   ];
 
-  boot.loader.grub.devices = ["/dev/disk/by-label/boot"];
+  boot.loader.grub.devices = ["/dev/disk/by-label/BOOT"];
 
   nixpkgs = {
     # Configure your nixpkgs instance

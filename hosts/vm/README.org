@@ -16,7 +16,6 @@ parted /dev/sda -- mkpart primary 512MiB 700GiB
 parted /dev/sda -- mkpart primary 700GiB 100%
 parted /dev/sda -- set 1 boot on
 mkfs.fat -F32 -n BOOT /dev/sda1
-mkfs.ext4 -L boot /dev/sda1
 mkfs.ext4 -L nixos /dev/sda2
 mkfs.ext4 -L home /dev/sda3
 #+END_SRC
