@@ -24,6 +24,11 @@
     ./hardware-configuration.nix
   ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = 2;
+
+
   nixpkgs = {
     # Configure your nixpkgs instance
     config = {
@@ -87,5 +92,7 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.05";
+
+  virtualisation.virtualbox.guest.enable = true;
 }

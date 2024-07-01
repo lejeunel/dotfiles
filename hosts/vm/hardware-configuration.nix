@@ -3,17 +3,14 @@
 {
   imports = [];
 
-  boot.loader.grub.devices = ["nodev"];
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
   boot.initrd.availableKernelModules = ["ata_piix"
                                         "ohci_pci"
                                         "ehci_pci"
                                         "ahci"
                                         "sd_mod"
                                         "sr_mod"];
-  boot.initrd.KernelModules = [];
-  boot.KernelModules = [];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = [];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
