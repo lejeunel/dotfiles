@@ -4,14 +4,12 @@
 zparseopts -E -F -D -- -flake=flake \
                        -user=user \
                        -host=host \
-                       -dest=dest \
                        -root=root || exit 1
 
 local root="${root[2]:-/mnt}"
 local flake="${flake[2]:-$root/etc/dotfiles}"
 local host="${host[2]:-$HOST}"
-local user="${user[2]:-hlissner}"
-local dest="${dest[2]:-$root/home/$user/.config/dotfiles}"
+local user="${user[2]:-laurent}"
 
 if [[ "$USER" == nixos ]]; then
   >&2 echo "Error: not in the nixos installer"
@@ -23,8 +21,8 @@ fi
 
 set -e
 if [[ ! -d "$flake" ]]; then
-  local url=https://github.com/hlissner/dotfiles
-  [[ "$user" == hlissner ]] && url="git@github.com:hlissner/dotfiles.git"
+  local url=https://github.com/lejeunel/hm-dotfiles
+  [[ "$user" == hlissner ]] && url="git@github.com:lejeunel/hm-dotfiles.git"
   rm -rf "$flake"
   git clone --recursive "$url" "$flake"
   chown "$user:users" -R "$flake"

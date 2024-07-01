@@ -1,5 +1,48 @@
 #+title: Readme
 
+
+* Quick start
+
+1. Acquire or build a NixOS 24.05+ image:
+#+begin_src shell
+# Yoink nixos-unstable from upstream
+wget -O nixos.iso https://channels.nixos.org/nixos-unstable/latest-nixos-minimal-x86_64-linux.iso
+#+end_src
+
+2. Write it to a USB drive:
+#+begin_src shell
+# Replace /dev/sdX with the correct partition!
+cp nixos.iso /dev/sdX
+#+end_src
+
+3. Restart and boot into the installer.
+
+4. Do your partitions and mount your root to ~/mnt~
+
+5. Clone these dotfiles somewhere:
+#+begin_src shell
+git clone --recursive https://github.com/lejeunel/hm-dotfiles
+#+end_src
+
+6. Create a host config in ~hosts/~
+
+7. Run the installer:
+#+begin_src shell
+USER=laurent
+HOSTNAME=tartopom
+dotfiles/install.zsh \
+         --root /mnt \
+         --flake /mnt/etc/dotfiles \
+         --user "$USER" \
+         --host "$HOSTNAME" \
+#+end_src
+
+8. Then reboot and you're good to go!
+
+[!WARNING]
+Don't forget to change your ~root~ and ~$USER~ passwords! They are set to
+~nixos~ by default.
+
 * Resources
 - i3, doom emacs: [[https://github.com/kenranunderscore/dotfiles/blob/bb0d038f1f31d52acef0da777621dfc1ea4b8a6d/modules/doom/default.nix][kenranunderscore/dotfiles]]
 - https://github.com/doomemacs/doomemacs/blob/master/shell.nix
