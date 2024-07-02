@@ -76,6 +76,9 @@ in {
       autosuggestion = {
         enable = true;
       };
+      sessionVariables = {
+        FZF_BASE = "${pkgs.fzf}";
+      };
       shellAliases = {
         ls = "eza --color=always --long --git --icons=always";
         ll = "ls -lah";
@@ -98,6 +101,10 @@ in {
           "fzf"
           "vi-mode"
         ];
+      };
+
+      fzf = {
+        enable = true;
       };
 
     };
