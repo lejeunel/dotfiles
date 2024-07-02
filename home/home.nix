@@ -1,5 +1,7 @@
-{ lib, pkgs, config, homeDirectory, username, nix-colors, wallpaper, dotfilesPath, ... }:
+{ lib, pkgs, config, homeDirectory, username, nix-colors, dotfilesPath, ... }:
 {
+
+  fonts.fontconfig.enable = true;
 
   home = {
 
@@ -10,7 +12,9 @@
     packages = [
       pkgs.xidlehook
       pkgs.xorg.setxkbmap
+      (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
+
 
   };
 
@@ -22,6 +26,7 @@
   ];
 
   colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
+
 
   home.file.".local/share/X11/xkb/symbol/us_qwerty_fr".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/home/us_qwerty-fr";
 
