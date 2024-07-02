@@ -132,7 +132,7 @@ in {
           "XF86AudioRaiseVolume" = "exec amixer set Master 4%+";
           "XF86MonBrightnessDown" = "exec brightnessctl set 4%-";
           "XF86MonBrightnessUp" = "exec brightnessctl set 4%+";
-          "${modifier}+Return" = "exec /usr/bin/alacritty";
+          "${modifier}+Return" = "exec ${terminal}";
           "${modifier}+e" = "exec ${pkgs.emacs}/bin/emacsclient -nc";
           "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
           "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun";
