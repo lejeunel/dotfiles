@@ -36,4 +36,13 @@
       "application/pdf" = ["org.pwmt.zathura.desktop"];
     };
   };
+
+  programs.urxvt = {
+    enable = true;
+    fonts = [
+      "xft:${font}-12"
+      "xft:Symbols Nerd Font-8"
+
+    ];
+  };
 }

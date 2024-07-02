@@ -1,6 +1,6 @@
-{ config, lib, pkgs, font, nix-colors, wallpaper, ... }:
+{ config, lib, pkgs, font, nix-colors, wallpaper, terminal, ... }:
   let
-    term_float = "/usr/bin/alacritty --class floating_shell -e";
+    term_float = "${terminal} --class floating_shell -e";
     calendar = "${term_float}" + " calcurse";
     bluetooth = "${term_float}" + " bluetuith";
     audio = "${term_float}" + " pulsemixer";

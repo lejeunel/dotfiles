@@ -12,7 +12,8 @@
     packages = [
       pkgs.xidlehook
       pkgs.xorg.setxkbmap
-      (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; })
+      pkgs.i3status-rust
     ];
 
 

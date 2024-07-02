@@ -1,9 +1,9 @@
-{ config, lib, pkgs, font, nix-colors, ... }:
+{ config, lib, pkgs, font, nix-colors, terminal, ... }:
 {
 
   programs.rofi = {
     enable = true;
-    terminal = "/usr/bin/alacritty";
+    terminal = terminal;
     font = "${font}" + " 12";
     theme = "./theme.rasi";
     extraConfig = {

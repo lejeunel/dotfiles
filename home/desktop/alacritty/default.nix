@@ -3,6 +3,8 @@
   programs.alacritty = {
     enable = true;
     settings = {
+
+      debug.prefer_egl = false;
       colors = {
         primary = {
           foreground = "#${config.colorScheme.palette.base05}";

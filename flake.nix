@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
     nix-colors.url = "github:misterio77/nix-colors";
+    nixgl.url = "github:nix-community/nixGL";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,13 +11,16 @@
 
   };
 
-  outputs = { self, nixpkgs, nix-colors, home-manager, ... } @inputs:
+  outputs = { self, nixpkgs, nix-colors, home-manager, nixgl, ... } @inputs:
     let
 
       inherit (self) outputs;
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        # overlays = [nixgl.overlay];
+      };
     in {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -42,6 +46,7 @@
             username = "laurent";
             font = "JetBrainsMono Nerd Font";
             wallpaper = "~/Pictures/catppuccin-wallpapers/misc/lonely-fish.png";
+            terminal = "/usr/bin/alacritty";
             gitIdentity = {
               email = "me@lejeunel.org";
               fullname = "Laurent Lejeune";
