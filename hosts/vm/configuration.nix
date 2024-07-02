@@ -66,6 +66,15 @@
   # for touchpad
   services.libinput.enable = true;
 
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+    };
+  };
+
   users.users = {
     laurent = {
       # TODO: You can set an initial password for your user.
