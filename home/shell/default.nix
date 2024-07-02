@@ -76,9 +76,9 @@ in {
       autosuggestion = {
         enable = true;
       };
-      sessionVariables = {
-        FZF_BASE = "${pkgs.fzf}";
-      };
+      envExtra = ''
+        export FZF_BASE=${pkgs.fzf}
+        '';
       shellAliases = {
         ls = "eza --color=always --long --git --icons=always";
         ll = "ls -lah";
@@ -103,10 +103,10 @@ in {
         ];
       };
 
-      fzf = {
-        enable = true;
-      };
 
+    };
+    fzf = {
+      enable = true;
     };
 
     starship = {
