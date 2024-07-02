@@ -75,6 +75,10 @@
     };
   };
 
+  programs.firefox.enable = true;
+  nixpkgs.config.allowUnfree = true;
+  programs.zsh.enable = true;
+
   users.users = {
     laurent = {
       # TODO: You can set an initial password for your user.
@@ -83,11 +87,10 @@
       initialPassword = "correcthorsebatterystaple";
       isNormalUser = true;
       extraGroups = ["wheel" "networkmanager"];
+      shell = pkgs.zsh;
     };
   };
 
-  programs.firefox.enable = true;
-  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     neovim
