@@ -43,7 +43,7 @@ in {
               size = 12.0;
             };
             position = "top";
-            statusCommand = "/usr/bin/i3status-rs /home/laurent/.config/i3status-rust/config-top.toml";
+            statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs /home/laurent/.config/i3status-rust/config-top.toml";
             colors = rec {
               background = "#${config.colorScheme.palette.base00}";
               focusedBackground = "#${config.colorScheme.palette.base00}";
