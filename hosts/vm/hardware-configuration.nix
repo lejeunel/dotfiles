@@ -28,13 +28,6 @@
     options = ["fmask=0022" "dmask=0022"];
   };
 
-  swapDevices = [
-    {
-      device = "/dev/disk/by-label/swap";
-    }
-                ];
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  virtualisation.virtualbox.guest.enable = true;
 
 }
