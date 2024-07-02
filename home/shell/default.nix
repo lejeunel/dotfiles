@@ -95,7 +95,6 @@ in {
         plugins = [
           "command-not-found"
           "git"
-          "fzf"
           "vi-mode"
         ];
       };
