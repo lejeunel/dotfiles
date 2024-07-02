@@ -13,7 +13,6 @@
       pkgs.xidlehook
       pkgs.xorg.setxkbmap
       (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      pkgs.i3status-rust
     ];
 
 
