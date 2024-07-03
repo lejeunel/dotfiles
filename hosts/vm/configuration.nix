@@ -26,6 +26,7 @@
     ../../users
     ../../locale
     ../../audio
+    ../../xserver
   ];
 
   boot.loader.grub.enable = true;
@@ -37,15 +38,6 @@
 
   time.timeZone = "Europe/Paris";
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xterm.enable = true;
-  services.xserver.windowManager.i3.enable = true;
-
-
-  # for touchpad
-  services.libinput.enable = true;
-
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
@@ -56,7 +48,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
-  programs.zsh.enable = true;
 
 
   environment.systemPackages = with pkgs; [
