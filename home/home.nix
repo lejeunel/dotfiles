@@ -18,6 +18,7 @@
       pkgs.python312Packages.python-lsp-ruff
       pkgs.python312Packages.python-lsp-server
       pkgs.thunderbird
+      pkgs.tectonic
     ];
 
   };
