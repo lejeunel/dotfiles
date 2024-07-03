@@ -23,13 +23,13 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    .../users
   ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  # TODO: Set your hostname
   networking.hostName = "virtualbox";
   networking.networkmanager.enable = true;
 
@@ -75,21 +75,7 @@
     };
   };
 
-  programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
-  programs.zsh.enable = true;
-
-  users.users = {
-    laurent = {
-      # TODO: You can set an initial password for your user.
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
-      isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager"];
-      shell = pkgs.zsh;
-    };
-  };
 
 
   environment.systemPackages = with pkgs; [
