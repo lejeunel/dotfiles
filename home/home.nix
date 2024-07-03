@@ -13,9 +13,11 @@
       pkgs.xidlehook
       pkgs.xorg.setxkbmap
       (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ]; })
+      pkgs.emacs
       pkgs.i3status-rust
+      pkgs.python312Packages.python-lsp-ruff
+      pkgs.python312Packages.python-lsp-server
     ];
-
 
   };
 
