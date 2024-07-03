@@ -37,12 +37,6 @@
     };
   };
 
-  programs.urxvt = {
-    enable = true;
-    fonts = [
-      "xft:${font}-12"
-      "xft:Symbols Nerd Font-8"
-
-    ];
-  };
+  programs.firefox.enable = true;
+  home.file.".icons/default".source = "${pkgs.capitaine-cursors-themed}/share/icons/Capitaine Cursors (Palenight)";
 }
