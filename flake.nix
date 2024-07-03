@@ -45,7 +45,7 @@
             homeDirectory = "/home/laurent";
             username = "laurent";
             font = "JetBrainsMono Nerd Font";
-            wallpaper = "~/Pictures/catppuccin-wallpapers/misc/lonely-fish.png";
+            wallpaper = "~/Pictures/lonely-fish.png";
             terminal = "/usr/bin/alacritty";
             gitIdentity = {
               email = "me@lejeunel.org";

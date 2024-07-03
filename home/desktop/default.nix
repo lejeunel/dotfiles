@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, font, nix-colors, ...}:{
+{ config, inputs, pkgs, font, nix-colors, dotfilesPath, ...}:{
 
   imports = [
     ./i3
@@ -38,5 +38,8 @@
   };
 
   programs.firefox.enable = true;
+
+  # themes, icons, wallpapers, ...
   home.file.".icons/default".source = "${pkgs.capitaine-cursors-themed}/share/icons/Capitaine Cursors (Palenight)";
+  home.file."Pictures/lonely-fish.png".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/wallpapers/lonely-fish.png";
 }
