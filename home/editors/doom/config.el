@@ -21,8 +21,7 @@
 (setq catppuccin-flavor 'macchiato) ;; 'latte, 'frappe, 'macchiato, or 'mocha
 ;; (catppuccin-reload)
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 21 :height 1.0 :weight 'normal)
-     doom-variable-pitch-font (font-spec :family "ETBembo" :height 1.4))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 21 :height 1.0 :weight 'normal))
 
 (setq highlight-indent-guides-auto-odd-face-perc 50)
 (setq highlight-indent-guides-auto-even-face-perc 50)
