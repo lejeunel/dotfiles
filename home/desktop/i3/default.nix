@@ -1,6 +1,7 @@
 { config, lib, pkgs, font, nix-colors, wallpaper, terminal, ... }:
   let
     term_float = "${terminal} --class floating_shell -e";
+    nmui = "${term_float}" + " ${pkgs.networkmanager}/bin/nmtui";
     calendar = "${term_float}" + " calcurse";
     bluetooth = "${term_float}" + " bluetuith";
     audio = "${term_float}" + " pulsemixer";
@@ -127,6 +128,9 @@ in {
           "${modifier}+Shift+e" = ''mode "${mode_system}"'';
           "${modifier}+Shift+s" = "exec --no-startup-id ${screenshoter}";
 
+          # TODO bind escape key to kill floating_shell
+          # $bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
+
           "XF86AudioMute" = "exec amixer set Master toggle";
           "XF86AudioLowerVolume" = "exec amixer set Master 4%-";
           "XF86AudioRaiseVolume" = "exec amixer set Master 4%+";
@@ -239,6 +243,15 @@ in {
                 {
                   button = "left";
                   cmd = "${bluetooth}";
+                }
+              ];
+            }
+            {
+              block = "net";
+              click = [
+                {
+                  button = "left";
+                  cmd = "${nmui}";
                 }
               ];
             }

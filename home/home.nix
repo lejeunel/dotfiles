@@ -22,7 +22,7 @@
       pkgs.calcurse
       pkgs.bluetuith
       pkgs.htop
-      pkgs.etBook
+      pkgs.networkmanager
     ];
 
   };
