@@ -19,6 +19,9 @@
       pkgs.python312Packages.python-lsp-server
       pkgs.thunderbird
       pkgs.tectonic
+      pkgs.calcurse
+      pkgs.bluetuith
+      pkgs.htop
     ];
 
   };
