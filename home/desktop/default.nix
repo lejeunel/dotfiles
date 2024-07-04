@@ -46,6 +46,6 @@
   programs.firefox.enable = true;
 
   # themes, icons, wallpapers, ...
-  home.file.".icons/default".source = "${pkgs.capitaine-cursors-themed}/share/icons/Capitaine Cursors (Palenight)";
+  home.file.".icons/default".source = "${pkgs.cinnamon.mint-cursor-themes}/share/icons/Bibata-Modern-Classic";
   home.file."Pictures/lonely-fish.png".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/wallpapers/lonely-fish.png";
 }
