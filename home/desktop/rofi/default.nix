@@ -58,7 +58,6 @@
         border-color: @border-col;
         background-color: @bg-col;
         border:           4;
-        border-radius:    10;
         padding:          5;
     }
 

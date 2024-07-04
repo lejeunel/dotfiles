@@ -46,6 +46,29 @@
   programs.firefox.enable = true;
 
   # themes, icons, wallpapers, ...
-  home.file.".icons/default".source = "${pkgs.cinnamon.mint-cursor-themes}/share/icons/Bibata-Modern-Classic";
+  home.file.".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
   home.file."Pictures/lonely-fish.png".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/wallpapers/lonely-fish.png";
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Paper";
+      package = pkgs.paper-icon-theme;
+    };
+    cursorTheme = {
+      name = "Phinger Cursors (light)";
+      package = pkgs.phinger-cursors;
+    };
+    theme = {
+      name = "Matcha-dark-azul";
+      package = pkgs.matcha-gtk-theme;
+    };
+    font = {
+      name = "Ubuntu";
+      size = 12;
+      package = pkgs.ubuntu_font_family;
+    };
+
+  };
+
 }
