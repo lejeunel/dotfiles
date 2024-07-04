@@ -12,10 +12,12 @@
     screenshoter = "/usr/bin/gnome-screenshot -i";
     idlehook = "${xidlehook} --not-when-fullscreen --not-when-audio --timer 60 '${locker}' '' --timer 120 '${systemctl} suspend' ''";
     mode_system = "System (l) lock, (e) logout, (s) suspend";
-    # local_layouts_dir = ".local/share/X11/xkb/symbols";
 
 in {
 
+    home.packages = with pkgs; [
+        i3status-rust
+    ];
 
     xsession.windowManager.i3 = {
       enable = true;
@@ -118,7 +120,7 @@ in {
         modes = {
           "${mode_system}" = {
             "l" = "exec --no-startup-id ${locker}, mode \"default\"";
-            "e" = "exec i3-msg exit, mode \"default\"";
+            "e" = "exec --no-startup-id i3-msg exit, mode \"default\"";
             "s" = "exec --no-startup-id ${locker} && ${systemctl} suspend, mode \"default\"";
             Escape = ''mode "default"'';
           };
@@ -131,15 +133,15 @@ in {
           # TODO bind escape key to kill floating_shell
           # $bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
 
-          "XF86AudioMute" = "exec amixer set Master toggle";
-          "XF86AudioLowerVolume" = "exec amixer set Master 4%-";
-          "XF86AudioRaiseVolume" = "exec amixer set Master 4%+";
-          "XF86MonBrightnessDown" = "exec brightnessctl set 4%-";
-          "XF86MonBrightnessUp" = "exec brightnessctl set 4%+";
-          "${modifier}+Return" = "exec ${terminal}";
-          "${modifier}+e" = "exec ${pkgs.emacs}/bin/emacsclient -nc";
-          "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
-          "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun";
+          "XF86AudioMute" = "exec --no-startup-id amixer set Master toggle";
+          "XF86AudioLowerVolume" = "exec --no-startup-id amixer set Master 4%-";
+          "XF86AudioRaiseVolume" = "exec --no-startup-id amixer set Master 4%+";
+          "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl set 4%-";
+          "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl set 4%+";
+          "${modifier}+Return" = "exec --no-startup-id ${terminal}";
+          "${modifier}+e" = "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -nc";
+          "${modifier}+Shift+d" = "exec --no-startup-id ${pkgs.rofi}/bin/rofi -show window";
+          "${modifier}+d" = "exec --no-startup-id ${pkgs.rofi}/bin/rofi -modi drun -show drun";
 
           "${modifier}+q" = "kill";
 

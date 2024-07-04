@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
+  home.packages = [
+    pkgs.xidlehook
+  ];
 
   services.xserver.enable = true;
   services.xserver.displayManager.lightdm.enable = true;

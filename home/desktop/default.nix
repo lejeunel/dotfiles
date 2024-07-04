@@ -8,6 +8,11 @@
     ./imv
   ];
 
+
+  home.packages = [
+      pkgs.thunderbird
+  ];
+
   xdg.desktopEntries = {
     imv-x11 = {
       name = "Imv";

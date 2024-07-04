@@ -18,15 +18,12 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ../../users
     ../../locale
-    ../../audio
-    ../../xserver
+    ../../services/audio
+    ../../services/xserver
   ];
 
   boot.loader.grub.enable = true;

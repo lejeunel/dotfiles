@@ -7,6 +7,10 @@ in
   home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/home/editors/doom";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/home/editors/nvim";
 
+  home.packages = [
+      pkgs.tectonic
+  ];
+
   programs = {
     neovim = {
         enable = true;

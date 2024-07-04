@@ -5,6 +5,12 @@ in {
 
   imports = [./lf];
 
+  home.packages = [
+      pkgs.calcurse
+      pkgs.bluetuith
+      pkgs.htop
+  ];
+
   programs = {
 
     git = {
