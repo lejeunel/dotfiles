@@ -18,6 +18,9 @@ in
         vimAlias = true;
         vimdiffAlias = true;
     };
+    emacs = {
+      enable = true;
+    };
   };
 
 

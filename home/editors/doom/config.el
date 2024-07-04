@@ -30,12 +30,6 @@
 (setq highlight-indent-guides-responsive 'top)
 (setq display-line-numbers-type 'relative)
 
-(use-package! mixed-pitch
-  :hook (org-mode . mixed-pitch-mode)
-  :config
-  (setq mixed-pitch-set-height t)
-  (set-face-attribute 'variable-pitch nil :height 1.4))
-
 (custom-theme-set-faces!
     'doom-dracula
         '(org-level-4 :inherit outline-4 :height 1.0)
