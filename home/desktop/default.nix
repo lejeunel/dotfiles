@@ -9,10 +9,11 @@
   ];
 
 
-  home.packages = [
-      pkgs.thunderbird
-      pkgs.xidlehook
-      pkgs.dconf
+  home.packages = with pkgs; [
+      thunderbird
+      xidlehook
+      dconf
+      gnome.nautilus
   ];
 
   xdg.desktopEntries = {
