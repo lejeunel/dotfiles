@@ -12,6 +12,7 @@
   home.packages = [
       pkgs.thunderbird
       pkgs.xidlehook
+      pkgs.dconf
   ];
 
   xdg.desktopEntries = {
@@ -49,7 +50,6 @@
   home.file.".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
   home.file."Pictures/lonely-fish.png".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/wallpapers/lonely-fish.png";
 
-  dconf.enable = true;
   gtk = {
     enable = true;
     iconTheme = {
