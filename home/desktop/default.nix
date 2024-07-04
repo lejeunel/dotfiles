@@ -11,6 +11,7 @@
 
   home.packages = [
       pkgs.thunderbird
+      pkgs.xidlehook
   ];
 
   xdg.desktopEntries = {
