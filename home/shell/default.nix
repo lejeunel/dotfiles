@@ -9,6 +9,7 @@ in {
       pkgs.calcurse
       pkgs.bluetuith
       pkgs.htop
+      pkgs.neofetch
   ];
 
   programs = {
@@ -121,6 +122,14 @@ in {
       enable = true;
       enableZshIntegration = true;
       rootDirectory = "${homeDirectory}/.pyenv";
+    };
+
+    command-not-found = {
+      enable = true;
+    };
+
+    ripgrep = {
+      enable = true;
     };
 
   };

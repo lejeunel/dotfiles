@@ -25,10 +25,16 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        vm = nixpkgs.lib.nixosSystem {
+        #vm = nixpkgs.lib.nixosSystem {
+        #  specialArgs = {inherit inputs outputs;};
+        #  modules = [
+        #    ./hosts/vm/configuration.nix
+        #  ];
+        #};
+        tartopom = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs outputs;};
           modules = [
-            ./hosts/vm/configuration.nix
+            ./hosts/tartopom/configuration.nix
           ];
         };
       };
@@ -46,7 +52,7 @@
             username = "laurent";
             font = "JetBrainsMono Nerd Font";
             wallpaper = "~/Pictures/lonely-fish.png";
-            terminal = "/usr/bin/alacritty";
+            terminal = "${pkgs.alacritty}/bin/alacritty";
             gitIdentity = {
               email = "me@lejeunel.org";
               fullname = "Laurent Lejeune";
