@@ -163,7 +163,7 @@ in {
           "${modifier}+w" = "layout tabbed";
 
           "${modifier}+space" = "focus mod_toggle";
-          "${modifier}+Shift+space" = "floating toggle";
+          "${modifier}+Shift+f" = "floating toggle";
 
           "${modifier}+Shift+r" = "restart";
           "${modifier}+Shift+c" = "reload";
