@@ -14,13 +14,14 @@
       xidlehook
       dconf
       gnome.nautilus
+      gnome.gnome-screenshot
   ];
 
   xdg.desktopEntries = {
-    imv-x11 = {
+    imv = {
       name = "Imv";
       genericName = "Image Viewer";
-      exec = "/usr/bin/imv-x11 -n %f .";
+      exec = "${pkgs.imv}/bin/imv -n %f .";
     };
     emacsclient = {
       name = "Emacs Client";
@@ -33,9 +34,9 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "image/png" = ["imv-x11.desktop"];
-      "image/jpeg" = ["imv-x11.desktop"];
-      "image/gif" = ["imv-x11.desktop"];
+      "image/png" = ["imv.desktop"];
+      "image/jpeg" = ["imv.desktop"];
+      "image/gif" = ["imv.desktop"];
 
       "text/plain" = ["emacsclient.desktop"];
       "text/x-script.python" = ["emacsclient.desktop"];
