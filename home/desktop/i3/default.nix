@@ -5,11 +5,11 @@
     calendar = "${term_float}" + " calcurse";
     bluetooth = "${term_float}" + " bluetuith";
     audio = "${term_float}" + " pulsemixer";
-    bluetooth_mac_addr = "/usr/bin/bluetoothctl list | cut -d\  -f2";
-    systemctl = "/usr/bin/systemctl";
+    bluetooth_mac_addr = "${pkgs.bluez-experimental}/bin/bluetoothctl list | cut -d\  -f2";
+    systemctl = "${pkgs.systemd}/bin/systemctl";
     locker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
     xidlehook = "${pkgs.xidlehook}/bin/xidlehook";
-    screenshoter = "/usr/bin/gnome-screenshot -i";
+    screenshoter = "${pkgs.gnome.gnome-screenshot}/bin/gnome-screenshot -i";
     idlehook = "${xidlehook} --not-when-fullscreen --not-when-audio --timer 60 '${locker}' '' --timer 120 '${systemctl} suspend' ''";
     mode_system = "System (l) lock, (e) logout, (s) suspend";
 
