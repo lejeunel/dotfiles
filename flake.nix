@@ -25,12 +25,12 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        #vm = nixpkgs.lib.nixosSystem {
-        #  specialArgs = {inherit inputs outputs;};
-        #  modules = [
-        #    ./hosts/vm/configuration.nix
-        #  ];
-        #};
+        vm = nixpkgs.lib.nixosSystem {
+         specialArgs = {inherit inputs outputs;};
+         modules = [
+           ./hosts/vm/configuration.nix
+         ];
+        };
         tartopom = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs outputs;};
           modules = [

@@ -7,7 +7,7 @@
     audio = "${term_float}" + " pulsemixer";
     bluetooth_mac_addr = "/usr/bin/bluetoothctl list | cut -d\  -f2";
     systemctl = "/usr/bin/systemctl";
-    locker = "/usr/bin/i3lock-fancy";
+    locker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
     xidlehook = "${pkgs.xidlehook}/bin/xidlehook";
     screenshoter = "/usr/bin/gnome-screenshot -i";
     idlehook = "${xidlehook} --not-when-fullscreen --not-when-audio --timer 60 '${locker}' '' --timer 120 '${systemctl} suspend' ''";
@@ -17,6 +17,7 @@ in {
 
     home.packages = with pkgs; [
         i3status-rust
+        i3lock-fancy
     ];
 
     xsession.windowManager.i3 = {
