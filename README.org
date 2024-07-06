@@ -20,7 +20,7 @@ cp nixos.iso /dev/sdX
 
 5. Clone these dotfiles somewhere:
 #+begin_src shell
-git clone https://github.com/lejeunel/hm-dotfiles
+git clone https://github.com/lejeunel/dotfiles
 #+end_src
 
 6. Create a host config in ~hosts/~
@@ -54,7 +54,19 @@ Don't forget to change your ~root~ and ~$USER~ passwords! They are set to
 
 * Commands
 
-Cleaning old generations:
+** Rebuilding system
+
+#+begin_src shell
+sudo nixos-rebuild switch --flake .#<host>
+#+end_src
+
+** Apply Home-Manager configuration
+
+#+begin_src shell
+home-manager switch --flake .#<username>
+#+end_src
+
+** Cleaning old generations
 
 #+begin_src shell
 nix-env --list-generations
