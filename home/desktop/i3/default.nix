@@ -190,6 +190,12 @@ in {
             always = true;
             notification = false;
           }
+          {
+            command = "${pkgs.deadd-notification-center}/bin/deadd-notification-center";
+            always = false;
+            notification = false;
+          }
+
         ];
       };
     };

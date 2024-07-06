@@ -15,6 +15,8 @@
       dconf
       gnome.nautilus
       gnome.gnome-screenshot
+      deadd-notification-center
+      telegram-desktop
   ];
 
   xdg.desktopEntries = {
