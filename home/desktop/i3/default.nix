@@ -181,7 +181,7 @@ in {
             notification = false;
           }
           {
-            command = "${pkgs.xorg.setxkbmap}/bin/setxkbmap us_qwerty-fr";
+            command = "${pkgs.xorg.setxkbmap}/bin/setxkbmap qwerty-fr";
             always = true;
             notification = false;
           }
