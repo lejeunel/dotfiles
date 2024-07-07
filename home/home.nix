@@ -29,6 +29,5 @@
 
   colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
-  home.file.".local/share/X11/xkb/symbol/us_qwerty_fr".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/home/us_qwerty-fr";
 
 }
