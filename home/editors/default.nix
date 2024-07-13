@@ -29,7 +29,7 @@ in
       Description = "Emacs Text Editor Daemon";
     };
     Service = {
-      Environment = "PATH=/usr/bin:/usr/local/bin:${config.home.homeDirectory}/.nix-profile/bin";
+      Environment = "PATH=/usr/bin:/usr/local/bin:${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin";
       Type = "forking";
       ExecStart = "${pkgs.emacs}/bin/emacs --daemon";
       ExecStop = "${pkgs.emacs}/bin/emacsclient --eval \"(kill-emacs)\"";

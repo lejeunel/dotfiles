@@ -1,6 +1,5 @@
 #+title: Readme
 
-
 * Quick start
 
 1. Acquire a NixOS 24.05+ image:

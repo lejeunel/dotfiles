@@ -195,6 +195,13 @@ Download standalone [[https://languagetool.org/][LanguageTool]] server from http
 (setq python-shell-interpreter "ipython"
     python-shell-interpreter-args "-i --simple-prompt")
 #+end_src
+** Executables
+#+begin_src emacs-lisp :tangle yes
+(setq flycheck-python-ruff-executable "ruff")
+(add-hook 'python-mode-hook
+  (lambda ()
+    (setq flycheck-checker 'python-ruff)))
+#+end_src
 ** Breakpoints
 
 Bindings and functions to add and highlight breakpoints.
