@@ -8,7 +8,6 @@
     ./imv
   ];
 
-
   home.packages = with pkgs; [
       thunderbird
       xidlehook
@@ -17,6 +16,8 @@
       gnome.gnome-screenshot
       deadd-notification-center
       telegram-desktop
+      evince
+      inkscape
   ];
 
   xdg.desktopEntries = {
