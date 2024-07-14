@@ -6,6 +6,7 @@
       python312Packages.python-lsp-ruff
       python312Packages.black
       python312Packages.isort
+      python312Packages.pyflakes
       gopls
       godef
     ];
