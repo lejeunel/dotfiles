@@ -59,7 +59,7 @@ in {
                 text = border;
               };
               focusedWorkspace = {
-                background = "#${config.colorScheme.palette.base0D}";
+                background = "#${config.colorScheme.palette.base0C}";
                 border = "#${config.colorScheme.palette.base07}";
                 text = "#${config.colorScheme.palette.base00}";
               };
