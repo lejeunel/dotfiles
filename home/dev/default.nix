@@ -7,8 +7,14 @@
       python312Packages.black
       python312Packages.isort
       python312Packages.pyflakes
+
+      # golang utils
       gopls
       godef
+      gomodifytags
+      gotests
+      gore
+      gotools
     ];
 
     programs = {
