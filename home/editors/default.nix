@@ -7,6 +7,8 @@ in {
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
     "${config.home.homeDirectory}/${dotfilesPath}/home/editors/nvim";
 
+  home.sessionPath = [ "$HOME/.config/emacs/bin" ];
+
   home.packages = with pkgs; [
     tectonic
 

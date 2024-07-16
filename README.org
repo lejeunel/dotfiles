@@ -81,5 +81,3 @@ sudo nix-collect-garbage -d
 sudo /run/current-system/bin/switch-to-configuration boot
 #+end_src
 
-* Bugs
-- [[https://github.com/nix-community/home-manager/issues/4720][Alacritty on non-NixOS]]
