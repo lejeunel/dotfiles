@@ -1,23 +1,18 @@
-{ config, inputs, pkgs, font, nix-colors, dotfilesPath, ...}:{
+{ config, inputs, pkgs, font, nix-colors, dotfilesPath, ... }: {
 
-  imports = [
-    ./i3
-    ./rofi
-    ./alacritty
-    ./zathura
-    ./imv
-  ];
+  imports = [ ./i3 ./rofi ./alacritty ./zathura ./imv ];
 
   home.packages = with pkgs; [
-      thunderbird
-      xidlehook
-      dconf
-      gnome.nautilus
-      gnome.gnome-screenshot
-      deadd-notification-center
-      telegram-desktop
-      evince
-      inkscape
+    thunderbird
+    xidlehook
+    dconf
+    gnome.nautilus
+    gnome.gnome-screenshot
+    deadd-notification-center
+    telegram-desktop
+    evince
+    inkscape
+    vlc
   ];
 
   xdg.desktopEntries = {
@@ -37,23 +32,26 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "image/png" = ["imv.desktop"];
-      "image/jpeg" = ["imv.desktop"];
-      "image/gif" = ["imv.desktop"];
+      "image/png" = [ "imv.desktop" ];
+      "image/jpeg" = [ "imv.desktop" ];
+      "image/gif" = [ "imv.desktop" ];
 
-      "text/plain" = ["emacsclient.desktop"];
-      "text/x-script.python" = ["emacsclient.desktop"];
-      "text/x-tex" = ["emacsclient.desktop"];
+      "text/plain" = [ "emacsclient.desktop" ];
+      "text/x-script.python" = [ "emacsclient.desktop" ];
+      "text/x-tex" = [ "emacsclient.desktop" ];
 
-      "application/pdf" = ["org.pwmt.zathura.desktop"];
+      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
     };
   };
 
   programs.firefox.enable = true;
 
   # themes, icons, wallpapers, ...
-  home.file.".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
-  home.file."Pictures/lonely-fish.png".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/${dotfilesPath}/wallpapers/lonely-fish.png";
+  home.file.".icons/default".source =
+    "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
+  home.file."Pictures/lonely-fish.png".source =
+    config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/${dotfilesPath}/wallpapers/lonely-fish.png";
 
   gtk = {
     enable = true;
@@ -75,6 +73,17 @@
       package = pkgs.ubuntu_font_family;
     };
 
+  };
+
+  services.picom = {
+    enable = true;
+    fade = true;
+    shadow = true;
+    fadeDelta = 4;
+    inactiveOpacity = 0.95;
+    vSync = true;
+    activeOpacity = 1;
+    settings = { blur = { strength = 5; }; };
   };
 
 }

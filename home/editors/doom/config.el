@@ -253,6 +253,17 @@ background of code to whatever theme I'm using's background"
       :map org-mode-map
       :desc "Insert citation" "c" 'org-cite-insert)
 
+(setq org-capture-templates
+  (quote
+   (("t" "todo" entry
+     (file+headline "~/org/todo.org" "Tasks")
+     "* TODO %U %?\n\n"
+     :empty-lines-after 1)
+    ("n" "note" entry
+     (file+headline "~/org/notes.org" "Inbox")
+     "* %U %? \n\n"
+     :empty-lines-after 1))))
+
 (after! counsel
   (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s || true"))
 

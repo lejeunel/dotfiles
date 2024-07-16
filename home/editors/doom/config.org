@@ -402,6 +402,21 @@ background of code to whatever theme I'm using's background"
       :desc "Insert citation" "c" 'org-cite-insert)
 #+end_src
 
+** Org-capture
+#+begin_src emacs-lisp :tangle yes
+(setq org-capture-templates
+  (quote
+   (("t" "todo" entry
+     (file+headline "~/org/todo.org" "Tasks")
+     "* TODO %U %?\n\n"
+     :empty-lines-after 1)
+    ("n" "note" entry
+     (file+headline "~/org/notes.org" "Inbox")
+     "* %U %? \n\n"
+     :empty-lines-after 1))))
+#+end_src
+
+
 * Others
 
 #+begin_src emacs-lisp :tangle yes
