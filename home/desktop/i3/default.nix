@@ -183,6 +183,20 @@ in {
           notification = false;
         }
         {
+          command = ''
+            ${pkgs.xorg.xinput}/bin/xinput --set-prop $(${pkgs.xorg.xinput}/bin/xinput list --id-only 'Microsoft Microsoft Pro Intellimouse Mouse') 'libinput Accel Profile Enabled' 0, 1
+          '';
+          always = true;
+          notification = false;
+        }
+        {
+          command = ''
+            ${pkgs.xorg.xinput}/bin/xinput --set-prop $(${pkgs.xorg.xinput}/bin/xinput list --id-only 'Microsoft Microsoft Pro Intellimouse Mouse') 'libinput Accel Speed' -0.5
+          '';
+          always = true;
+          notification = false;
+        }
+        {
           command = "${idlehook}";
           always = true;
           notification = false;
