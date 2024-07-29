@@ -1,6 +1,6 @@
 { config, inputs, pkgs, font, nix-colors, dotfilesPath, ... }: {
 
-  imports = [ ./i3 ./rofi ./alacritty ./zathura ./imv ];
+  imports = [ ./i3 ./rofi ./alacritty ./zathura ./imv ./office ];
 
   home.packages = with pkgs; [
     thunderbird
@@ -8,6 +8,7 @@
     dconf
     gnome.nautilus
     gnome.gnome-screenshot
+    gnome.gnome-calculator
     deadd-notification-center
     telegram-desktop
     evince
