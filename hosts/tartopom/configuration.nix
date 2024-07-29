@@ -5,15 +5,14 @@
 { inputs, outputs, lib, config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../users
-      ../../locale
-      ../../services/audio
-      ../../services/xserver
-      ../../services/bluetooth
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../users
+    ../../locale
+    ../../services/audio
+    ../../services/xserver
+    ../../services/bluetooth
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -22,12 +21,10 @@
   networking.hostName = "tartopom"; # Define your hostname.
 
   # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-  };
+  hardware.opengl = { enable = true; };
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
 
@@ -64,35 +61,24 @@
 
   };
 
-
-
   # Enable networking
   networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
-  nix = let
-          flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-        in {
-	  settings = {
-            experimental-features = "nix-command flakes";
-	  };
-};
-
+  nix = let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in { settings = { experimental-features = "nix-command flakes"; }; };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-	neovim 
-	wget
-	git
-	gnumake
-  ];
+  environment.systemPackages = with pkgs; [ neovim wget git gnumake ];
 
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  environment.sessionVariables = { LD_LIBRARY_PATH = "$NIX_LD_LIBRARY_PATH"; };
 
 }
