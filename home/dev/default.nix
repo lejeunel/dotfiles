@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    python312Packages.python-lsp-server
 
-    python312Packages.python-lsp-ruff
+  home.packages = with pkgs; [
+
+    # interpreters
+    python312
+
+    python312Packages.python-lsp-server
     python312Packages.black
     python312Packages.isort
     python312Packages.pyflakes
@@ -31,7 +34,22 @@
         };
       };
     };
+
+    pyenv = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    poetry = {
+      enable = true;
+      settings = {
+        virtualenvs.create = true;
+        virtualenvs.in-project = true;
+      };
+    };
+
     go = { enable = true; };
+
   };
 
 }

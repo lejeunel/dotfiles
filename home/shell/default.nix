@@ -1,16 +1,10 @@
-{ inputs, pkgs, lib, config, gitIdentity, homeDirectory, ...}:
-let
-  lf = "${pkgs.lf}/bin/lf";
+{ inputs, pkgs, lib, config, gitIdentity, homeDirectory, ... }:
+let lf = "${pkgs.lf}/bin/lf";
 in {
 
-  imports = [./lf];
+  imports = [ ./lf ];
 
-  home.packages = [
-      pkgs.calcurse
-      pkgs.bluetuith
-      pkgs.htop
-      pkgs.neofetch
-  ];
+  home.packages = [ pkgs.calcurse pkgs.bluetuith pkgs.htop pkgs.neofetch ];
 
   programs = {
 
@@ -18,13 +12,14 @@ in {
       enable = true;
       userEmail = "${gitIdentity.email}";
       userName = "${gitIdentity.username}";
-      aliases = {co = "checkout";
-                br = "branch";
-                ci = "commit";
-                st = "status";
-                unstage = "reset HEAD --";
-                last = "log -1 HEAD";
-                };
+      aliases = {
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        st = "status";
+        unstage = "reset HEAD --";
+        last = "log -1 HEAD";
+      };
       extraConfig = {
         credential.helper = "store";
         init.defaultBranch = "main";
@@ -52,12 +47,23 @@ in {
 
                 pyenv activate ''${pvenv}
         }
+
+        layout_poetry() {
+          if [[ ! -f pyproject.toml ]]; then
+            log_error 'No pyproject.toml found.  Use `poetry new` or `poetry init` to create one first.'
+            exit 2
+          fi
+
+          local VENV=$(dirname $(poetry run which python))
+          export VIRTUAL_ENV=$(echo "$VENV" | rev | cut -d'/' -f2- | rev)
+          export POETRY_ACTIVE=1
+          PATH_add "$VENV"
+        }
+
       '';
     };
 
-    eza = {
-      enable = true;
-    };
+    eza = { enable = true; };
 
     bat = {
       enable = true;
@@ -72,17 +78,13 @@ in {
           file = "themes/Catppuccin Macchiato.tmTheme";
         };
       };
-      config = {
-        theme = "catppuccin";
-      };
+      config = { theme = "catppuccin"; };
     };
 
     zsh = {
       enable = true;
       enableCompletion = true;
-      autosuggestion = {
-        enable = true;
-      };
+      autosuggestion = { enable = true; };
       shellAliases = {
         ls = "eza --color=always --long --git --icons=always";
         ll = "ls -lah";
@@ -99,13 +101,8 @@ in {
 
       oh-my-zsh = {
         enable = true;
-        plugins = [
-          "command-not-found"
-          "git"
-          "vi-mode"
-        ];
+        plugins = [ "command-not-found" "git" "vi-mode" ];
       };
-
 
     };
     fzf = {
@@ -118,19 +115,9 @@ in {
       enableZshIntegration = true;
     };
 
-    pyenv = {
-      enable = true;
-      enableZshIntegration = true;
-      rootDirectory = "${homeDirectory}/.pyenv";
-    };
+    command-not-found = { enable = true; };
 
-    command-not-found = {
-      enable = true;
-    };
-
-    ripgrep = {
-      enable = true;
-    };
+    ripgrep = { enable = true; };
 
   };
 
