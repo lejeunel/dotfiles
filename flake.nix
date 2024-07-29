@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
     nix-colors.url = "github:misterio77/nix-colors";
+    fix-python.url = "github:GuillaumeDesforges/fix-python";
     nixgl.url = "github:nix-community/nixGL";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -11,7 +12,8 @@
 
   };
 
-  outputs = { self, nixpkgs, nix-colors, home-manager, nixgl, ... } @inputs:
+  outputs =
+    { self, nixpkgs, nix-colors, home-manager, nixgl, fix-python, ... }@inputs:
     let
 
       inherit (self) outputs;
@@ -26,16 +28,12 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
-         specialArgs = {inherit inputs outputs;};
-         modules = [
-           ./hosts/vm/configuration.nix
-         ];
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/vm/configuration.nix ];
         };
         tartopom = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs outputs;};
-          modules = [
-            ./hosts/tartopom/configuration.nix
-          ];
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/tartopom/configuration.nix ];
         };
       };
 
@@ -43,7 +41,10 @@
         laurent = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
-          modules = [ ./home/home.nix ];
+          modules = [
+            ./home/home.nix
+            { home.packages = [ fix-python.packages.${system}.default ]; }
+          ];
           extraSpecialArgs = {
             # we bundle in this repo our editors config, these will be
             # linked to $HOME/.config/ from ${HOME}/${editorsCfgPath}
@@ -59,10 +60,8 @@
               username = "lejeunel";
             };
             inherit nix-colors;
-
           };
+        };
       };
     };
-  };
 }
-
