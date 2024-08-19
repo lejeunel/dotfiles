@@ -22,7 +22,7 @@
   };
 
   imports =
-    [ nix-colors.homeManagerModules.default ./shell ./dev ./editors ./desktop ];
+    [ nix-colors.homeManagerModules.default ./shell ./editors ./desktop ];
 
   colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
