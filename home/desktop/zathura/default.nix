@@ -1,6 +1,5 @@
+{ config, lib, pkgs, font, nix-colors, ... }: {
 
-{ config, lib, pkgs, font, nix-colors, ... }:
-{
   programs.zathura = {
     enable = true;
     options = {
@@ -15,8 +14,8 @@
       completion-bg = "#${config.colorScheme.palette.base02}";
       completion-fg = "#${config.colorScheme.palette.base00}";
 
-      completion-highlight-bg =  "#${config.colorScheme.palette.base03}";
-      completion-highlight-fg =  "#${config.colorScheme.palette.base00}";
+      completion-highlight-bg = "#${config.colorScheme.palette.base03}";
+      completion-highlight-fg = "#${config.colorScheme.palette.base00}";
 
       completion-group-bg = "#${config.colorScheme.palette.base02}";
       completion-group-fg = "#${config.colorScheme.palette.base00}";
@@ -62,4 +61,5 @@
       "J" = "zoom out";
     };
   };
+
 }

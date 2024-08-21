@@ -19,13 +19,10 @@
       inherit (self) outputs;
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        # overlays = [nixgl.overlay];
-      };
+      pkgs = import nixpkgs { inherit system; };
     in {
       # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
+      # Available through 'nixos-rebuild --flake .#<hostname>'
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -37,12 +34,14 @@
         };
       };
 
+      # Home-Manager configuration entrypoint
+      # Available through 'home-manager --flake .#<user>'
       homeConfigurations = {
         laurent = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
           modules = [
-            ./home/home.nix
+            ./home
             { home.packages = [ fix-python.packages.${system}.default ]; }
           ];
           extraSpecialArgs = {

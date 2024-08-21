@@ -14,8 +14,6 @@
       (nerdfonts.override {
         fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ];
       })
-      python312Packages.python-lsp-ruff
-      python312Packages.python-lsp-server
       networkmanager
     ];
 
