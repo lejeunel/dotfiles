@@ -7,14 +7,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-colors.url = "github:misterio77/nix-colors";
+    stylix.url = "github:danth/stylix";
   };
 
-  outputs = { nix-colors, ... }@inputs:
+  outputs = { ... }@inputs:
     let
       # super simple boilerplate-reducing
       # lib with a bunch of functions
-      myLib = import ./myLib/default.nix { inherit inputs nix-colors; };
+      myLib = import ./myLib/default.nix { inherit inputs; };
     in with myLib; {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#<hostname>'
@@ -29,7 +29,8 @@
         "laurent@tartopom" = mkHome "x86_64-linux" ./hosts/tartopom/home.nix;
       };
 
-      homeManagerModules.default = ./homeManagerModules;
       nixosModules.default = ./nixosModules;
+      homeManagerModules.default = ./homeManagerModules;
+
     };
 }

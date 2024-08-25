@@ -1,11 +1,6 @@
-{ inputs, outputs, pkgs, lib, nix-colors, ... }: {
+{ inputs, outputs, pkgs, lib, ... }: {
 
-  imports = [
-    outputs.homeManagerModules.default
-    nix-colors.homeManagerModules.default
-  ];
-
-  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
+  imports = [ outputs.homeManagerModules.default ];
 
   myHomeManager = {
     bundles.desktop.enable = true;
@@ -15,7 +10,7 @@
 
   home = {
     username = "laurent";
-    homeDirectory = lib.mkDefault "/home/laurent";
+    homeDirectory = "/home/laurent";
     stateVersion = "24.05";
 
     packages = with pkgs; [
@@ -26,4 +21,6 @@
       networkmanager
     ];
   };
+
+  programs.home-manager.enable = true;
 }

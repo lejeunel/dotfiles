@@ -1,6 +1,6 @@
-{ inputs, nix-colors }:
+{ inputs }:
 let
-  myLib = (import ./default.nix) { inherit inputs nix-colors; };
+  myLib = (import ./default.nix) { inherit inputs; };
   outputs = inputs.self.outputs;
 in rec {
   # ================================================================ #
@@ -22,7 +22,7 @@ in rec {
   mkHome = sys: config:
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = pkgsFor sys;
-      extraSpecialArgs = { inherit inputs myLib outputs nix-colors; };
+      extraSpecialArgs = { inherit inputs myLib outputs; };
       modules = [ config outputs.homeManagerModules.default ];
     };
 

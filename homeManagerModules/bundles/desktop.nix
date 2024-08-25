@@ -1,8 +1,5 @@
 { config, inputs, pkgs, ... }:
-let dotfilesPath = "dotfiles";
-in {
-
-  # imports = [ ./i3 ./rofi ./alacritty ./zathura ./imv ./office ];
+{
 
   myHomeManager.i3.enable = true;
   myHomeManager.rofi.enable = true;
@@ -59,9 +56,6 @@ in {
   # themes, icons, wallpapers, ...
   home.file.".icons/default".source =
     "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
-  home.file."Pictures/lonely-fish.png".source =
-    config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/${dotfilesPath}/wallpapers/lonely-fish.png";
 
   gtk = {
     enable = true;
