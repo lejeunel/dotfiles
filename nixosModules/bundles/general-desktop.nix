@@ -1,7 +1,7 @@
 { pkgs, lib, ... }: {
   myNixOS.xserver.enable = lib.mkDefault true;
   myNixOS.bluetooth.enable = lib.mkDefault true;
-  myNixOS.stylix.enable = lib.mkDefault true;
+  # myNixOS.stylix.enable = lib.mkDefault true;
 
   # Central European time zone
   i18n.defaultLocale = "en_US.UTF-8";

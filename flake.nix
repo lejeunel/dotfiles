@@ -7,7 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix.url = "github:danth/stylix";
+    # stylix.url = "github:danth/stylix";
   };
 
   outputs = { ... }@inputs:
@@ -29,8 +29,8 @@
         "laurent@tartopom" = mkHome "x86_64-linux" ./hosts/tartopom/home.nix;
       };
 
-      nixosModules.default = ./nixosModules;
       homeManagerModules.default = ./homeManagerModules;
+      nixosModules.default = ./nixosModules;
 
     };
 }
