@@ -2,10 +2,10 @@
 let cfg = config.editors;
 in {
 
-  home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/homeManagerModules/features/editors/doom";
+  # home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink
+  #   "${config.home.homeDirectory}/dotfiles/doom";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/homeManagerModules/features/editors/nvim";
+    "${config.home.homeDirectory}/dotfiles/nvim";
 
   home.sessionPath = [ "$HOME/.config/emacs/bin" ];
 

@@ -1,6 +1,4 @@
-{ inputs, pkgs, lib, config, ... }:
-let lf = "${pkgs.lf}/bin/lf";
-in {
+{ inputs, pkgs, lib, config, ... }: {
 
   myHomeManager.editors.enable = true;
   home.packages = with pkgs; [ calcurse bluetuith htop neofetch nh psmisc ];
