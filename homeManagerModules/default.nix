@@ -1,5 +1,7 @@
-{ lib, pkgs, config, homeDirectory, username, nix-colors, dotfilesPath
-, fix-python, ... }: {
+{ inputs, outputs, lib, pkgs, config, homeDirectory, username, nix-colors, ...
+}: {
+
+  imports = [ outputs.homeManagerModules.default ];
 
   fonts.fontconfig.enable = true;
 
@@ -18,9 +20,6 @@
     ];
 
   };
-
-  imports =
-    [ nix-colors.homeManagerModules.default ./shell ./editors ./desktop ];
 
   colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 

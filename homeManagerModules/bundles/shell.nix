@@ -4,7 +4,7 @@ in {
 
   imports = [ ./lf ];
 
-  home.packages = [ pkgs.calcurse pkgs.bluetuith pkgs.htop pkgs.neofetch ];
+  home.packages = with pkgs; [ calcurse bluetuith htop neofetch nh psmisc ];
 
   programs = {
 

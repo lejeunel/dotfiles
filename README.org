@@ -50,33 +50,24 @@ Don't forget to change your ~root~ and ~$USER~ passwords! They are set to
 * Resources
 - i3, doom emacs: [[https://github.com/kenranunderscore/dotfiles/blob/bb0d038f1f31d52acef0da777621dfc1ea4b8a6d/modules/doom/default.nix][kenranunderscore/dotfiles]]
 - https://github.com/doomemacs/doomemacs/blob/master/shell.nix
+- [[https://github.com/vimjoyer/nixconf.git]]
 
 * Commands
 
 ** Rebuilding system
 
 #+begin_src shell
-sudo nixos-rebuild switch --flake .#<host>
+nh os switch -u ~/dotfiles
 #+end_src
 
 ** Apply Home-Manager configuration
 
 #+begin_src shell
-home-manager switch --flake .#<username>
+nh home switch -u ~/dotfiles
 #+end_src
 
 ** Cleaning old generations
 
 #+begin_src shell
-nix-env --list-generations
-
-nix-collect-garbage  --delete-old
-
-nix-collect-garbage  --delete-generations 1 2 3
-
-# recommeneded to sometimes run as sudo to collect additional garbage
-sudo nix-collect-garbage -d
-
-# As a separation of concerns - you will need to run this command to clean out boot
-sudo /run/current-system/bin/switch-to-configuration boot
+nh clean all
 #+end_src
