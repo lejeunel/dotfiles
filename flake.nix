@@ -33,29 +33,24 @@
         };
         inherit nix-colors;
       };
-    in {
+
+      # super simple boilerplate-reducing
+      # lib with a bunch of functions
+      myLib = import ./myLib/default.nix { inherit inputs; };
+    in with myLib; {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#<hostname>'
       nixosConfigurations = {
-        vm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/vm/configuration.nix ];
-        };
-        tartopom = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/tartopom/configuration.nix ];
-        };
+        vm = mkSystem ./hosts/vm/configuration.nix;
+        tartopom = mkSystem ./hosts/tartopom/configuration.nix;
       };
 
       # Home-Manager configuration entrypoint
       # Available through 'home-manager --flake .#<user>'
       homeConfigurations = {
-        "laurent@tartopom" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          inherit extraSpecialArgs;
-
-          modules = [ ./hosts/tartopom/home.nix ];
-        };
+        "laurent@tartopom" = mkHome "x86_64-linux" ./hosts/tartopom/home.nix;
       };
+
+      homeManagerModules.default = ./homeManagerModules;
     };
 }

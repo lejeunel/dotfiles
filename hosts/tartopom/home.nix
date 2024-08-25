@@ -1,4 +1,5 @@
 { inputs, outputs, pkgs, lib, ... }: {
+
   imports = [ outputs.homeManagerModules.default ];
 
   myHomeManager = {

@@ -1,26 +1,24 @@
-{ inputs, outputs, lib, pkgs, config, homeDirectory, username, nix-colors, ...
-}: {
+{ pkgs, system, inputs, config, lib, myLib, ... }:
+let
+  cfg = config.myHomeManager;
 
-  imports = [ outputs.homeManagerModules.default ];
+  # Taking all modules in ./features and adding enables to them
+  features = myLib.extendModules (name: {
+    extraOptions = {
+      myHomeManager.${name}.enable =
+        lib.mkEnableOption "enable my ${name} configuration";
+    };
 
-  fonts.fontconfig.enable = true;
+    configExtension = config: (lib.mkIf cfg.${name}.enable config);
+  }) (myLib.filesIn ./features);
 
-  home = {
+  # Taking all module bundles in ./bundles and adding bundle.enables to them
+  bundles = myLib.extendModules (name: {
+    extraOptions = {
+      myHomeManager.bundles.${name}.enable =
+        lib.mkEnableOption "enable ${name} module bundle";
+    };
 
-    homeDirectory = "${homeDirectory}";
-    stateVersion = "24.05";
-    username = "${username}";
-
-    packages = with pkgs; [
-      xorg.setxkbmap
-      (nerdfonts.override {
-        fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ];
-      })
-      networkmanager
-    ];
-
-  };
-
-  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
-
-}
+    configExtension = config: (lib.mkIf cfg.bundles.${name}.enable config);
+  }) (myLib.filesIn ./bundles);
+in { imports = [ ] ++ features ++ bundles; }
