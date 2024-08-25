@@ -1,17 +1,16 @@
-{ inputs, pkgs, lib, config, gitIdentity, homeDirectory, ... }:
+{ inputs, pkgs, lib, config, ... }:
 let lf = "${pkgs.lf}/bin/lf";
 in {
 
-  imports = [ ./lf ];
-
+  myHomeManager.lf.enable = true;
   home.packages = with pkgs; [ calcurse bluetuith htop neofetch nh psmisc ];
 
   programs = {
 
     git = {
       enable = true;
-      userEmail = "${gitIdentity.email}";
-      userName = "${gitIdentity.username}";
+      userEmail = "me@lejeunel.org";
+      userName = "lejeunel";
       aliases = {
         co = "checkout";
         br = "branch";

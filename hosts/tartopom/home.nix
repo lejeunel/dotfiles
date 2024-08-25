@@ -1,10 +1,16 @@
-{ inputs, outputs, pkgs, lib, ... }: {
+{ inputs, outputs, pkgs, lib, nix-colors, ... }: {
 
-  imports = [ outputs.homeManagerModules.default ];
+  imports = [
+    outputs.homeManagerModules.default
+    nix-colors.homeManagerModules.default
+  ];
+
+  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
   myHomeManager = {
     bundles.desktop.enable = true;
     bundles.shell.enable = true;
+    bundles.editors.enable = true;
   };
 
   home = {

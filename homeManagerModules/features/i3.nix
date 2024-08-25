@@ -1,5 +1,8 @@
-{ config, lib, pkgs, font, nix-colors, wallpaper, terminal, ... }:
+{ config, lib, pkgs, nix-colors, ... }:
 let
+  wallpaper = "~/Pictures/lonely-fish.png";
+  font = "JetBrainsMono Nerd Font";
+  terminal = "${pkgs.alacritty}/bin/alacritty";
   term_float = "${terminal} --class floating_shell -e";
   nmui = "${term_float}" + " ${pkgs.networkmanager}/bin/nmtui";
   calendar = "${term_float}" + " calcurse";
@@ -72,7 +75,7 @@ in {
       }];
 
       fonts = {
-        names = [ "${font}" ];
+        names = [ "JetBrainsMono Nerd Font" ];
         size = 12.0;
 
       };

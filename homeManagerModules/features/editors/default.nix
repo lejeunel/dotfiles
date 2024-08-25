@@ -1,11 +1,11 @@
-{ config, lib, pkgs, dotfilesPath, ... }:
+{ config, lib, pkgs, ... }:
 let cfg = config.editors;
 in {
 
   home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/${dotfilesPath}/home/editors/doom";
+    "${config.home.homeDirectory}/dotfiles/homeManagerModules/features/editors/doom";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/${dotfilesPath}/home/editors/nvim";
+    "${config.home.homeDirectory}/dotfiles/homeManagerModules/features/editors/nvim";
 
   home.sessionPath = [ "$HOME/.config/emacs/bin" ];
 

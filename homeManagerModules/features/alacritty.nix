@@ -1,5 +1,4 @@
-{ config, lib, pkgs, font, nix-colors, ... }:
-{
+{ config, lib, pkgs, ... }: {
   programs.alacritty = {
     enable = true;
     settings = {
@@ -75,18 +74,18 @@
         };
         indexed_colors = [
           {
-          index = 16;
-          color = "#${config.colorScheme.palette.base09}";
+            index = 16;
+            color = "#${config.colorScheme.palette.base09}";
           }
           {
-          index = 17;
-          color = "#${config.colorScheme.palette.base06}";
+            index = 17;
+            color = "#${config.colorScheme.palette.base06}";
           }
         ];
       };
       font = {
         size = 13;
-        normal.family = "${font}";
+        normal.family = "JetBrainsMono Nerd Font";
       };
       window.padding = {
         x = 10;

@@ -1,6 +1,15 @@
-{ config, inputs, pkgs, font, nix-colors, dotfilesPath, ... }: {
+{ config, inputs, pkgs, ... }:
+let dotfilesPath = "dotfiles";
+in {
 
-  imports = [ ./i3 ./rofi ./alacritty ./zathura ./imv ./office ];
+  # imports = [ ./i3 ./rofi ./alacritty ./zathura ./imv ./office ];
+
+  myHomeManager.i3.enable = true;
+  myHomeManager.rofi.enable = true;
+  myHomeManager.alacritty.enable = true;
+  myHomeManager.zathura.enable = true;
+  myHomeManager.imv.enable = true;
+  myHomeManager.office.enable = true;
 
   home.packages = with pkgs; [
     thunderbird

@@ -1,9 +1,12 @@
-{ config, lib, pkgs, font, nix-colors, terminal, ... }:
-{
+{ config, lib, pkgs, ... }:
+
+let
+
+  font = "JetBrainsMono Nerd Font";
+in {
 
   programs.rofi = {
     enable = true;
-    terminal = terminal;
     font = "${font}" + " 12";
     theme = "./theme.rasi";
     extraConfig = {

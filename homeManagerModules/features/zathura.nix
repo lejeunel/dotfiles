@@ -1,4 +1,6 @@
-{ config, lib, pkgs, font, nix-colors, ... }: {
+{ config, lib, pkgs, ... }:
+let font = "JetBrainsMono Nerd Font";
+in {
 
   programs.zathura = {
     enable = true;
