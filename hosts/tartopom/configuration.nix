@@ -17,8 +17,8 @@
 
   myNixOS = {
     bundles.general-desktop.enable = true;
+    # bundles.home-manager.enable = true;
     bundles.users.enable = true;
-    bundles.general.enable = true;
   };
 
   # Enable OpenGL

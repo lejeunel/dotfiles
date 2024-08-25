@@ -47,11 +47,8 @@
     cursor.name = "Bibata-Modern-Ice";
     cursor.package = pkgs.bibata-cursors;
 
-    targets.chromium.enable = true;
     targets.grub.enable = true;
     targets.grub.useImage = true;
-    targets.plymouth.enable = true;
-    # stylix.targets.nixos-icons.enable = true;
 
     autoEnable = false;
   };
