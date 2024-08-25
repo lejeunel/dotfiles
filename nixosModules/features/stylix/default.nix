@@ -49,6 +49,7 @@
 
     targets.grub.enable = false;
     targets.grub.useImage = false;
+    targets.plymouth.enable = true;
 
     autoEnable = false;
   };
