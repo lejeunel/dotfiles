@@ -67,6 +67,15 @@
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
+  home-users = {
+  "laurent" = {
+    userConfig = ./home.nix;
+    userSettings = {
+      extraGroups = ["networkmanager" "wheel" "docker"];
+    };
+  };
+};
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
