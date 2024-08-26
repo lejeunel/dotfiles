@@ -1,12 +1,7 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [
-    inputs.stylix.nixosModules.stylix
-  ];
+{ pkgs, inputs, ... }: {
+  imports = [ inputs.stylix.nixosModules.stylix ];
   stylix = {
+    enable = true;
     base16Scheme = {
       base00 = "282828"; # ----
       base01 = "3c3836"; # ---
@@ -26,15 +21,12 @@
       base0F = "d65d0e"; # brown
     };
 
-    # does not work >:(
-    # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
-
     image = ./gruvbox-mountain-village.png;
 
     fonts = {
       monospace = {
-        package = pkgs.nerdfonts.override {fonts = ["JetBrainsMono"];};
-        name = "JetBrainsMono Nerd Font Mono";
+        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+        name = "JetBrainsMono Nerd Font";
       };
       sansSerif = {
         package = pkgs.dejavu_fonts;
@@ -56,12 +48,11 @@
     cursor.name = "Bibata-Modern-Ice";
     cursor.package = pkgs.bibata-cursors;
 
-    targets.chromium.enable = true;
     targets.grub.enable = true;
     targets.grub.useImage = true;
     targets.plymouth.enable = true;
-    # stylix.targets.nixos-icons.enable = true;
+    targets.nixos-icons.enable = true;
 
-    autoEnable = false;
+    autoEnable = true;
   };
 }

@@ -1,10 +1,9 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
 
-  home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink
-    "/home/laurent/dotfiles/doom";
-  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
-    "/home/laurent/dotfiles/nvim";
+  home.file.".config/doom".source =
+    config.lib.file.mkOutOfStoreSymlink "/home/laurent/dotfiles/doom";
+  home.file.".config/nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "/home/laurent/dotfiles/nvim";
 
   home.sessionPath = [ "$HOME/.config/emacs/bin" ];
 

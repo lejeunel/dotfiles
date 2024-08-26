@@ -3,10 +3,6 @@
     enable = true;
     settings = {
 
-      font = {
-        size = 13;
-        normal.family = "JetBrainsMono Nerd Font";
-      };
       window.padding = {
         x = 10;
         y = 10;

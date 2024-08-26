@@ -6,7 +6,7 @@
     bundles.desktop.enable = true;
     bundles.shell.enable = true;
     bundles.editors.enable = true;
-    # bundles.general.enable = true;
+    bundles.general.enable = true;
   };
 
   home = {

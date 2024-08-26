@@ -40,11 +40,9 @@ Function that allow to move around selections:
 * Appearance
 Colors and fonts
 #+begin_src emacs-lisp :tangle yes
-(setq doom-theme 'catppuccin)
-(setq catppuccin-flavor 'macchiato) ;; 'latte, 'frappe, 'macchiato, or 'mocha
-;; (catppuccin-reload)
+(setq doom-theme 'doom-gruvbox)
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 21 :height 1.0 :weight 'normal))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 20 :height 1.0 :weight 'normal))
 #+end_src
 
 Indentation guides

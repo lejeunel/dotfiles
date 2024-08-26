@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 let
-  font = "JetBrainsMono Nerd Font";
   terminal = "${pkgs.alacritty}/bin/alacritty";
   term_float = "${terminal} --class floating_shell -e";
   nmui = "${term_float}" + " ${pkgs.networkmanager}/bin/nmtui";
@@ -39,20 +38,39 @@ in {
         }
       ];
       bars = [{
-        fonts = {
-          names = [ "${font}" ];
-          size = 12.0;
-        };
+        fonts = { size = 12.0; };
+
         position = "top";
         statusCommand =
           "${pkgs.i3status-rust}/bin/i3status-rs /home/laurent/.config/i3status-rust/config-top.toml";
+
+        colors = rec {
+          background = "#${config.lib.stylix.colors.base00}";
+          focusedBackground = "#${config.lib.stylix.colors.base00}";
+          statusline = "#${config.lib.stylix.colors.base00}";
+          focusedStatusline = statusline;
+          bindingMode = rec {
+            inherit background;
+            border = "#${config.lib.stylix.colors.base08}";
+            text = border;
+          };
+          focusedWorkspace = {
+            background = "#${config.lib.stylix.colors.base0C}";
+            border = "#${config.lib.stylix.colors.base07}";
+            text = "#${config.lib.stylix.colors.base00}";
+          };
+          activeWorkspace = {
+            inherit background;
+            inherit (focusedWorkspace) text border;
+          };
+          inactiveWorkspace = rec {
+            inherit background;
+            border = "#${config.lib.stylix.colors.base05}";
+            text = border;
+          };
+        };
       }];
 
-      fonts = {
-        names = [ "JetBrainsMono Nerd Font" ];
-        size = 12.0;
-
-      };
       modifier = "Mod1";
       gaps = {
         inner = 10;
@@ -160,6 +178,7 @@ in {
     enable = true;
     bars = {
       top = {
+        settings = { theme = { theme = "gruvbox-dark"; }; };
         blocks = [
           {
             block = "focused_window";

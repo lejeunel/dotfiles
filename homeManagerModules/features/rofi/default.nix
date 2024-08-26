@@ -1,13 +1,7 @@
-{ config, lib, pkgs, ... }:
-
-let
-
-  font = "JetBrainsMono Nerd Font";
-in {
+{ config, lib, pkgs, ... }: {
 
   programs.rofi = {
     enable = true;
-    font = "${font}" + " 12";
     extraConfig = {
       modi = "run,drun,window";
       icon-theme = "Oranchelo";

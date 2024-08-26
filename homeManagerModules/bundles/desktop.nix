@@ -1,5 +1,4 @@
-{ config, inputs, pkgs, ... }:
-{
+{ config, inputs, pkgs, ... }: {
 
   myHomeManager.i3.enable = true;
   myHomeManager.rofi.enable = true;
@@ -7,6 +6,8 @@
   myHomeManager.zathura.enable = true;
   myHomeManager.imv.enable = true;
   myHomeManager.office.enable = true;
+  myHomeManager.stylix.enable = true;
+  myHomeManager.gtk.enable = true;
 
   home.packages = with pkgs; [
     thunderbird
@@ -52,32 +53,6 @@
   };
 
   programs.firefox.enable = true;
-
-  # themes, icons, wallpapers, ...
-  home.file.".icons/default".source =
-    "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
-
-  gtk = {
-    enable = true;
-    iconTheme = {
-      name = "Paper";
-      package = pkgs.paper-icon-theme;
-    };
-    cursorTheme = {
-      name = "Phinger Cursors (light)";
-      package = pkgs.phinger-cursors;
-    };
-    theme = {
-      name = "Matcha-dark-azul";
-      package = pkgs.matcha-gtk-theme;
-    };
-    font = {
-      name = "Ubuntu";
-      size = 12;
-      package = pkgs.ubuntu_font_family;
-    };
-
-  };
 
   services.picom = {
     enable = true;
