@@ -27,5 +27,6 @@
     enable = true;
     autoEnable = true;
     targets.neovim.enable = false;
+    targets.rofi.enable = false;
   };
 }

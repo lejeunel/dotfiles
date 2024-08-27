@@ -143,6 +143,11 @@ in {
           notification = false;
         }
         {
+          command = "${pkgs.feh}/bin/feh --bg-scale ${config.stylix.image}";
+          always = true;
+          notification = false;
+        }
+        {
           command = ''
             ${pkgs.xorg.xinput}/bin/xinput --set-prop $(${pkgs.xorg.xinput}/bin/xinput list --id-only 'Microsoft Microsoft Pro Intellimouse Mouse') 'libinput Accel Profile Enabled' 0, 1
           '';
