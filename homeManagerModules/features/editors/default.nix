@@ -5,7 +5,8 @@
   home.file.".config/nvim".source =
     config.lib.file.mkOutOfStoreSymlink "/home/laurent/dotfiles/nvim";
 
-  home.sessionPath = [ "$HOME/.config/emacs/bin" ];
+  home.sessionPath =
+    [ "$HOME/.config/emacs/bin" "$HOME/.local/share/nvim/mason/bin" ];
 
   home.packages = with pkgs; [
     tectonic
