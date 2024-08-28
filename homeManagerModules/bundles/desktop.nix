@@ -20,6 +20,7 @@
     telegram-desktop
     evince
     inkscape
+    gimp
     vlc
   ];
 
