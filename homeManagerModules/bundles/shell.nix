@@ -76,6 +76,9 @@ in {
         cat = "bat";
         tmux = "tmux -u";
         e = "emacsclient -nc";
+        tree = "${pkgs.eza}/bin/eza --color=auto --tree";
+        cal = "cal -m";
+        grep = "grep --color=auto";
       };
       initExtra = ''
         bindkey "^K" up-line-or-search
