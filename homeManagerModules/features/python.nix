@@ -1,11 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
+    poetry
     python311
-    Python311Packages.python-lsp-server
-    Python311Packages.python-lsp-ruff
-    Python311Packages.isort
+    ruff-lsp
+    inputs.fix-python.packages."x86_64-linux".default
   ];
 
 }

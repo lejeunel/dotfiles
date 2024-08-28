@@ -12,6 +12,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fix-python.url = "github:GuillaumeDesforges/fix-python";
 
   };
 
