@@ -3,7 +3,16 @@ let lf = "${pkgs.lf}/bin/lf";
 in {
 
   myHomeManager.lf.enable = true;
-  home.packages = with pkgs; [ calcurse bluetuith htop neofetch nh psmisc ];
+  home.packages = with pkgs; [
+    calcurse
+    bluetuith
+    htop
+    neofetch
+    nh
+    psmisc
+    pdftk
+    imagemagick
+  ];
 
   programs = {
 
