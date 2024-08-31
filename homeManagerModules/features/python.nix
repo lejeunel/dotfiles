@@ -4,7 +4,10 @@
   home.packages = with pkgs; [
     poetry
     python311
-    ruff-lsp
+    python311Packages.python-lsp-server
+    python311Packages.isort
+    python311Packages.black
+    python311Packages.pyflakes
     inputs.fix-python.packages."x86_64-linux".default
   ];
 
