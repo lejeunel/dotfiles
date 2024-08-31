@@ -1,11 +1,13 @@
 { config, lib, pkgs, ... }:
 let
+  timeout_lock = "120";
+  timeout_suspend = "120";
   terminal = "${pkgs.alacritty}/bin/alacritty";
   term_float = "${terminal} --class floating_shell -e";
   nmui = "${term_float}" + " ${pkgs.networkmanager}/bin/nmtui";
-  calendar = "${term_float}" + " calcurse";
-  bluetooth = "${term_float}" + " bluetuith";
-  audio = "${term_float}" + " pulsemixer";
+  calendar = "${term_float}" + " ${pkgs.calcurse}/bin/calcurse";
+  bluetooth = "${term_float}" + " ${pkgs.bluetuith}/bin/bluetuith";
+  audio = "${term_float}" + " ${pkgs.pulsemixer}/bin/pulsemixer";
   bluetooth_mac_addr =
     "${pkgs.bluez-experimental}/bin/bluetoothctl list | cut -d  -f2";
   systemctl = "${pkgs.systemd}/bin/systemctl";
@@ -13,17 +15,140 @@ let
   xidlehook = "${pkgs.xidlehook}/bin/xidlehook";
   screenshoter = "${pkgs.gnome.gnome-screenshot}/bin/gnome-screenshot -i";
   idlehook =
-    "${xidlehook} --not-when-fullscreen --not-when-audio --timer 60 '${locker}' '' --timer 120 '${systemctl} suspend' ''";
+    "${xidlehook} --not-when-fullscreen --not-when-audio --timer '${timeout_lock}' '${locker}' '' --timer '${timeout_suspend}' '${systemctl} suspend' ''";
   mode_system = "System (l)ock, l(o)gout, (s)uspend";
 
 in {
 
-  home.packages = with pkgs; [ i3status-rust i3lock-fancy rofi-power-menu ];
+  home.packages = with pkgs; [ i3lock-fancy rofi-power-menu ];
+
+  services.polybar = {
+    enable = true;
+    package = pkgs.polybar.override {
+      i3Support = true;
+      alsaSupport = true;
+      iwSupport = true;
+      githubSupport = true;
+    };
+    config = {
+      "bar/top" = {
+        # monitor = "eDP1";
+        font-0 = "JetBrainsMono Nerd Font";
+        background = "#${config.lib.stylix.colors.base01}";
+        width = "100%";
+        height = "3%";
+        radius = 0;
+        padding-left = 0;
+        padding-right = 0;
+        module-margin = 0;
+        border-left-size = 0;
+        border-right-size = 0;
+        border-top-size = 0;
+        modules-left = "i3";
+        modules-center = "title";
+        modules-right =
+          "tray bluetooth network fs-root fs-home memory cpu alsa date";
+      };
+      "module/title" = { type = "internal/xwindow"; };
+      "module/bluetooth" = {
+        type = "custom/text";
+        label = " 󰂯 ";
+        format-background = "#${config.lib.stylix.colors.base0B}";
+        click-left = "${bluetooth}";
+      };
+      "module/network" = {
+        type = "custom/text";
+        label = "󰖩 ";
+        format-background = "#${config.lib.stylix.colors.base0B}";
+        click-left = "${nmui}";
+      };
+      "fs-base" = {
+        type = "internal/fs";
+        label-mounted-background = "#${config.lib.stylix.colors.base0C}";
+
+      };
+      "module/fs-root" = {
+        "inherit" = "fs-base";
+        mount-0 = "/";
+        label-mounted = "  %percentage_used%% ";
+      };
+      "module/fs-home" = {
+        "inherit" = "fs-base";
+        mount-0 = "/home";
+        label-mounted = " %percentage_used%% ";
+      };
+      "module/cpu" = {
+        type = "internal/cpu";
+        label = " %percentage%% ";
+        format-background = "#${config.lib.stylix.colors.base0D}";
+      };
+      "module/memory" = {
+        type = "internal/memory";
+        format-prefix = " 󱚥 ";
+        format-background = "#${config.lib.stylix.colors.base0D}";
+        label = "%percentage_used%% ";
+      };
+      "module/alsa" = {
+        type = "internal/alsa";
+        format-volume-prefix = " ";
+        format-volume-background = "${config.lib.stylix.colors.base0E}";
+        format-volume = "<label-volume>";
+
+        label-volume = "%percentage%%";
+        label-volume-padding-right = 1;
+        label-volume-padding-left = 1;
+
+        label-muted = " 󰝟 ";
+      };
+      "module/date" = {
+        type = "internal/date";
+        internal = 5;
+        date = "%a %d/%m";
+        time = "%H:%M";
+        label = "%{A1:${calendar}:} %date% %time%%{A} ";
+        format-background = "#${config.lib.stylix.colors.base0F}";
+      };
+      "module/tray" = {
+        type = "internal/tray";
+        tray-padding = "20px";
+        tray-foreground = "${config.lib.stylix.colors.base09}";
+      };
+      "module/i3" = {
+        type = "internal/i3";
+        scroll-up = "i3wm-wsnext";
+        scroll-down = "i3wm-wsprev";
+        pin-workspaces = true;
+
+        label-focused = "%index%";
+        label-focused-foreground = "${config.lib.stylix.colors.base07}";
+        label-focused-background = "${config.lib.stylix.colors.base0D}";
+        label-focused-underline = "${config.lib.stylix.colors.base09}";
+        label-focused-padding = 1;
+
+        label-unfocused = "%index%";
+        label-unfocused-foreground = "${config.lib.stylix.colors.base06}";
+        label-unfocused-padding = 1;
+
+        label-urgent = "%index%";
+        label-urgent-background = "${config.lib.stylix.colors.base08}";
+        label-urgent-padding = 1;
+
+        label-empty = "%index%";
+        label-empty-foreground = "${config.lib.stylix.colors.base0F}";
+        label-empty-padding = 1;
+
+      };
+    };
+    script = ''
+      polybar top &
+    '';
+  };
 
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
     config = rec {
+      bars = [ ];
       window.hideEdgeBorders = "smart";
 
       window.commands = [
@@ -37,39 +162,6 @@ in {
           criteria = { class = "^.*"; };
         }
       ];
-      bars = [{
-        fonts = { size = 12.0; };
-
-        position = "top";
-        statusCommand =
-          "${pkgs.i3status-rust}/bin/i3status-rs /home/laurent/.config/i3status-rust/config-top.toml";
-
-        colors = rec {
-          background = "#${config.lib.stylix.colors.base00}";
-          focusedBackground = "#${config.lib.stylix.colors.base00}";
-          statusline = "#${config.lib.stylix.colors.base00}";
-          focusedStatusline = statusline;
-          bindingMode = rec {
-            inherit background;
-            border = "#${config.lib.stylix.colors.base08}";
-            text = border;
-          };
-          focusedWorkspace = {
-            background = "#${config.lib.stylix.colors.base0C}";
-            border = "#${config.lib.stylix.colors.base07}";
-            text = "#${config.lib.stylix.colors.base00}";
-          };
-          activeWorkspace = {
-            inherit background;
-            inherit (focusedWorkspace) text border;
-          };
-          inactiveWorkspace = rec {
-            inherit background;
-            border = "#${config.lib.stylix.colors.base05}";
-            text = border;
-          };
-        };
-      }];
 
       modifier = "Mod1";
       gaps = {
@@ -179,74 +271,4 @@ in {
 
   programs.feh = { enable = true; };
 
-  programs.i3status-rust = {
-    enable = true;
-    bars = {
-      top = {
-        settings = { theme = { theme = "gruvbox-dark"; }; };
-        blocks = [
-          {
-            block = "focused_window";
-            format.full = " $title.str(max_w:100) |";
-            format.short = " $title.str(max_w:80) |";
-          }
-          {
-            block = "disk_space";
-            path = "/";
-            info_type = "available";
-            interval = 60;
-            warning = 20.0;
-            alert = 10.0;
-          }
-          {
-            block = "memory";
-            format = " $icon $mem_total_used_percents.eng(w:2) ";
-            format_alt = " $icon_swap $swap_used_percents.eng(w:2) ";
-          }
-          {
-            block = "cpu";
-            interval = 1;
-          }
-          {
-            block = "load";
-            interval = 1;
-            format = " $icon $1m ";
-          }
-          {
-            block = "sound";
-            click = [{
-              button = "left";
-              cmd = "${audio}";
-            }];
-
-          }
-          {
-            block = "bluetooth";
-            mac = "${bluetooth_mac_addr}";
-            click = [{
-              button = "left";
-              cmd = "${bluetooth}";
-            }];
-          }
-          {
-            block = "net";
-            click = [{
-              button = "left";
-              cmd = "${nmui}";
-            }];
-          }
-          {
-            block = "time";
-            interval = 60;
-            click = [{
-              button = "left";
-              cmd = "${calendar}";
-            }];
-            format = " $timestamp.datetime(f:'%a %d/%m %R') ";
-          }
-        ];
-        icons = "awesome4";
-      };
-    };
-  };
 }
