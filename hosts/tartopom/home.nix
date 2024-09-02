@@ -21,6 +21,8 @@
         fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ];
       })
       networkmanager
+      ubuntu_font_family
+      roboto-serif
     ];
   };
 

@@ -29,11 +29,11 @@
         name = "JetBrainsMono Nerd Font";
       };
       sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
+        package = pkgs.ubuntu_font_family;
+        name = "Ubuntu";
       };
       serif = {
-        package = pkgs.dejavu_fonts;
+        package = pkgs.roboto-serif;
         name = "DejaVu Serif";
       };
 

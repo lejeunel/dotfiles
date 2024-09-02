@@ -32,11 +32,11 @@ in {
     };
     config = {
       "bar/top" = {
-        # monitor = "eDP1";
         font-0 = "JetBrainsMono Nerd Font";
-        background = "#${config.lib.stylix.colors.base01}";
+        font-1 = "JetBrainsMono Nerd Font:weight=bold";
+        background = "#${config.lib.stylix.colors.base00}";
         width = "100%";
-        height = "3%";
+        height = "30pt";
         radius = 0;
         padding-left = 0;
         padding-right = 0;
@@ -44,6 +44,7 @@ in {
         border-left-size = 0;
         border-right-size = 0;
         border-top-size = 0;
+        line-size = 4;
         modules-left = "i3";
         modules-center = "title";
         modules-right =
@@ -79,12 +80,12 @@ in {
       };
       "module/cpu" = {
         type = "internal/cpu";
-        label = " %percentage%% ";
+        label = "󱚥 %percentage%% ";
         format-background = "#${config.lib.stylix.colors.base0D}";
       };
       "module/memory" = {
         type = "internal/memory";
-        format-prefix = " 󱚥 ";
+        format-prefix = "  ";
         format-background = "#${config.lib.stylix.colors.base0D}";
         label = "%percentage_used%% ";
       };
@@ -98,11 +99,11 @@ in {
         label-volume-padding-right = 1;
         label-volume-padding-left = 1;
 
-        label-muted = " 󰝟 ";
+        label-muted = " 󰝟     ";
+        label-muted-background = "${config.lib.stylix.colors.base0E}";
       };
       "module/date" = {
         type = "internal/date";
-        internal = 5;
         date = "%a %d/%m";
         time = "%H:%M";
         label = "%{A1:${calendar}:} %date% %time%%{A} ";
@@ -119,9 +120,8 @@ in {
         scroll-down = "i3wm-wsprev";
         pin-workspaces = true;
 
-        label-focused = "%index%";
-        label-focused-foreground = "${config.lib.stylix.colors.base07}";
-        label-focused-background = "${config.lib.stylix.colors.base0D}";
+        label-focused = "%{T2}%index%%{T-}";
+        label-focused-foreground = "${config.lib.stylix.colors.base09}";
         label-focused-underline = "${config.lib.stylix.colors.base09}";
         label-focused-padding = 1;
 
@@ -147,6 +147,10 @@ in {
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
+
+    extraConfig = ''
+      font pango:JetBrainsMono Nerd Font 10
+    '';
     config = rec {
       bars = [ ];
       window.hideEdgeBorders = "smart";

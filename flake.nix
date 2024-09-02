@@ -13,7 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     fix-python.url = "github:GuillaumeDesforges/fix-python";
-
   };
 
   outputs = { ... }@inputs:
