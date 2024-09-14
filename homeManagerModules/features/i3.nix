@@ -21,7 +21,6 @@ let
 in {
 
   home.packages = with pkgs; [ i3lock-fancy rofi-power-menu arandr ];
-
   services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
@@ -48,7 +47,7 @@ in {
         modules-left = "i3";
         modules-center = "title";
         modules-right =
-          "tray bluetooth network fs-root fs-home memory cpu alsa date";
+          "tray bluetooth network fs-root memory cpu battery alsa date";
       };
       "module/title" = { type = "internal/xwindow"; };
       "module/bluetooth" = {
@@ -73,11 +72,11 @@ in {
         mount-0 = "/";
         label-mounted = "  %percentage_used%% ";
       };
-      "module/fs-home" = {
-        "inherit" = "fs-base";
-        mount-0 = "/home";
-        label-mounted = " %percentage_used%% ";
-      };
+      # "module/fs-home" = {
+      #   "inherit" = "fs-base";
+      #   mount-0 = "/home";
+      #   label-mounted = " %percentage_used%% ";
+      # };
       "module/cpu" = {
         type = "internal/cpu";
         label = "󱚥 %percentage%% ";
@@ -88,6 +87,30 @@ in {
         format-prefix = "  ";
         format-background = "#${config.lib.stylix.colors.base0D}";
         label = "%percentage_used%% ";
+      };
+      "module/battery" = {
+        type = "internal/battery";
+        battery = "BAT0";
+        adapter = "AC";
+        full-at = "98";
+
+        format-charging = "<animation-charging> <label-charging>";
+
+        format-discharging = "<ramp-capacity> <label-discharging>";
+
+        format-full-prefix = " ";
+        format-full-prefix-background = "${config.lib.stylix.colors.base0D}";
+
+        ramp-capacity-0 = "";
+        ramp-capacity-1 = "";
+        ramp-capacity-2 = "";
+        ramp-capacity-background = "${config.lib.stylix.colors.base0D}";
+
+        animation-charging-0 = "";
+        animation-charging-1 = "";
+        # animation-charging-2 = "";
+        animation-charging-background = "${config.lib.stylix.colors.base0D}";
+        animation-charging-framerate = "750";
       };
       "module/alsa" = {
         type = "internal/alsa";

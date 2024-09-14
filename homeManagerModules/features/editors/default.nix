@@ -9,6 +9,7 @@
     [ "$HOME/.config/emacs/bin" "$HOME/.local/share/nvim/mason/bin" ];
 
   home.packages = with pkgs; [
+    # (pkgs.callPackage ./doom.nix { })
     tectonic
 
     # alternative to find util

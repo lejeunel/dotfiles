@@ -22,6 +22,7 @@
     inkscape
     gimp
     vlc
+    grobi
   ];
 
   xdg.desktopEntries = {
@@ -121,6 +122,33 @@
     vSync = true;
     activeOpacity = 1;
     settings = { blur = { strength = 5; }; };
+  };
+
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
+
+  services.grobi = {
+    enable = true;
+    rules = [
+      {
+        name = "Dual";
+        outputs_connected = [ "HDMI-2" "eDP-1" ];
+        configure_row = [ "HDMI-2" "eDP-1" ];
+        primary = "HDMI-2";
+      }
+      {
+        name = "Mobile";
+        outputs_connected = [ "eDP-1" ];
+        outputs_disconnected = [ "HDMI-2" ];
+        configure_single = "eDP-1";
+        primary = true;
+        atomic = true;
+      }
+    ];
   };
 
 }

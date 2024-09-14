@@ -12,11 +12,15 @@
       symbolsFile = ./qwerty-fr;
     };
     xkbOptions = "caps:swapescape";
+    libinput = {
+      enable = true;
+      naturalScrolling = true;
+    };
   };
 
   console.useXkbConfig = true;
 
   # for touchpad
-  services.libinput.enable = true;
+  services.libinput = { enable = true; };
 
 }
