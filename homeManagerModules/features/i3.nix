@@ -20,7 +20,7 @@ let
 
 in {
 
-  home.packages = with pkgs; [ i3lock-fancy rofi-power-menu ];
+  home.packages = with pkgs; [ i3lock-fancy rofi-power-menu arandr ];
 
   services.polybar = {
     enable = true;
