@@ -28,5 +28,7 @@
     autoEnable = true;
     targets.neovim.enable = false;
     targets.rofi.enable = false;
+
+    fonts.sizes = { terminal = 9; };
   };
 }
