@@ -16,7 +16,7 @@
   networking.hostName = "tartopom"; # Define your hostname.
 
   myNixOS = {
-    bundles.general-desktop.enable = true;
+    bundles.xorg-desktop.enable = true;
     bundles.users.enable = true;
   };
 
