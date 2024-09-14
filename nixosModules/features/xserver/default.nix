@@ -8,13 +8,13 @@
     windowManager.i3.enable = true;
     xkb.extraLayouts.qwerty-fr = {
       description = "US layout with alt-gr french";
-      languages   = [ "eng" ];
+      languages = [ "eng" ];
       symbolsFile = ./qwerty-fr;
     };
+    xkbOptions = "caps:swapescape";
   };
 
   console.useXkbConfig = true;
-
 
   # for touchpad
   services.libinput.enable = true;

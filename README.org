@@ -75,4 +75,3 @@ nh clean all
 ** TODO
 
 - Install doom as in [[https://github.com/doomemacs/doomemacs?tab=readme-ov-file#install]]
-- Invert caps-lock and escape per host
