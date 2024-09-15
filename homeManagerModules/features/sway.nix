@@ -8,6 +8,7 @@ let
   swayexec = "${pkgs.sway}/bin/swaymsg exec --";
 
 in {
+  services.kanshi = { enable = true; };
   programs.swaylock = {
     enable = true;
     package = pkgs.swaylock-fancy;
@@ -220,7 +221,7 @@ in {
         layer = "top";
         position = "top";
         height = 30;
-        output = [ "eDP-1" "HDMI-2" ];
+        output = [ "eDP-1" "HDMI-A-2" ];
 
         "sway/workspaces" = {
           disable-scroll = true;
@@ -276,7 +277,7 @@ in {
           tooltip-format-disconnected = "{icon} disconnected";
           tooltip-format-disabled = "{icon} disabled";
           on-click =
-            "${pkgs.sway}/bin/swaymsg exec -- ${term_float} ${pkgs.networkmanager}/bin/nmtui connect";
+            "${swayexec} ${term_float} ${pkgs.networkmanager}/bin/nmtui connect";
         };
         "custom/menu" = {
           format = "󱄅";
@@ -288,7 +289,7 @@ in {
           format-disabled = "󰂲";
 
           on-click =
-            "${pkgs.sway}/bin/swaymsg exec -- ${term_float} ${pkgs.bluetuith}/bin/bluetuith connect";
+            "${swayexec} ${term_float} ${pkgs.bluetuith}/bin/bluetuith connect";
           on-click-right = "rfkill toggle bluetooth";
           tooltip-format = "{}";
         };
@@ -349,6 +350,7 @@ in {
         "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl set 4%-";
         "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl set 4%+";
         "${modifier}+Shift+e" = "mode $mode_shutdown";
+        "${modifier}+Shift+s" = "mode $mode_screenshot";
         "${modifier}+e" =
           "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -nc";
         "${modifier}+Shift+d" =
@@ -382,60 +384,92 @@ in {
 
     };
     extraConfig = ''
-      hide_edge_borders smart
-      default_border pixel 4
-      titlebar_border_thickness 2
-      gaps inner 15px
-      default_dim_inactive 0.1
-      smart_gaps on
-      smart_corner_radius on
-      corner_radius 4
-      blur enable
-      shadows enable
-      blur_passes 2
-      blur_radius 2
-      layer_effects "waybar" "blur enable"; shadows enable
-      shadow_blur_radius 20
+        hide_edge_borders smart
+        default_border pixel 4
+        titlebar_border_thickness 2
+        gaps inner 15px
+        default_dim_inactive 0.1
+        smart_gaps on
+        smart_corner_radius on
+        corner_radius 4
+        blur enable
+        shadows enable
+        blur_passes 2
+        blur_radius 2
+        layer_effects "waybar" "blur enable"; shadows enable
+        shadow_blur_radius 20
 
-      for_window [app_id="floating_shell"] floating enable, sticky enable, resize set 1000 700
-      for_window [app_id="thunderbird" title=".*Reminder"] floating enable
+        for_window [app_id="floating_shell"] floating enable, sticky enable, resize set 1000 700
+        for_window [app_id="thunderbird" title=".*Reminder"] floating enable
 
-      set $mode_shutdown "\
-      <span></span>  \
-      <span foreground='#${config.lib.stylix.colors.base06}'> \
-      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>h</b>)</span>hibernate \
-      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>l</b>)</span>lock \
-      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>e</b>)</span>logout \
-      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>r</b>)</span>reboot \
-      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>u</b>)</span>suspend \
-      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>s</b>)</span>shutdown \
-      <span> -</span>  \
-      </span>"
+        set $mode_shutdown "\
+        <span></span>  \
+        <span foreground='#${config.lib.stylix.colors.base06}'> \
+        <span foreground='#${config.lib.stylix.colors.base04}'>(<b>h</b>)</span>hibernate \
+        <span foreground='#${config.lib.stylix.colors.base04}'>(<b>l</b>)</span>lock \
+        <span foreground='#${config.lib.stylix.colors.base04}'>(<b>e</b>)</span>logout \
+        <span foreground='#${config.lib.stylix.colors.base04}'>(<b>r</b>)</span>reboot \
+        <span foreground='#${config.lib.stylix.colors.base04}'>(<b>u</b>)</span>suspend \
+        <span foreground='#${config.lib.stylix.colors.base04}'>(<b>s</b>)</span>shutdown \
+        <span> -</span>  \
+        </span>"
 
-      mode --pango_markup $mode_shutdown {
-          # lock
-          bindsym l mode "default", exec ${pkgs.swaylock-fancy}/bin/swaylock-fancy
+        mode --pango_markup $mode_shutdown {
+            # lock
+            bindsym l mode "default", exec ${pkgs.swaylock-fancy}/bin/swaylock-fancy
 
-          # logout
-          bindsym e exec loginctl terminate-user $USER
+            # logout
+            bindsym e exec loginctl terminate-user $USER
 
-          # suspend
-          bindsym u mode "default", exec systemctl suspend
+            # suspend
+            bindsym u mode "default", exec systemctl suspend
 
-          # hibernate
-          bindsym h mode "default", exec systemctl hibernate
+            # hibernate
+            bindsym h mode "default", exec systemctl hibernate
 
-          # shutdown
-          bindsym s exec $purge_cliphist; exec systemctl poweroff
+            # shutdown
+            bindsym s exec $purge_cliphist; exec systemctl poweroff
 
-          # reboot
-          bindsym r exec $purge_cliphist; exec systemctl reboot
+            # reboot
+            bindsym r exec $purge_cliphist; exec systemctl reboot
 
-          # Return to default mode.
-          bindsym Escape mode "default"
-      }
+            # Return to default mode.
+            bindsym Escape mode "default"
+        }
 
-      bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
+        bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
+
+        set $grimshot ${pkgs.sway-contrib.grimshot}/bin/grimshot
+        set $notify ${pkgs.libnotify}/bin/notify-send
+        set $pipe_output $grimshot save output -
+        set $pipe_selection $grimshot save area -
+        set $notify_paste  [[ $(${pkgs.wl-clipboard-rs}/bin/wl-paste -l) == "image/png" ]] && $notify "Screenshot copied to clipboard"
+        set $swappy ${pkgs.swappy}/bin/swappy -f -
+        set $swappy_pipe ${pkgs.swappy}/bin/swappy -f - -o -
+
+        set $screenshot_screen $pipe_output | $swappy && $notify_paste
+
+        set $screenshot_selection $pipe_selection | $swappy && $notify_paste
+
+        set $mode_screenshot "<span foreground='#${config.lib.stylix.colors.base04}'>󰄄</span>  \
+        <span foreground='#${config.lib.stylix.colors.base06}'><b>Pick</b></span> <span foreground='#${config.lib.stylix.colors.base04}'>(<b>p</b>)</span> \
+        <span foreground='#${config.lib.stylix.colors.base06}'><b>Output</b></span> <span foreground='#${config.lib.stylix.colors.base04}'>(<b>o</b>)</span> \
+        "
+        mode --pango_markup $mode_screenshot {
+            # output = currently active output
+            bindsym o mode "default", exec $screenshot_screen
+
+            # pick the region to screenshot
+            bindsym p mode "default", exec $screenshot_selection
+
+            # Return to default mode.
+            bindsym Escape mode "default"
+        }
+
+      set $sworkstyle ${pkgs.swayest-workstyle}/bin/sworkstyle
+      set $workspace_icons $sworkstyle -d -l info &> /tmp/sworkstyle.log
+
+      exec $workspace_icons
 
     '';
   };

@@ -37,7 +37,7 @@ in {
 
   xdg.configFile."rofi/theme.rasi".text = ''
     * {
-        bg-col:  #${config.lib.stylix.colors.base02};
+        bg-col:  #${config.lib.stylix.colors.base00};
         bg-col-light: #${config.lib.stylix.colors.base03};
         border-col: #${config.lib.stylix.colors.base08};
         selected-col: #${config.lib.stylix.colors.base0D};
