@@ -105,7 +105,7 @@ in {
       }
 
       #workspaces button {
-          border-top: 2px solid transparent;
+          border-top: 2px solid transparent; 
           /* To compensate for the top border and still have vertical centering */
           padding-left: 10px;
           padding-right: 10px;
