@@ -347,6 +347,7 @@ in {
         "XF86AudioRaiseVolume" = "exec --no-startup-id amixer set Master 4%+";
         "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl set 4%-";
         "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl set 4%+";
+        "${modifier}+Shift+e" = "mode $mode_shutdown";
         "${modifier}+e" =
           "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -nc";
         "${modifier}+Shift+d" =
@@ -397,6 +398,42 @@ in {
 
       for_window [app_id="floating_shell"] floating enable, sticky enable, resize set 1000 700
       for_window [app_id="thunderbird" title=".*Reminder"] floating enable
+
+      set $mode_shutdown "\
+      <span></span>  \
+      <span foreground='$base06'> \
+      <span foreground='$base04'>(<b>h</b>)</span>hibernate \
+      <span foreground='$base04'>(<b>l</b>)</span>lock \
+      <span foreground='$base04'>(<b>e</b>)</span>logout \
+      <span foreground='$base04'>(<b>r</b>)</span>reboot \
+      <span foreground='$base04'>(<b>u</b>)</span>suspend \
+      <span foreground='$base04'>(<b>s</b>)</span>shutdown \
+      <span> -</span>  \
+      </span>"
+
+      mode --pango_markup $mode_shutdown {
+          # lock
+          bindsym l mode "default", exec $locking lock-now
+
+          # logout
+          bindsym e exec loginctl terminate-user $USER
+
+          # suspend
+          bindsym u mode "default", exec systemctl suspend
+
+          # hibernate
+          bindsym h mode "default", exec systemctl hibernate
+
+          # shutdown
+          bindsym s exec $purge_cliphist; exec systemctl poweroff
+
+          # reboot
+          bindsym r exec $purge_cliphist; exec systemctl reboot
+
+          # Return to default mode.
+          bindsym Escape mode "default"
+      }
+
     '';
   };
 }
