@@ -94,7 +94,6 @@ in {
       /* -----------------------------------------------------------------------------
        * Module styles
        * -------------------------------------------------------------------------- */
-
       #custom-scratchpad,
       #custom-menu,
       #workspaces button.focused,
@@ -227,8 +226,7 @@ in {
           disable-scroll = true;
           all-outputs = true;
         };
-        "custom/battery" = {
-          interval = 30;
+        "battery" = {
           states = {
             warning = 30;
             critical = 15;
@@ -246,7 +244,7 @@ in {
           on-click = "${swayexec} ${term_float} ${calendar}";
 
         };
-        "custom/cpu" = {
+        "cpu" = {
           interval = 10;
           format = "󰘚";
           states = {
@@ -256,9 +254,9 @@ in {
           on-click = "${swayexec} ${term_float} ${pkgs.htop}/bin/htop";
           tooltip = true;
         };
-        "custom/memory" = {
+        "memory" = {
           interval = 10;
-          format = "󰍛";
+          format = "󰍛 {}%";
           states = {
             warning = 70;
             critical = 90;
@@ -266,7 +264,7 @@ in {
           on-click = "${swayexec} ${term_float} ${pkgs.htop}/bin/htop";
           tooltip = true;
         };
-        "custom/network" = {
+        "network" = {
           interval = 5;
           format-wifi = " ";
           format-ethernet = "󰈀";
@@ -284,7 +282,7 @@ in {
           on-click = "${swayexec} \\${menu}";
           tooltip = false;
         };
-        "custom/bluetooth" = {
+        "bluetooth" = {
           format = "󰂯";
           format-disabled = "󰂲";
 
@@ -294,20 +292,15 @@ in {
           tooltip-format = "{}";
         };
         modules-left = [ "custom/menu" "sway/workspaces" "custom/scratchpad" ];
-        modules-center = [ "custom/wf-recorder" "sway/mode" "sway/window" ];
+        modules-center = [ "sway/mode" "sway/window" ];
         modules-right = [
-          "custom/clipboard"
-          "custom/cpu"
+          "cpu"
           "temperature"
           "memory"
           "battery"
 
-          "custom/network"
-          "custom/bluetooth"
-
-          "idle_inhibitor"
-          "pulseaudio"
-          "backlight"
+          "network"
+          "bluetooth"
 
           "tray"
           "clock"
