@@ -401,13 +401,13 @@ in {
 
       set $mode_shutdown "\
       <span></span>  \
-      <span foreground='$base06'> \
-      <span foreground='$base04'>(<b>h</b>)</span>hibernate \
-      <span foreground='$base04'>(<b>l</b>)</span>lock \
-      <span foreground='$base04'>(<b>e</b>)</span>logout \
-      <span foreground='$base04'>(<b>r</b>)</span>reboot \
-      <span foreground='$base04'>(<b>u</b>)</span>suspend \
-      <span foreground='$base04'>(<b>s</b>)</span>shutdown \
+      <span foreground='#${config.lib.stylix.colors.base06}'> \
+      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>h</b>)</span>hibernate \
+      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>l</b>)</span>lock \
+      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>e</b>)</span>logout \
+      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>r</b>)</span>reboot \
+      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>u</b>)</span>suspend \
+      <span foreground='#${config.lib.stylix.colors.base04}'>(<b>s</b>)</span>shutdown \
       <span> -</span>  \
       </span>"
 
