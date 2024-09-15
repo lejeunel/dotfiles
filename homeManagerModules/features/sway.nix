@@ -286,7 +286,9 @@ in {
         "custom/bluetooth" = {
           format = "󰂯";
           format-disabled = "󰂲";
-          on-click = "swaymsg exec \\$bluetooth";
+
+          on-click =
+            "${pkgs.sway}/bin/swaymsg exec -- ${term_float} ${pkgs.bluetuith}/bin/bluetuith connect";
           on-click-right = "rfkill toggle bluetooth";
           tooltip-format = "{}";
         };
@@ -302,7 +304,6 @@ in {
           "custom/network"
           "custom/bluetooth"
 
-          "playerctl"
           "idle_inhibitor"
           "pulseaudio"
           "backlight"
@@ -383,7 +384,7 @@ in {
     extraConfig = ''
       hide_edge_borders smart
       default_border pixel 4
-      titlebar_border_thickness 0
+      titlebar_border_thickness 2
       gaps inner 15px
       default_dim_inactive 0.1
       smart_gaps on
@@ -413,7 +414,7 @@ in {
 
       mode --pango_markup $mode_shutdown {
           # lock
-          bindsym l mode "default", exec $locking lock-now
+          bindsym l mode "default", exec ${pkgs.swaylock-fancy}/bin/swaylock-fancy
 
           # logout
           bindsym e exec loginctl terminate-user $USER
@@ -433,6 +434,8 @@ in {
           # Return to default mode.
           bindsym Escape mode "default"
       }
+
+      bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
 
     '';
   };
