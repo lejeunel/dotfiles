@@ -1,6 +1,5 @@
 { config, inputs, pkgs, ... }: {
 
-  myHomeManager.i3.enable = true;
   myHomeManager.rofi.enable = true;
   myHomeManager.alacritty.enable = true;
   myHomeManager.zathura.enable = true;
@@ -11,12 +10,10 @@
 
   home.packages = with pkgs; [
     thunderbird
-    xidlehook
     dconf
     gnome.nautilus
     gnome.gnome-screenshot
     gnome.gnome-calculator
-    deadd-notification-center
     telegram-desktop
     evince
     inkscape
@@ -113,17 +110,6 @@
     };
   };
 
-  services.picom = {
-    enable = true;
-    fade = true;
-    shadow = true;
-    fadeDelta = 4;
-    inactiveOpacity = 0.95;
-    vSync = true;
-    activeOpacity = 1;
-    settings = { blur = { strength = 5; }; };
-  };
-
   systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";
@@ -133,6 +119,7 @@
 
   services.grobi = {
     enable = true;
+    executeAfter = [ "${pkgs.systemd}/bin/systemctl --user restart polybar" ];
     rules = [
       {
         name = "Dual";

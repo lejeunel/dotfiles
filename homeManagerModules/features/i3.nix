@@ -20,7 +20,6 @@ let
 
 in {
 
-  home.packages = with pkgs; [ i3lock-fancy rofi-power-menu arandr ];
   services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
@@ -295,7 +294,5 @@ in {
       ];
     };
   };
-
-  programs.feh = { enable = true; };
 
 }

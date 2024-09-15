@@ -16,8 +16,14 @@
   networking.hostName = "barbatruc"; # Define your hostname.
 
   myNixOS = {
-    bundles.xorg-desktop.enable = true;
+    bundles.desktop.enable = true;
+    # bundles.xorg.enable = true;
+    bundles.wayland.enable = true;
     bundles.users.enable = true;
+    bundles.locale.enable = true;
+    bundles.audio.enable = true;
+    bundles.fonts.enable = true;
+    bundles.power.enable = true;
   };
 
   # Enable OpenGL
@@ -30,13 +36,9 @@
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
-  services.tlp = {
-    enable = true;
-  };
+  services.tlp = { enable = true; };
 
-  services.logind.extraConfig = ''
-    IdleActionSec=5m
- '';
+  security.polkit.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";

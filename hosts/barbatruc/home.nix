@@ -3,6 +3,7 @@
   imports = [ outputs.homeManagerModules.default ];
 
   myHomeManager = {
+    bundles.sway.enable = true;
     bundles.desktop.enable = true;
     bundles.shell.enable = true;
     bundles.editors.enable = true;
