@@ -41,7 +41,7 @@ in {
       initialPassword = "12345";
       description = cfg.userName;
       shell = pkgs.zsh;
-      extraGroups = [ "libvirtd" "networkmanager" "wheel" ];
+      extraGroups = [ "libvirtd" "networkmanager" "wheel" "docker" ];
     } // cfg.userNixosSettings;
   };
 }

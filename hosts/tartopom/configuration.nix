@@ -18,7 +18,10 @@
   myNixOS = {
     bundles.general-desktop.enable = true;
     bundles.users.enable = true;
+    bundles.docker.enable = true;
   };
+
+  virtualisation.docker.enable = true;
 
   # Enable OpenGL
   hardware.opengl = { enable = true; };

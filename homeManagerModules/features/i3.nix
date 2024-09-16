@@ -5,6 +5,7 @@ let
   terminal = "${pkgs.alacritty}/bin/alacritty";
   term_float = "${terminal} --class floating_shell -e";
   nmui = "${term_float}" + " ${pkgs.networkmanager}/bin/nmtui";
+  top = "${term_float}" + " ${pkgs.htop}/bin/htop";
   calendar = "${term_float}" + " ${pkgs.calcurse}/bin/calcurse";
   bluetooth = "${term_float}" + " ${pkgs.bluetuith}/bin/bluetuith";
   audio = "${term_float}" + " ${pkgs.pulsemixer}/bin/pulsemixer";
@@ -16,11 +17,18 @@ let
   screenshoter = "${pkgs.gnome.gnome-screenshot}/bin/gnome-screenshot -i";
   idlehook =
     "${xidlehook} --not-when-fullscreen --not-when-audio --timer '${timeout_lock}' '${locker}' '' --timer '${timeout_suspend}' '${systemctl} suspend' ''";
-  mode_system = "System (l)ock, l(o)gout, (s)uspend";
+  mode_system = "System (l)ock, l(o)gout, (s)uspend (h)ibernate (p)oweroff";
 
 in {
 
   home.packages = with pkgs; [ i3lock-fancy rofi-power-menu ];
+
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
 
   services.polybar = {
     enable = true;
@@ -180,6 +188,10 @@ in {
           "o" = ''exec --no-startup-id i3-msg exit, mode "default"'';
           "s" = ''
             exec --no-startup-id ${locker} && ${systemctl} suspend, mode "default"'';
+          "h" = ''
+            exec --no-startup-id ${locker} && ${systemctl} hibernate, mode "default"'';
+          "p" = ''
+            exec --no-startup-id ${locker} && ${systemctl} poweroff, mode "default"'';
           Escape = ''mode "default"'';
         };
 
