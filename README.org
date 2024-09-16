@@ -71,3 +71,7 @@ nh home switch -u ~/dotfiles
 #+begin_src shell
 nh clean all
 #+end_src
+
+** TODO
+
+- Install doom as in [[https://github.com/doomemacs/doomemacs?tab=readme-ov-file#install]]

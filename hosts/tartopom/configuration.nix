@@ -16,9 +16,12 @@
   networking.hostName = "tartopom"; # Define your hostname.
 
   myNixOS = {
-    bundles.general-desktop.enable = true;
+    bundles.desktop.enable = true;
+    bundles.xorg.enable = true;
     bundles.users.enable = true;
-    bundles.docker.enable = true;
+    bundles.locale.enable = true;
+    bundles.audio.enable = true;
+    bundles.fonts.enable = true;
   };
 
   virtualisation.docker.enable = true;

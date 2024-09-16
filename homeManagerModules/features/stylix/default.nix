@@ -28,5 +28,8 @@
     autoEnable = true;
     targets.neovim.enable = false;
     targets.rofi.enable = false;
+    targets.waybar.enable = false;
+
+    fonts.sizes = { terminal = 14; };
   };
 }

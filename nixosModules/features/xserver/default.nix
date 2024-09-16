@@ -3,25 +3,24 @@
 {
   services.xserver = {
     enable = true;
-    displayManager = {
-      lightdm = {
-        enable = true;
-      };
-    };
+    displayManager.lightdm.enable = true;
     desktopManager.xterm.enable = true;
     windowManager.i3.enable = true;
     xkb.extraLayouts.qwerty-fr = {
       description = "US layout with alt-gr french";
-      languages   = [ "eng" ];
+      languages = [ "eng" ];
       symbolsFile = ./qwerty-fr;
+    };
+    xkbOptions = "caps:swapescape";
+    libinput = {
+      enable = true;
+      naturalScrolling = true;
     };
   };
 
   console.useXkbConfig = true;
 
-
   # for touchpad
-  services.libinput.enable = true;
-
+  services.libinput = { enable = true; };
 
 }

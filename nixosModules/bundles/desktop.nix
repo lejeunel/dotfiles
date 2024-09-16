@@ -1,5 +1,4 @@
 { pkgs, lib, ... }: {
-  myNixOS.xserver.enable = true;
   myNixOS.bluetooth.enable = true;
   myNixOS.stylix.enable = true;
 
@@ -39,4 +38,5 @@
 
   # battery
   services.upower.enable = true;
+  services.upower.ignoreLid = true;
 }

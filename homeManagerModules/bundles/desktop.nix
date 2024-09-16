@@ -1,6 +1,5 @@
 { config, inputs, pkgs, ... }: {
 
-  myHomeManager.i3.enable = true;
   myHomeManager.rofi.enable = true;
   myHomeManager.alacritty.enable = true;
   myHomeManager.zathura.enable = true;
@@ -11,17 +10,16 @@
 
   home.packages = with pkgs; [
     thunderbird
-    xidlehook
     dconf
     gnome.nautilus
     gnome.gnome-screenshot
     gnome.gnome-calculator
-    deadd-notification-center
     telegram-desktop
     evince
     inkscape
     gimp
     vlc
+    grobi
   ];
 
   xdg.desktopEntries = {
@@ -112,15 +110,32 @@
     };
   };
 
-  services.picom = {
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
+
+  services.grobi = {
     enable = true;
-    fade = true;
-    shadow = true;
-    fadeDelta = 4;
-    inactiveOpacity = 0.95;
-    vSync = true;
-    activeOpacity = 1;
-    settings = { blur = { strength = 5; }; };
+    executeAfter = [ "${pkgs.systemd}/bin/systemctl --user restart polybar" ];
+    rules = [
+      {
+        name = "Dual";
+        outputs_connected = [ "HDMI-2" "eDP-1" ];
+        configure_row = [ "HDMI-2" "eDP-1" ];
+        primary = "HDMI-2";
+      }
+      {
+        name = "Mobile";
+        outputs_connected = [ "eDP-1" ];
+        outputs_disconnected = [ "HDMI-2" ];
+        configure_single = "eDP-1";
+        primary = true;
+        atomic = true;
+      }
+    ];
   };
 
 }
