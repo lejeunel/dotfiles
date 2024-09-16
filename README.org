@@ -74,4 +74,4 @@ nh clean all
 
 ** TODO
 
-- Install doom as in [[https://github.com/doomemacs/doomemacs?tab=readme-ov-file#install]]
+- Deploy doom emacs as in [[https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/]]
