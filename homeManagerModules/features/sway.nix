@@ -330,9 +330,8 @@ in {
           middle_emulation = "enabled";
         };
         "type:keyboard" = {
-          xkb_variant = "qwerty";
-          xkb_options = "caps:swapescape";
-
+          xkb_layout = "us";
+          xkb_variant = "intl";
         };
       };
       keybindings = lib.mkOptionDefault {

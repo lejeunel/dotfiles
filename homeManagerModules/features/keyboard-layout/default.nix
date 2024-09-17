@@ -1,15 +1,15 @@
 { config, inputs, lib, pkgs, vars, ... }:
 let
-  input_id = "${(if vars.host == "tartopom" then
-    "usb-DZTECH_DZ65RGBV3_vial:f64c2b3c-if02-event-kbd"
+  kbinput = "${(if vars.host == "tartopom" then
+    "by-id/usb-DZTECH_DZ65RGBV3_vial:f64c2b3c-if02-event-kbd"
   else if vars.host == "barbatruc" then
-    ""
+    "by-path/platform-i8042-serio-0-event-kbd"
   else
     abort "keyboard-layout flake needs a valid hostname!")}";
 
   cfgANSI = ''
     (defcfg
-      input (device-file "/dev/input/by-id/${input_id}")
+      input (device-file "/dev/input/${kbinput}")
       output (uinput-sink "KMonad kbd")
       fallthrough true
       cmp-seq lctl
@@ -54,7 +54,7 @@ let
 
   cfgISO = ''
     (defcfg
-      input (device-file "/dev/input/by-id/${input_id}")
+      input (device-file "/dev/input/${kbinput}")
       output (uinput-sink "KMonad kbd")
       fallthrough true
       cmp-seq lctl
