@@ -21,9 +21,9 @@ in {
       ExecStart = ''
         ${pkgs.swayidle}/bin/swayidle -w \
             timeout 300 "${pkgs.swaylock-fancy}/bin/swaylock-fancy" \
-            timeout 300 'swaymsg "output * power off"' \
-                resume 'swaymsg "output * power on"' \
-            timeout 330 "systemctl suspend" \
+            timeout 400 'swaymsg -q "output * power off"' \
+            timeout 410 "systemctl suspend" \
+            resume 'swaymsg -q "output * power on"' \
             before-sleep "${pkgs.swaylock-fancy}/bin/swaylock-fancy"
       '';
       Restart = "on-failure";
@@ -298,6 +298,16 @@ in {
           on-click = "${swayexec} \\${menu}";
           tooltip = false;
         };
+        "idle_inhibitor" = {
+          format = "{icon}";
+          format-icons = {
+            activated = "󰒳";
+            deactivated = "󰒲";
+          };
+          tooltip = true;
+          tooltip-format-activated = "idle inhibitor enabled";
+          tooltip-format-deactivated = "idle inhibitor disabled";
+        };
         "bluetooth" = {
           format = "󰂯";
           format-disabled = "󰂲";
@@ -314,6 +324,7 @@ in {
           "temperature"
           "memory"
           "battery"
+          "idle_inhibitor"
 
           "network"
           "bluetooth"
