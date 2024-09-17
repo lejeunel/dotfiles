@@ -6,35 +6,40 @@ let
   calendar = "${pkgs.calcurse}/bin/calcurse";
   menu = "${pkgs.rofi}/bin/rofi -modi drun -show drun";
   swayexec = "${pkgs.sway}/bin/swaymsg exec --";
+  swaylock = ''
+    ${pkgs.swaylock-effects}/bin/swaylock -f --clock --indicator \
+    --screenshots --effect-blur 4x4 \
+    --grace 5 \
+    --key-hl-color ${config.lib.stylix.colors.base0B} \
+    --ring-color ${config.lib.stylix.colors.base02} \
+    --line-color ${config.lib.stylix.colors.base01} \
+    --text-wrong-color ${config.lib.stylix.colors.base00} \
+    --ring-wrong-color ${config.lib.stylix.colors.base09} \
+    --line-wrong-color ${config.lib.stylix.colors.base00} \
+    --text-ver-color ${config.lib.stylix.colors.base00} \
+    --ring-ver-color ${config.lib.stylix.colors.base0C} \
+    --line-ver-color ${config.lib.stylix.colors.base0D}
+  '';
 
 in {
   services.kanshi = { enable = true; };
-  programs.swaylock = {
-    enable = true;
-    package = pkgs.swaylock-fancy;
-  };
 
   services.swayidle = {
     enable = true;
     package = pkgs.swayidle;
     timeouts = [
       {
-        timeout = 180;
-        command = "${pkgs.swaylock-fancy}/bin/swaylock-fancy";
+        timeout = 60;
+        command = "${swaylock}";
       }
       {
-        timeout = 185;
-        command = "${pkgs.sway}/bin/swaymsg -q 'output * power off'";
-        resumeCommand = "${pkgs.sway}/bin/swaymsg -q 'output * power on'";
-      }
-      {
-        timeout = 190;
+        timeout = 90;
         command = "${pkgs.systemd}/bin/systemctl suspend";
       }
     ];
     events = [{
       event = "before-sleep";
-      command = "${pkgs.swaylock-fancy}/bin/swaylock-fancy";
+      command = "${swaylock}";
     }];
   };
   programs.waybar = {
@@ -443,7 +448,7 @@ in {
 
         mode --pango_markup $mode_shutdown {
             # lock
-            bindsym l mode "default", exec ${pkgs.swaylock-fancy}/bin/swaylock-fancy
+            bindsym l mode "default", exec ${swaylock}
 
             # logout
             bindsym e exec loginctl terminate-user $USER
