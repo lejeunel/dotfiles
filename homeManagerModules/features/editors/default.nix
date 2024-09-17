@@ -41,9 +41,6 @@
     # format nix files
     nixfmt-classic
 
-    # tree-sitter grammars shared libs
-    # tree-sitter-grammars.tree-sitter-gomod
-
   ];
 
   programs = {
@@ -53,10 +50,7 @@
       vimAlias = true;
       vimdiffAlias = true;
     };
-    emacs = {
-      enable = true;
-      # extraPackages = epkgs: with epkgs; [ tsc tree-sitter-langs tree-sitter ];
-    };
+    emacs = { enable = true; };
   };
 
   systemd.user.services.emacs = {

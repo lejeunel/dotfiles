@@ -13,6 +13,21 @@ in {
     enable = true;
     package = pkgs.swaylock-fancy;
   };
+  systemd.user.services.swayidle = {
+    Unit.PartOf = [ "sway-session.target" ];
+    Install.WantedBy = [ "sway-session.target" ];
+
+    Service = {
+      ExecStart = ''
+        ${pkgs.swayidle}/bin/swayidle -w \
+            timeout 300 "${pkgs.swaylock-fancy}/bin/swaylock-fancy" \
+            timeout 300 'swaymsg "output * dpms off"' \
+                resume 'swaymsg "output * dpms on"' \
+            before-sleep "${pkgs.swaylock-fancy}/bin/swaylock-fancy"
+      '';
+      Restart = "on-failure";
+    };
+  };
   programs.waybar = {
     enable = true;
     systemd.enable = true;
