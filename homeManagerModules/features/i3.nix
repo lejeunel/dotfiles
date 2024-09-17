@@ -163,8 +163,10 @@ in {
       };
     };
     script = ''
-      polybar top &
-    '';
+      PATH=$PATH:${pkgs.i3}/bin
+      for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
+          MONITOR=$m polybar --reload top &
+      done'';
   };
 
   xsession.windowManager.i3 = {
@@ -256,12 +258,7 @@ in {
 
       startup = [
         {
-          command = "exec i3-msg workspace 1";
-          always = true;
-          notification = false;
-        }
-        {
-          command = "${pkgs.xorg.setxkbmap}/bin/setxkbmap qwerty-fr";
+          command = "systemctl --user restart polybar";
           always = true;
           notification = false;
         }
