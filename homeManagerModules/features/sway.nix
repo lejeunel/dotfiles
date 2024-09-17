@@ -13,21 +13,29 @@ in {
     enable = true;
     package = pkgs.swaylock-fancy;
   };
-  systemd.user.services.swayidle = {
-    Unit.PartOf = [ "sway-session.target" ];
-    Install.WantedBy = [ "sway-session.target" ];
 
-    Service = {
-      ExecStart = ''
-        ${pkgs.swayidle}/bin/swayidle -w \
-            timeout 300 "${pkgs.swaylock-fancy}/bin/swaylock-fancy" \
-            timeout 400 'swaymsg -q "output * power off"' \
-            timeout 410 "systemctl suspend" \
-            resume 'swaymsg -q "output * power on"' \
-            before-sleep "${pkgs.swaylock-fancy}/bin/swaylock-fancy"
-      '';
-      Restart = "on-failure";
-    };
+  services.swayidle = {
+    enable = true;
+    package = pkgs.swayidle;
+    timeouts = [
+      {
+        timeout = 10;
+        command = "${pkgs.swaylock-fancy}/bin/swaylock-fancy";
+      }
+      {
+        timeout = 15;
+        command = "${pkgs.sway}/bin/swaymsg -q 'output * power off'";
+        resumeCommand = "${pkgs.sway}/bin/swaymsg -q 'output * power on'";
+      }
+      {
+        timeout = 20;
+        command = "${pkgs.systemd}/bin/systemctl suspend";
+      }
+    ];
+    events = [{
+      event = "before-sleep";
+      command = "${pkgs.swaylock-fancy}/bin/swaylock-fancy";
+    }];
   };
   programs.waybar = {
     enable = true;
