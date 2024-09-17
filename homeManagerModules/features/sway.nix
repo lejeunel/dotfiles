@@ -21,8 +21,9 @@ in {
       ExecStart = ''
         ${pkgs.swayidle}/bin/swayidle -w \
             timeout 300 "${pkgs.swaylock-fancy}/bin/swaylock-fancy" \
-            timeout 300 'swaymsg "output * dpms off"' \
-                resume 'swaymsg "output * dpms on"' \
+            timeout 300 'swaymsg "output * power off"' \
+                resume 'swaymsg "output * power on"' \
+            timeout 330 "systemctl suspend" \
             before-sleep "${pkgs.swaylock-fancy}/bin/swaylock-fancy"
       '';
       Restart = "on-failure";

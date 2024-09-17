@@ -1,6 +1,7 @@
 { config, inputs, pkgs, ... }: {
   home.packages = with pkgs; [
     swayfx
+    swayidle
     swaylock-fancy
     sway-contrib.grimshot
     swappy
