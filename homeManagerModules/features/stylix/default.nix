@@ -30,6 +30,6 @@
     targets.rofi.enable = false;
     targets.waybar.enable = false;
 
-    fonts.sizes = { terminal = 14; };
+    fonts.sizes = { terminal = 13; };
   };
 }
