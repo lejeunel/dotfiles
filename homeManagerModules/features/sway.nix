@@ -22,7 +22,9 @@ let
   '';
 
 in {
+  # TODO add settings for multi monitors
   services.kanshi = { enable = true; };
+  services.swaync = { enable = true; };
 
   services.swayidle = {
     enable = true;
@@ -321,6 +323,10 @@ in {
           tooltip-format-activated = "idle inhibitor enabled";
           tooltip-format-deactivated = "idle inhibitor disabled";
         };
+        "custom/notification" = {
+          format = "󰎟";
+          on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
+        };
         "bluetooth" = {
           format = "󰂯";
           format-disabled = "󰂲";
@@ -341,6 +347,7 @@ in {
 
           "network"
           "bluetooth"
+          "custom/notification"
 
           "tray"
           "clock"
