@@ -32,8 +32,14 @@
       # Home-Manager configuration entrypoint
       # Available through 'home-manager --flake .#<user>'
       homeConfigurations = {
-        "laurent@tartopom" = mkHome "x86_64-linux" ./hosts/tartopom/home.nix;
-        "laurent@barbatruc" = mkHome "x86_64-linux" ./hosts/barbatruc/home.nix;
+        "laurent@tartopom" = mkHome {
+          sys = "x86_64-linux";
+          host = "tartopom";
+        } ./hosts/tartopom/home.nix;
+        "laurent@barbatruc" = mkHome {
+          sys = "x86_64-linux";
+          host = "barbatruc";
+        } ./hosts/barbatruc/home.nix;
       };
 
       homeManagerModules.default = ./homeManagerModules;

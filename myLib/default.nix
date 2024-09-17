@@ -19,10 +19,13 @@ in rec {
       modules = [ config outputs.nixosModules.default ];
     };
 
-  mkHome = sys: config:
+  mkHome = x: config:
     inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = pkgsFor sys;
-      extraSpecialArgs = { inherit inputs myLib outputs; };
+      pkgs = pkgsFor x.sys;
+      extraSpecialArgs = {
+        vars = { host = x.host; };
+        inherit inputs myLib outputs;
+      };
       modules = [ config outputs.homeManagerModules.default ];
     };
 
