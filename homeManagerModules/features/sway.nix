@@ -19,16 +19,16 @@ in {
     package = pkgs.swayidle;
     timeouts = [
       {
-        timeout = 10;
+        timeout = 180;
         command = "${pkgs.swaylock-fancy}/bin/swaylock-fancy";
       }
       {
-        timeout = 15;
+        timeout = 185;
         command = "${pkgs.sway}/bin/swaymsg -q 'output * power off'";
         resumeCommand = "${pkgs.sway}/bin/swaymsg -q 'output * power on'";
       }
       {
-        timeout = 20;
+        timeout = 190;
         command = "${pkgs.systemd}/bin/systemctl suspend";
       }
     ];
