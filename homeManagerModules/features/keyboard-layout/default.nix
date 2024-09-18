@@ -60,6 +60,16 @@ let
       cmp-seq lctl
     )
 
+    (defalias
+      alt (tap-next-release ralt (layer-toggle accent))
+      sft (tap-next-release ralt (layer-toggle onshift))
+      ç  RA-,
+      €  RA-5
+      qt (tap-macro ' spc)
+      dqt (tap-macro " spc)
+      crc (tap-macro ^ spc)
+    )
+
     (defsrc
       esc
       grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
@@ -69,21 +79,23 @@ let
       lctl    lmet lalt            spc            ralt rmet cmp  rctl
     )
 
-    (defalias
-      alt (tap-next-release ralt (layer-toggle accent))
-    )
-    (defalias
-      ç  RA-,
-      €  RA-5
-    )
 
     (deflayer default
       caps
       grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
       tab     q    w    e    r    t    y    u    i    o    p    [    ]
-      esc     a    s    d    f    g    h    j    k    l    ;    '    \   ret
-      lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft
+      esc     a    s    d    f    g    h    j    k    l    ;    @qt  \   ret
+      @sft 102d z    x    c    v    b    n    m    ,    .    /    @sft
       lctl    lmet lalt            spc           @alt rmet cmp  rctl
+    )
+
+    (deflayer onshift
+      _
+      _       !    @    #    $    %    @crc &    *   \(    \)   \_   +    _
+      _       Q    W    E    R    T    Y    U    I    O    P    {    }
+      _       A    S    D    F    G    H    J    K    L    :    @dqt  |   _
+      _    |  Z    X    C    V    B    N    M    <    >    ?    _
+      _       _    _              _              _    _    _     _
     )
 
     (deflayer accent
