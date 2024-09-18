@@ -25,7 +25,7 @@ let
     )
 
     (defalias
-      alt (tap-next-release ralt (layer-toggle accent))
+      alt (tap-next ralt (layer-toggle accent))
     )
     (defalias
       ç  RA-,
@@ -61,8 +61,8 @@ let
     )
 
     (defalias
-      alt (tap-next-release ralt (layer-toggle accent))
-      sft (tap-next-release ralt (layer-toggle onshift))
+      alt (tap-next ralt (layer-toggle accent))
+      sft (tap-next lsft (layer-toggle onshift))
       ç  RA-,
       €  RA-5
       qt (tap-macro ' spc)
