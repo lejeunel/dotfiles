@@ -17,7 +17,7 @@
 
   myNixOS = {
     bundles.desktop.enable = true;
-    # bundles.xorg.enable = true;
+    bundles.console.enable = true;
     bundles.wayland.enable = true;
     bundles.users.enable = true;
     bundles.locale.enable = true;
@@ -27,7 +27,7 @@
   };
 
   # Enable OpenGL
-  hardware.opengl = { enable = true; };
+  hardware.graphics.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
