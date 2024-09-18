@@ -94,14 +94,12 @@ in {
       }
 
       /* Each module */
-      #custom-pacman,
       #custom-menu,
       #custom-help,
       #custom-scratchpad,
       #custom-github,
       #custom-clipboard,
-      #custom-zeit,
-      #custom-dnd,
+      #custom-notification,
       #bluetooth,
       #battery,
       #clock,
@@ -115,8 +113,6 @@ in {
       #backlight,
       #language,
       #custom-adaptive-light,
-      #custom-sunset,
-      #custom-playerctl,
       #tray {
           padding-left: 10px;
           padding-right: 10px;
@@ -132,6 +128,7 @@ in {
           color: #${config.lib.stylix.colors.base00};
           background-color: #${config.lib.stylix.colors.base0D};
           border-radius: 8px;
+          padding-left: 10px;
       }
 
       #workspaces button {
@@ -230,11 +227,6 @@ in {
 
       #temperature.critical {
           color: #${config.lib.stylix.colors.base08};
-      }
-
-
-      #custom-pacman {
-          color: #${config.lib.stylix.colors.base0B};
       }
 
       #bluetooth.disabled {
