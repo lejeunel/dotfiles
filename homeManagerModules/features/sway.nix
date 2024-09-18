@@ -6,25 +6,42 @@ let
   calendar = "${pkgs.calcurse}/bin/calcurse";
   menu = "${pkgs.rofi}/bin/rofi -modi drun -show drun";
   swayexec = "${pkgs.sway}/bin/swaymsg exec --";
-  swaylock = ''
-    ${pkgs.swaylock-effects}/bin/swaylock -f --clock --indicator \
-    --screenshots --effect-blur 4x4 \
-    --grace 5 \
-    --key-hl-color ${config.lib.stylix.colors.base0B} \
-    --ring-color ${config.lib.stylix.colors.base02} \
-    --line-color ${config.lib.stylix.colors.base01} \
-    --text-wrong-color ${config.lib.stylix.colors.base00} \
-    --ring-wrong-color ${config.lib.stylix.colors.base09} \
-    --line-wrong-color ${config.lib.stylix.colors.base00} \
-    --text-ver-color ${config.lib.stylix.colors.base00} \
-    --ring-ver-color ${config.lib.stylix.colors.base0C} \
-    --line-ver-color ${config.lib.stylix.colors.base0D}
-  '';
+  swaylock = "${pkgs.swaylock-effects}/bin/swaylock -f";
 
 in {
   # TODO add settings for multi monitors
   services.kanshi = { enable = true; };
   services.swaync = { enable = true; };
+  xdg.configFile."swaylock/config".text = ''
+    ignore-empty-password
+
+    clock
+    timestr=%R
+    datestr=%a, %e of %B
+
+    screenshots
+
+    effect-blur=20x2
+    effect-scale=0.3
+
+    indicator
+    indicator-radius=120
+    indicator-thickness=10
+    indicator-caps-lock
+
+    grace=5
+
+    key-hl-color=${config.lib.stylix.colors.base0B}
+    ring-color=${config.lib.stylix.colors.base02}
+    line-color=${config.lib.stylix.colors.base01}
+    text-wrong-color=${config.lib.stylix.colors.base00}
+    ring-wrong-color=${config.lib.stylix.colors.base09}
+    line-wrong-color=${config.lib.stylix.colors.base00}
+    inside-ver-color=${config.lib.stylix.colors.base0D}
+    text-ver-color=${config.lib.stylix.colors.base00}
+    ring-ver-color=${config.lib.stylix.colors.base0C}
+    line-ver-color=${config.lib.stylix.colors.base0D}
+  '';
 
   services.swayidle = {
     enable = true;
