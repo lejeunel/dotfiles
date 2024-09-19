@@ -28,8 +28,6 @@ in {
     indicator-thickness=10
     indicator-caps-lock
 
-    grace=5
-
     key-hl-color=${config.lib.stylix.colors.base0B}
     ring-color=${config.lib.stylix.colors.base02}
     line-color=${config.lib.stylix.colors.base01}
@@ -48,7 +46,7 @@ in {
     timeouts = [
       {
         timeout = 60;
-        command = "${swaylock}";
+        command = "${swaylock} --grace 5";
       }
       {
         timeout = 90;
