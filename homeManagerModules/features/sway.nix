@@ -1,13 +1,12 @@
 { config, lib, pkgs, ... }:
 let
-
   terminal = "${pkgs.alacritty}/bin/alacritty";
   term_float = "${terminal} --class floating_shell -e";
   calendar = "${pkgs.calcurse}/bin/calcurse";
   menu = "${pkgs.rofi}/bin/rofi -modi drun -show drun";
   swayexec = "${pkgs.sway}/bin/swaymsg exec --";
   swaylock = "${pkgs.swaylock-effects}/bin/swaylock -f";
-
+  notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
 in {
   # TODO add settings for multi monitors
   services.kanshi = { enable = true; };
@@ -334,7 +333,7 @@ in {
         };
         "custom/notification" = {
           format = "󰎟";
-          on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
+          on-click = "${notif-center}";
         };
         "bluetooth" = {
           format = "󰂯";
@@ -403,6 +402,7 @@ in {
         "${modifier}+Shift+s" = "mode $mode_screenshot";
         "${modifier}+e" =
           "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -nc";
+        "${modifier}+n" = "exec --no-startup-id ${notif-center}";
         "${modifier}+Shift+d" =
           "exec --no-startup-id ${pkgs.rofi}/bin/rofi -show window";
         "${modifier}+d" = "exec --no-startup-id \\${menu}";
