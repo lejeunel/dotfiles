@@ -395,8 +395,10 @@ in {
         "XF86AudioMute" = "exec --no-startup-id amixer set Master toggle";
         "XF86AudioLowerVolume" = "exec --no-startup-id amixer set Master 4%-";
         "XF86AudioRaiseVolume" = "exec --no-startup-id amixer set Master 4%+";
-        "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl set 4%-";
-        "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl set 4%+";
+        "XF86MonBrightnessDown" =
+          "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 8%-";
+        "XF86MonBrightnessUp" =
+          "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 8%+";
         "${modifier}+Shift+e" = "mode $mode_shutdown";
         "${modifier}+Shift+s" = "mode $mode_screenshot";
         "${modifier}+e" =
