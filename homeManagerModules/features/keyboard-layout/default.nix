@@ -7,13 +7,30 @@ let
   else
     abort "keyboard-layout flake needs a valid hostname!")}";
 
-  cfgANSI = ''
+  defalias = ''
+    (defalias
+      alt (tap-next ralt (layer-toggle accent))
+      sft (tap-next lsft (layer-toggle onshift))
+      ç  RA-,
+      €  RA-5
+      qt (tap-macro ' spc)
+      dqt (tap-macro " spc)
+      crc (tap-macro ^ spc)
+    )
+  '';
+
+  defcfg = ''
     (defcfg
       input (device-file "/dev/input/${kbinput}")
       output (uinput-sink "KMonad kbd")
       fallthrough true
       cmp-seq lctl
     )
+  '';
+
+  cfgANSI = ''
+    ${defcfg}
+    ${defalias}
 
     (defsrc
       esc
@@ -24,21 +41,23 @@ let
       lctl met  lalt           spc            ralt rctl lft  up   down rght
     )
 
-    (defalias
-      alt (tap-next ralt (layer-toggle accent))
-    )
-    (defalias
-      ç  RA-,
-      €  RA-5
-    )
 
     (deflayer default
       caps
       grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
       tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-      esc a    s    d    f    g    h    j    k    l    ;    '    ret
-      lsft z    x    c    v    b    n    m    ,    .    /    rsft
+      esc a    s    d    f    g    h    j    k    l    ;    @qt    ret
+      @sft z    x    c    v    b    n    m    ,    .    /    @sft
       rctl met  lalt           spc           @alt rctl lft  up   down rght
+    )
+
+    (deflayer onshift
+      _
+      _    !    @    #    $    %   @crc  &    *    \(    \)  \_   +    _
+      _    Q    W    E    R    T    Y    U    I    O    P    {    }    |
+      _    A    S    D    F    G    H    J    K    L    :    @dqt    _
+      _    Z    X    C   V     B    N    M    <    >    ?    _
+      _    _    _              _              _    _    _    _    _    _
     )
 
     (deflayer accent
@@ -53,22 +72,8 @@ let
   '';
 
   cfgISO = ''
-    (defcfg
-      input (device-file "/dev/input/${kbinput}")
-      output (uinput-sink "KMonad kbd")
-      fallthrough true
-      cmp-seq lctl
-    )
-
-    (defalias
-      alt (tap-next ralt (layer-toggle accent))
-      sft (tap-next lsft (layer-toggle onshift))
-      ç  RA-,
-      €  RA-5
-      qt (tap-macro ' spc)
-      dqt (tap-macro " spc)
-      crc (tap-macro ^ spc)
-    )
+    ${defcfg}
+    ${defalias}
 
     (defsrc
       esc
