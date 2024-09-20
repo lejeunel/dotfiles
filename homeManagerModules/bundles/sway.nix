@@ -7,6 +7,8 @@
     libnotify
     wl-clipboard-rs
     swayest-workstyle
+    swaylock-effects
+    swaynotificationcenter
   ];
 
   myHomeManager.sway.enable = true;

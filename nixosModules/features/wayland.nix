@@ -6,13 +6,13 @@ in {
 
   services.greetd = {
     enable = true;
+    vt = 2;
     settings = {
       default_session = {
         command = "${tuigreet} --time --remember --remember-session --cmd sway";
         user = "greeter";
       };
     };
-
   };
 
   environment.etc."greetd/environments".text = ''

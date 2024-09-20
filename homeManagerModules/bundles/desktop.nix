@@ -11,9 +11,9 @@
   home.packages = with pkgs; [
     thunderbird
     dconf
-    gnome.nautilus
-    gnome.gnome-screenshot
-    gnome.gnome-calculator
+    nautilus
+    gnome-screenshot
+    gnome-calculator
     telegram-desktop
     evince
     inkscape

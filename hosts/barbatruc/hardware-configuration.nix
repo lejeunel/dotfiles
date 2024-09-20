@@ -6,29 +6,27 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "ahci"
-    "usb_storage"
-    "sd_mod"
-    "rtsx_pci_sdmmc"
-    "thinkpad_acpi"
-  ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "acpi_call" "cpuid" ];
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "i915.enable_psr=0" "console=tty1" ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/c5ddde92-d686-46d9-b9f2-68a403a03d81";
+    device = "/dev/disk/by-uuid/47d6bb4b-dd85-4204-a08e-6359a67324af";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/4B74-760E";
+    device = "/dev/disk/by-uuid/2A63-EE1B";
     fsType = "vfat";
     options = [ "fmask=0022" "dmask=0022" ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/a451d8bc-9257-4f78-92b6-31646a296f9a";
+    fsType = "ext4";
   };
 
   swapDevices = [ ];

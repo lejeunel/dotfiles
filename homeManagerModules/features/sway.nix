@@ -1,40 +1,61 @@
 { config, lib, pkgs, ... }:
 let
-
   terminal = "${pkgs.alacritty}/bin/alacritty";
   term_float = "${terminal} --class floating_shell -e";
   calendar = "${pkgs.calcurse}/bin/calcurse";
   menu = "${pkgs.rofi}/bin/rofi -modi drun -show drun";
   swayexec = "${pkgs.sway}/bin/swaymsg exec --";
-
+  swaylock = "${pkgs.swaylock-effects}/bin/swaylock -f";
+  notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
 in {
+  # TODO add settings for multi monitors
   services.kanshi = { enable = true; };
-  programs.swaylock = {
-    enable = true;
-    package = pkgs.swaylock-fancy;
-  };
+  services.swaync = { enable = true; };
+  xdg.configFile."swaylock/config".text = ''
+    ignore-empty-password
+
+    clock
+    timestr=%R
+    datestr=%a, %e of %B
+
+    screenshots
+
+    effect-blur=20x2
+    effect-scale=0.3
+
+    indicator
+    indicator-radius=120
+    indicator-thickness=10
+    indicator-caps-lock
+
+    key-hl-color=${config.lib.stylix.colors.base0B}
+    ring-color=${config.lib.stylix.colors.base02}
+    line-color=${config.lib.stylix.colors.base01}
+    text-wrong-color=${config.lib.stylix.colors.base00}
+    ring-wrong-color=${config.lib.stylix.colors.base09}
+    line-wrong-color=${config.lib.stylix.colors.base00}
+    inside-ver-color=${config.lib.stylix.colors.base0D}
+    text-ver-color=${config.lib.stylix.colors.base00}
+    ring-ver-color=${config.lib.stylix.colors.base0C}
+    line-ver-color=${config.lib.stylix.colors.base0D}
+  '';
 
   services.swayidle = {
     enable = true;
     package = pkgs.swayidle;
     timeouts = [
       {
-        timeout = 180;
-        command = "${pkgs.swaylock-fancy}/bin/swaylock-fancy";
+        timeout = 60;
+        command = "${swaylock} --grace 5";
       }
       {
-        timeout = 185;
-        command = "${pkgs.sway}/bin/swaymsg -q 'output * power off'";
-        resumeCommand = "${pkgs.sway}/bin/swaymsg -q 'output * power on'";
-      }
-      {
-        timeout = 190;
+        timeout = 90;
         command = "${pkgs.systemd}/bin/systemctl suspend";
       }
     ];
     events = [{
       event = "before-sleep";
-      command = "${pkgs.swaylock-fancy}/bin/swaylock-fancy";
+      command = "${swaylock}";
     }];
   };
   programs.waybar = {
@@ -87,14 +108,12 @@ in {
       }
 
       /* Each module */
-      #custom-pacman,
       #custom-menu,
       #custom-help,
       #custom-scratchpad,
       #custom-github,
       #custom-clipboard,
-      #custom-zeit,
-      #custom-dnd,
+      #custom-notification,
       #bluetooth,
       #battery,
       #clock,
@@ -108,8 +127,6 @@ in {
       #backlight,
       #language,
       #custom-adaptive-light,
-      #custom-sunset,
-      #custom-playerctl,
       #tray {
           padding-left: 10px;
           padding-right: 10px;
@@ -125,6 +142,7 @@ in {
           color: #${config.lib.stylix.colors.base00};
           background-color: #${config.lib.stylix.colors.base0D};
           border-radius: 8px;
+          padding-left: 10px;
       }
 
       #workspaces button {
@@ -225,11 +243,6 @@ in {
           color: #${config.lib.stylix.colors.base08};
       }
 
-
-      #custom-pacman {
-          color: #${config.lib.stylix.colors.base0B};
-      }
-
       #bluetooth.disabled {
           color: #${config.lib.stylix.colors.base0B};
       }
@@ -316,6 +329,10 @@ in {
           tooltip-format-activated = "idle inhibitor enabled";
           tooltip-format-deactivated = "idle inhibitor disabled";
         };
+        "custom/notification" = {
+          format = "󰎟";
+          on-click = "${notif-center}";
+        };
         "bluetooth" = {
           format = "󰂯";
           format-disabled = "󰂲";
@@ -336,6 +353,7 @@ in {
 
           "network"
           "bluetooth"
+          "custom/notification"
 
           "tray"
           "clock"
@@ -374,12 +392,15 @@ in {
         "XF86AudioMute" = "exec --no-startup-id amixer set Master toggle";
         "XF86AudioLowerVolume" = "exec --no-startup-id amixer set Master 4%-";
         "XF86AudioRaiseVolume" = "exec --no-startup-id amixer set Master 4%+";
-        "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl set 4%-";
-        "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl set 4%+";
+        "XF86MonBrightnessDown" =
+          "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 8%-";
+        "XF86MonBrightnessUp" =
+          "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl set 8%+";
         "${modifier}+Shift+e" = "mode $mode_shutdown";
         "${modifier}+Shift+s" = "mode $mode_screenshot";
         "${modifier}+e" =
           "exec --no-startup-id ${pkgs.emacs}/bin/emacsclient -nc";
+        "${modifier}+n" = "exec --no-startup-id ${notif-center}";
         "${modifier}+Shift+d" =
           "exec --no-startup-id ${pkgs.rofi}/bin/rofi -show window";
         "${modifier}+d" = "exec --no-startup-id \\${menu}";
@@ -443,7 +464,7 @@ in {
 
         mode --pango_markup $mode_shutdown {
             # lock
-            bindsym l mode "default", exec ${pkgs.swaylock-fancy}/bin/swaylock-fancy
+            bindsym l mode "default", exec ${swaylock}
 
             # logout
             bindsym e exec loginctl terminate-user $USER

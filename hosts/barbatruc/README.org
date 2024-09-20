@@ -1,13 +1,10 @@
-#+TITLE: Tartopom
+#+TITLE: Barbatruc
 #+DATE:  July 05, 2024
 
-* Overview
-My daily NixOS driver, for work and play.
-
 * Specs
+Thinkpad T460s
 
 * Filesystems
-** /dev/nvme0n1: Samsung EVO+ 500gb (nixos, /home)
 
 #+begin_src sh
 parted /dev/nvme0n1 -- mklabel gpt
