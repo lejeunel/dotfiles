@@ -51,7 +51,6 @@
    ((t (:family "JetBrainsMono Nerd Font" :height 1.0))))
   :config
         (define-key evil-insert-state-map (kbd "C-l") 'company-complete)
-        (define-key company-active-map (kbd "RET") nil)
         (setq company-idle-delay 0.1)
         (setq company-tooltip-idle-delay 0.1)
   )

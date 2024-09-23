@@ -83,11 +83,16 @@ in {
       mouse = true;
       baseIndex = 1;
       keyMode = "vi";
+      plugins = with pkgs; [
+        tmuxPlugins.cpu
+        {
+          plugin = tmuxPlugins.vim-tmux-navigator;
+          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+        }
+      ];
       extraConfig = ''
         # Vim style pane selection
          bind h select-pane -L
-         bind j select-pane -D
-         bind k select-pane -U
          bind l select-pane -R
 
         bind-key -r f run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
