@@ -96,7 +96,7 @@ let
 
     (deflayer onshift
       _
-      _       !    @    #    $    %    @crc &    *   \(    \)   \_   +    _
+      ~       !    @    #    $    %    @crc &    *   \(    \)   \_   +    _
       _       Q    W    E    R    T    Y    U    I    O    P    {    }
       _       A    S    D    F    G    H    J    K    L    :    @dqt  |   _
       _    |  Z    X    C    V    B    N    M    <    >    ?    _
