@@ -82,6 +82,7 @@ in {
       prefix = "C-Space";
       mouse = true;
       baseIndex = 1;
+      escapeTime = 0;
       keyMode = "vi";
       extraConfig = ''
         # Vim style pane selection
