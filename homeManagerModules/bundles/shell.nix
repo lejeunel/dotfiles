@@ -83,13 +83,6 @@ in {
       mouse = true;
       baseIndex = 1;
       keyMode = "vi";
-      plugins = with pkgs; [
-        tmuxPlugins.cpu
-        {
-          plugin = tmuxPlugins.vim-tmux-navigator;
-          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-        }
-      ];
       extraConfig = ''
         # Vim style pane selection
          bind h select-pane -L
@@ -100,6 +93,10 @@ in {
         bind-key -T copy-mode-vi v send-keys -X begin-selection
         bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
         bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+        bind-key -n 'C-h' 'select-pane -L'
+        bind-key -n 'C-l' 'select-pane -R'
+
       '';
     };
 

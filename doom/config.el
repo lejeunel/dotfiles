@@ -269,3 +269,9 @@ background of code to whatever theme I'm using's background"
   )
 
 (setq +tree-sitter-hl-enabled-modes t)
+
+(defun tmux-sessionizer ()
+  (interactive)
+  (with-current-buffer
+      (shell-command "tmux neww tmux-sessionizer")))
+(map! :nvi "C-f" #'tmux-sessionizer)
