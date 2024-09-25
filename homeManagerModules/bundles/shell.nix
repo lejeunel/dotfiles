@@ -75,32 +75,6 @@ in {
 
     bat = { enable = true; };
 
-    tmux = {
-      enable = true;
-      sensibleOnTop = true;
-      terminal = "alacritty-direct";
-      prefix = "C-Space";
-      mouse = true;
-      baseIndex = 1;
-      escapeTime = 0;
-      keyMode = "vi";
-      extraConfig = ''
-        # Vim style pane selection
-         bind h select-pane -L
-         bind l select-pane -R
-
-        bind-key -r f run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
-
-        bind-key -T copy-mode-vi v send-keys -X begin-selection
-        bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-        bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-
-        bind-key -n 'C-h' 'select-pane -L'
-        bind-key -n 'C-l' 'select-pane -R'
-
-      '';
-    };
-
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -119,7 +93,7 @@ in {
       initExtra = ''
         bindkey "^K" up-line-or-search
         bindkey "^J" down-line-or-search
-        bindkey '^A' autosuggest-accept
+        bindkey '^ ' autosuggest-accept
         bindkey -s '^O' 'lf^M'
         bindkey -s ^f "tmux-sessionizer^M"
 
