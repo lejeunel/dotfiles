@@ -34,12 +34,6 @@ in {
       };
     };
 
-    tmux = {
-      enable = true;
-      mouse = true;
-      newSession = true;
-    };
-
     direnv = {
       enable = true;
       enableZshIntegration = true;
