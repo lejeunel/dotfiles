@@ -7,7 +7,12 @@
         x = 10;
         y = 10;
       };
-      env.term = "xterm-256color";
+
+      keyboard.bindings = [{
+        key = "Space";
+        mods = "Control";
+        action = "ToggleViMode";
+      }];
 
     };
   };

@@ -3,6 +3,7 @@
   imports = [ outputs.homeManagerModules.default ];
 
   myHomeManager = {
+    bundles.rclone.enable = true;
     bundles.desktop.enable = true;
     bundles.i3.enable = true;
     bundles.shell.enable = true;

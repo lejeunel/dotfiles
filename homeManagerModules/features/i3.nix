@@ -14,7 +14,7 @@ let
   systemctl = "${pkgs.systemd}/bin/systemctl";
   locker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
   xidlehook = "${pkgs.xidlehook}/bin/xidlehook";
-  screenshoter = "${pkgs.gnome.gnome-screenshot}/bin/gnome-screenshot -i";
+  screenshoter = "${pkgs.gnome-screenshot}/bin/gnome-screenshot -i";
   idlehook =
     "${xidlehook} --not-when-fullscreen --not-when-audio --timer '${timeout_lock}' '${locker}' '' --timer '${timeout_suspend}' '${systemctl} suspend' ''";
   mode_system = "System (l)ock, l(o)gout, (s)uspend (h)ibernate (p)oweroff";
