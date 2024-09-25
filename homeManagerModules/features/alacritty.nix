@@ -7,13 +7,13 @@
         x = 10;
         y = 10;
       };
-
       keyboard.bindings = [{
         key = "Space";
         mods = "Control";
         action = "ToggleViMode";
       }];
 
+      env.TERM = "alacritty-direct";
     };
   };
 

@@ -91,7 +91,6 @@ Force company to use fixed-pitch font
    ((t (:family "JetBrainsMono Nerd Font" :height 1.0))))
   :config
         (define-key evil-insert-state-map (kbd "C-l") 'company-complete)
-        (define-key company-active-map (kbd "RET") nil)
         (setq company-idle-delay 0.1)
         (setq company-tooltip-idle-delay 0.1)
   )
@@ -432,4 +431,13 @@ Enable tree-sitter syntax highlighting for all languages.
 
 #+begin_src emacs-lisp :tangle yes
 (setq +tree-sitter-hl-enabled-modes t)
+#+end_src
+* TMUX
+
+#+begin_src emacs-lisp :tangle yes
+(defun tmux-sessionizer ()
+  (interactive)
+  (with-current-buffer
+      (shell-command "tmux neww tmux-sessionizer")))
+(map! :nvi "C-f" #'tmux-sessionizer)
 #+end_src
