@@ -50,9 +50,18 @@
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
     };
   };
-
+  # programs.firefox.nativeMessagingHosts.euwebid = true;
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox-esr.override {
+      nativeMessagingHosts = [ pkgs.web-eid-app ];
+      pkcs11Modules = [ pkgs.eid-mw ];
+    };
+
+    # nativeMessagingHosts = [ pkgs.web-eid-app ];
+    policies.SecurityDevices.p11-kit-proxy =
+      "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
+
     profiles.laurent = {
       extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
         bitwarden
