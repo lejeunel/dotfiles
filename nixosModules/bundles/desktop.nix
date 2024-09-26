@@ -15,7 +15,7 @@
 
   fonts.packages = with pkgs; [
     (pkgs.nerdfonts.override {
-      fonts = [ "JetBrainsMono" "Iosevka" "FiraCode" ];
+      fonts = [ "JetBrainsMono" "Iosevka" "FiraCode" "NerdFontsSymbolsOnly" ];
     })
     cm_unicode
     corefonts

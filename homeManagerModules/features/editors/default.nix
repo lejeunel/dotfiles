@@ -44,6 +44,8 @@
     # format nix files
     nixfmt-classic
 
+    emacsPackages.all-the-icons-nerd-fonts
+
   ];
 
   programs = {

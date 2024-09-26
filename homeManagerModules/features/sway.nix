@@ -470,16 +470,16 @@ in {
             bindsym e exec loginctl terminate-user $USER
 
             # suspend
-            bindsym u mode "default", exec systemctl suspend
+            bindsym u mode "default", exec ${pkgs.systemd}/bin/systemctl suspend
 
             # hibernate
-            bindsym h mode "default", exec systemctl hibernate
+            bindsym h mode "default", exec ${pkgs.systemd}/bin/systemctl hibernate
 
             # shutdown
-            bindsym s exec $purge_cliphist; exec systemctl poweroff
+            bindsym s exec $purge_cliphist; exec ${pkgs.systemd}/bin/systemctl poweroff
 
             # reboot
-            bindsym r exec $purge_cliphist; exec systemctl reboot
+            bindsym r exec $purge_cliphist; exec ${pkgs.systemd}/bin/systemctl reboot
 
             # Return to default mode.
             bindsym Escape mode "default"

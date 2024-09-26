@@ -122,44 +122,4 @@ in {
 
   };
 
-  home.file.".local/scripts/tmux-sessionizer" = {
-
-    executable = true;
-    text = ''
-      #!/usr/bin/env bash
-
-      TMUXEXEC=${pkgs.tmux}/bin/tmux
-      FZF=${pkgs.fzf}/bin/fzf
-      FIND=${pkgs.findutils}/bin/find
-
-      if [[ $# -eq 1 ]]; then
-          selected=$1
-      else
-          selected=$($FIND ~/code -mindepth 1 -maxdepth 1 -type d | $FZF)
-      fi
-
-      if [[ -z $selected ]]; then
-          exit 0
-      fi
-
-      selected_name=$(basename "$selected" | tr . _)
-      tmux_running=$(pgrep $TMUXEXEC)
-
-      if [[ -z $TMUXEXEC ]] && [[ -z $tmux_running ]]; then
-          $TMUXEXEC new-session -s $selected_name -c $selected
-          exit 0
-      fi
-
-      if ! $TMUXEXEC has-session -t=$selected_name 2> /dev/null; then
-          $TMUXEXEC new-session -ds $selected_name -c $selected
-      fi
-
-      if [[ -z $TMUX ]]; then
-          $TMUXEXEC attach -t $selected_name
-      else
-          $TMUXEXEC switch-client -t $selected_name
-      fi
-    '';
-  };
-
 }
