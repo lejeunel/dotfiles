@@ -32,7 +32,7 @@ return {
         sync_on_ui_close = true,
       },
     }
-    vim.keymap.set('n', '<leader>rm', function()
+    vim.keymap.set('n', '<leader>rr', function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
     end, { desc = '[M]enu' })
     vim.keymap.set('n', '<leader>ra', function()

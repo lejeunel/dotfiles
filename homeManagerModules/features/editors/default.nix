@@ -44,6 +44,8 @@
     # format nix files
     nixfmt-classic
 
+    lazygit
+
   ];
 
   programs = {
