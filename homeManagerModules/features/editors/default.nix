@@ -45,6 +45,7 @@
     nixfmt-classic
 
     lazygit
+    emacsPackages.all-the-icons-nerd-fonts
 
   ];
 
