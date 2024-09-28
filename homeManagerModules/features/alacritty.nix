@@ -8,7 +8,7 @@
         y = 10;
       };
       keyboard.bindings = [{
-        key = "v";
+        key = "[";
         mods = "Control";
         action = "ToggleViMode";
       }];

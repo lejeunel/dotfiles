@@ -1,3 +1,6 @@
 [submodule "doom"]
 	path = doom
 	url = https://github.com/lejeunel/doom-emacs
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/lejeunel/nvim
