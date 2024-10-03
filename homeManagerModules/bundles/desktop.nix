@@ -15,6 +15,7 @@
     gnome-screenshot
     gnome-calculator
     telegram-desktop
+    whatsapp-for-linux
     evince
     inkscape
     gimp
