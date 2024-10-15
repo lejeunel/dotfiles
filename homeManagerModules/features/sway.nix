@@ -7,6 +7,7 @@ let
   swayexec = "${pkgs.sway}/bin/swaymsg exec --";
   swaylock = "${pkgs.swaylock-effects}/bin/swaylock -f";
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
+
 in {
   # TODO add settings for multi monitors
   services.kanshi = { enable = true; };
@@ -291,6 +292,21 @@ in {
           on-click = "${swayexec} ${term_float} ${pkgs.htop}/bin/htop";
           tooltip = true;
         };
+        pulseaudio = {
+          format = "{volume}% {icon}";
+          format-bluetooth = "{volume}% {icon}";
+          format-muted = "";
+          format-icons = {
+            phone = "";
+            phone-muted = "";
+            portable = "";
+            car = "";
+            default = [ "" "" ];
+          };
+          scroll-step = 1;
+          on-click =
+            "${swayexec} ${term_float} ${pkgs.pulsemixer}/bin/pulsemixer";
+        };
         "memory" = {
           interval = 10;
           format = "󰍛 {}%";
@@ -349,6 +365,7 @@ in {
           "temperature"
           "memory"
           "battery"
+          "pulseaudio"
           "idle_inhibitor"
 
           "network"
