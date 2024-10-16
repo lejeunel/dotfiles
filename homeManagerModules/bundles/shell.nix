@@ -12,6 +12,7 @@ in {
     psmisc
     pdftk
     imagemagick
+    unzip
   ];
 
   programs = {
