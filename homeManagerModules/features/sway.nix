@@ -46,11 +46,11 @@ in {
     package = pkgs.swayidle;
     timeouts = [
       {
-        timeout = 60;
+        timeout = 300;
         command = "${swaylock} --grace 5";
       }
       {
-        timeout = 90;
+        timeout = 600;
         command = "${pkgs.systemd}/bin/systemctl suspend";
       }
     ];
@@ -293,8 +293,8 @@ in {
           tooltip = true;
         };
         pulseaudio = {
-          format = "{volume}% {icon}";
-          format-bluetooth = "{volume}% {icon}";
+          format = "{icon} {volume}%";
+          format-bluetooth = "{icon} {volume}%";
           format-muted = "";
           format-icons = {
             phone = "";
