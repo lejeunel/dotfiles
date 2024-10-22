@@ -184,16 +184,6 @@ in {
           color: @error_color;
       }
 
-      #battery.warning.discharging {
-          animation-name: blink-warning;
-          animation-duration: 3s;
-      }
-
-      #battery.critical.discharging {
-          animation-name: blink-critical;
-          animation-duration: 2s;
-      }
-
       #clock {
           font-weight: bold;
       }
