@@ -71,61 +71,9 @@ let
 
   '';
 
-  cfgISO = ''
-    ${defcfg}
-    ${defalias}
-
-    (defsrc
-      esc
-      grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
-      tab     q    w    e    r    t    y    u    i    o    p    [    ]
-      caps    a    s    d    f    g    h    j    k    l    ;    '    \   ret
-      lsft 102d z    x    c    v    b    n    m    ,    .    /    rsft
-      lctl    lmet lalt            spc            ralt rmet cmp  rctl
-    )
-
-
-    (deflayer default
-      caps
-      grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
-      tab     q    w    e    r    t    y    u    i    o    p    [    ]
-      esc     a    s    d    f    g    h    j    k    l    ;    @qt  \   ret
-      @sft 102d z    x    c    v    b    n    m    ,    .    /    @sft
-      lctl    lmet lalt            spc           @alt rmet cmp  rctl
-    )
-
-    (deflayer onshift
-      _
-      ~       !    @    #    $    %    @crc &    *   \(    \)   \_   +    _
-      _       Q    W    E    R    T    Y    U    I    O    P    {    }
-      _       A    S    D    F    G    H    J    K    L    :    @dqt  |   _
-      _    |  Z    X    C    V    B    N    M    <    >    ?    _
-      _       _    _              _              _    _    _     _
-    )
-
-    (deflayer accent
-      _
-      _       _    _    ê    _    @€   _    û    î    ô    _    _    _    _
-      _       â    é    è    _    _    _    _    _    _    œ    _    _
-      _       à    æ    ë    _    _    _    _    ï    _    _    _    _   _
-      _    _  ä    _    @ç   _    _    _    _    _    _    _    _
-      _       _    _              _              _    _    _     _
-    )
-
-  '';
-
 in {
   home.packages = with pkgs; [ kmonad ];
-  home.file = {
-    ".kmonad.kbd" = {
-      text = if vars.host == "tartopom" then
-        cfgANSI
-      else if vars.host == "barbatruc" then
-        cfgISO
-      else
-        "";
-    };
-  };
+  home.file = { ".kmonad.kbd" = { text = cfgANSI; }; };
   systemd.user.services.keyboard-layout = {
     Unit = { Description = "Keyboard layout daemon"; };
     Install = { WantedBy = [ "default.target" ]; };
