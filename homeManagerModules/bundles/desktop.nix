@@ -16,6 +16,7 @@
     gnome-calculator
     telegram-desktop
     whatsapp-for-linux
+    teams-for-linux
     evince
     inkscape
     gimp
