@@ -21,6 +21,9 @@ in {
   '';
 
   # for touchpad
-  services.libinput.enable = true;
+  services.libinput = {
+    enable = true;
+    mouse.disableWhileTyping = true;
+  }
 
 }
