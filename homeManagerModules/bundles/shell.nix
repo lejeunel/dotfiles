@@ -1,6 +1,4 @@
-{ inputs, pkgs, lib, config, ... }:
-let lf = "${pkgs.lf}/bin/lf";
-in {
+{ inputs, pkgs, lib, config, ... }: {
 
   myHomeManager.lf.enable = true;
   home.packages = with pkgs; [
