@@ -29,6 +29,7 @@
 
       bind-key -n 'C-h' 'select-pane -L'
       bind-key -n 'C-l' 'select-pane -R'
+      bind-key -n C-Space resize-pane -Z
 
       set-option -g pane-active-border-style fg=blue
 
