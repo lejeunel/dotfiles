@@ -376,6 +376,7 @@ in {
     config = rec {
       modifier = "Mod1";
       terminal = "alacritty";
+      defaultWorkspace = "1";
       gaps = {
         inner = 10;
         outer = 5;
