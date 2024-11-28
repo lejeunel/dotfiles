@@ -33,6 +33,9 @@
 
       set-option -g pane-active-border-style fg=blue
 
+      set-option -sa terminal-overrides ",xterm-256color:RGB"
+      set -g default-terminal "tmux-256color"
+
     '';
   };
 

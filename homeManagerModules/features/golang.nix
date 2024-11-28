@@ -8,6 +8,7 @@
     gomodifytags
     gocode-gomod
     gotestsum
+    gotest
   ];
 
 }
