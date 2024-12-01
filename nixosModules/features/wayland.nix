@@ -24,6 +24,6 @@ in {
   services.libinput = {
     enable = true;
     mouse.disableWhileTyping = true;
-  }
+  };
 
 }

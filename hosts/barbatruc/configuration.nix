@@ -25,6 +25,7 @@
     bundles.audio.enable = true;
     bundles.fonts.enable = true;
     bundles.power.enable = true;
+    bundles.docker.enable = true;
   };
 
   # Enable OpenGL
