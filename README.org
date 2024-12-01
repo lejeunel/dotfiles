@@ -66,6 +66,13 @@ nh os switch -u ~/dotfiles
 nh home switch -u ~/dotfiles
 #+end_src
 
+Or, using a standalone home-manager install:
+#+begin_src shell
+home-manager switch --extra-experimental-features nix-command --extra-experimental-features flakes --flake .#"user@hostname"
+#+end_src
+
+where *user@hostname* corresponds to entry-points defined in the flake.nix file.
+
 ** Cleaning old generations
 
 #+begin_src shell
