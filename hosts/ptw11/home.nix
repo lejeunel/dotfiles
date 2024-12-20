@@ -6,7 +6,7 @@
     bundles.shell.enable = true;
     bundles.tmux.enable = true;
     bundles.editors.enable = true;
-    bundles.stylix.enable = true;
+    # bundles.stylix.enable = true;
     bundles.dev.enable = true;
   };
 

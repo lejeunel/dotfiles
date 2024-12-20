@@ -27,7 +27,7 @@
         vm = mkSystem ./hosts/vm/configuration.nix;
         tartopom = mkSystem ./hosts/tartopom/configuration.nix;
         barbatruc = mkSystem ./hosts/barbatruc/configuration.nix;
-        PC-JSCANVIC-2 = mkSystem ./hosts/PC-JSCANVIC-2/configuration.nix;
+        ptw11 = mkSystem ./hosts/ptw11/configuration.nix;
       };
 
       # Home-Manager configuration entrypoint
@@ -41,10 +41,10 @@
           sys = "x86_64-linux";
           host = "barbatruc";
         } ./hosts/barbatruc/home.nix;
-        "laurent@PC-JSCANVIC-2" = mkHome {
+        "laurent@ptw11" = mkHome {
           sys = "x86_64-linux";
-          host = "PC-JSCANVIC-2";
-        } ./hosts/laptop-work/home.nix;
+          host = "PTW11-Lejeune";
+        } ./hosts/ptw11/home.nix;
       };
 
       homeManagerModules.default = ./homeManagerModules;
