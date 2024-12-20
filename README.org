@@ -19,7 +19,7 @@ cp nixos.iso /dev/sdX
 
 5. Clone these dotfiles somewhere:
 #+begin_src shell
-git clone https://github.com/lejeunel/dotfiles
+git clone --recurse-submodules https://github.com/lejeunel/dotfiles
 #+end_src
 
 6. Create a host config in ~hosts/~
