@@ -47,11 +47,6 @@ sudo cp -R $PWD /mnt/etc/nixos/dotfiles
 Don't forget to change your ~root~ and ~$USER~ passwords! They are set to
 ~nixos~ by default.
 
-* Resources
-- i3, doom emacs: [[https://github.com/kenranunderscore/dotfiles/blob/bb0d038f1f31d52acef0da777621dfc1ea4b8a6d/modules/doom/default.nix][kenranunderscore/dotfiles]]
-- https://github.com/doomemacs/doomemacs/blob/master/shell.nix
-- [[https://github.com/vimjoyer/nixconf.git]]
-
 * Commands
 
 ** Rebuilding system
@@ -62,16 +57,7 @@ nh os switch -u ~/dotfiles
 
 ** Apply Home-Manager configuration
 
-#+begin_src shell
-nh home switch -u ~/dotfiles
-#+end_src
-
-Or, using a standalone home-manager install:
-#+begin_src shell
-home-manager switch --extra-experimental-features nix-command --extra-experimental-features flakes --flake .#"user@hostname"
-#+end_src
-
-where *user@hostname* corresponds to entry-points defined in the flake.nix file.
+See Makefile.
 
 ** Cleaning old generations
 
@@ -79,6 +65,13 @@ where *user@hostname* corresponds to entry-points defined in the flake.nix file.
 nh clean all
 #+end_src
 
-** TODO
 
-- Deploy doom emacs as in [[https://bhankas.org/blog/deploying_doom_emacs_config_via_nixos_home_manager/]]
+** Enabling experimental features globally when installing from standalone home-manager
+#+begin_src shell
+echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+#+end_src
+
+* Resources
+- i3, doom emacs: [[https://github.com/kenranunderscore/dotfiles/blob/bb0d038f1f31d52acef0da777621dfc1ea4b8a6d/modules/doom/default.nix][kenranunderscore/dotfiles]]
+- https://github.com/doomemacs/doomemacs/blob/master/shell.nix
+- [[https://github.com/vimjoyer/nixconf.git]]

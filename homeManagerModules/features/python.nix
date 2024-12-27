@@ -11,4 +11,13 @@
     inputs.fix-python.packages."x86_64-linux".default
   ];
 
+  programs.poetry = {
+    enable = true;
+    settings = {
+      virtualenvs.create = true;
+      virtualenvs.in-project = true;
+    };
+
+  };
+
 }

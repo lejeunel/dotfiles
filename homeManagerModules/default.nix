@@ -2,6 +2,7 @@
 let
   cfg = config.myHomeManager;
 
+
   # Taking all modules in ./features and adding enables to them
   features = myLib.extendModules (name: {
     extraOptions = {

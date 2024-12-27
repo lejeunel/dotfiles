@@ -28,4 +28,10 @@
 
   environment.sessionVariables = { LD_LIBRARY_PATH = "$NIX_LD_LIBRARY_PATH"; };
 
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = lib.optionalString (config.nix.package == pkgs.nixFlakes)
+      "experimental-features = nix-command flakes";
+  };
+
 }

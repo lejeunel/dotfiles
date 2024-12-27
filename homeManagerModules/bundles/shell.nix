@@ -88,6 +88,7 @@
         ee = "emacsclient -nw";
         tree = "${pkgs.eza}/bin/eza --color=auto --tree";
         cal = "cal -m";
+        vim = "nvim";
         grep = "grep --color=auto";
       };
       initExtra = ''
