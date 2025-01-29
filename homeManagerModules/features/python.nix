@@ -8,6 +8,7 @@
     python311Packages.isort
     python311Packages.black
     python311Packages.pyflakes
+    python311Packages.pylint
     inputs.fix-python.packages."x86_64-linux".default
   ];
 
