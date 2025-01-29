@@ -26,6 +26,7 @@
     bundles.fonts.enable = true;
     bundles.power.enable = true;
     bundles.docker.enable = true;
+    bundles.k8s.enable = true;
   };
 
   # Enable OpenGL
@@ -33,6 +34,12 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # for playing around with k3s
+  networking.extraHosts = ''
+    127.0.0.1 podinfo.local
+    127.0.0.1 auth.local
+  '';
 
   # power management
   powerManagement.enable = true;

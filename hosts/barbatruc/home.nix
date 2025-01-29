@@ -8,8 +8,9 @@
     bundles.shell.enable = true;
     bundles.tmux.enable = true;
     bundles.editors.enable = true;
-    bundles.general.enable = true;
+    bundles.k8s.enable = true;
     bundles.dev.enable = true;
+    bundles.keyboard-layout.enable = true;
   };
 
   home = {
