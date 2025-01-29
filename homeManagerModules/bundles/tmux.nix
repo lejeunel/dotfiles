@@ -17,6 +17,8 @@
       bind h select-pane -L
       bind l select-pane -R
 
+
+
       bind-key -r f run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
 
       bind-key R run-shell ' \
@@ -27,8 +29,9 @@
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
-      bind-key -n 'C-h' 'select-pane -L'
-      bind-key -n 'C-l' 'select-pane -R'
+      bind-key -n C-h if -F "#{pane_at_left}" "" "select-pane -L"
+      bind-key -n C-l if -F "#{pane_at_right}" "" "select-pane -R"
+
       bind-key -n C-Space resize-pane -Z
 
       set-option -g pane-active-border-style fg=blue
