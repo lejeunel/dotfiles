@@ -78,7 +78,7 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      autosuggestion = { enable = true; };
+      # autosuggestion = { enable = true; };
       shellAliases = {
         ls = "eza --color=always --long --git --icons=always";
         ll = "ls -lah";
