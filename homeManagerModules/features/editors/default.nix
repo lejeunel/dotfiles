@@ -47,6 +47,8 @@
     lazygit
     emacsPackages.all-the-icons-nerd-fonts
 
+    vimgolf
+
   ];
 
   programs = {
