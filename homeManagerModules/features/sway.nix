@@ -9,7 +9,6 @@ let
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
 
 in {
-  # TODO add settings for multi monitors
   services.kanshi = { enable = true; };
   services.swaync = { enable = true; };
   xdg.configFile."swaylock/config".text = ''
