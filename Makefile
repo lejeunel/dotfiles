@@ -6,3 +6,6 @@ home-manager:
 
 home-ptw11:
 	$(BASE_CMD_HOME_MANAGER) .#"laurent@ptw11"
+
+home-barbatruc:
+	$(BASE_CMD_HOME_MANAGER) .#"laurent@barbatruc"
