@@ -1,15 +1,13 @@
 { inputs, pkgs, lib, config, ... }: {
-  myHomeManager.yazi = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  myHomeManager.yazi = { enable = true; };
   home.packages = with pkgs; [
     calcurse
     bluetuith
-    htop
-    neofetch
+    fastfetch
     nh
     psmisc
+    htop
+    nh
     pdftk
     imagemagick
     unzip
