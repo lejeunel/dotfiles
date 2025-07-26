@@ -373,7 +373,7 @@ in {
     checkConfig = false;
     package = pkgs.swayfx;
     config = rec {
-      modifier = "Mod1";
+      modifier = "Mod4";
       terminal = "alacritty";
       defaultWorkspace = "1";
       gaps = {

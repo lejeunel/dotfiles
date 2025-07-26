@@ -24,10 +24,6 @@
     image = ./gruvbox-mountain-village.png;
 
     fonts = {
-      monospace = {
-        package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-        name = "JetBrainsMono Nerd Font";
-      };
       sansSerif = {
         package = pkgs.ubuntu_font_family;
         name = "Ubuntu";
@@ -45,8 +41,11 @@
       };
     };
 
-    cursor.name = "Bibata-Modern-Ice";
-    cursor.package = pkgs.bibata-cursors;
+	cursor = {
+	    name = "Bibata-Modern-Ice";
+	    package = pkgs.bibata-cursors;
+	    size = 18;
+	};
 
     targets.grub.enable = true;
     targets.grub.useImage = true;

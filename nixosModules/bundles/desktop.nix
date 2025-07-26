@@ -13,14 +13,6 @@
 
   environment.systemPackages = with pkgs; [ pulsemixer ];
 
-  fonts.packages = with pkgs; [
-    (pkgs.nerdfonts.override {
-      fonts = [ "JetBrainsMono" "Iosevka" "FiraCode" "NerdFontsSymbolsOnly" ];
-    })
-    cm_unicode
-    corefonts
-  ];
-
   # battery
   services.upower.enable = true;
   services.upower.ignoreLid = true;
