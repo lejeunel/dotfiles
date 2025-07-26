@@ -41,11 +41,11 @@
       };
     };
 
-	cursor = {
-	    name = "Bibata-Modern-Ice";
-	    package = pkgs.bibata-cursors;
-	    size = 18;
-	};
+    cursor = {
+      name = "Bibata-Modern-Ice";
+      package = pkgs.bibata-cursors;
+      size = 18;
+    };
 
     targets.grub.enable = true;
     targets.grub.useImage = true;

@@ -23,9 +23,9 @@
 
     image = ./girl-reading-book.jpg;
     cursor = {
-    name = "Bibata-Modern-Ice";
-    package = pkgs.bibata-cursors;
-    size = 28;
+      name = "Bibata-Modern-Ice";
+      package = pkgs.bibata-cursors;
+      size = 28;
     };
 
     enable = true;
