@@ -1,6 +1,8 @@
 { inputs, pkgs, lib, config, ... }: {
-
-  myHomeManager.lf.enable = true;
+  myHomeManager.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   home.packages = with pkgs; [
     calcurse
     bluetuith
@@ -91,14 +93,15 @@
         vim = "nvim";
         grep = "grep --color=auto";
       };
-      initExtra = ''
+      initContent = ''
         bindkey "^K" up-line-or-search
         bindkey "^J" down-line-or-search
         bindkey '^Y' autosuggest-accept
-        bindkey -s '^O' 'lf^M'
+        bindkey -s '^O' 'yy^M'
         bindkey -s ^f "tmux-sessionizer^M"
 
         export EDITOR="emacsclient -nw"
+
       '';
 
       oh-my-zsh = {
