@@ -34,6 +34,27 @@
     targets.rofi.enable = false;
     targets.waybar.enable = false;
 
-    fonts.sizes = { terminal = 15; };
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.ubuntu_font_family;
+        name = "Ubuntu";
+      };
+      serif = {
+        package = pkgs.roboto-serif;
+        name = "DejaVu Serif";
+      };
+
+      sizes = {
+        applications = 12;
+        terminal = 15;
+        desktop = 10;
+        popups = 10;
+      };
+    };
+
   };
 }

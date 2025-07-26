@@ -17,9 +17,6 @@
 
     packages = with pkgs; [
       xorg.setxkbmap
-      (nerdfonts.override {
-        fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" ];
-      })
       networkmanager
       ubuntu_font_family
       roboto-serif

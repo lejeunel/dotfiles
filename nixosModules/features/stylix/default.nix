@@ -24,6 +24,10 @@
     image = ./gruvbox-mountain-village.png;
 
     fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
+      };
       sansSerif = {
         package = pkgs.ubuntu_font_family;
         name = "Ubuntu";
