@@ -58,7 +58,10 @@
       vimAlias = true;
       vimdiffAlias = true;
     };
-    emacs = { enable = true; };
+    emacs = {
+      enable = true;
+      package = pkgs.emacs-pgtk;
+    };
   };
 
   systemd.user.services.emacs = {
