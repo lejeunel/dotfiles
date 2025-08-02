@@ -12,8 +12,12 @@ let
   term_float = "${terminal} --class floating_shell -e";
   editor = "${pkgs.emacs}/bin/emacsclient -nc";
 in {
-  home.file."${scriptsPath}".source = config.lib.file.mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/dotfiles/homeManagerModules/features/hyprland/scripts";
+
+  xdg.configFile."hypr/scripts" = {
+    source = ./scripts;
+    recursive = true;
+  };
+
   imports = [
     ./programs/waybar
     ./programs/wlogout
@@ -64,6 +68,7 @@ in {
         "hyprctl setcursor ${config.stylix.cursor.name} ${
           toString config.stylix.cursor.size
         }"
+        "wl-paste --watch cliphist store"
         "waybar"
         "swaync"
         "nm-applet --indicator"
@@ -216,7 +221,7 @@ in {
         "$mainMod, E, exec, ${editor}"
 
         "$mainMod, D, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh drun" # launch desktop applications
-        "$mainMod, Z, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh emoji" # launch emoji picker
+        "$mainMod, I, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh emoji" # launch emoji picker
         "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
         "$mainMod, V, exec, ${scriptsFPath}/ClipManager.sh" # Clipboard Manager
 
