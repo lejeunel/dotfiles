@@ -4,7 +4,6 @@ let
   menu = "${pkgs.rofi}/bin/rofi -modi drun -show drun";
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
   calendar = "${pkgs.calcurse}/bin/calcurse";
-  term_float = "${terminal} --class floating_shell -e";
 in {
   programs.waybar = {
     enable = true;
@@ -174,10 +173,10 @@ in {
         format-ethernet = "󱘖 Wired";
         format-linked = "󱘖 {ifname} (No IP)";
         format-disconnected = "󰤮 Off";
-        format-alt = "󰤨 {signalStrength}%";
         tooltip-format =
           "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-        on-click = "${term_float} ${pkgs.networkmanager}/bin/nmtui connect";
+        on-click =
+          "${terminal} -t nmtui -e ${pkgs.networkmanager}/bin/nmtui connect";
       };
 
       "bluetooth" = {
@@ -187,14 +186,16 @@ in {
         tooltip-format = " {device_alias}";
         tooltip-format-connected = "{device_enumerate}";
         tooltip-format-enumerate-connected = " {device_alias}";
-        on-click = "${term_float} ${pkgs.bluetuith}/bin/bluetuith connect";
+        on-click =
+          "${terminal} -t bluetuith -e ${pkgs.bluetuith}/bin/bluetuith connect";
         on-click-right = "rfkill toggle bluetooth";
       };
 
       "pulseaudio" = {
         format = "{icon} {volume}";
         format-muted = " ";
-        on-click = "pavucontrol -t 3";
+        on-click =
+          "${terminal} -t pulsemixer -e ${pkgs.pulsemixer}/bin/pulsemixer";
         tooltip-format = "{icon} {desc} // {volume}%";
         scroll-step = 4;
         format-icons = {
@@ -244,9 +245,8 @@ in {
     }];
     style = ''
       * {
-        font-family: "JetBrainsMono Nerd Font";
-        font-size: 14px;
-        font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+        font-family: "${config.stylix.fonts.monospace.name}";
+        font-size: 18px;
         margin: 0px;
         padding: 0px;
       }
@@ -272,7 +272,7 @@ in {
       @define-color sapphire  #${config.lib.stylix.colors.base0C};
       @define-color sky       #${config.lib.stylix.colors.base0B};
       @define-color teal      #${config.lib.stylix.colors.base0A};
-      @define-color green     #${config.lib.stylix.colors.base09};
+      @define-color green     #${config.lib.stylix.colors.base0B};
       @define-color yellow    #${config.lib.stylix.colors.base0A};
       @define-color peach     #${config.lib.stylix.colors.base08};
       @define-color maroon    #${config.lib.stylix.colors.base08};
@@ -309,21 +309,21 @@ in {
       /* This section can be use if you want to separate waybar modules */
       .modules-left {
       	background: @theme_base_color;
-       	border: 1px solid @blue;
+      border: 2px solid @blue;
       	padding-right: 15px;
       	padding-left: 2px;
       	border-radius: 10px;
       }
       .modules-center {
       	background: @theme_base_color;
-        border: 0.5px solid @overlay0;
+        border: 2px solid @blue;
       	padding-right: 5px;
       	padding-left: 5px;
       	border-radius: 10px;
       }
       .modules-right {
       	background: @theme_base_color;
-       	border: 1px solid @blue;
+        border: 2px solid @blue;
       	padding-right: 15px;
       	padding-left: 15px;
       	border-radius: 10px;
@@ -380,7 +380,7 @@ in {
       }
 
       #idle_inhibitor {
-        color: @blue;
+        color: @green;
       }
 
       #bluetooth,
@@ -424,16 +424,12 @@ in {
       }
 
       #clock {
-        color: @yellow;
+        color: @text;
       }
 
       #custom-icon {
         font-size: 15px;
         color: #cba6f7;
-      }
-
-      #custom-gpuinfo {
-        color: @maroon;
       }
 
       #cpu {
@@ -470,7 +466,7 @@ in {
 
       #workspaces button {
           box-shadow: none;
-      	text-shadow: none;
+          text-shadow: none;
           padding: 0px;
           border-radius: 9px;
           padding-left: 4px;
@@ -495,10 +491,9 @@ in {
       }
 
       #workspaces button.active {
-      	color: @teal;
+      	color: @red;
         border-radius: 10px;
         padding-left: 8px;
-        font-weight: bold;
         padding-right: 8px;
         animation: gradient_f 20s ease-in infinite;
         transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
@@ -579,7 +574,7 @@ in {
       }
 
       #network {
-        color: @blue;
+        color: @red;
       }
       #network.disconnected,
       #network.disabled {
