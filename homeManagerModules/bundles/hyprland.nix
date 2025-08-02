@@ -7,6 +7,8 @@
     grimblast
     swappy
     libnotify
+    cliphist
+    wl-clipboard
   ];
 
   myHomeManager.hyprland.enable = true;
