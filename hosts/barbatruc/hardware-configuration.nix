@@ -43,6 +43,9 @@
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  # this will load wireless adapter firmware
+  hardware.enableAllFirmware = true;
+
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 }
