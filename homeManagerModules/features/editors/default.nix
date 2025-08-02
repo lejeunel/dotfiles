@@ -1,14 +1,13 @@
 { config, lib, pkgs, ... }: {
-
-  home.file.".config/doom".source =
-    config.lib.file.mkOutOfStoreSymlink "/home/laurent/dotfiles/doom";
-  home.file.".config/nvim".source =
-    config.lib.file.mkOutOfStoreSymlink "/home/laurent/dotfiles/nvim";
+  home.file.".config/doom".source = config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/dotfiles/doom";
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
+    "${config.home.homeDirectory}/dotfiles/nvim";
 
   home.sessionPath = [
-    "$HOME/.config/emacs/bin"
-    "$HOME/.local/share/nvim/mason/bin"
-    "$HOME/.local/scripts"
+    "${config.home.homeDirectory}/.config/emacs/bin"
+    "${config.home.homeDirectory}/.local/share/nvim/mason/bin"
+    "${config.home.homeDirectory}/.local/scripts"
   ];
 
   home.packages = with pkgs; [
