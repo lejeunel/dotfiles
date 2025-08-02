@@ -55,7 +55,7 @@
   # programs.firefox.nativeMessagingHosts.euwebid = true;
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-esr.override {
+    package = pkgs.firefox.override {
       nativeMessagingHosts = [ pkgs.web-eid-app ];
       pkcs11Modules = [ pkgs.eid-mw ];
     };
@@ -65,15 +65,16 @@
       "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
 
     profiles.laurent = {
-      extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
-        bitwarden
-        ublock-origin
-        sponsorblock
-        darkreader
-        vimium
-        multi-account-containers
-        youtube-shorts-block
-      ];
+      extensions.packages =
+        with inputs.firefox-addons.packages."x86_64-linux"; [
+          bitwarden
+          ublock-origin
+          sponsorblock
+          darkreader
+          vimium
+          multi-account-containers
+          youtube-shorts-block
+        ];
 
       search.engines = {
         "Nix Packages" = {
