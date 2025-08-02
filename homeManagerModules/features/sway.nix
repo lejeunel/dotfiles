@@ -1,14 +1,12 @@
 { config, lib, pkgs, ... }:
 let
   terminal = "${pkgs.alacritty}/bin/alacritty";
-  menu = "${pkgs.rofi}/bin/rofi -modi drun -show drun";
+  menu = "${pkgs.rofi-wayland}/bin/rofi -modi drun -show drun";
   swaylock = "${pkgs.swaylock-effects}/bin/swaylock -f";
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
   term_float = "${terminal} --class floating_shell -e";
 
 in {
-  imports = [ ./sway-waybar.nix ];
-
   services.kanshi = { enable = true; };
   services.swaync = { enable = true; };
   xdg.configFile."swaylock/config".text = ''

@@ -12,4 +12,5 @@
   ];
 
   myHomeManager.sway.enable = true;
+  myHomeManager.sway-waybar.enable = true;
 }

@@ -1,6 +1,5 @@
 { config, inputs, pkgs, ... }: {
 
-  myHomeManager.rofi.enable = true;
   myHomeManager.alacritty.enable = true;
   myHomeManager.zathura.enable = true;
   myHomeManager.imv.enable = true;

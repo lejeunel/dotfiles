@@ -33,6 +33,7 @@
     targets.neovim.enable = false;
     targets.rofi.enable = false;
     targets.waybar.enable = false;
+    targets.hyprland.enable = true;
 
     fonts = {
       monospace = {

@@ -48,7 +48,7 @@
     cursor = {
       name = "Bibata-Modern-Ice";
       package = pkgs.bibata-cursors;
-      size = 18;
+      size = 24;
     };
 
     targets.grub.enable = true;

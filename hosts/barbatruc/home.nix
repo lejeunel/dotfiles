@@ -3,7 +3,7 @@
   imports = [ outputs.homeManagerModules.default ];
 
   myHomeManager = {
-    bundles.sway.enable = true;
+    bundles.hyprland.enable = true;
     bundles.desktop.enable = true;
     bundles.shell.enable = true;
     bundles.tmux.enable = true;
