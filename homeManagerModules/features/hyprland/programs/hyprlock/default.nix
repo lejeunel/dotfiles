@@ -17,6 +17,9 @@
         }
         {
           monitor = "";
+          text = ''
+            Hello <span text_transform="capitalize" size="larger">$USER!</span>'';
+
           color = "rgb(${config.stylix.base16Scheme.base0D})";
           font_size = 20;
           font_family = "JetBrains Mono Nerd Font 10";
