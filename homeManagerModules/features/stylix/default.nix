@@ -21,7 +21,7 @@
       base0F = "bd6f3e";
     };
 
-    image = ./girl-reading-book.jpg;
+    image = ./girl-reading-book.png;
     cursor = {
       name = "Bibata-Modern-Ice";
       package = pkgs.bibata-cursors;

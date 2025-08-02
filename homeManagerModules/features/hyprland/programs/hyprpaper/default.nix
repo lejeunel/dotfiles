@@ -1,14 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Enable hyprpaper
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [ "${config.stylix.image}" ];
-      wallpaper = [ ",${config.stylix.image}" ];
-    };
-  };
+  services.hyprpaper = { enable = true; };
 
   # If hyprpaper isn't in nixpkgs, add it manually
   home.packages = with pkgs;

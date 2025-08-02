@@ -20,6 +20,7 @@ in {
     ./programs/rofi
     ./programs/hypridle
     ./programs/hyprlock
+    ./programs/hyprpaper
     ./programs/swaync
   ];
 

@@ -229,7 +229,6 @@ in {
           critical = 20;
         };
         format = "{icon} {capacity}%";
-        # format-charging = " {capacity}%";
         format-charging = " {capacity}%";
         format-plugged = " {capacity}%";
         format-alt = "{time} {icon}";
@@ -496,12 +495,13 @@ in {
       }
 
       #workspaces button.active {
-      	color: @peach;
-        	border-radius: 10px;
-          padding-left: 8px;
-          padding-right: 8px;
-          animation: gradient_f 20s ease-in infinite;
-          transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+      	color: @teal;
+        border-radius: 10px;
+        padding-left: 8px;
+        font-weight: bold;
+        padding-right: 8px;
+        animation: gradient_f 20s ease-in infinite;
+        transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
       }
 
       #workspaces button.urgent {
