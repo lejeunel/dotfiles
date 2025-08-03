@@ -1,5 +1,8 @@
-{ inputs, pkgs, lib, config, ... }: {
-  myHomeManager.yazi = { enable = true; };
+{ pkgs, ... }:
+{
+  myHomeManager.yazi = {
+    enable = true;
+  };
   home.packages = with pkgs; [
     calcurse
     bluetuith
@@ -71,9 +74,13 @@
       '';
     };
 
-    eza = { enable = true; };
+    eza = {
+      enable = true;
+    };
 
-    bat = { enable = true; };
+    bat = {
+      enable = true;
+    };
 
     zsh = {
       enable = true;
@@ -104,7 +111,11 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "command-not-found" "git" "vi-mode" ];
+        plugins = [
+          "command-not-found"
+          "git"
+          "vi-mode"
+        ];
       };
 
     };
@@ -118,9 +129,13 @@
       enableZshIntegration = true;
     };
 
-    command-not-found = { enable = true; };
+    command-not-found = {
+      enable = true;
+    };
 
-    ripgrep = { enable = true; };
+    ripgrep = {
+      enable = true;
+    };
 
   };
 
