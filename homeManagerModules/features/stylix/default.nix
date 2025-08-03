@@ -1,4 +1,10 @@
-{ pkgs, lib, inputs, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
+{
   imports = [ inputs.stylix.homeModules.stylix ];
   stylix = {
     base16Scheme = {
@@ -34,6 +40,7 @@
     targets.rofi.enable = false;
     targets.waybar.enable = false;
     targets.hyprland.enable = true;
+    targets.swaync.enable = false;
     targets.firefox = {
       enable = true;
       profileNames = [ "laurent" ];

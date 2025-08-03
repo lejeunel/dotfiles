@@ -8,9 +8,7 @@
       positionY = "top";
       cssPriority = "user";
       control-center-margin-top = 22;
-      control-center-margin-bottom = 2;
-      control-center-margin-right = 1;
-      control-center-margin-left = 0;
+      control-center-margin-right = 10;
       notification-icon-size = 64;
       notification-body-image-height = 128;
       notification-body-image-width = 200;
@@ -87,9 +85,9 @@
       }
 
       .notification {
-        box-shadow: none;
-        border-radius: 4px;
-        background: @base;
+        background: @base;  /* Background color (with transparency) */
+        border-radius: 12px;                 /* Rounded corners */
+        border: 2px solid @red;           /* Border color */
       }
 
       .notification button {
@@ -110,10 +108,6 @@
         margin: 10px;
         padding: 0px;
         border-radius: 0px;
-      }
-
-      .notification-icon {
-        display: none;
       }
 
       .close-button {
@@ -220,7 +214,6 @@
       }
       .control-center-list-placeholder image {
           opacity: 0;
-          width: 0;
       }
 
       .notification-group {
