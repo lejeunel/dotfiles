@@ -1,13 +1,15 @@
-{ config, lib, pkgs, ... }:
-let font = "JetBrainsMono Nerd Font";
-in {
+{
+  config,
+  ...
+}:
+{
 
   programs.zathura = {
     enable = true;
     options = {
       window-title-basename = "true";
       selection-clipboard = "clipboard";
-      font = "${font}" + " 12";
+      font = "${config.stylix.fonts.monospace.name} + 12";
       adjust-open = "width";
       show-scrollbars = true;
     };
