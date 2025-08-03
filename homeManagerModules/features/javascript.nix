@@ -1,6 +1,9 @@
-{ config, inputs, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ yarn nodejs_20 ];
+  home.packages = with pkgs; [
+    yarn
+    nodejs_20
+  ];
 
 }
