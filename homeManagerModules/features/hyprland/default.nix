@@ -106,6 +106,13 @@ in
           xray = false;
         };
       };
+      group = {
+        groupbar = {
+          font_family = "${config.stylix.fonts.monospace.name}";
+          font_size = 18;
+        };
+
+      };
       layerrule = [
         "blur, rofi"
         "ignorezero, rofi"
@@ -198,10 +205,15 @@ in
 
         # Window/Session actions
         "$mainMod, SPACE, togglefloating" # toggle the window on focus to float
-        "$mainMod SHIFT, G, togglegroup" # toggle the window on focus to float
+
         "$mainMod, F, fullscreen" # toggle the window on focus to fullscreen
         "$mainMod ALT, L, exec, hyprlock" # lock screen
         "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
+
+        # window groups
+        "$mainMod, T, togglegroup" # toggle the window on focus to float
+        "$mainMod, Tab, changegroupactive, f"
+        "$mainMod SHIFT, Tab, changegroupactive, f"
 
         # Applications/Programs
         "$mainMod, Return, exec, $term"
@@ -222,10 +234,6 @@ in
         ",XF86AudioPause,exec,playerctl play-pause" # Play/Pause media
         ",xf86AudioNext,exec,playerctl next" # go to next media
         ",xf86AudioPrev,exec,playerctl previous" # go to previous media
-
-        # to switch between windows in a floating workspace
-        "$mainMod, Tab, cyclenext"
-        "$mainMod, Tab, bringactivetotop"
 
         # Switch workspaces relative to the active workspace with mainMod + CTRL + [←→]
         "$mainMod CTRL, h, workspace, r-1"
