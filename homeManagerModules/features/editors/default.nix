@@ -46,8 +46,8 @@
     shfmt
     shellcheck
 
-    # format nix files
     nil # LSP
+    nixd # another lSP
     nixfmt # formatting
 
     emacsPackages.all-the-icons-nerd-fonts
