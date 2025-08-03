@@ -1,17 +1,19 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 let
   terminal = "${pkgs.alacritty}/bin/alacritty";
   terminalFileManager = "${pkgs.yazi}/bin/yazzi";
   browser = "${pkgs.firefox}/bin/firefox";
   clipboard = "${pkgs.wl-clipboard-rs}/bin/wl-paste";
-  hyprsunset = "${pkgs.hyprsunset}/bin/hyprsunset";
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
   scriptsPath = ".config/hypr/scripts";
   scriptsFPath = "${config.home.homeDirectory}/${scriptsPath}";
-  calendar = "${pkgs.calcurse}/bin/calcurse";
-  term_float = "${terminal} --class floating_shell -e";
   editor = "${pkgs.emacs}/bin/emacsclient -nc";
-in {
+in
+{
 
   xdg.configFile."hypr/scripts" = {
     source = ./scripts;
@@ -36,13 +38,15 @@ in {
         kb_layout = "us"; # Base layout (QWERTY)
         kb_variant = "intl"; # Variant: "intl" for International (dead keys)
         natural_scroll = true;
-        touchpad = { natural_scroll = true; };
+        touchpad = {
+          natural_scroll = true;
+          disable_while_typing = true;
+        };
       };
       monitor = [ "eDP-1,1920x1080@60.04900,0x0, 1" ];
       "$mainMod" = "SUPER";
       "$term" = "${terminal}";
-      "$fileManager" =
-        ''$term --class "terminalFileManager" -e ${terminalFileManager}'';
+      "$fileManager" = ''$term --class "terminalFileManager" -e ${terminalFileManager}'';
       "$browser" = "${browser}";
 
       env = [
@@ -65,9 +69,7 @@ in {
         "NIXPKGS_ALLOW_UNFREE,1"
       ];
       exec-once = [
-        "hyprctl setcursor ${config.stylix.cursor.name} ${
-          toString config.stylix.cursor.size
-        }"
+        "hyprctl setcursor ${config.stylix.cursor.name} ${toString config.stylix.cursor.size}"
         "wl-paste --watch cliphist store"
         "waybar"
         "swaync"
@@ -97,19 +99,13 @@ in {
         blur = {
           enabled = true;
           special = true;
-          size = 6; # 6
-          passes = 2; # 3
+          size = 6;
+          passes = 2;
           new_optimizations = true;
           ignore_opacity = true;
           xray = false;
         };
       };
-      # group = {
-      #   "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-      #   "col.border_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-      #   "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-      #   "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-      # };
       layerrule = [
         "blur, rofi"
         "ignorezero, rofi"
@@ -120,8 +116,6 @@ in {
         "ignorezero, swaync-control-center"
         "ignorezero, swaync-notification-window"
         "ignorealpha 0.7, swaync-control-center"
-        # "ignorealpha 0.8, swaync-notification-window"
-        # "dimaround, swaync-control-center"
       ];
       animations = {
         enabled = true;
@@ -142,16 +136,12 @@ in {
           "windows, 1, 3, md3_decel, popin 60%"
           "border, 1, 10, default"
           "fade, 1, 2.5, md3_decel"
-          # "workspaces, 1, 3.5, md3_decel, slide"
           "workspaces, 1, 3.5, easeOutExpo, slide"
-          # "workspaces, 1, 7, fluent_decel, slidefade 15%"
-          # "specialWorkspace, 1, 3, md3_decel, slidefadevert 15%"
           "specialWorkspace, 1, 3, md3_decel, slidevert"
         ];
       };
       render = {
-        direct_scanout =
-          2; # 0 = off, 1 = on, 2 = auto (on with content type ‘game’)
+        direct_scanout = 2; # 0 = off, 1 = on, 2 = auto (on with content type ‘game’)
       };
       ecosystem = {
         no_update_news = true;
@@ -203,7 +193,8 @@ in {
         "$mainMod, Q, killactive"
 
         # Night Mode (lower value means warmer temp)
-        "$mainMod, N, exec, ${scriptsFPath}/hyprsunset.sh"
+        "$mainMod SHIFT, N, exec, ${scriptsFPath}/hyprsunset.sh"
+        "$mainMod, N, exec, ${notif-center}"
 
         # Window/Session actions
         "$mainMod, SPACE, togglefloating" # toggle the window on focus to float
@@ -218,7 +209,6 @@ in {
 
         "$mainMod, D, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh drun" # launch desktop applications
         "$mainMod, I, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh emoji" # launch emoji picker
-        "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
         "$mainMod, V, exec, ${scriptsFPath}/ClipManager.sh" # Clipboard Manager
 
         # Screenshot/Screencapture
@@ -261,13 +251,24 @@ in {
         "$mainMod CTRL, S, movetoworkspacesilent, special"
         "$mainMod ALT, S, movetoworkspacesilent, special"
         "$mainMod, S, togglespecialworkspace,"
-      ] ++ (builtins.concatLists (builtins.genList (x:
-        let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
-        in [
-          "$mainMod, ${ws}, workspace, ${toString (x + 1)}"
-          "$mainMod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-          "$mainMod CTRL, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
-        ]) 10));
+      ]
+      ++ (builtins.concatLists (
+        builtins.genList (
+          x:
+          let
+            ws =
+              let
+                c = (x + 1) / 10;
+              in
+              builtins.toString (x + 1 - (c * 10));
+          in
+          [
+            "$mainMod, ${ws}, workspace, ${toString (x + 1)}"
+            "$mainMod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+            "$mainMod CTRL, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
+          ]
+        ) 10
+      ));
       bindm = [
         # Move/Resize windows with mainMod + LMB/RMB and dragging
         "$mainMod, mouse:272, movewindow"
