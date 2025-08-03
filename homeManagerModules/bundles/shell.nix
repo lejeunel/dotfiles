@@ -1,8 +1,5 @@
 { pkgs, ... }:
 {
-  myHomeManager.yazi = {
-    enable = true;
-  };
   home.packages = with pkgs; [
     calcurse
     bluetuith
@@ -14,9 +11,15 @@
     pdftk
     imagemagick
     unzip
+    lazygit
+    lazydocker
   ];
 
   programs = {
+
+    yazi = {
+      enable = true;
+    };
 
     git = {
       enable = true;
@@ -41,37 +44,6 @@
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
-      stdlib = ''
-        use_python() {
-            if has pyenv; then
-                local pyversion=$1
-                eval "$(pyenv init --path)"
-                eval "$(pyenv init -)"
-                pyenv local ''${pyversion} || log_error "Could not find pyenv version ''${pyversion}. Consider running 'pyenv install ''${pyversion}'"
-            fi
-        }
-
-        layout_activate() {
-                local pyenvprefix=$(pyenv prefix)
-                local pyversion=$(pyenv version-name)
-                local pvenv="$1"
-
-                pyenv activate ''${pvenv}
-        }
-
-        layout_poetry() {
-          if [[ ! -f pyproject.toml ]]; then
-            log_error 'No pyproject.toml found.  Use `poetry new` or `poetry init` to create one first.'
-            exit 2
-          fi
-
-          local VENV=$(dirname $(poetry run which python))
-          export VIRTUAL_ENV=$(echo "$VENV" | rev | cut -d'/' -f2- | rev)
-          export POETRY_ACTIVE=1
-          PATH_add "$VENV"
-        }
-
-      '';
     };
 
     eza = {
@@ -85,7 +57,6 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      # autosuggestion = { enable = true; };
       shellAliases = {
         ls = "eza --color=always --long --git --icons=always";
         ll = "ls -lah";
