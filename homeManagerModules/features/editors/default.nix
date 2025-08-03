@@ -41,7 +41,8 @@
     shellcheck
 
     # format nix files
-    nixfmt-classic
+    nil # LSP
+    nixfmt # formatting
 
     lazygit
     emacsPackages.all-the-icons-nerd-fonts

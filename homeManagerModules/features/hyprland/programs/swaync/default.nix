@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ config, ... }:
+{
   services.swaync = {
     enable = true;
     settings = {
@@ -28,240 +29,67 @@
       script-fail-notify = true;
       widgets = [
         "title"
-        "dnd"
         "menubar#desktop"
-        "volume"
-        "mpris"
         "notifications"
-        "buttons-grid"
       ];
-      widget-config = {
-        title = {
-          text = " Quick settings";
-          clear-all-button = true;
-          button-text = "";
-        };
-        "menubar#desktop" = {
-          "backlight" = { label = "       󰃟  "; };
-          "menu#screenshot" = {
-            label = "	󰄀   Screenshot	";
-            position = "left";
-            actions = [
-              {
-                label = "Whole screen";
-                command =
-                  "sh -c 'swaync-client -cp; sleep 1; grimblast copysave output \"/tmp/screenshot.png\"; swappy -f \"/tmp/screenshot.png\"'";
-              }
-              {
-                label = "Whole window / Select region";
-                command =
-                  "sh -c 'swaync-client -cp; grimblast copysave area \"/tmp/screenshot.png\"; swappy -f \"/tmp/screenshot.png\"'";
-              }
-            ];
-          };
-          "menu#power" = {
-            label = "	   Power Menu	  ";
-            position = "left";
-            actions = [
-              {
-                label = "   Lock";
-                command = "hyprlock";
-              }
-              {
-                label = "   Logout";
-                command = "hyprctl dispatch exit 0";
-              }
-              {
-                label = "   Shut down";
-                command = "systemctl poweroff";
-              }
-              {
-                label = "󰤄   Suspend";
-                command = "systemctl suspend";
-              }
-              {
-                label = "   Reboot";
-                command = "systemctl reboot";
-              }
-            ];
-          };
-        };
-        volume = {
-          label = "";
-          expand-button-label = "";
-          collapse-button-label = "";
-          show-per-app = true;
-          show-per-app-icon = true;
-          show-per-app-label = true;
-        };
-        dnd = { text = " Do Not Disturb"; };
-        mpris = {
-          image-size = 96;
-          image-radius = 4;
-        };
-        label = {
-          text = "Notifications";
-          clear-all-button = true;
-          button-text = "";
-        };
-
-        "buttons-grid" = {
-          actions = [
-
-            {
-              label = "󰝟";
-              type = "toggle";
-              command = "pamixer -t";
-              update-command =
-                "sh -c 'pamixer --get-mute | grep -q true && echo true || echo false'";
-            }
-            {
-              label = "󰍭";
-              type = "toggle";
-              command = "pamixer --default-source -t";
-              update-command =
-                "sh -c 'pamixer --get-mute --default-source | grep true && echo true || echo false'";
-            }
-
-            {
-              label = "";
-              type = "toggle";
-              command = "blueman-manager";
-              update-command =
-                "sh -c 'bluetoothctl show | grep -q \\\"Powered: yes\\\" && echo true || echo false'";
-            }
-
-            {
-              label = "󰤨";
-              type = "toggle";
-              command =
-                "sh -c '[ \"$SWAYNC_TOGGLE_STATE\" = true ] && nmcli radio wifi on || nmcli radio wifi off'";
-              update-command =
-                "sh -c 'nmcli radio wifi | grep -q enabled && echo true || echo false'";
-            }
-
-            {
-              label = "🎮";
-              type = "toggle";
-              command = "${../../../hyprland/scripts/gamemode.sh}";
-              update-command =
-                "hyprctl getoption animations:enabled | grep -q 'int: 1' && echo false || echo true";
-            }
-
-            {
-              label = "󰤄";
-              type = "toggle";
-              command =
-                "sh -c '${pkgs.procps}/bin/pgrep -x hyprsunset >/dev/null && ${pkgs.procps}/bin/pkill hyprsunset || nohup ${pkgs.hyprsunset}/bin/hyprsunset --temperature 3500 > /tmp/hyprsunset_output.log 2>&1 &'";
-              update-command =
-                "sh -c 'pgrep -x hyprsunset >/dev/null && echo true || echo false'";
-            }
-
-            {
-              label = "☕";
-              command =
-                "systemctl --user is-active --quiet hypridle.service && systemctl --user stop hypridle.service || systemctl --user start hypridle.service";
-              type = "toggle";
-              update-command =
-                "pgrep -x hypridle > /dev/null && echo false || echo true";
-            }
-
-            {
-              label = "";
-              type = "toggle";
-
-              command = "${../../../hyprland/scripts/TogglePowerMode.sh}";
-              update-command = ''
-                test -f "$HOME/.config/hypr/power_mode" && grep -q "^powersave$" "$HOME/.config/hypr/power_mode" && echo true || echo false'';
-            }
-
-          ];
-        };
-      };
-      scripts = {
-        example-script = {
-          exec = "echo 'Do something...'";
-          urgency = "Normal";
-        };
-      };
       notification-visibility = {
         spotify = {
           state = "enabled";
           urgency = "Low";
           app-name = "Spotify";
         };
-        youtube-music = {
-          state = "enabled";
-          urgency = "Low";
-          app-name = "com.github.th_ch.youtube_music";
-        };
       };
     };
     style = ''
       @define-color shadow rgba(0, 0, 0, 0.25);
-      /*
-      *
-      * Catppuccin Mocha palette
-      * Maintainer: rubyowo
-      *
-      */
 
-      @define-color base   #1E1D2E;
-      @define-color mantle #181825;
-      @define-color crust  #11111b;
+      @define-color base   #${config.lib.stylix.colors.base00};
+      @define-color mantle #${config.lib.stylix.colors.base01};
+      @define-color crust  #${config.lib.stylix.colors.base02};
 
-      @define-color text     #cdd6f4;
-      @define-color subtext0 #a6adc8;
-      @define-color subtext1 #bac2de;
+      @define-color text     #${config.lib.stylix.colors.base05};
+      @define-color subtext0 #${config.lib.stylix.colors.base04};
+      @define-color subtext1 #${config.lib.stylix.colors.base06};
 
-      @define-color surface0 #313244;
-      @define-color surface1 #45475a;
-      @define-color surface2 #585b70;
+      @define-color surface0 #${config.lib.stylix.colors.base03};
+      @define-color surface1 #${config.lib.stylix.colors.base04};
+      @define-color surface2 #${config.lib.stylix.colors.base05};
 
-      @define-color overlay0 #6c7086;
-      @define-color overlay1 #7f849c;
-      @define-color overlay2 #9399b2;
+      @define-color overlay0 #${config.lib.stylix.colors.base07};
+      @define-color overlay1 #${config.lib.stylix.colors.base08};
+      @define-color overlay2 #${config.lib.stylix.colors.base09};
 
-      @define-color blue      #89b4fa;
-      @define-color lavender  #b4befe;
-      @define-color sapphire  #74c7ec;
-      @define-color sky       #89dceb;
-      @define-color teal      #94e2d5;
-      @define-color green     #a6e3a1;
-      @define-color yellow    #f9e2af;
-      @define-color peach     #fab387;
-      @define-color maroon    #eba0ac;
-      @define-color red       #f38ba8;
-      @define-color mauve     #cba6f7;
-      @define-color pink      #f5c2e7;
-      @define-color flamingo  #f2cdcd;
-      @define-color rosewater #f5e0dc;
+      @define-color blue      #${config.lib.stylix.colors.base0D};
+      @define-color lavender  #${config.lib.stylix.colors.base0E};
+      @define-color sapphire  #${config.lib.stylix.colors.base0C};
+      @define-color sky       #${config.lib.stylix.colors.base0B};
+      @define-color teal      #${config.lib.stylix.colors.base0A};
+      @define-color green     #${config.lib.stylix.colors.base0B};
+      @define-color yellow    #${config.lib.stylix.colors.base0A};
+      @define-color peach     #${config.lib.stylix.colors.base08};
+      @define-color maroon    #${config.lib.stylix.colors.base08};
+      @define-color red       #${config.lib.stylix.colors.base08};
+      @define-color mauve     #${config.lib.stylix.colors.base0E};
+      @define-color pink      #${config.lib.stylix.colors.base0F};
+      @define-color flamingo  #${config.lib.stylix.colors.base07};
+      @define-color rosewater #${config.lib.stylix.colors.base06};
 
       @define-color base_lighter  #1e1e2e;
       @define-color mauve_lighter #caa6f7;
 
       * {
-        font-family: "Product Sans";
+        font-family: "${config.stylix.fonts.monospace.name}";
         background-clip: border-box;
       }
-
-      /* #notifications_box { */
-      /* border: solid 4px red; */
-      /* } */
 
       label {
         color: @text;
       }
 
       .notification {
-        border: none;
         box-shadow: none;
-        /* margin: 0px; */
-        /* margin: -15px -10px -15px -10px; */
         border-radius: 4px;
-        background: inherit;
-        /* background: @theme_bg_color; */
-        /* background: shade(alpha(@borders, 2.55), 0.25); */
+        background: @base;
       }
 
       .notification button {
@@ -282,6 +110,10 @@
         margin: 10px;
         padding: 0px;
         border-radius: 0px;
+      }
+
+      .notification-icon {
+        display: none;
       }
 
       .close-button {
@@ -357,24 +189,18 @@
       /* The "Notifications" and "Do Not Disturb" text widget */
       .top-action-title {
         color: @text;
-        /* color: @theme_text_color; */
         text-shadow: none;
       }
 
       /* Control center */
 
       .control-center {
-        background: alpha(@crust, .80);
-        border-radius: 15px;
-        border: 0px solid @selected;
-        box-shadow: 0 0 10px 0 rgba(0,0,0,.80);
+        background: @base;
+      	border-radius: 10px;
+        border: 2px solid @red;
         margin: 10px;
         padding: 4px;
       }
-
-      /* .right.overlay-indicator { */
-      /* border: solid 5px red; */
-      /* } */
 
       .control-center-list {
         /* background: @base; */
@@ -391,6 +217,10 @@
         /* opacity: 1.0; */
         /* opacity: 0; */
         color: alpha(@theme_text_color, 0.50);
+      }
+      .control-center-list-placeholder image {
+          opacity: 0;
+          width: 0;
       }
 
       .notification-group {
@@ -439,11 +269,6 @@
         box-shadow: none;
       }
 
-      .control-center-list > row:last-child {
-        padding: 5px 10px 10px 10px;
-      }
-
-
       /* Window behind control center and on all other monitors */
       .blank-window {
         background: transparent;
@@ -455,9 +280,7 @@
       .widget-title {
         margin: 0px;
         background: transparent;
-        /* background: @theme_bg_color; */
         border-radius: 4px 4px 0px 0px;
-        /* border: 1px solid @surface1; */
         border-bottom: none;
       }
 
@@ -498,41 +321,6 @@
         font-weight: 400;
       }
 
-      /* Menubar */
-      .widget-menubar {
-        background: transparent;
-        /* background: @theme_bg_color; */
-        /* border: 1px solid @surface1; */
-        border-top: none;
-        border-bottom: none;
-      }
-      .widget-menubar > box > box {
-        margin: 5px 10px 5px 10px;
-        min-height: 40px;
-        border-radius: 4px;
-        background: transparent;
-      }
-      .widget-menubar > box > box > button {
-        background: alpha(@mantle, .80);
-        /* background: alpha(currentColor, 0.05); */
-        min-width: 185px;
-        min-height: 50px;
-        margin-right: 10px;
-        font-size: 14px;
-        padding: 0px;
-      }
-      .widget-menubar > box > box > button:nth-child(2) {
-        margin-right: 0px;
-      }
-      .widget-menubar button:focus {
-        box-shadow: none;
-      }
-      .widget-menubar button:focus:hover {
-        background: @base;
-        /* background: alpha(currentColor,0.1); */
-        box-shadow: none;
-      }
-
       .widget-menubar > box > revealer > box {
         margin: 5px 10px 5px 10px;
         background: alpha(@mantle, .80);
@@ -546,217 +334,9 @@
         margin: 5px;
       }
 
-      /* Buttons grid */
-      .widget-buttons-grid {
-        /* background-color: @theme_bg_color; */
-        background: transparent;
-        /* border: 1px solid @surface1; */
-        border-top: none;
-        border-bottom: none;
-        font-size: 14px;
-        font-weight: 500;
-        margin: 0px;
-        padding: 5px;
-        border-radius: 0px;
-      }
-
-      .widget-buttons-grid > flowbox > flowboxchild {
-        background: alpha(@mantle, .80);
-        /* background: alpha(currentColor, 0.05); */
-        border-radius: 4px;
-        min-height: 50px;
-        min-width: 85px;
-        margin: 5px;
-        padding: 0px;
-      }
-
-      .widget-buttons-grid > flowbox > flowboxchild > button {
-        background: transparent;
-        border-radius: 4px;
-        margin: 0px;
-        border: none;
-        box-shadow: none;
-      }
-
-
-      .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-        background: alpha(@mantle, .80);
-        /* background: alpha(currentColor, 0.1); */
-      }
-
-      /* Mpris widget */
-      .widget-mpris {
-        padding: 8px;
-        padding-bottom: 15px;
-        margin-bottom: -33px;
-      }
-      .widget-mpris > box {
-        padding: 0px;
-        margin: -5px 0px -10px 0px;
-        padding: 0px;
-        border-radius: 4px;
-        /* background: alpha(currentColor, 0.05); */
-        background: alpha(@mantle, .80);
-      }
-      .widget-mpris > box > button:nth-child(1),
-      .widget-mpris > box > button:nth-child(3) {
-        margin-bottom: 0px;
-      }
-      .widget-mpris > box > button:nth-child(1) {
-        margin-left: -25px;
-        margin-right: -25px;
-        opacity: 0;
-      }
-      .widget-mpris > box > button:nth-child(3) {
-        margin-left: -25px;
-        margin-right: -25px;
-        opacity: 0;
-      }
-
-      .widget-mpris-album-art {
-        all: unset;
-      }
-
-      /* Player button box */
-      .widget-mpris > box > carousel > widget > box > box:nth-child(2) {
-        margin: 5px 0px -5px 90px;
-      }
-
-      /* Player buttons */
-      .widget-mpris > box > carousel > widget > box > box:nth-child(2) > button {
-        border-radius: 4px;
-      }
-      .widget-mpris > box > carousel > widget > box > box:nth-child(2) > button:hover {
-        background: alpha(currentColor, 0.1);
-      }
-      carouselindicatordots {
-        opacity: 0;
-      }
-
-      .widget-mpris-title {
-        color: #eeeeee;
-        font-weight: bold;
-        font-size: 1.25rem;
-        text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-      }
-      .widget-mpris-subtitle {
-        color: #eeeeee;
-        font-size: 1rem;
-        text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
-      }
-
-      .widget-mpris-player {
-        border-radius: 0px;
-        margin: 0px;
-      }
-      .widget-mpris-player > box > image {
-        margin: 0px 0px -48px 0px;
-      }
-
       .notification-group > box.vertical {
         /* border: solid 5px red; */
         margin-top: 3px;
-      }
-
-      /* Backlight and volume widgets */
-      .widget-backlight,
-      .widget-volume {
-        background: transparent;
-        /* background-color: @crust; */
-        /* background-color: @theme_bg_color; */
-        /* border: 1px solid @surface1; */
-        border-top: none;
-        border-bottom: none;
-        font-size: 13px;
-        font-weight: 600;
-        border-radius: 0px;
-        margin: 0px;
-        padding: 0px;
-      }
-      .widget-volume > box {
-        background: alpha(@mantle, .80);
-        /* background: alpha(currentColor, 0.05); */
-        border-radius: 4px;
-        margin: 5px 10px 5px 10px;
-        min-height: 50px;
-      }
-      .widget-volume > box > label {
-        min-width: 50px;
-        padding: 0px;
-      }
-      .widget-volume > box > button {
-        min-width: 50px;
-        box-shadow: none;
-        padding: 0px;
-      }
-      .widget-volume > box > button:hover {
-        /* background: alpha(currentColor, 0.05); */
-        background: @surface0;
-      }
-      .widget-volume > revealer > list {
-        background: alpha(@mantle, .80);
-        /* background: alpha(currentColor, 0.05); */
-        border-radius: 4px;
-        margin-top: 5px;
-        padding: 0px;
-      }
-      .widget-volume > revealer > list > row {
-        padding-left: 10px;
-        min-height: 40px;
-        background: transparent;
-      }
-      .widget-volume > revealer > list > row:hover {
-        background: transparent;
-        box-shadow: none;
-        border-radius: 4px;
-      }
-      .widget-backlight > scale {
-        background: alpha(@mantle, .80);
-        /* background: alpha(currentColor, 0.05); */
-        border-radius: 0px 4px 4px 0px;
-        margin: 5px 10px 5px 0px;
-        padding: 0px 10px 0px 0px;
-        min-height: 50px;
-      }
-      .widget-backlight > label {
-        background: @surface0;
-        /* background: alpha(currentColor, 0.05); */
-        margin: 5px 0px 5px 10px;
-        border-radius: 4px 0px 0px 4px;
-        padding: 0px;
-        min-height: 50px;
-        min-width: 50px;
-      }
-
-      /* DND widget */
-      .widget-dnd {
-        margin: 6px;
-        font-size: 1.2rem;
-      }
-
-      .widget-dnd > switch {
-        background: alpha(@mantle, .80);
-        font-size: initial;
-        border-radius: 8px;
-        box-shadow: none;
-        padding: 2px;
-      }
-
-      .widget-dnd > switch:hover {
-        background: alpha(@mauve_lighter, .80);
-      }
-
-      .widget-dnd > switch:checked {
-        background: @mauve;
-      }
-
-      .widget-dnd > switch:checked:hover {
-        background: alpha(@mauve_lighter, .80);
-      }
-
-      .widget-dnd > switch slider {
-        background: alpha(@mauve_lighter, .80);
-        border-radius: 6px;
       }
 
       /* Toggles */
