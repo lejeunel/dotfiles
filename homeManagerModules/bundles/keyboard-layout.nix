@@ -1,4 +1,5 @@
-{ pkgs, config, lib, inputs, ... }: {
+{ lib, ... }:
+{
 
   myHomeManager.keyboard-layout.enable = lib.mkDefault true;
 

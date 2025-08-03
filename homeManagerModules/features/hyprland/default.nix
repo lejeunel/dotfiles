@@ -5,8 +5,7 @@
 }:
 let
   terminal = "${pkgs.alacritty}/bin/alacritty";
-  terminalFileManager = "${pkgs.yazi}/bin/yazzi";
-  browser = "${pkgs.firefox}/bin/firefox";
+  terminalFileManager = ''${terminal} --class "terminalFileManager" -e ${pkgs.yazi}/bin/yazi'';
   clipboard = "${pkgs.wl-clipboard-rs}/bin/wl-paste";
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
   scriptsPath = ".config/hypr/scripts";
@@ -45,9 +44,6 @@ in
       };
       monitor = [ "eDP-1,1920x1080@60.04900,0x0, 1" ];
       "$mainMod" = "SUPER";
-      "$term" = "${terminal}";
-      "$fileManager" = ''$term --class "terminalFileManager" -e ${terminalFileManager}'';
-      "$browser" = "${browser}";
 
       env = [
         "XDG_CURRENT_DESKTOP,Hyprland"
@@ -70,27 +66,23 @@ in
       ];
       exec-once = [
         "hyprctl setcursor ${config.stylix.cursor.name} ${toString config.stylix.cursor.size}"
-        "wl-paste --watch cliphist store"
         "waybar"
         "swaync"
         "nm-applet --indicator"
         "wl-clipboard-history -t"
+        "${clipboard} --watch cliphist store"
         "${clipboard} --type text --watch cliphist store" # clipboard store text data
         "${clipboard} --type image --watch cliphist store" # clipboard store image data
         "rm '$XDG_CACHE_HOME/cliphist/db'" # Clear clipboard
         "${scriptsFPath}/batterynotify.sh" # battery notification
         "polkit-agent-helper-1"
-        "pamixer --set-volume 50"
       ];
       general = {
         gaps_in = 4;
         gaps_out = 9;
         border_size = 2;
-        # "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        # "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
         resize_on_border = true;
         layout = "dwindle"; # dwindle or master
-        # allow_tearing = true; # Allow tearing for games (use immediate window rules for specific games or all titles)
       };
       decoration = {
         shadow.enabled = false;
@@ -216,14 +208,15 @@ in
         "$mainMod SHIFT, Tab, changegroupactive, f"
 
         # Applications/Programs
-        "$mainMod, Return, exec, $term"
+        "$mainMod, Return, exec, ${terminal}"
         "$mainMod, E, exec, ${editor}"
+        "$mainMod, M, exec, ${terminalFileManager}"
 
         "$mainMod, D, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh drun" # launch desktop applications
         "$mainMod, I, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh emoji" # launch emoji picker
         "$mainMod, V, exec, ${scriptsFPath}/ClipManager.sh" # Clipboard Manager
 
-        # Screenshot/Screencapture
+        # Screenshot
         "$mainMod, P, exec, ${scriptsFPath}/screenshot.sh s" # drag to snip an area / click on a window to print it
 
         # Functional keybinds
@@ -277,11 +270,6 @@ in
           ]
         ) 10
       ));
-      bindm = [
-        # Move/Resize windows with mainMod + LMB/RMB and dragging
-        "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
-      ];
     };
 
   };

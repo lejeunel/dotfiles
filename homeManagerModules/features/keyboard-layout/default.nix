@@ -1,11 +1,15 @@
-{ config, inputs, lib, pkgs, vars, ... }:
+{ pkgs, vars, ... }:
 let
-  kbinput = "${(if vars.host == "tartopom" then
-    "by-id/usb-DZTECH_DZ65RGBV3_vial:f64c2b3c-if02-event-kbd"
-  else if vars.host == "barbatruc" then
-    "by-path/platform-i8042-serio-0-event-kbd"
-  else
-    abort "keyboard-layout flake needs a valid hostname!")}";
+  kbinput = "${
+    (
+      if vars.host == "tartopom" then
+        "by-id/usb-DZTECH_DZ65RGBV3_vial:f64c2b3c-if02-event-kbd"
+      else if vars.host == "barbatruc" then
+        "by-path/platform-i8042-serio-0-event-kbd"
+      else
+        abort "keyboard-layout flake needs a valid hostname!"
+    )
+  }";
 
   defalias = ''
     (defalias
@@ -71,12 +75,23 @@ let
 
   '';
 
-in {
+in
+{
   home.packages = with pkgs; [ kmonad ];
-  home.file = { ".kmonad.kbd" = { text = cfgANSI; }; };
+  home.file = {
+    ".kmonad.kbd" = {
+      text = cfgANSI;
+    };
+  };
   systemd.user.services.keyboard-layout = {
-    Unit = { Description = "Keyboard layout daemon"; };
-    Install = { WantedBy = [ "default.target" ]; };
-    Service = { ExecStart = "${pkgs.kmonad}/bin/kmonad %h/.kmonad.kbd"; };
+    Unit = {
+      Description = "Keyboard layout daemon";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.kmonad}/bin/kmonad %h/.kmonad.kbd";
+    };
   };
 }

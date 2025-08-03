@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: {
+{ ... }:
+{
   programs.alacritty = {
     enable = true;
     settings = {
@@ -7,11 +8,13 @@
         x = 10;
         y = 10;
       };
-      keyboard.bindings = [{
-        key = "[";
-        mods = "Control";
-        action = "ToggleViMode";
-      }];
+      keyboard.bindings = [
+        {
+          key = "[";
+          mods = "Control";
+          action = "ToggleViMode";
+        }
+      ];
 
       env.TERM = "alacritty-direct";
     };
