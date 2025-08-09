@@ -10,7 +10,7 @@ let
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
   scriptsPath = ".config/hypr/scripts";
   scriptsFPath = "${config.home.homeDirectory}/${scriptsPath}";
-  editor = "${pkgs.emacs}/bin/emacsclient -nc";
+  editor = "${pkgs.emacs-pgtk}/bin/emacsclient -nc";
 in
 {
 

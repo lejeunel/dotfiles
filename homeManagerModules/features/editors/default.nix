@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -68,16 +67,22 @@
       package = pkgs.emacs-pgtk;
     };
   };
+  home.sessionVariables = {
+    GDK_BACKEND = "wayland";
+  };
 
   systemd.user.services.emacs = {
     Unit = {
       Description = "Emacs Text Editor Daemon";
     };
     Service = {
-      Environment = "PATH=/usr/bin:/usr/local/bin:${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin";
+      Environment = [
+        "PATH=/usr/bin:/usr/local/bin:${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin"
+        "GDK_BACKEND=wayland"
+      ];
       Type = "forking";
-      ExecStart = "${pkgs.emacs}/bin/emacs --daemon";
-      ExecStop = ''${pkgs.emacs}/bin/emacsclient --eval "(kill-emacs)"'';
+      ExecStart = "${pkgs.emacs-pgtk}/bin/emacs --daemon";
+      ExecStop = ''${pkgs.emacs-pgtk}/bin/emacsclient --eval "(kill-emacs)"'';
       Restart = "on-failure";
     };
     Install = {
