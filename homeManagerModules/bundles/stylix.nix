@@ -1,4 +1,5 @@
-{ pkgs, config, lib, inputs, ... }: {
+{ lib, ... }:
+{
 
   myHomeManager.stylix.enable = lib.mkDefault true;
 

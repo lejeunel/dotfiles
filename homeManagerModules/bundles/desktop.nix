@@ -27,6 +27,7 @@
     vlc
     grobi
     transmission_4-gtk
+
   ];
 
   xdg.desktopEntries = {

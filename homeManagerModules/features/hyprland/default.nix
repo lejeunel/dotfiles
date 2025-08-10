@@ -68,7 +68,6 @@ in
         "hyprctl setcursor ${config.stylix.cursor.name} ${toString config.stylix.cursor.size}"
         "waybar"
         "swaync"
-        "nm-applet --indicator"
         "wl-clipboard-history -t"
         "${clipboard} --watch cliphist store"
         "${clipboard} --type text --watch cliphist store" # clipboard store text data

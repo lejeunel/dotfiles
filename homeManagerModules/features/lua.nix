@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 
-  home.packages = with pkgs; [ luaformatter lua-language-server ];
+  home.packages = with pkgs; [
+    luaformatter
+    lua-language-server
+  ];
 }
