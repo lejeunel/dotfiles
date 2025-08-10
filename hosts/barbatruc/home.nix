@@ -1,4 +1,5 @@
-{ inputs, outputs, pkgs, lib, ... }: {
+{ outputs, pkgs, ... }:
+{
 
   imports = [ outputs.homeManagerModules.default ];
 
@@ -11,6 +12,7 @@
     bundles.k8s.enable = true;
     bundles.dev.enable = true;
     bundles.keyboard-layout.enable = true;
+    bundles.email.enable = true;
   };
 
   home = {
