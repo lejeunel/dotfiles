@@ -10,7 +10,8 @@ let
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
   scriptsPath = ".config/hypr/scripts";
   scriptsFPath = "${config.home.homeDirectory}/${scriptsPath}";
-  editor = "${pkgs.emacs-pgtk}/bin/emacsclient -nc";
+  editor = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc'';
+  email = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(=notmuch)"'';
 in
 {
 
@@ -209,7 +210,8 @@ in
         # Applications/Programs
         "$mainMod, Return, exec, ${terminal}"
         "$mainMod, E, exec, ${editor}"
-        "$mainMod, M, exec, ${terminalFileManager}"
+        "$mainMod, W, exec, ${terminalFileManager}"
+        "$mainMod, M, exec, ${email}"
 
         "$mainMod, D, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh drun" # launch desktop applications
         "$mainMod, I, exec, pkill -x rofi || ${scriptsFPath}/rofi.sh emoji" # launch emoji picker

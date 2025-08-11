@@ -1,6 +1,6 @@
-{ pkgs, lib, terminal, ... }: {
-  programs.rofi = let inherit (lib) getExe;
-  in {
+{ pkgs, ... }:
+{
+  programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
     extraConfig = {
@@ -9,10 +9,9 @@
       kb-row-down = "Control+j";
       kb-row-up = "Control+k";
     };
-    plugins = with pkgs;
-      [
-        rofi-emoji-wayland # https://github.com/Mange/rofi-emoji 🤯
-      ];
+    plugins = with pkgs; [
+      rofi-emoji-wayland # https://github.com/Mange/rofi-emoji 🤯
+    ];
   };
   xdg.configFile."rofi/launchers" = {
     source = ./launchers;
