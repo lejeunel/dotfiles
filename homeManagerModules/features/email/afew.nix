@@ -6,14 +6,12 @@
     enable = true;
     extraConfig = ''
       [SpamFilter]
+      [SentMailsFilter]
+        sent_tag=sent
       [KillThreadsFilter]
       [ListMailsFilter]
       [FolderNameFilter]
-      [HeaderMatchingFilter.1]
-      header = X-Maildir
-      pattern = .*
-      tags = -new
-      query = tag:new
+      [InboxFilter]
     '';
   };
 }

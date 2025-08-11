@@ -88,13 +88,33 @@ in
       maildir.synchronizeFlags = true;
     };
   };
+
+  xdg.configFile."notmuch/notify.sh".source = ./notify.sh;
+
   services = {
     mbsync = {
       enable = true;
       frequency = "*:0/5";
-      preExec = "${pkgs.notmuch}/bin/notmuch new";
-      postExec = "${pkgs.afew}/bin/afew -C ${config.home.homeDirectory}/.config/notmuch/default/config --tag --new";
+      postExec = "${config.home.homeDirectory}/.local/bin/post-sync-mailboxes";
     };
   };
+
+  home.file.".local/bin/post-sync-mailboxes" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+      set -euo pipefail  # Strict error handling
+      ${pkgs.notmuch}/bin/notmuch new
+      ${config.home.homeDirectory}/.config/notmuch/notify.sh
+      ${pkgs.afew}/bin/afew -C "${config.home.homeDirectory}/.config/notmuch/default/config" --tag --new
+    '';
+  };
+
+  home.file.".mailcap".text = ''
+    application/pdf; xdg-open %s
+    image/*; xdg-open %s
+    text/html; xdg-open %s
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document; xdg-open %s
+  '';
 
 }
