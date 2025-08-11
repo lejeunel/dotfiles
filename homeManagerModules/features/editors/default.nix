@@ -79,6 +79,9 @@
       Environment = [
         "PATH=/usr/bin:/usr/local/bin:${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin"
         "GDK_BACKEND=wayland"
+
+        # allows xdg-open from daemon
+        "XDG_SESSION_TYPE=wayland"
       ];
       Type = "forking";
       ExecStart = "${pkgs.emacs-pgtk}/bin/emacs --daemon";
