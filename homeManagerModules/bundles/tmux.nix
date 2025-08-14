@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
 
@@ -6,7 +11,7 @@
     enable = true;
     sensibleOnTop = true;
     terminal = "alacritty-direct";
-    prefix = "C-A";
+    prefix = "C-a";
     mouse = true;
     baseIndex = 1;
     escapeTime = 0;
@@ -16,8 +21,6 @@
       # Vim style pane selection
       bind h select-pane -L
       bind l select-pane -R
-
-
 
       bind-key -r f run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
 
