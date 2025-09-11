@@ -82,6 +82,8 @@
 
         # allows xdg-open from daemon
         "XDG_SESSION_TYPE=wayland"
+        "DBUS_SESSION_BUS_ADDRESS=unix:path=%t/bus"
+        "XDG_RUNTIME_DIR=%t"
       ];
       Type = "forking";
       ExecStart = "${pkgs.emacs-pgtk}/bin/emacs --daemon";
