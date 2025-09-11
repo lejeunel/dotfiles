@@ -106,7 +106,7 @@ in
       set -euo pipefail  # Strict error handling
       ${pkgs.notmuch}/bin/notmuch new
       ${config.home.homeDirectory}/.config/notmuch/notify.sh
-      ${pkgs.afew}/bin/afew -C "${config.home.homeDirectory}/.config/notmuch/default/config" --tag --new
+      ${pkgs.afew}/bin/afew --tag --new
     '';
   };
 
@@ -116,5 +116,4 @@ in
     text/html; xdg-open %s
     application/vnd.openxmlformats-officedocument.wordprocessingml.document; xdg-open %s
   '';
-
 }
