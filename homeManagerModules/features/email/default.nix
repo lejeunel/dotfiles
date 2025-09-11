@@ -89,8 +89,6 @@ in
     };
   };
 
-  xdg.configFile."notmuch/notify.sh".source = ./notify.sh;
-
   services = {
     mbsync = {
       enable = true;
@@ -104,8 +102,24 @@ in
     text = ''
       #!/usr/bin/env bash
       set -euo pipefail  # Strict error handling
+      export NOTMUCH_CONFIG=${config.home.homeDirectory}/.config/notmuch/default/config
       ${pkgs.notmuch}/bin/notmuch new
-      ${config.home.homeDirectory}/.config/notmuch/notify.sh
+
+      # Process each new message and send notification
+      ${pkgs.notmuch}/bin/notmuch search --output=summary tag:new | while read -r line; do
+          # Extract relevant parts (adjust based on your notmuch output format)
+          from=$(echo "$line" | sed -E 's/.*\] ([^;]+);.*/\1/')
+
+          # Extract subject (everything after "; ")
+          subject=$(echo "$line" | sed -E 's/.*; (.*)/\1/')
+
+          # Clean up any trailing tags like "(new unread)"
+          subject=$(echo "$subject" | sed -E 's/\([^)]*\)$//' | xargs)
+
+          # Send notification
+          notify-send -t 5000 "New email from $from" "$subject"
+      done
+
       ${pkgs.afew}/bin/afew --tag --new
     '';
   };
