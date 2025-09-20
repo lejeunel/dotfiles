@@ -14,12 +14,15 @@
     };
   };
 
-  outputs = { ... }@inputs:
+  outputs =
+    { ... }@inputs:
     let
       # super simple boilerplate-reducing
       # lib with a bunch of functions
       myLib = import ./myLib/default.nix { inherit inputs; };
-    in with myLib; {
+    in
+    with myLib;
+    {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#<hostname>'
       nixosConfigurations = {
