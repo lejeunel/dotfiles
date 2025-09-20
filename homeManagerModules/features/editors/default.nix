@@ -53,6 +53,9 @@
 
     vimgolf
 
+    # show file types
+    file
+
   ];
 
   programs = {
