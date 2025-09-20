@@ -114,7 +114,7 @@ in
           subject=$(echo "$line" | sed -E 's/.*; (.*)/\1/')
 
           # Clean up any trailing tags like "(new unread)"
-          subject=$(echo "$subject" | sed -E 's/\([^)]*\)$//' | xargs)
+          subject=$(echo "$subject" | sed -E 's/\([^)]*\)$//' | xargs -0)
 
           # Send notification
           notify-send -t 5000 "New email from $from" "$subject"
