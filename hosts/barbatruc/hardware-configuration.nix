@@ -2,6 +2,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -24,7 +25,7 @@
   ];
 
   boot.extraModprobeConfig = ''
-    options btusb enable_autosuspend=0 reset_on_resume=1
+    options btusb enable_autosuspend=1 reset_on_resume=1
   '';
 
   fileSystems."/" = {
@@ -75,6 +76,24 @@
       Policy = {
         AutoEnable = "true";
       };
+    };
+  };
+  systemd.services.restart-btusb-on-resume = {
+    description = "Restart btusb module on resume";
+    wantedBy = [
+      "suspend.target"
+      "hibernate.target"
+      "hybrid-sleep.target"
+    ];
+    after = [
+      "suspend.target"
+      "hibernate.target"
+      "hybrid-sleep.target"
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.kmod}/bin/modprobe -r btusb && sleep 1 && ${pkgs.kmod}/bin/modprobe btusb'";
+      User = "root";
     };
   };
 }
