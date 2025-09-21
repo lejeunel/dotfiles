@@ -27,6 +27,7 @@
     bundles.power.enable = true;
     bundles.docker.enable = true;
     bundles.k8s.enable = true;
+    bundles.wifi.enable = true;
   };
 
   # Enable OpenGL
