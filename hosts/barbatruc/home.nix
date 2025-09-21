@@ -1,7 +1,9 @@
 { outputs, pkgs, ... }:
 {
 
-  imports = [ outputs.homeManagerModules.default ];
+  imports = [
+    outputs.homeManagerModules.default
+  ];
 
   myHomeManager = {
     bundles.hyprland.enable = true;
@@ -13,6 +15,7 @@
     bundles.dev.enable = true;
     bundles.keyboard-layout.enable = true;
     bundles.email.enable = true;
+    bundles.encryption.enable = true;
   };
 
   home = {
