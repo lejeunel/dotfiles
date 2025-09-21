@@ -126,6 +126,8 @@
     }
   '';
 
+  # write ~/.git-credentials on home-manager switch
+  # this uses sops secrets
   sops.secrets.github-pat = { };
   home.activation.gitCredentials = ''
       cat > ${config.home.homeDirectory}/.git-credentials <<EOF
