@@ -9,8 +9,8 @@ let
   maildir = ".mail";
 in
 {
-  sops.secrets.gandi-email = { };
-  sops.secrets.gmail-email = { };
+  sops.secrets."email/gandi" = { };
+  sops.secrets."email/gmail" = { };
   imports = [ ./afew.nix ];
   accounts.email = {
     maildirBasePath = "${maildir}";
@@ -19,7 +19,7 @@ in
         address = "olol85@gmail.com";
         userName = "olol85@gmail.com";
         flavor = "gmail.com";
-        passwordCommand = "cat ${config.sops.secrets.gmail-email.path}";
+        passwordCommand = "cat ${config.sops.secrets."email/gmail".path}";
         primary = true;
         mbsync = {
           enable = true;
@@ -43,7 +43,7 @@ in
         address = "me@lejeunel.org";
         userName = "me@lejeunel.org";
         flavor = "plain";
-        passwordCommand = "cat ${config.sops.secrets.gandi-email.path}";
+        passwordCommand = "cat ${config.sops.secrets."email/gandi".path}";
         mbsync = {
           enable = true;
           create = "both";
