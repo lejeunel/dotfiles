@@ -1,6 +1,49 @@
 #+title: Readme
 
-* Quick start
+* Commands
+** Rebuilding system
+From project's root:
+
+#+begin_src shell
+nh os switch .
+#+end_src
+
+** Apply Home-Manager configuration
+
+From project's root:
+
+#+begin_src shell
+nh home switch .
+#+end_src
+
+** Cleaning old generations
+
+#+begin_src shell
+nh clean all
+#+end_src
+
+** Enabling experimental features globally when installing from standalone home-manager
+#+begin_src shell
+echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+#+end_src
+
+* Secrets
+Secrets are encrypted and decrypted using [[https://github.com/Mic92/sops-nix][sops-nix]].
+At build-time, nix will look for a ~keys.txt~ file which should
+be located at ~/home/laurent/.config/sops/age/keys.txt~.
+
+The secret file is committed in this repo at ~<PROJECT-ROOT>/secrets.yaml~.
+
+* Updating
+All packages are pinned using a ~flake.lock~ file.
+We follow the ~nixos-unstable~ channel.
+
+Run ~nix flake update~ from project's root to update
+all packages to their latest version.
+
+Last, re-build using the ~switch~ commands.
+
+* Installing NixOS
 
 1. Acquire a NixOS 24.05+ image:
 #+begin_src shell
@@ -46,50 +89,6 @@ sudo cp -R $PWD /mnt/etc/nixos/dotfiles
 [!WARNING]
 Don't forget to change your ~root~ and ~$USER~ passwords! They are set to
 ~nixos~ by default.
-
-* Commands
-** Rebuilding system
-From project's root:
-
-#+begin_src shell
-nh os switch .
-#+end_src
-
-** Apply Home-Manager configuration
-
-From project's root:
-
-#+begin_src shell
-nh home switch .
-#+end_src
-
-** Cleaning old generations
-
-#+begin_src shell
-nh clean all
-#+end_src
-
-
-** Enabling experimental features globally when installing from standalone home-manager
-#+begin_src shell
-echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
-#+end_src
-
-* Secrets
-Secrets are encrypted and decrypted using [[https://github.com/Mic92/sops-nix][sops-nix]].
-At build-time, nix will look for a ~keys.txt~ file which should
-be located at ~/home/laurent/.config/sops/age/keys.txt~.
-
-The secret file is committed in this repo at ~<PROJECT-ROOT>/secrets.yaml~.
-
-* Updating
-All packages are pinned using a ~flake.lock~ file.
-We follow the ~nixos-unstable~ channel.
-
-Run ~nix flake update~ from project's root to update
-all packages to their latest version.
-
-Last, re-build using the ~switch~ commands.
 
 * Resources
 - i3, doom emacs: [[https://github.com/kenranunderscore/dotfiles/blob/bb0d038f1f31d52acef0da777621dfc1ea4b8a6d/modules/doom/default.nix][kenranunderscore/dotfiles]]
