@@ -32,8 +32,9 @@
     # format xml files
     libxml2
 
-    # markdown compiler
-    discount
+    # markdown
+    discount # compiler
+    markdownlint-cli # linter
 
     # Tool to access the X clipboard from a console application
     xclip
