@@ -109,6 +109,7 @@
       search.force = true;
 
       settings = {
+        "widget.non-native-theme.scrollbar.size.override" = 46;
         "browser.disableResetPrompt" = true;
         "browser.download.panel.shown" = true;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
@@ -124,6 +125,7 @@
         "privacy.trackingprotection.enabled" = true;
         "signon.rememberSignons" = false;
       };
+
     };
   };
 
