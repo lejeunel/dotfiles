@@ -9,6 +9,7 @@ let
   maildir = ".mail";
 in
 {
+
   sops.secrets."email/gandi" = { };
   sops.secrets."email/gmail" = { };
   imports = [ ./afew.nix ];

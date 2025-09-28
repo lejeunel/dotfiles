@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 
@@ -23,6 +24,22 @@
         "h" = "pan 50 0";
         "l" = "pan -50 0";
       };
+    };
+  };
+
+  xdg.desktopEntries = {
+    imv = {
+      name = "Imv";
+      genericName = "Image Viewer";
+      exec = "${pkgs.imv}/bin/imv -n %f .";
+    };
+  };
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "image/png" = [ "imv.desktop" ];
+      "image/jpeg" = [ "imv.desktop" ];
+      "image/gif" = [ "imv.desktop" ];
     };
   };
 

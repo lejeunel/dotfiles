@@ -98,5 +98,21 @@
       WantedBy = [ "default.target" ];
     };
   };
+  xdg.desktopEntries = {
+    emacsclient = {
+      name = "Emacs Client";
+      genericName = "Text Editor";
+      exec = "${pkgs.emacs-pgtk}/bin/emacsclient -nc %f";
+      icon = "emacs";
+    };
+  };
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/plain" = [ "emacsclient.desktop" ];
+      "text/x-script.python" = [ "emacsclient.desktop" ];
+      "text/x-tex" = [ "emacsclient.desktop" ];
+    };
+  };
 
 }
