@@ -1,6 +1,7 @@
 { ... }:
 {
 
-  myHomeManager.editors.enable = true;
+  myHomeManager.nvim.enable = true;
+  myHomeManager.emacs.enable = true;
 
 }

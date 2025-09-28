@@ -3,15 +3,13 @@
   pkgs,
   ...
 }:
+
 {
   home.file.".config/doom".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/doom";
-  home.file.".config/nvim".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
 
   home.sessionPath = [
     "${config.home.homeDirectory}/.config/emacs/bin"
-    "${config.home.homeDirectory}/.local/share/nvim/mason/bin"
     "${config.home.homeDirectory}/.local/scripts"
   ];
 
@@ -60,12 +58,6 @@
   ];
 
   programs = {
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-    };
     emacs = {
       enable = true;
       package = pkgs.emacs-pgtk;
