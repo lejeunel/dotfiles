@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 
-  home.packages = with pkgs; [ k3s k9s yq jq ];
+  home.packages = with pkgs; [
+    k3s
+    k9s
+    yq
+    jq
+  ];
 }
