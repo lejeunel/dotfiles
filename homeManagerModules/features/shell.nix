@@ -6,6 +6,10 @@
   programs = {
     bat.enable = true;
     eza.enable = true;
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
     yazi = {
       enable = true;
@@ -37,6 +41,7 @@
       shellAliases = {
         ls = "eza --color=always --long --git --icons=always";
         ll = "ls -lah";
+        cd = "z"; # use zoxide
         cat = "${pkgs.bat}/bin/bat";
         tmux = "tmux -u";
         e = "emacsclient -nc";
