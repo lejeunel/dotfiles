@@ -5,16 +5,15 @@
 }:
 let
   terminal = "${pkgs.alacritty}/bin/alacritty";
-  terminalFileManager = ''${terminal} --class "terminalFileManager" -e ${pkgs.yazi}/bin/yazi'';
   clipboard = "${pkgs.wl-clipboard-rs}/bin/wl-paste";
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
   scriptsPath = ".config/hypr/scripts";
   scriptsFPath = "${config.home.homeDirectory}/${scriptsPath}";
   editor = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc'';
   email = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(=notmuch)"'';
+  terminalFileManager = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(dired \"~\")"'';
 in
 {
-
   xdg.configFile."hypr/scripts" = {
     source = ./scripts;
     recursive = true;
@@ -37,7 +36,6 @@ in
       input = {
         kb_layout = "us"; # Base layout (QWERTY)
         kb_variant = "intl"; # Variant: "intl" for International (dead keys)
-        natural_scroll = true;
         touchpad = {
           natural_scroll = true;
           disable_while_typing = true;
@@ -272,7 +270,6 @@ in
         ) 10
       ));
     };
-
   };
 
 }
