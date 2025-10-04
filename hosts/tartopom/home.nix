@@ -1,8 +1,6 @@
 {
-  inputs,
   outputs,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -12,7 +10,7 @@
   myHomeManager = {
     bundles.rclone.enable = true;
     bundles.desktop.enable = true;
-    bundles.i3.enable = true;
+    bundles.hyprland.enable = true;
     bundles.shell.enable = true;
     bundles.editors.enable = true;
     bundles.general.enable = true;
