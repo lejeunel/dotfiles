@@ -75,6 +75,7 @@
       Environment = [
         "PATH=/usr/bin:/usr/local/bin:${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin"
         "GDK_BACKEND=wayland"
+        "DISPLAY=:0"
 
         # allows xdg-open from daemon
         "XDG_SESSION_TYPE=wayland"

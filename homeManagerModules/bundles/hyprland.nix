@@ -1,4 +1,5 @@
-{ config, inputs, pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     hyprsunset
     hyprpaper
