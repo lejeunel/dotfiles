@@ -16,6 +16,7 @@
     bundles.email.enable = true;
     bundles.encryption.enable = true;
     bundles.bluetooth.enable = true;
+    bundles.tmux.enable = true;
   };
 
   home = {
