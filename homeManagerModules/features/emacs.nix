@@ -50,11 +50,10 @@
 
     emacsPackages.all-the-icons-nerd-fonts
 
-    vimgolf
-
     # show file types
     file
 
+    proselint
   ];
 
   programs = {
