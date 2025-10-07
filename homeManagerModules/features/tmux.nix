@@ -37,8 +37,8 @@
       set-option -g pane-active-border-style fg=blue
       set-option -g history-limit 5000
 
-      set-option -sa terminal-overrides ",xterm-256color:RGB"
-      set -g default-terminal "xterm-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
+      set -g default-terminal "tmux-256color"
 
     '';
   };
