@@ -51,7 +51,6 @@
         bindkey "^K" up-line-or-search
         bindkey "^J" down-line-or-search
         bindkey '^Y' autosuggest-accept
-        bindkey -s '^O' 'yy^M'
         bindkey -s ^f "tmux-sessionizer^M"
 
         export EDITOR="emacsclient -nw"
