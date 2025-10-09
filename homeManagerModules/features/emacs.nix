@@ -55,6 +55,14 @@
 
     # generic spelling and checking
     proselint
+    aspell
+    aspellDicts.fr
+    aspellDicts.en
+    # aspellDicts.en-computers
+    # aspellDicts.en-science
+
+    libvterm
+    emacsPackages.vterm
   ];
 
   programs = {

@@ -48,13 +48,13 @@
         grep = "grep --color=auto";
       };
       initContent = ''
-        bindkey "^K" up-line-or-search
-        bindkey "^J" down-line-or-search
         bindkey '^Y' autosuggest-accept
         bindkey -s ^f "tmux-sessionizer^M"
 
         export EDITOR="emacsclient -nw"
 
+        # This fixes a bug where a % sign is printed in vterm
+        unsetopt PROMPT_SP
       '';
 
       oh-my-zsh = {
