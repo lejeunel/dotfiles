@@ -18,6 +18,7 @@
     bundles.bluetooth.enable = true;
     bundles.tmux.enable = true;
   };
+  nixpkgs.config.allowUnfree = true;
 
   home = {
     username = "laurent";
