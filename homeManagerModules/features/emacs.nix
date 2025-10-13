@@ -61,8 +61,12 @@
     # aspellDicts.en-computers
     # aspellDicts.en-science
 
+    # terminal emulation
     libvterm
     emacsPackages.vterm
+
+    # latex equation preview
+    texliveMedium
   ];
 
   programs = {
