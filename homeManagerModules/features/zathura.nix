@@ -9,9 +9,8 @@
     options = {
       window-title-basename = "true";
       selection-clipboard = "clipboard";
-      font = "${config.stylix.fonts.monospace.name} + 12";
+      font = "${config.stylix.fonts.monospace.name} 12";
       adjust-open = "width";
-      show-scrollbars = true;
     };
     mappings = {
       "f" = "toggle_fullscreen";
