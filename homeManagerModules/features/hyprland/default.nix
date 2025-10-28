@@ -11,7 +11,7 @@ let
   scriptsFPath = "${config.home.homeDirectory}/${scriptsPath}";
   editor = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc'';
   email = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(=notmuch)"'';
-  terminalFileManager = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(dired \"~\")"'';
+  terminalFileManager = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(dirvish \"~\")"'';
 in
 {
   xdg.configFile."hypr/scripts" = {
