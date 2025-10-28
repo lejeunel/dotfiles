@@ -4,10 +4,14 @@
     enable = true;
     package = pkgs.rofi-wayland;
     extraConfig = {
-      kb-remove-to-eol = ""; # Often uses Ctrl+j/k
-      kb-accept-entry = "Return"; # Clear if needed
+      kb-remove-to-eol = "";
+      kb-remove-char-back = "BackSpace,Shift+BackSpace";
+      kb-mode-complete = "";
+      kb-accept-entry = "Return";
       kb-row-down = "Control+j";
       kb-row-up = "Control+k";
+      kb-row-right = "Control+l";
+      kb-row-left = "Control+h";
     };
     plugins = with pkgs; [
       rofi-emoji-wayland # https://github.com/Mange/rofi-emoji 🤯
