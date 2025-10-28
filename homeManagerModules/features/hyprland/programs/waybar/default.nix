@@ -13,8 +13,8 @@ in
       {
         layer = "top";
         position = "top";
-        mode = "dock"; # Fixes fullscreen issues
-        height = 32; # 35
+        mode = "dock";
+        height = 32;
         exclusive = true;
         passthrough = false;
         gtk-layer-shell = true;
@@ -26,7 +26,6 @@ in
         margin-bottom = 0;
 
         modules-left = [ "hyprland/workspaces" ];
-        # modules-center = ["clock" "custom/notification"];
         modules-center = [
           "idle_inhibitor"
           "clock"
@@ -385,9 +384,12 @@ in
         color: @green;
       }
 
-      #bluetooth,
       #backlight {
         color: @blue;
+      }
+
+      #bluetooth {
+        color: @flamingo;
       }
 
       #battery {
