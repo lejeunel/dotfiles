@@ -23,10 +23,6 @@
     # format docker file
     dockfmt
 
-    # compile/format C/C++
-    libclang
-    glslang
-
     # format xml files
     libxml2
 
@@ -58,8 +54,8 @@
     aspell
     aspellDicts.fr
     aspellDicts.en
-    # aspellDicts.en-computers
-    # aspellDicts.en-science
+    aspellDicts.en-computers
+    aspellDicts.en-science
 
     # terminal emulation
     libvterm
@@ -88,6 +84,7 @@
         "PATH=/usr/bin:/usr/local/bin:${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin"
         "GDK_BACKEND=wayland"
         "DISPLAY=:0"
+        "WAYLAND_DISPLAY=wayland-0"
 
         "TERM=xterm-256color"
         "COLORTERM=truecolor"
