@@ -28,7 +28,7 @@
   ];
 
   boot.extraModprobeConfig = ''
-    options btusb enable_autosuspend=1 reset_on_resume=1
+    options btusb enable_autosuspend=n
   '';
 
   fileSystems."/" = {
