@@ -1,15 +1,20 @@
-{ config, lib, pkgs, ... }:
-let tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-in {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
+in
+{
   security.polkit.enable = true;
 
   services.greetd = {
     enable = true;
-    vt = 2;
     settings = {
       default_session = {
-        command =
-          "${tuigreet} --time --remember --remember-session --cmd hyprland";
+        command = "${tuigreet} --time --remember --remember-session --cmd hyprland";
         user = "greeter";
       };
     };

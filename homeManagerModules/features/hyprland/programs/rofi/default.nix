@@ -2,7 +2,7 @@
 {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
     extraConfig = {
       kb-remove-to-eol = "";
       kb-remove-char-back = "BackSpace,Shift+BackSpace";
@@ -14,7 +14,7 @@
       kb-row-left = "Control+h";
     };
     plugins = with pkgs; [
-      rofi-emoji-wayland # https://github.com/Mange/rofi-emoji 🤯
+      rofi-emoji # https://github.com/Mange/rofi-emoji 🤯
     ];
   };
   xdg.configFile."rofi/launchers" = {

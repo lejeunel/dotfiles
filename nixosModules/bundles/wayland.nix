@@ -12,7 +12,8 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true; # adds pkgs.xdg-desktop-portal-wlr to extraPortals
-    extraPortals = [
+
+    configPackages = [
       pkgs.xdg-desktop-portal-gtk # gtk portal needed to make gtk apps happy
     ];
   };

@@ -1,27 +1,26 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [ inputs.stylix.nixosModules.stylix ];
   stylix = {
     enable = true;
     base16Scheme = {
-      base00 = "282828"; # ----
-      base01 = "3c3836"; # ---
-      base02 = "504945"; # --
-      base03 = "665c54"; # -
-      base04 = "bdae93"; # +
-      base05 = "d5c4a1"; # ++
-      base06 = "ebdbb2"; # +++
-      base07 = "fbf1c7"; # ++++
-      base08 = "fb4934"; # red
-      base09 = "fe8019"; # orange
-      base0A = "fabd2f"; # yellow
-      base0B = "b8bb26"; # green
-      base0C = "8ec07c"; # aqua/cyan
-      base0D = "83a598"; # blue
-      base0E = "d3869b"; # purple
-      base0F = "d65d0e"; # brown
+      base00 = "24273a";
+      base01 = "1e2030";
+      base02 = "363a4f";
+      base03 = "494d64";
+      base04 = "5b6078";
+      base05 = "cad3f5";
+      base06 = "f4dbd6";
+      base07 = "b7bdf8";
+      base08 = "ed8796";
+      base09 = "f5a97f";
+      base0A = "eed49f";
+      base0B = "a6da95";
+      base0C = "8bd5ca";
+      base0D = "8aadf4";
+      base0E = "c6a0f6";
+      base0F = "f0c6c6";
     };
-
-    image = ./gruvbox-mountain-village.png;
 
     fonts = {
       monospace = {
@@ -29,7 +28,7 @@
         name = "JetBrainsMono Nerd Font";
       };
       sansSerif = {
-        package = pkgs.ubuntu_font_family;
+        package = pkgs.ubuntu-classic;
         name = "Ubuntu";
       };
       serif = {
@@ -52,7 +51,7 @@
     };
 
     targets.grub.enable = true;
-    targets.grub.useImage = true;
+    targets.grub.useWallpaper = true;
     targets.plymouth.enable = true;
     targets.nixos-icons.enable = true;
 

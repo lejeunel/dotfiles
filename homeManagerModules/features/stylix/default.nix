@@ -7,25 +7,25 @@
   imports = [ inputs.stylix.homeModules.stylix ];
   stylix = {
     base16Scheme = {
-      base00 = "292828";
-      base01 = "32302f";
-      base02 = "504945";
-      base03 = "665c54";
-      base04 = "bdae93";
-      base05 = "ddc7a1";
-      base06 = "ebdbb2";
-      base07 = "fbf1c7";
-      base08 = "ea6962";
-      base09 = "e78a4e";
-      base0A = "d8a657";
-      base0B = "a9b665";
-      base0C = "89b482";
-      base0D = "7daea3";
-      base0E = "d3869b";
-      base0F = "bd6f3e";
+      base00 = "282936";
+      base01 = "3a3c4e";
+      base02 = "4d4f68";
+      base03 = "626483";
+      base04 = "62d6e8";
+      base05 = "e9e9f4";
+      base06 = "f1f2f8";
+      base07 = "f7f7fb";
+      base08 = "ea51b2";
+      base09 = "b45bcf";
+      base0A = "00f769";
+      base0B = "ebff87";
+      base0C = "a1efe4";
+      base0D = "62d6e8";
+      base0E = "b45bcf";
+      base0F = "00f769";
     };
 
-    image = ./girl-reading-book.png;
+    image = ./kraken.png;
     cursor = {
       name = "Bibata-Modern-Ice";
       package = pkgs.bibata-cursors;
@@ -50,7 +50,7 @@
         name = "JetBrainsMono Nerd Font";
       };
       sansSerif = {
-        package = pkgs.ubuntu_font_family;
+        package = pkgs.ubuntu-classic;
         name = "Ubuntu";
       };
       serif = {

@@ -44,7 +44,7 @@
     nixd # another lSP
     nixfmt # formatting
 
-    emacsPackages.all-the-icons-nerd-fonts
+    emacs.pkgs.all-the-icons-nerd-fonts
 
     # show file types
     file
@@ -58,8 +58,7 @@
     aspellDicts.en-science
 
     # terminal emulation
-    libvterm
-    emacsPackages.vterm
+    emacs.pkgs.vterm
 
     # latex equation preview
     texliveMedium
@@ -71,6 +70,33 @@
       package = pkgs.emacs-pgtk;
     };
   };
+
+  home.file.".local/scripts/emacs-tangle" = {
+
+    executable = true;
+    text = ''
+      ${pkgs.emacs-pgtk}/bin/emacs --batch \
+          -l org \
+          --eval "(setq org-src-preserve-indentation t)" \
+          "$1" \
+          -f org-babel-tangle
+    '';
+  };
+
+  home.file.".local/scripts/emacs-install" = {
+
+    executable = true;
+    text = ''
+      EMACSDIR=$HOME/.config/emacs
+      echo ">>> Deleting packages, grammars and native compilation cache ..."
+      rm -rf $EMACSDIR/eln-cache $EMACSDIR/elpa $EMACSDIR/tree-sitter $EMACSDIR/elpaca $EMACSDIR/auto-save-list $EMACSDIR/transient
+      echo ">>> Tangling literate config ..."
+      ./$HOME/.local/scripts/emacs-tangle $EMACSDIR/config.org
+      echo ">>> Starting Emacs and auto-package fetching/installing ..."
+      ${pkgs.emacs-pgtk}/bin/emacs --init-dir="$EMACSDIR" -nw --eval="(ll/first-install)"
+    '';
+  };
+
   home.sessionVariables = {
     GDK_BACKEND = "wayland";
   };
@@ -83,8 +109,6 @@
       Environment = [
         "PATH=/usr/bin:/usr/local/bin:${config.home.homeDirectory}/.nix-profile/bin:/run/current-system/sw/bin"
         "GDK_BACKEND=wayland"
-        "DISPLAY=:0"
-        "WAYLAND_DISPLAY=wayland-0"
 
         "TERM=xterm-256color"
         "COLORTERM=truecolor"

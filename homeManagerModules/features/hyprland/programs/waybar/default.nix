@@ -173,7 +173,7 @@ in
           tooltip-format = " {device_alias}";
           tooltip-format-connected = "{device_enumerate}";
           tooltip-format-enumerate-connected = " {device_alias}";
-          on-click = "${terminal} -t bluetuith -e ${pkgs.bluetuith}/bin/bluetuith connect";
+          on-click = "${terminal} -t bluetuith -e ${pkgs.bluetuith}/bin/bluetuith";
           on-click-right = "rfkill toggle bluetooth";
         };
 
@@ -485,7 +485,7 @@ in
       }
 
       #workspaces button.persistent {
-      	color: @surface1;
+      	color: @text;
       	border-radius: 10px;
       }
 

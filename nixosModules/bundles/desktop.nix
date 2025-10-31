@@ -1,8 +1,9 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   myNixOS.bluetooth.enable = true;
   myNixOS.stylix.enable = true;
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
