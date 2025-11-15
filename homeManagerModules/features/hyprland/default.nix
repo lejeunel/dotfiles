@@ -31,6 +31,10 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
+    extraConfig = ''
+      source=~/.config/hypr/monitors.conf
+      source=~/.config/hypr/workspaces.conf
+    '';
 
     settings = {
       input = {
@@ -163,13 +167,13 @@ in
         mfact = 0.5;
       };
       windowrule = [
-        "float, title:^(nmtui)$"
-        "size 800 600, title:^(nmtui)$"
-        "center, title:^(nmtui)$"
+        "float, title:^(impala)$"
+        "size 800 600, title:^(impala)$"
+        "center, title:^(impala)$"
 
-        "float, title:^(bluetuith)$"
-        "size 800 600, title:^(bluetuith)$"
-        "center, title:^(bluetuith)$"
+        "float, title:^(bluetui)$"
+        "size 800 600, title:^(bluetui)$"
+        "center, title:^(bluetui)$"
 
         "float, title:^(pulsemixer)$"
         "size 800 600, title:^(pulsemixer)$"

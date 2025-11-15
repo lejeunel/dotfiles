@@ -1,0 +1,8 @@
+{
+  ...
+}:
+
+{
+  myHomeManager.wifi.enable = true;
+
+}

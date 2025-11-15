@@ -44,7 +44,7 @@ in
 
         "custom/notification" = {
           tooltip = false;
-          format = "{icon} {}";
+          format = "{icon} {text}";
           format-icons = {
             notification = "<span color=\"#${config.lib.stylix.colors.base08}\"><sup></sup></span>";
             none = "";
@@ -163,7 +163,7 @@ in
           format-linked = "󱘖 {ifname} (No IP)";
           format-disconnected = "󰤮 Off";
           tooltip-format = "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-          on-click = "${terminal} -t nmtui -e ${pkgs.networkmanager}/bin/nmtui connect";
+          on-click = "${terminal} -t impala -e ${pkgs.impala}/bin/impala";
         };
 
         "bluetooth" = {
@@ -173,7 +173,7 @@ in
           tooltip-format = " {device_alias}";
           tooltip-format-connected = "{device_enumerate}";
           tooltip-format-enumerate-connected = " {device_alias}";
-          on-click = "${terminal} -t bluetuith -e ${pkgs.bluetuith}/bin/bluetuith";
+          on-click = "${terminal} -t bluetui -e ${pkgs.bluetui}/bin/bluetui";
           on-click-right = "rfkill toggle bluetooth";
         };
 
