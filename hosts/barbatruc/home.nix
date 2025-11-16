@@ -30,6 +30,7 @@
       networkmanager
       ubuntu-classic
       roboto-serif
+      pavucontrol
     ];
   };
 
