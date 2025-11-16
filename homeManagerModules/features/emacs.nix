@@ -57,8 +57,7 @@
     aspellDicts.en-computers
     aspellDicts.en-science
 
-    # terminal emulation
-    emacs.pkgs.vterm
+    emacs-pgtk.pkgs.vterm
 
     # latex equation preview
     texliveMedium
