@@ -167,9 +167,9 @@ in
         mfact = 0.5;
       };
       windowrule = [
-        "float, title:^(nmtui)$"
-        "size 800 600, title:^(nmtui)$"
-        "center, title:^(nmtui)$"
+        "float, title:^(impala)$"
+        "size 800 600, title:^(impala)$"
+        "center, title:^(impala)$"
 
         "float, title:^(bluetui)$"
         "size 800 600, title:^(bluetui)$"

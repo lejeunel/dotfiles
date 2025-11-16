@@ -163,7 +163,7 @@ in
           format-linked = "󱘖 {ifname} (No IP)";
           format-disconnected = "󰤮 Off";
           tooltip-format = "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-          on-click = "${terminal} -t nmtui -e ${pkgs.networkmanager}/bin/nmtui connect";
+          on-click = "${terminal} -t impala -e ${pkgs.impala}/bin/impala";
         };
 
         "bluetooth" = {
