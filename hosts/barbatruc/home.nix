@@ -18,6 +18,7 @@
     bundles.bluetooth.enable = true;
     bundles.wifi.enable = true;
     bundles.tmux.enable = true;
+    bundles.python.enable = true;
   };
   nixpkgs.config.allowUnfree = true;
 
