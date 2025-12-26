@@ -12,6 +12,7 @@ let
   editor = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc'';
   email = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(=notmuch)"'';
   terminalFileManager = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(dirvish \"~\")"'';
+  pulsemixer = ''${pkgs.pulsemixer}/bin/pulsemixer'';
 in
 {
   xdg.configFile."hypr/scripts" = {
@@ -183,8 +184,8 @@ in
         # Functional keybinds
         ",XF86MonBrightnessDown,exec,brightnessctl set 2%-"
         ",XF86MonBrightnessUp,exec,brightnessctl set +2%"
-        ",XF86AudioLowerVolume,exec,pamixer -d 2"
-        ",XF86AudioRaiseVolume,exec,pamixer -i 2"
+        ",XF86AudioLowerVolume,exec,${pulsemixer} --change-volume -2"
+        ",XF86AudioRaiseVolume,exec,${pulsemixer} --change-volume +2"
       ];
       bind = [
         "$mainMod, Q, killactive"

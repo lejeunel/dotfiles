@@ -59,6 +59,8 @@
 
     emacs-pgtk.pkgs.vterm
 
+    emacs-pgtk.pkgs.treesit-grammars.with-all-grammars
+
     # latex equation preview
     texliveMedium
   ];

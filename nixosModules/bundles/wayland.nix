@@ -11,11 +11,22 @@
   ];
   xdg.portal = {
     enable = true;
-    wlr.enable = true; # adds pkgs.xdg-desktop-portal-wlr to extraPortals
+    # Disable wlr portal (conflicts with Hyprland’s own)
+    wlr.enable = false;
 
-    configPackages = [
-      pkgs.xdg-desktop-portal-gtk # gtk portal needed to make gtk apps happy
+    # Add extra portals here
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk # makes GTK/Electron apps behave better
     ];
+    config = {
+      hyprland = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+      };
+    };
   };
 
 }

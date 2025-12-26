@@ -3,10 +3,12 @@
   ...
 }:
 {
+  # background-color: #${config.stylix.base16Scheme.base00};
 
   programs.zathura = {
     enable = true;
     options = {
+      # default-fg = "${config.stylix.base16Scheme.base05}";
       window-title-basename = "true";
       selection-clipboard = "clipboard";
       font = "${config.stylix.fonts.monospace.name} 12";

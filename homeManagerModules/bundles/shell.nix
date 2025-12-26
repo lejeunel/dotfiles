@@ -4,7 +4,6 @@
     calcurse
     fastfetch
     psmisc
-    htop
     nh
     pdftk
     imagemagick

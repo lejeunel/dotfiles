@@ -8,7 +8,7 @@
     telegram-desktop
     wasistlos
     teams-for-linux
-    slacky
+    slack
   ];
 
 }
