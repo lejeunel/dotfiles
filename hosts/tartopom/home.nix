@@ -8,7 +8,6 @@
   imports = [ outputs.homeManagerModules.default ];
 
   myHomeManager = {
-    bundles.rclone.enable = true;
     bundles.desktop.enable = true;
     bundles.hyprland.enable = true;
     bundles.shell.enable = true;
