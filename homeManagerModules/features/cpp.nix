@@ -1,6 +1,11 @@
-{ config, inputs, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ ccls gnumake cmake gcc ];
+  home.packages = with pkgs; [
+    ccls
+    gnumake
+    cmake
+    gcc
+  ];
 
 }
