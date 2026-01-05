@@ -14,7 +14,22 @@
   ];
 
   home.packages = with pkgs; [
-    # (pkgs.callPackage ./doom.nix { })
+    # :emacs dired +dirvish
+    ffmpegthumbnailer
+    mediainfo
+    vips
+    poppler-utils
+    imagemagick
+
+    # :tools editorconfig (per-project style config)
+    editorconfig-core-c
+
+    # :tools lookup & :lang org +roam
+    sqlite
+
+    # :lang cc
+    clang-tools
+
     tectonic
 
     # alternative to find util
@@ -60,9 +75,6 @@
     emacs-pgtk.pkgs.vterm
 
     emacs-pgtk.pkgs.treesit-grammars.with-all-grammars
-
-    # latex equation preview
-    texliveMedium
   ];
 
   programs = {
