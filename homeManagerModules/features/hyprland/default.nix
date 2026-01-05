@@ -202,9 +202,11 @@ in
         "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
 
         # window groups
-        "$mainMod, T, togglegroup" # toggle the window on focus to float
+        "$mainMod, T, togglegroup"
+        "$mainMod, Y, lockactivegroup, toggle"
+        "$mainMod, U, moveoutofgroup"
         "$mainMod, Tab, changegroupactive, f"
-        "$mainMod SHIFT, Tab, changegroupactive, f"
+        "$mainMod SHIFT, Tab, changegroupactive, b"
 
         # Applications/Programs
         "$mainMod, Return, exec, ${terminal}"
