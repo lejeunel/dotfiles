@@ -12,6 +12,7 @@
     bundles.shell.enable = true;
     bundles.editors.enable = true;
     bundles.dev.enable = true;
+    bundles.encryption.enable = true;
   };
 
   home = {
