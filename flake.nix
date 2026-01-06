@@ -1,12 +1,7 @@
 {
   description = "My NixOS / Home-Manager configuration";
   inputs = {
-    nixpkgs = {
-      url = "nixpkgs/nixos-unstable";
-      config = {
-        allowUnfree = true;
-      };
-    };
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
