@@ -46,10 +46,10 @@
           sys = "x86_64-linux";
           host = "barbatruc";
         } ./hosts/barbatruc/home.nix;
-        "laurent@ptw11" = mkHome {
+        "laurent@quantiq-vm" = mkHome {
           sys = "x86_64-linux";
-          host = "PTW11-Lejeune";
-        } ./hosts/ptw11/home.nix;
+          host = "quantiq-vm";
+        } ./hosts/quantiq-vm/home.nix;
       };
 
       homeManagerModules.default = ./homeManagerModules;

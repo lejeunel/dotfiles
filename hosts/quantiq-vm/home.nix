@@ -25,7 +25,7 @@
     packages = with pkgs; [
       xorg.setxkbmap
       networkmanager
-      ubuntu_font_family
+      ubuntu-classic
       roboto-serif
     ];
   };
