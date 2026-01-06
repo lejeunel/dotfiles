@@ -4,8 +4,8 @@ home-manager:
 	nix-channel --update
 	nix-shell '<home-manager>' -A install
 
-home-ptw11:
-	$(BASE_CMD_HOME_MANAGER) .#"laurent@ptw11"
+home-quantiq-vm:
+	$(BASE_CMD_HOME_MANAGER) .#"laurent@quantiq-vm"
 
 home-barbatruc:
 	$(BASE_CMD_HOME_MANAGER) .#"laurent@barbatruc"
