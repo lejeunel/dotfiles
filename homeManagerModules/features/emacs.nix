@@ -70,7 +70,7 @@
     aspellDicts.fr
     aspellDicts.en
     aspellDicts.en-computers
-    aspellDicts.en-science
+    # aspellDicts.en-science
 
     emacs-pgtk.pkgs.vterm
 
