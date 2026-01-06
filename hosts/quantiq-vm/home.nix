@@ -1,8 +1,5 @@
 {
-  inputs,
   outputs,
-  pkgs,
-  lib,
   ...
 }:
 {
@@ -13,7 +10,6 @@
     bundles.stylix.enable = true;
     bundles.shell.enable = true;
     bundles.editors.enable = true;
-    bundles.k8s.enable = true;
     bundles.dev.enable = true;
   };
 
@@ -22,12 +18,6 @@
     homeDirectory = "/home/laurent";
     stateVersion = "24.05";
 
-    packages = with pkgs; [
-      xorg.setxkbmap
-      networkmanager
-      ubuntu-classic
-      roboto-serif
-    ];
   };
 
 }
