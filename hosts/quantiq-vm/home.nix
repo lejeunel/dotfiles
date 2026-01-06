@@ -1,5 +1,6 @@
 {
   outputs,
+  pkgs,
   ...
 }:
 {
@@ -18,6 +19,9 @@
     homeDirectory = "/home/laurent";
     stateVersion = "24.05";
 
+    packages = with pkgs; [
+      gnumake
+    ];
   };
 
 }
