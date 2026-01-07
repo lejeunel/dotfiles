@@ -1,0 +1,39 @@
+#!/usr/bin/env sh
+
+usage() {
+  echo "Wrapper script to run home-manager commands."
+  echo "Usage: $0 <flake-target>"
+  echo "Example:"
+  echo "  $0 .#user@host"
+  exit 1
+}
+
+# ---- Parse arguments -----------------------------------------------
+if [[ $# -ne 1 ]]; then
+  usage
+fi
+
+FLAKE_TARGET="$1"
+
+# ---- Configuration -------------------------------------------------
+NIXPKGS_REF="nixos-25.11"
+
+HM_CMD=(
+  home-manager
+  -v
+  --show-trace
+  switch
+  --flake "${FLAKE_TARGET}"
+)
+
+# ---- Environment ---------------------------------------------------
+export NIX_CONFIG="experimental-features = nix-command flakes"
+
+# Ensure HOME exists (important in containers)
+export HOME="${HOME:-/root}"
+
+# ---- Execute -------------------------------------------------------
+nix shell "github:NixOS/nixpkgs/${NIXPKGS_REF}#home-manager" \
+  --command "${HM_CMD[@]}"
+
+
