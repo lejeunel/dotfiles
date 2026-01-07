@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+    echo "Usage: $0 <mode> [flake-target]"
+    echo ""
+    echo "Modes:"
+    echo "  install-nix            Install Nix (single-user)"
+    echo "  install-age-key        Install AGE decryption key"
+    echo "  hm-switch              Run Home-Manager (flake-target required)"
+    echo ""
+    echo "Example:"
+    echo "  $0 install-nix"
+    echo "  $0 install-age-key <PATH-TO-AGE-KEY>"
+    echo "  $0 hm-switch .#user@host"
+    exit 1
+}
+
+# ---- Parse CLI arguments ------------------------------------------
+if [[ $# -lt 1 ]]; then
+    usage
+fi
+
+MODE="$1"
+ARGS="${2:-}"
+AGE_KEY_DST_DIR="$HOME/.config/sops/age"
+AGE_KEY_DST="$AGE_KEY_DST_DIR/keys.txt"
+
+# ---- Ensure HOME exists --------------------------------------------
+export HOME="${HOME:-$PWD/.home}"
+mkdir -p "$HOME"
+
+install_nix() {
+    if command -v nix >/dev/null 2>&1; then
+        echo ">> Nix already installed."
+        return
+    fi
+
+    echo ">> Installing Nix (single-user, no daemon)..."
+    sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon
+
+    # Load nix.sh into current shell
+    if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+        # shellcheck disable=SC1091
+        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    else
+        echo "ERROR: nix.sh not found; Nix installation may have failed."
+        exit 1
+    fi
+}
+
+install_age_key() {
+    SRC_PATH="$ARGS"
+    if [ -z "$SRC_PATH" ]; then
+        echo "ERROR: source key file path is required for install-age-key mode."
+        usage
+    fi
+    if [ ! -f "$SRC_PATH" ]; then
+        echo "ERROR: source key file $SRC_PATH not found"
+        exit 1
+    fi
+    if [ -f "$AGE_KEY_DST" ]; then
+        echo "ERROR: destination key file exists at $AGE_KEY_DST"
+        echo "you might want to remove it first!"
+        exit 1
+    fi
+
+    mkdir -p "$AGE_KEY_DST_DIR"
+    echo ">> Copying key file ${SRC_PATH} -> ${AGE_KEY_DST}"
+    cp "${SRC_PATH}" "${AGE_KEY_DST}"
+}
+
+
+home_manager_switch() {
+    FLAKE_TARGET="$ARGS"
+    if [ -z "$FLAKE_TARGET" ]; then
+        echo "ERROR: flake-target is required for hm-switch mode."
+        usage
+    fi
+
+    echo ">> Running Home-Manager for flake: ${FLAKE_TARGET}"
+
+    # Enable flakes and nix-command
+    export NIX_CONFIG="experimental-features = nix-command flakes"
+
+    # Pin nixpkgs
+    NIXPKGS_REF="nixos-24.05"
+
+    # Run Home-Manager via nix shell
+    nix shell "github:NixOS/nixpkgs/${NIXPKGS_REF}#home-manager" \
+        --command \
+        home-manager -v --show-trace switch --flake "${FLAKE_TARGET}"
+}
+
+# ---- Main ----------------------------------------------------------
+case "$MODE" in
+    install-nix)
+        install_nix
+        ;;
+    install-age-key)
+        install_age_key
+        ;;
+    hm-switch)
+        home_manager_switch
+        ;;
+    *)
+        usage
+        ;;
+esac
