@@ -1,8 +1,11 @@
-{ config, lib, ... }: {
+{ config, ... }:
+{
   programs.hyprlock = {
     enable = true;
     settings = {
-      general = { hide_cursor = true; };
+      general = {
+        hide_cursor = true;
+      };
 
       label = [
         {
@@ -17,8 +20,7 @@
         }
         {
           monitor = "";
-          text = ''
-            Hello <span text_transform="capitalize" size="larger">$USER!</span>'';
+          text = ''Hello <span text_transform="capitalize" size="larger">$USER!</span>'';
 
           color = "rgb(${config.stylix.base16Scheme.base0D})";
           font_size = 20;

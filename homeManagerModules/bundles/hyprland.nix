@@ -12,4 +12,11 @@
   ];
 
   myHomeManager.hyprland.enable = true;
+  myHomeManager.waybar.enable = true;
+  myHomeManager.wlogout.enable = true;
+  myHomeManager.rofi.enable = true;
+  myHomeManager.hypridle.enable = true;
+  myHomeManager.hyprlock.enable = true;
+  myHomeManager.hyprpaper.enable = true;
+  myHomeManager.swaync.enable = true;
 }

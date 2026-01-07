@@ -19,16 +19,10 @@ in
     source = ./scripts;
     recursive = true;
   };
-
-  imports = [
-    ./programs/waybar
-    ./programs/wlogout
-    ./programs/rofi
-    ./programs/hypridle
-    ./programs/hyprlock
-    ./programs/hyprpaper
-    ./programs/swaync
-  ];
+  xdg.configFile."hypr/icons" = {
+    source = ./icons;
+    recursive = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
