@@ -8,7 +8,7 @@
   imports = [ outputs.homeManagerModules.default ];
 
   myHomeManager = {
-    bundles.stylix.enable = false;
+    bundles.stylix.enable = true;
     bundles.shell.enable = true;
     bundles.dev.enable = true;
     bundles.encryption.enable = true;
