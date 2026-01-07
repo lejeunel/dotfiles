@@ -42,7 +42,7 @@ install_nix() {
     # Load nix.sh into current shell
     if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
         # shellcheck disable=SC1091
-        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+        . "${HOME}/.nix-profile/etc/profile.d/nix.sh"
     else
         echo "ERROR: nix.sh not found; Nix installation may have failed."
         exit 1
