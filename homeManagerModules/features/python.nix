@@ -1,16 +1,18 @@
 { pkgs, ... }:
 
 {
-  home.packages = [
+  home.packages = with pkgs; [
 
-    pkgs.qt6.qtwayland
-    pkgs.mesa
-    pkgs.libGL
-    pkgs.libxkbcommon
+    basedpyright
+    qt6.qtwayland
+    mesa
+    libGL
+    libxkbcommon
 
-    (pkgs.python313.withPackages (ps: [
-      ps.matplotlib
-      ps.pyqt6
+    (python313.withPackages (ps: [
+      ps.isort
+      ps.black
+      ps.pyflakes
       ps.ipython
     ]))
 
