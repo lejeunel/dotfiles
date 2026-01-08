@@ -6,7 +6,6 @@ usage() {
     echo ""
     echo "Modes:"
     echo "  install-nix            Install Nix (single-user)"
-    echo "  install-age-key        Install AGE decryption key"
     echo "  hm-switch              Run Home-Manager (flake-target required)"
     echo ""
     echo "Example:"
@@ -23,8 +22,6 @@ fi
 
 MODE="$1"
 ARGS="${2:-}"
-AGE_KEY_DST_DIR="$HOME/.config/sops/age"
-AGE_KEY_DST="$AGE_KEY_DST_DIR/keys.txt"
 
 # ---- Ensure HOME exists --------------------------------------------
 export HOME="${HOME:-$PWD/.home}"
@@ -47,27 +44,6 @@ install_nix() {
         echo "ERROR: nix.sh not found; Nix installation may have failed."
         exit 1
     fi
-}
-
-install_age_key() {
-    SRC_PATH="$ARGS"
-    if [ -z "$SRC_PATH" ]; then
-        echo "ERROR: source key file path is required for install-age-key mode."
-        usage
-    fi
-    if [ ! -f "$SRC_PATH" ]; then
-        echo "ERROR: source key file $SRC_PATH not found"
-        exit 1
-    fi
-    if [ -f "$AGE_KEY_DST" ]; then
-        echo "ERROR: destination key file exists at $AGE_KEY_DST"
-        echo "you might want to remove it first!"
-        exit 1
-    fi
-
-    mkdir -p "$AGE_KEY_DST_DIR"
-    echo ">> Copying key file ${SRC_PATH} -> ${AGE_KEY_DST}"
-    cp "${SRC_PATH}" "${AGE_KEY_DST}"
 }
 
 
@@ -96,9 +72,6 @@ home_manager_switch() {
 case "$MODE" in
     install-nix)
         install_nix
-        ;;
-    install-age-key)
-        install_age_key
         ;;
     hm-switch)
         home_manager_switch
