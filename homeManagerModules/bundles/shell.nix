@@ -9,6 +9,8 @@
     imagemagick
     unzip
     lazydocker
+    stow
+    rsync
   ];
 
   myHomeManager.shell.enable = true;

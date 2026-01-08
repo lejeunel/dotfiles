@@ -12,6 +12,7 @@
   ];
 
   myHomeManager.hyprland.enable = true;
+  myHomeManager.hyprassets.enable = true;
   myHomeManager.waybar.enable = true;
   myHomeManager.wlogout.enable = true;
   myHomeManager.rofi.enable = true;

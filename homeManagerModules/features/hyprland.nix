@@ -15,14 +15,6 @@ let
   pulsemixer = ''${pkgs.pulsemixer}/bin/pulsemixer'';
 in
 {
-  xdg.configFile."hypr/scripts" = {
-    source = ./scripts;
-    recursive = true;
-  };
-  xdg.configFile."hypr/icons" = {
-    source = ./icons;
-    recursive = true;
-  };
 
   wayland.windowManager.hyprland = {
     enable = true;
