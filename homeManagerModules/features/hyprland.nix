@@ -7,8 +7,7 @@ let
   terminal = "${pkgs.alacritty}/bin/alacritty";
   clipboard = "${pkgs.wl-clipboard-rs}/bin/wl-paste";
   notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
-  scriptsPath = ".config/hypr/scripts";
-  scriptsFPath = "${config.home.homeDirectory}/${scriptsPath}";
+  scriptsFPath = "${config.home.homeDirectory}/.config/hypr/scripts";
   editor = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc'';
   email = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(=notmuch)"'';
   terminalFileManager = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(dirvish \"~\")"'';
