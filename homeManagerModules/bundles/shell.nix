@@ -11,6 +11,7 @@
     lazydocker
     stow
     rsync
+    parallel
   ];
 
   myHomeManager.shell.enable = true;
