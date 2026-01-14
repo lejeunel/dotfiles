@@ -12,7 +12,6 @@
     bundles.hyprland.enable = true;
     bundles.shell.enable = true;
     bundles.editors.enable = true;
-    bundles.general.enable = true;
     bundles.dev.enable = true;
   };
 
