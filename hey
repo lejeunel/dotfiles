@@ -10,7 +10,6 @@ usage() {
     echo ""
     echo "Example:"
     echo "  $0 install-nix"
-    echo "  $0 install-age-key <PATH-TO-AGE-KEY>"
     echo "  $0 hm-switch .#user@host"
     exit 1
 }
@@ -46,7 +45,6 @@ install_nix() {
     fi
 }
 
-
 home_manager_switch() {
     FLAKE_TARGET="$ARGS"
     if [ -z "$FLAKE_TARGET" ]; then
@@ -70,13 +68,13 @@ home_manager_switch() {
 
 # ---- Main ----------------------------------------------------------
 case "$MODE" in
-    install-nix)
-        install_nix
-        ;;
-    hm-switch)
-        home_manager_switch
-        ;;
-    *)
-        usage
-        ;;
+install-nix)
+    install_nix
+    ;;
+hm-switch)
+    home_manager_switch
+    ;;
+*)
+    usage
+    ;;
 esac
