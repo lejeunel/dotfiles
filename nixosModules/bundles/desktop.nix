@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   myNixOS.bluetooth.enable = true;
   myNixOS.stylix.enable = true;
