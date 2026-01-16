@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 
@@ -42,6 +43,9 @@
 
     '';
   };
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.local/scripts"
+  ];
 
   home.file.".local/scripts/tmux-sessionizer" = {
 
