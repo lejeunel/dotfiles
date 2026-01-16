@@ -13,6 +13,7 @@
     bundles.dev.enable = true;
     bundles.encryption.enable = true;
     bundles.nvim.enable = true;
+    bundles.emacs.enable = true;
   };
 
   home = {
