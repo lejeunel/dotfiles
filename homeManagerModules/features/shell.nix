@@ -44,8 +44,10 @@
         cd = "z"; # use zoxide
         cat = "${pkgs.bat}/bin/bat";
         tmux = "tmux -u";
-        e = "emacsclient -nc";
-        ee = "emacsclient -nw";
+        ec = "emacsclient -nc";
+        eec = "emacsclient -nw";
+        e = "emacs -nc";
+        ee = "emacs -nw";
         tree = "${pkgs.eza}/bin/eza --color=auto --tree";
         cal = "cal -m";
         vim = "nvim";
