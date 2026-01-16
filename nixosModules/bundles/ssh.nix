@@ -1,0 +1,4 @@
+{ ... }:
+{
+  myNixOS.ssh.enable = true;
+}
