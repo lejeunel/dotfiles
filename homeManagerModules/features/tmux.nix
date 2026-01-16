@@ -14,6 +14,13 @@
     baseIndex = 1;
     escapeTime = 0;
     keyMode = "vi";
+
+    plugins = with pkgs; [
+      tmuxPlugins.sensible
+      tmuxPlugins.dotbar
+      tmuxPlugins.vim-tmux-navigator
+    ];
+
     extraConfig = ''
 
       # Vim style pane selection
@@ -23,8 +30,8 @@
       bind-key -r f run-shell "tmux neww ~/.local/scripts/tmux-sessionizer"
 
       bind-key R run-shell ' \
-        tmux source-file ~/.config/tmux/tmux.conf > /dev/null; \
-        tmux display-message "sourced tmux config"'
+      tmux source-file ~/.config/tmux/tmux.conf > /dev/null; \
+      tmux display-message "sourced tmux config"'
 
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
@@ -40,7 +47,7 @@
 
       set -ga terminal-overrides ",*256col*:Tc"
       set -g default-terminal "tmux-256color"
-
+      set -g status on
     '';
   };
   home.sessionPath = [
