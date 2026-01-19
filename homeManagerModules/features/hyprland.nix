@@ -12,6 +12,8 @@ let
   email = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(=notmuch)"'';
   terminalFileManager = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(dirvish \"~\")"'';
   pulsemixer = ''${pkgs.pulsemixer}/bin/pulsemixer'';
+  wlogout = "${pkgs.wlogout}/bin/wlogout";
+  hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
 in
 {
 
@@ -183,8 +185,8 @@ in
         "$mainMod, SPACE, togglefloating" # toggle the window on focus to float
 
         "$mainMod, F, fullscreen" # toggle the window on focus to fullscreen
-        "$mainMod ALT, L, exec, hyprlock" # lock screen
-        "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
+        "$mainMod ALT, L, exec, ${hyprlock}" # lock screen
+        "$mainMod, backspace, exec, pkill -x ${wlogout} || ${wlogout} -b 4"
 
         # window groups
         "$mainMod, T, togglegroup"

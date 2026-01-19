@@ -6,7 +6,7 @@
   ];
 
   myHomeManager = {
-    bundles.hyprland.enable = true;
+    bundles.niri.enable = true;
     bundles.desktop.enable = true;
     bundles.shell.enable = true;
     bundles.editors.enable = true;

@@ -19,6 +19,7 @@ in
   };
 
   environment.etc."greetd/environments".text = ''
+    niri
     hyprland
     zsh
   '';

@@ -14,6 +14,7 @@
     baseIndex = 1;
     escapeTime = 0;
     keyMode = "vi";
+    historyLimit = 5000;
 
     plugins = with pkgs; [
       tmuxPlugins.sensible
@@ -43,7 +44,6 @@
       bind-key -n C-Space resize-pane -Z
 
       set-option -g pane-active-border-style fg=blue
-      set-option -g history-limit 5000
 
       set -ga terminal-overrides ",*256col*:Tc"
       set -g default-terminal "tmux-256color"
