@@ -18,6 +18,10 @@ in
     spawn-sh-at-startup "${clipboard} --type text --watch cliphist store"
     spawn-sh-at-startup "${clipboard} --type image --watch cliphist store"
 
+    hotkey-overlay {
+        skip-at-startup
+    }
+
     output "eDP-1" {
       scale 1.0
       mode "1920x1080@60.049"
