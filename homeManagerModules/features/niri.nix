@@ -86,8 +86,8 @@ in
 
       Mod+Shift+H { move-column-left; }
       Mod+Shift+L { move-column-right; }
-      Mod+Shift+J { move-window-down; }
-      Mod+Shift+K { move-window-up; }
+      Mod+Shift+J { move-window-to-workspace-down; }
+      Mod+Shift+K { move-window-to-workspace-up; }
     }
   '';
 }
