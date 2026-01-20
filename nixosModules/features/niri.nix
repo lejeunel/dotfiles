@@ -20,4 +20,8 @@
     nerd-fonts.jetbrains-mono
     noto-fonts
   ];
+
+  environment.systemPackages = with pkgs; [
+    wdisplays
+  ];
 }

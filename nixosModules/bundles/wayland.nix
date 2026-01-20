@@ -17,7 +17,8 @@
     # Add extra portals here
     extraPortals = [
       pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk # makes GTK/Electron apps behave better
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
     ];
     config = {
       hyprland = {
