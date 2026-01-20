@@ -49,7 +49,7 @@ in
     }
 
     layout {
-      gaps 16
+      gaps 12
       focus-ring {
         width 2
         active-color "#${config.lib.stylix.colors.base0D}"
