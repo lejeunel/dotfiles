@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 let
   terminal = "${pkgs.alacritty}/bin/alacritty";
   wlogout = "${pkgs.wlogout}/bin/wlogout";
@@ -10,88 +15,151 @@ let
 
 in
 {
-  xdg.configFile."niri/config.kdl".text = ''
-    prefer-no-csd
-    spawn-at-startup "waybar"
 
-    spawn-sh-at-startup "${clipboard} --watch cliphist store"
-    spawn-sh-at-startup "${clipboard} --type text --watch cliphist store"
-    spawn-sh-at-startup "${clipboard} --type image --watch cliphist store"
+  imports = [
+    inputs.niri-flake.homeModules.niri
+  ];
 
-    hotkey-overlay {
-        skip-at-startup
-    }
+  xdg.configFile."niri/scripts" = {
+    source = ../../assets/scripts;
+    recursive = true;
+  };
+  xdg.configFile."niri/icons" = {
+    source = ../../assets/icons;
+    recursive = true;
+  };
 
-    output "eDP-1" {
-      scale 1.0
-      mode "1920x1080@60.049"
-      position x=330 y=1440
-    }
-    output "HDMI-A-2" {
-      scale 1.0
-      mode "2560x1440@59.951"
-      position x=0 y=0
+  programs.niri = {
+    enable = true;
+    settings = {
+      prefer-no-csd = true;
 
-    }
-
-    input {
-        keyboard {
-            xkb {
-                layout "us"
-                variant "intl"
-            }
-        
+      spawn-at-startup = [
+        { argv = [ "${pkgs.waybar}/bin/waybar" ]; }
+        {
+          argv = [
+            "${clipboard}"
+            "--watch"
+            "cliphist"
+            "store"
+          ];
         }
-        touchpad {
-            tap
-            natural-scroll
+        {
+          argv = [
+            "${clipboard}"
+            "--type"
+            "text"
+            "--watch"
+            "cliphist"
+            "store"
+          ];
         }
-    }
+        {
+          argv = [
+            "${clipboard}"
+            "--type"
+            "image"
+            "--watch"
+            "cliphist"
+            "store"
+          ];
+        }
+      ];
+      hotkey-overlay.skip-at-startup = true;
+      outputs = {
+        "eDP-1" = {
+          scale = 1.0;
+          mode = {
+            width = 1920;
+            height = 1080;
+            refresh = 60.049;
+          };
+          position = {
+            x = 330;
+            y = 1440;
+          };
+        };
+        "HDMI-A-2" = {
+          scale = 1.0;
+          mode = {
+            width = 2560;
+            height = 1440;
+            refresh = 59.951;
+          };
+          position = {
+            x = 0;
+            y = 0;
+          };
+        };
 
-    layout {
-      gaps 12
-      focus-ring {
-        width 2
-        active-color "#${config.lib.stylix.colors.base0D}"
-      }
-    }
-    window-rule {
-      geometry-corner-radius 12
-      clip-to-geometry true
-    }
+      };
 
-    binds {
-      Mod+Return { spawn "${terminal}"; }
-      Mod+Backspace { spawn-sh "pkill -x ${wlogout} || ${wlogout} -b 4"; }
-      Mod+E { spawn-sh "${editor}"; }
-      Mod+Alt+L { spawn "${hyprlock}"; }
-      Mod+Space { toggle-overview; }
-      Mod+S { screenshot; }
-      Mod+C { spawn-sh "${notif-center}";}
+      input = {
+        keyboard = {
+          xkb = {
+            layout = "us";
+            variant = "intl";
+          };
+        };
+        touchpad = {
+          tap = true;
+          natural-scroll = true;
+        };
+      };
 
-      Mod+Q { close-window; }
+      layout = {
+        gaps = 12;
+        focus-ring = {
+          width = 2;
+          active.color = "#${config.lib.stylix.colors.base0D}";
+        };
+      };
+      window-rules = [
+        {
+          draw-border-with-background = false;
+          geometry-corner-radius =
+            let
+              r = 12.0;
+            in
+            {
+              top-left = r;
+              top-right = r;
+              bottom-left = r;
+              bottom-right = r;
+            };
+          clip-to-geometry = true;
+        }
+      ];
 
-      Mod+F { maximize-column; }
-      Mod+Shift+F { fullscreen-window; }
-      Mod+M { maximize-window-to-edges; }
-      Mod+Ctrl+F { expand-column-to-available-width; }
+      binds = {
+        "Mod+Return".action.spawn = "${terminal}";
+        "Mod+Backspace".action.spawn-sh = "pkill -x ${wlogout} || ${wlogout} -b 4";
+        "Mod+E".action.spawn-sh = "${editor}";
+        "Mod+Alt+L".action.spawn = [ "${hyprlock}" ];
+        "Mod+Space".action.toggle-overview = [ ];
+        "Mod+S".action.screenshot = [ ];
+        "Mod+C".action.spawn-sh = "${notif-center}";
+        "Mod+Q".action.close-window = [ ];
+        "Mod+F".action.maximize-column = [ ];
+        "Mod+Shift+F".action.fullscreen-window = [ ];
+        "Mod+Ctrl+F".action.expand-column-to-available-width = [ ];
+        "Mod+Minus".action.set-column-width = "-10%";
+        "Mod+Equal".action.set-column-width = "+10%";
 
-      Mod+Minus { set-column-width "-10%"; }
-      Mod+Equal { set-column-width "+10%"; }
+        "Mod+D".action.spawn-sh = "pkill -x rofi || ${scriptsFPath}/rofi.sh drun";
 
-      Mod+D { spawn-sh "pkill -x rofi || ${scriptsFPath}/rofi.sh drun"; }
+        "Mod+H".action.focus-column-left = [ ];
+        "Mod+L".action.focus-column-right = [ ];
+        "Mod+J".action.focus-workspace-down = [ ];
+        "Mod+K".action.focus-workspace-up = [ ];
+        "Mod+P".action.focus-monitor-up = [ ];
+        "Mod+N".action.focus-monitor-down = [ ];
 
-      Mod+H { focus-column-left; }
-      Mod+L { focus-column-right; }
-      Mod+J { focus-workspace-down; }
-      Mod+K { focus-workspace-up; }
-      Mod+P { focus-monitor-up; }
-      Mod+N { focus-monitor-down; }
-
-      Mod+Shift+H { move-column-left; }
-      Mod+Shift+L { move-column-right; }
-      Mod+Shift+J { move-window-to-workspace-down; }
-      Mod+Shift+K { move-window-to-workspace-up; }
-    }
-  '';
+        "Mod+Shift+H".action.move-column-left = [ ];
+        "Mod+Shift+L".action.move-column-right = [ ];
+        "Mod+Shift+J".action.move-window-to-workspace-down = [ ];
+        "Mod+Shift+K".action.move-window-to-workspace-up = [ ];
+      };
+    };
+  };
 }

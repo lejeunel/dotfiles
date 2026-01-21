@@ -16,6 +16,14 @@ let
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
 in
 {
+  xdg.configFile."hypr/scripts" = {
+    source = ../../assets/scripts;
+    recursive = true;
+  };
+  xdg.configFile."hypr/icons" = {
+    source = ../../assets/icons;
+    recursive = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -26,8 +34,8 @@ in
 
     settings = {
       input = {
-        kb_layout = "us"; # Base layout (QWERTY)
-        kb_variant = "intl"; # Variant: "intl" for International (dead keys)
+        kb_layout = "us";
+        kb_variant = "intl";
         touchpad = {
           natural_scroll = true;
           disable_while_typing = true;

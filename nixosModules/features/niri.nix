@@ -1,7 +1,18 @@
-{ pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
+  imports = [
+    inputs.niri-flake.nixosModules.niri
+  ];
+
   programs.niri.enable = true;
+  nixpkgs.overlays = [ inputs.niri-flake.overlays.niri ];
+  programs.niri.package = pkgs.niri-unstable;
+  environment.variables.NIXOS_OZONE_WL = "1";
 
   # Required for Wayland compositors
   services.dbus.enable = true;

@@ -1,11 +1,12 @@
-{ config, ... }: {
-  xdg.configFile."wlogout/icons".source = ./icons;
+{ pkgs, config, ... }:
+{
+  xdg.configFile."wlogout/icons".source = ../../assets/icons;
   programs.wlogout = {
     enable = true;
     layout = [
       {
         label = "logout";
-        action = "hyprctl dispatch exit 0";
+        action = "${pkgs.niri}/bin/niri msg action quit";
         text = "Exit";
         keybind = "e";
       }
