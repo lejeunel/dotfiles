@@ -1,0 +1,8 @@
+{
+  ...
+}:
+
+{
+
+  myHomeManager.qute.enable = true;
+}

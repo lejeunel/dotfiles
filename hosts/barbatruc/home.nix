@@ -20,6 +20,9 @@
     bundles.tmux.enable = true;
     bundles.python.enable = true;
     bundles.podman.enable = true;
+    bundles.stylix.enable = true;
+    bundles.qute.enable = true;
+    bundle.floorp.enable = true;
   };
   nixpkgs.config.allowUnfree = true;
 
