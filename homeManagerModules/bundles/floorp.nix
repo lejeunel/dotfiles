@@ -1,6 +1,7 @@
 {
   ...
 }:
+
 {
 
   myHomeManager.floorp.enable = true;

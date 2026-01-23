@@ -22,7 +22,7 @@
     bundles.podman.enable = true;
     bundles.stylix.enable = true;
     bundles.qute.enable = true;
-    bundle.floorp.enable = true;
+    bundles.floorp.enable = true;
   };
   nixpkgs.config.allowUnfree = true;
 
