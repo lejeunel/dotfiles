@@ -95,7 +95,7 @@ in
       };
 
       input = {
-        focus-follows-mouse.enable = true;
+        focus-follows-mouse.enable = false;
         keyboard = {
           xkb = {
             layout = "us";
