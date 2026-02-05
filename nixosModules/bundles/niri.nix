@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  myNixOS.niri.enable = true;
+}

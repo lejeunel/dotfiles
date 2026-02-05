@@ -43,6 +43,10 @@
       enable = true;
       profileNames = [ "laurent" ];
     };
+    targets.floorp = {
+      enable = true;
+      profileNames = [ "laurent" ];
+    };
 
     fonts = {
       monospace = {

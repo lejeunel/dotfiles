@@ -6,7 +6,7 @@
   ];
 
   myHomeManager = {
-    bundles.hyprland.enable = true;
+    bundles.niri.enable = true;
     bundles.desktop.enable = true;
     bundles.shell.enable = true;
     bundles.editors.enable = true;
@@ -20,6 +20,9 @@
     bundles.tmux.enable = true;
     bundles.python.enable = true;
     bundles.podman.enable = true;
+    bundles.stylix.enable = true;
+    bundles.qute.enable = true;
+    bundles.floorp.enable = true;
   };
   nixpkgs.config.allowUnfree = true;
 

@@ -12,8 +12,18 @@ let
   email = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(=notmuch)"'';
   terminalFileManager = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval "(dirvish \"~\")"'';
   pulsemixer = ''${pkgs.pulsemixer}/bin/pulsemixer'';
+  wlogout = "${pkgs.wlogout}/bin/wlogout";
+  hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
 in
 {
+  xdg.configFile."hypr/scripts" = {
+    source = ../../assets/scripts;
+    recursive = true;
+  };
+  xdg.configFile."hypr/icons" = {
+    source = ../../assets/icons;
+    recursive = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -24,8 +34,8 @@ in
 
     settings = {
       input = {
-        kb_layout = "us"; # Base layout (QWERTY)
-        kb_variant = "intl"; # Variant: "intl" for International (dead keys)
+        kb_layout = "us";
+        kb_variant = "intl";
         touchpad = {
           natural_scroll = true;
           disable_while_typing = true;
@@ -183,8 +193,8 @@ in
         "$mainMod, SPACE, togglefloating" # toggle the window on focus to float
 
         "$mainMod, F, fullscreen" # toggle the window on focus to fullscreen
-        "$mainMod ALT, L, exec, hyprlock" # lock screen
-        "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
+        "$mainMod ALT, L, exec, ${hyprlock}" # lock screen
+        "$mainMod, backspace, exec, pkill -x ${wlogout} || ${wlogout} -b 4"
 
         # window groups
         "$mainMod, T, togglegroup"
