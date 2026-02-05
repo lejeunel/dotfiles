@@ -18,10 +18,7 @@
   services.dbus.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
-  # Seat management (pick ONE)
   services.seatd.enable = true;
-  # OR:
-  # services.logind.enable = true;
 
   # Optional but recommended
   security.polkit.enable = true;
