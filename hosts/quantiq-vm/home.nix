@@ -14,6 +14,8 @@
     bundles.encryption.enable = true;
     bundles.nvim.enable = true;
     bundles.emacs.enable = true;
+    bundles.python.enable = true;
+    bundles.remote.enable = true;
   };
 
   home = {
