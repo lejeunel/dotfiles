@@ -1,4 +1,5 @@
-{ lib, config, inputs, outputs, myLib, pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.zsh.enable = true;
 
   users.groups.uinput = { };
@@ -9,7 +10,29 @@
   users.users.laurent = {
     isNormalUser = true;
     home = "/home/laurent";
-    extraGroups = [ "wheel" "networkmanager" "docker" "keyd" "uinput" "input" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+      "keyd"
+      "uinput"
+      "input"
+    ];
+    shell = pkgs.zsh;
+  };
+
+  users.users.test = {
+    isNormalUser = true;
+    initialPassword = "changeme";
+    home = "/home/test";
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+      "keyd"
+      "uinput"
+      "input"
+    ];
     shell = pkgs.zsh;
   };
 
