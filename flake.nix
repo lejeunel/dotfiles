@@ -32,6 +32,7 @@
       }:
       {
         imports = [
+          ./modules/lib.nix
           ./modules/home-configs.nix
           ./modules/nixos-configs.nix
         ];

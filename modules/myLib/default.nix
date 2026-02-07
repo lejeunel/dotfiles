@@ -1,46 +1,8 @@
 { inputs }:
-let
-  myLib = (import ./default.nix) { inherit inputs; };
-  outputs = inputs.self.outputs;
-in
 rec {
   # ================================================================ #
   # =                            My Lib                            = #
   # ================================================================ #
-
-  # ======================= Package Helpers ======================== #
-
-  pkgsFor = sys: inputs.nixpkgs.legacyPackages.${sys};
-
-  # ========================== Buildables ========================== #
-
-  mkSystem =
-    config:
-    inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs outputs myLib; };
-      modules = [
-        config
-        outputs.nixosModules.default
-      ];
-    };
-
-  mkHome =
-    x: config:
-    inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = pkgsFor x.sys;
-      extraSpecialArgs = {
-        vars = {
-          host = x.host;
-        };
-        inherit inputs myLib outputs;
-      };
-      modules = [
-        config
-        outputs.homeManagerModules.default
-      ];
-    };
-
-  # =========================== Helpers ============================ #
 
   filesIn = dir: (map (fname: dir + "/${fname}") (builtins.attrNames (builtins.readDir dir)));
 
@@ -105,13 +67,4 @@ rec {
       (extendModule ((extension name) // { path = f; }))
     ) modules;
 
-  # ============================ Shell ============================= #
-  forAllSystems =
-    pkgs:
-    inputs.nixpkgs.lib.genAttrs [
-      "x86_64-linux"
-      "aarch64-linux"
-      "x86_64-darwin"
-      "aarch64-darwin"
-    ] (system: pkgs inputs.nixpkgs.legacyPackages.${system});
 }
