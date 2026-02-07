@@ -1,6 +1,0 @@
-{ ... }:
-{
-
-  myHomeManager.stylix.enable = true;
-
-}

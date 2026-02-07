@@ -44,6 +44,8 @@
       latex
 
       emacs
+
+      stylix
     ];
 
   };

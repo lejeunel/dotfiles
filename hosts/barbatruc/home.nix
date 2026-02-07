@@ -7,7 +7,6 @@
 
   myHomeManager = {
     bundles.desktop.enable = true;
-    bundles.k8s.enable = true;
     bundles.email.enable = true;
     bundles.encryption.enable = true;
     bundles.stylix.enable = true;

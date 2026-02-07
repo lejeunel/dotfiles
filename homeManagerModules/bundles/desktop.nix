@@ -4,8 +4,6 @@
 }:
 {
 
-  myHomeManager.stylix.enable = true;
-
   home.packages = with pkgs; [
     dconf
     nautilus
