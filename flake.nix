@@ -32,9 +32,8 @@
       }:
       {
         imports = [
-          # Optional: use external flake logic, e.g.
-          # inputs.foo.flakeModules.default
-          ./home.nix
+          ./home-configs.nix
+          ./nixos-configs.nix
         ];
         flake = {
           homeManagerModules.default = ./homeManagerModules;

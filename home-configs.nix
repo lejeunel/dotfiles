@@ -6,15 +6,6 @@ let
 in
 with myLib;
 {
-  # NixOS configuration entrypoint
-  # Available through 'nixos-rebuild --flake .#<hostname>'
-  flake.nixosConfigurations = {
-    vm = mkSystem ./hosts/vm/configuration.nix;
-    tartopom = mkSystem ./hosts/tartopom/configuration.nix;
-    barbatruc = mkSystem ./hosts/barbatruc/configuration.nix;
-    ptw11 = mkSystem ./hosts/ptw11/configuration.nix;
-  };
-
   # Home-Manager configuration entrypoint
   # Available through 'home-manager --flake .#<user>'
   flake.homeConfigurations = {
