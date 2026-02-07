@@ -46,6 +46,8 @@
       emacs
 
       stylix
+
+      sops
     ];
 
   };

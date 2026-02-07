@@ -1,6 +1,0 @@
-{ ... }:
-{
-
-  myHomeManager.sops.enable = true;
-
-}

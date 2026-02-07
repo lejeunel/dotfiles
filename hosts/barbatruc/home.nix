@@ -7,7 +7,6 @@
 
   myHomeManager = {
     bundles.email.enable = true;
-    bundles.encryption.enable = true;
   };
   nixpkgs.config.allowUnfree = true;
 
