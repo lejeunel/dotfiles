@@ -21,19 +21,4 @@
     shell = pkgs.zsh;
   };
 
-  users.users.test = {
-    isNormalUser = true;
-    initialPassword = "changeme";
-    home = "/home/test";
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "docker"
-      "keyd"
-      "uinput"
-      "input"
-    ];
-    shell = pkgs.zsh;
-  };
-
 }
