@@ -36,7 +36,6 @@
           (inputs.import-tree ./modules)
         ];
         flake = {
-          homeManagerModules.default = ./homeManagerModules;
           nixosModules.default = ./nixosModules;
 
         };

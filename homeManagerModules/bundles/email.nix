@@ -1,4 +1,0 @@
-{ ... }:
-{
-  myHomeManager.email.enable = true;
-}

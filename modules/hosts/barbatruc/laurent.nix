@@ -48,6 +48,7 @@
       stylix
 
       sops
+      email
     ];
 
   };

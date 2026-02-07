@@ -1,13 +1,6 @@
-{ outputs, ... }:
+{ ... }:
 {
 
-  imports = [
-    outputs.homeManagerModules.default
-  ];
-
-  myHomeManager = {
-    bundles.email.enable = true;
-  };
   nixpkgs.config.allowUnfree = true;
 
   home = {

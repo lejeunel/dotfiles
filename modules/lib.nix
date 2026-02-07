@@ -24,7 +24,6 @@ in
         };
         modules = [
           config
-          outputs.homeManagerModules.default
           inputs.self.modules.homeManager."${x.name}@${x.host}"
         ];
       };
