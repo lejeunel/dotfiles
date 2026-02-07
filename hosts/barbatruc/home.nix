@@ -6,10 +6,8 @@
   ];
 
   myHomeManager = {
-    bundles.desktop.enable = true;
     bundles.email.enable = true;
     bundles.encryption.enable = true;
-    bundles.stylix.enable = true;
   };
   nixpkgs.config.allowUnfree = true;
 
