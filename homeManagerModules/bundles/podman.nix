@@ -1,8 +1,0 @@
-{
-  ...
-}:
-
-{
-
-  myHomeManager.podman.enable = true;
-}

@@ -1,4 +1,0 @@
-{ ... }:
-{
-  myHomeManager.filebrowser.enable = true;
-}

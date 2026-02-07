@@ -6,7 +6,6 @@
 
   myHomeManager.office.enable = true;
   myHomeManager.stylix.enable = true;
-  myHomeManager.gtk.enable = true;
   myHomeManager.messaging.enable = true;
 
   home.packages = with pkgs; [

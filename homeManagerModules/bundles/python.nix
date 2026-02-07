@@ -1,6 +1,0 @@
-{ ... }:
-
-{
-  myHomeManager.python.enable = true;
-
-}

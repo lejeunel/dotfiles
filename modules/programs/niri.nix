@@ -18,6 +18,13 @@
 
     in
     {
+      home.packages = with pkgs; [
+        swaynotificationcenter
+        swappy
+        libnotify
+        cliphist
+        wl-clipboard
+      ];
       imports = [
         inputs.niri-flake.homeModules.niri
       ];

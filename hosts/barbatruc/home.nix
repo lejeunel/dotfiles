@@ -13,8 +13,6 @@
     bundles.keyboard-layout.enable = true;
     bundles.email.enable = true;
     bundles.encryption.enable = true;
-    bundles.python.enable = true;
-    bundles.podman.enable = true;
     bundles.stylix.enable = true;
   };
   nixpkgs.config.allowUnfree = true;

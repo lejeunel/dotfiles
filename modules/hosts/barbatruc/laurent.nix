@@ -16,10 +16,24 @@
       wlogout
       wifi
       zathura
+
       niri
       hypridle
       hyprpaper
       hyprlock
+      rofi
+      swaync
+
+      podman
+      python
+
+      filebrowser
+
+      golang
+      gpg
+      gtk
+      javascript
+      guile
     ];
 
   };
