@@ -34,6 +34,8 @@
       gtk
       javascript
       guile
+
+      qwerty-fr
     ];
 
   };
