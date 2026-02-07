@@ -42,6 +42,8 @@
 
       lua
       latex
+
+      emacs
     ];
 
   };

@@ -1,4 +1,0 @@
-{ ... }:
-{
-  myHomeManager.emacs.enable = true;
-}
