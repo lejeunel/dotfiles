@@ -1,5 +1,0 @@
-{ ... }:
-{
-
-  myHomeManager.nvim.enable = true;
-}

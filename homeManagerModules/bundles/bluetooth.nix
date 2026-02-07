@@ -1,8 +1,0 @@
-{
-  ...
-}:
-
-{
-  myHomeManager.bluetooth.enable = true;
-
-}

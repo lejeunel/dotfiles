@@ -4,14 +4,9 @@
 }:
 {
 
-  myHomeManager.alacritty.enable = true;
-  myHomeManager.zathura.enable = true;
-  myHomeManager.imv.enable = true;
   myHomeManager.office.enable = true;
   myHomeManager.stylix.enable = true;
   myHomeManager.gtk.enable = true;
-  myHomeManager.firefox.enable = true;
-  myHomeManager.drawing.enable = true;
   myHomeManager.messaging.enable = true;
 
   home.packages = with pkgs; [

@@ -19,7 +19,6 @@
     bundles.console.enable = true;
     bundles.ccid.enable = true;
     bundles.wayland.enable = true;
-    bundles.niri.enable = true;
     bundles.users.enable = true;
     bundles.locale.enable = true;
     bundles.audio.enable = true;
