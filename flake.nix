@@ -32,8 +32,8 @@
       }:
       {
         imports = [
-          ./home-configs.nix
-          ./nixos-configs.nix
+          ./modules/home-configs.nix
+          ./modules/nixos-configs.nix
         ];
         flake = {
           homeManagerModules.default = ./homeManagerModules;
@@ -41,20 +41,8 @@
 
         };
         systems = [
-          # systems for which you want to build the `perSystem` attributes
           "x86_64-linux"
-          # ...
         ];
-        perSystem =
-          { config, pkgs, ... }:
-          {
-            # Recommended: move all package definitions here.
-            # e.g. (assuming you have a nixpkgs input)
-            # packages.foo = pkgs.callPackage ./foo/package.nix { };
-            # packages.bar = pkgs.callPackage ./bar/package.nix {
-            #   foo = config.packages.foo;
-            # };
-          };
       }
     );
 }

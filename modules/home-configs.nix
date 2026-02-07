@@ -1,7 +1,6 @@
 { inputs, ... }:
 let
-  # super simple boilerplate-reducing
-  # lib with a bunch of functions
+  # provide the mkHome function
   myLib = import ./myLib/default.nix { inherit inputs; };
 in
 with myLib;
