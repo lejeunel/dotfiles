@@ -1,4 +1,4 @@
-{ outputs, pkgs, ... }:
+{ outputs, ... }:
 {
 
   imports = [
@@ -30,14 +30,6 @@
     username = "laurent";
     homeDirectory = "/home/laurent";
     stateVersion = "24.05";
-
-    packages = with pkgs; [
-      xorg.setxkbmap
-      networkmanager
-      ubuntu-classic
-      roboto-serif
-      pavucontrol
-    ];
   };
 
 }
