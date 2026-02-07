@@ -4,9 +4,7 @@
 }:
 {
 
-  myHomeManager.office.enable = true;
   myHomeManager.stylix.enable = true;
-  myHomeManager.messaging.enable = true;
 
   home.packages = with pkgs; [
     dconf

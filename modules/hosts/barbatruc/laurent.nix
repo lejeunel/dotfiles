@@ -36,6 +36,9 @@
       guile
 
       qwerty-fr
+
+      messaging
+      office
     ];
 
   };
