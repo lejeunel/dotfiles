@@ -1,6 +1,0 @@
-{ ... }:
-
-{
-  myHomeManager.tmux.enable = true;
-
-}

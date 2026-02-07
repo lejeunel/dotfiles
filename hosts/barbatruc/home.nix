@@ -17,7 +17,6 @@
     bundles.encryption.enable = true;
     bundles.bluetooth.enable = true;
     bundles.wifi.enable = true;
-    bundles.tmux.enable = true;
     bundles.python.enable = true;
     bundles.podman.enable = true;
     bundles.stylix.enable = true;

@@ -3,7 +3,7 @@
   ...
 }:
 let
-  myLib = (import ./myLib/default.nix) { inherit inputs; };
+  myLib = (import ./../myLib/default.nix) { inherit inputs; };
   outputs = inputs.self.outputs;
 in
 {
@@ -25,6 +25,7 @@ in
         modules = [
           config
           outputs.homeManagerModules.default
+          inputs.self.modules.homeManager."${x.name}@${x.host}"
         ];
       };
 

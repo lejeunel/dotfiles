@@ -15,6 +15,5 @@
   ];
 
   myHomeManager.shell.enable = true;
-  myHomeManager.tmux.enable = true;
 
 }

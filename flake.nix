@@ -19,9 +19,10 @@
       url = "github:sodiboo/niri-flake";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
   };
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs@{ flake-parts, import-tree, ... }:
     # https://flake.parts/module-arguments.html
     flake-parts.lib.mkFlake { inherit inputs; } (
       top@{
@@ -32,9 +33,7 @@
       }:
       {
         imports = [
-          ./modules/lib.nix
-          ./modules/home-configs.nix
-          ./modules/nixos-configs.nix
+          (inputs.import-tree ./modules)
         ];
         flake = {
           homeManagerModules.default = ./homeManagerModules;
