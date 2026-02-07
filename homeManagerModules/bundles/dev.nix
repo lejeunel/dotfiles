@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-
-  myHomeManager.lua.enable = true;
-
-}

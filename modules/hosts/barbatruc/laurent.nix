@@ -39,6 +39,9 @@
 
       messaging
       office
+
+      lua
+      latex
     ];
 
   };
