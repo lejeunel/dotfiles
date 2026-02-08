@@ -14,6 +14,7 @@
         portals
         stylix
         console
+        upower
       ];
 
       # Bootloader.
@@ -23,7 +24,6 @@
       networking.hostName = "barbatruc"; # Define your hostname.
 
       myNixOS = {
-        bundles.desktop.enable = true;
         bundles.ccid.enable = true;
         bundles.users.enable = true;
         bundles.locale.enable = true;

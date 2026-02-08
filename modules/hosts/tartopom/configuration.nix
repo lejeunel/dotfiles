@@ -23,7 +23,6 @@
       networking.hostName = "tartopom"; # Define your hostname.
 
       myNixOS = {
-        bundles.desktop.enable = true;
         bundles.users.enable = true;
         bundles.locale.enable = true;
         bundles.fonts.enable = true;
