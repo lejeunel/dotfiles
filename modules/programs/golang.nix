@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   flake.modules.homeManager.golang =
     { pkgs, ... }:

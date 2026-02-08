@@ -1,5 +1,3 @@
-{ ... }:
-
 {
 
   flake.modules.nixos.pcscd =

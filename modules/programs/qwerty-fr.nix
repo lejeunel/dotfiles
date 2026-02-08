@@ -1,4 +1,3 @@
-{ ... }:
 {
   flake.modules.homeManager.qwerty-fr =
     { pkgs, vars, ... }:

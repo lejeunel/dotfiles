@@ -1,5 +1,3 @@
-{ ... }:
-
 let
   name = "Laurent Lejeune";
   maildir = ".mail";

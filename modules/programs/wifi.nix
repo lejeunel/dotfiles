@@ -1,8 +1,4 @@
 {
-  ...
-}:
-
-{
 
   flake.modules.homeManager.wifi =
     { pkgs, ... }:

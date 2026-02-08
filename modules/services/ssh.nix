@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
 
   flake.modules.nixos.ssh =

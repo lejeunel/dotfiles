@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   flake.modules.nixos.wifi =
     { inputs, config, ... }:

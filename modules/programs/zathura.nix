@@ -1,7 +1,4 @@
-{ ... }:
 {
-  # background-color: #${config.stylix.base16Scheme.base00};
-
   flake.modules.homeManager.zathura =
     { config, ... }:
     {

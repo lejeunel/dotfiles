@@ -1,8 +1,4 @@
 {
-  pkgs,
-  ...
-}:
-{
   flake.modules.homeManager.shell =
     { pkgs, ... }:
     {

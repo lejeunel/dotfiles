@@ -1,8 +1,11 @@
-{ inputs, ... }:
-
 {
   flake.modules.homeManager.sops =
-    { pkgs, config, ... }:
+    {
+      inputs,
+      pkgs,
+      config,
+      ...
+    }:
     {
 
       home.packages = with pkgs; [
