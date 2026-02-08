@@ -1,6 +1,0 @@
-{ ... }:
-
-{
-  myNixOS.xserver.enable = true;
-
-}

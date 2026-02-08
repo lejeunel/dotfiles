@@ -13,6 +13,7 @@
         wifi
         ssh
         audio
+        xserver
       ];
 
       # Bootloader.
@@ -23,7 +24,6 @@
 
       myNixOS = {
         bundles.desktop.enable = true;
-        bundles.xorg.enable = true;
         bundles.users.enable = true;
         bundles.locale.enable = true;
         bundles.fonts.enable = true;
