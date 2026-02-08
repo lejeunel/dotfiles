@@ -37,13 +37,12 @@ in
       };
 
     mkSystem =
-      x: config:
+      name:
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs myLib; };
         modules = [
-          config
           outputs.nixosModules.default
-          inputs.self.modules.nixos.${x.name}
+          inputs.self.modules.nixos.${name}
         ];
       };
 
