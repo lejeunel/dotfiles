@@ -13,28 +13,37 @@ in
   config.flake.lib = {
 
     mkHome =
-      x: config:
+      sys: name: host:
       inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.${x.sys};
+        pkgs = inputs.nixpkgs.legacyPackages.${sys};
         extraSpecialArgs = {
           vars = {
-            host = x.host;
+            host = host;
           };
           inherit inputs myLib outputs;
         };
         modules = [
-          config
-          inputs.self.modules.homeManager."${x.name}@${x.host}"
+          inputs.self.modules.homeManager."${name}@${host}"
+
+          {
+            nixpkgs.config.allowUnfree = true;
+            home = {
+              username = "laurent";
+              homeDirectory = "/home/laurent";
+              stateVersion = "24.05";
+            };
+          }
         ];
       };
 
     mkSystem =
-      config:
+      x: config:
       inputs.nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs myLib; };
         modules = [
           config
           outputs.nixosModules.default
+          inputs.self.modules.nixos.${x.name}
         ];
       };
 
