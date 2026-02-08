@@ -12,6 +12,7 @@
         greetd
         libinput
         portals
+        stylix
       ];
 
       # Bootloader.
@@ -24,7 +25,6 @@
         bundles.desktop.enable = true;
         bundles.console.enable = true;
         bundles.ccid.enable = true;
-        bundles.wayland.enable = true;
         bundles.users.enable = true;
         bundles.locale.enable = true;
         bundles.fonts.enable = true;

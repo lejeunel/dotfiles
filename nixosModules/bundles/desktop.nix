@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  myNixOS.stylix.enable = true;
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;

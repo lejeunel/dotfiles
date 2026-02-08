@@ -1,5 +1,0 @@
-{ ... }:
-{
-  myNixOS.stylix.enable = true;
-
-}
