@@ -12,6 +12,7 @@
       imports = with inputs.self.modules.nixos; [
         users
         locale
+        pcscd
         fonts
         wifi
         ssh

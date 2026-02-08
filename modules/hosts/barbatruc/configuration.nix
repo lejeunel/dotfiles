@@ -18,6 +18,7 @@
         stylix
         console
         upower
+        pcscd
       ];
 
       # Bootloader.
@@ -25,10 +26,6 @@
       boot.loader.efi.canTouchEfiVariables = true;
 
       networking.hostName = "barbatruc"; # Define your hostname.
-
-      myNixOS = {
-        bundles.ccid.enable = true;
-      };
 
       # Enable OpenGL
       hardware.graphics.enable = true;

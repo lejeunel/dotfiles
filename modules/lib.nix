@@ -2,10 +2,6 @@
   inputs,
   ...
 }:
-let
-  myLib = (import ./../myLib/default.nix) { inherit inputs; };
-  outputs = inputs.self.outputs;
-in
 {
 
   # Helper functions for creating system / home-manager configurations
@@ -20,7 +16,7 @@ in
           vars = {
             host = host;
           };
-          inherit inputs myLib outputs;
+          inherit inputs;
         };
         modules = [
           inputs.self.modules.homeManager."${name}@${host}"
@@ -39,9 +35,8 @@ in
     mkSystem =
       name:
       inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs myLib; };
+        specialArgs = { inherit inputs; };
         modules = [
-          outputs.nixosModules.default
           inputs.self.modules.nixos.${name}
         ];
       };
