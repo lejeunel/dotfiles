@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ ... }:
 
 {
   flake.modules.homeManager.bluetooth =

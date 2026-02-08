@@ -2,8 +2,13 @@
 
 {
   flake.modules.nixos.barbatruc =
-    { pkgs, ... }:
+    { inputs, pkgs, ... }:
     {
+
+      imports = with inputs.self.modules.nixos; [
+        wifi
+      ];
+
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
@@ -20,9 +25,6 @@
         bundles.audio.enable = true;
         bundles.fonts.enable = true;
         bundles.power.enable = true;
-        bundles.docker.enable = true;
-        bundles.k8s.enable = true;
-        bundles.wifi.enable = true;
       };
 
       # Enable OpenGL

@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  myNixOS.bluetooth.enable = true;
   myNixOS.stylix.enable = true;
 
   services.pulseaudio.enable = false;
