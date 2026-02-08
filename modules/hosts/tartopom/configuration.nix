@@ -13,11 +13,12 @@
         users
         locale
         systemd-boot
-        pcscd
         fonts
         nix
-        wifi
         networking
+
+        pcscd
+        wifi
         ssh
         audio
         xserver
