@@ -12,17 +12,16 @@
       imports = with inputs.self.modules.nixos; [
         users
         locale
+        systemd-boot
         pcscd
         fonts
+        nix
         wifi
+        networking
         ssh
         audio
         xserver
       ];
-
-      # Bootloader.
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
 
       networking.hostName = "tartopom"; # Define your hostname.
 
@@ -34,8 +33,6 @@
       services.xserver.videoDrivers = [ "nvidia" ];
 
       hardware.nvidia = {
-
-        # Modesetting is required.
         modesetting.enable = true;
 
         # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
@@ -68,24 +65,7 @@
 
       };
 
-      networking.networkmanager.enable = true;
-
       time.timeZone = "Europe/Paris";
-
-      nixpkgs.config.allowUnfree = true;
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-
-      # List packages installed in system profile. To search, run:
-      # $ nix search wget
-      environment.systemPackages = with pkgs; [
-        neovim
-        wget
-        git
-        gnumake
-      ];
 
       system.stateVersion = "24.05"; # Did you read the comment?
 

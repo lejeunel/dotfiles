@@ -3,94 +3,97 @@
   ...
 }:
 {
-  flake.modules.homeManager.shell = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      calcurse
-      fastfetch
-      psmisc
-      nh
-      pdftk
-      imagemagick
-      unzip
-      lazydocker
-      stow
-      rsync
-      parallel
-    ];
+  flake.modules.homeManager.shell =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        calcurse
+        fastfetch
+        psmisc
+        nh
+        pdftk
+        imagemagick
+        unzip
+        lazydocker
+        stow
+        rsync
+        parallel
+        wget
+      ];
 
-    programs = {
-      bat.enable = true;
-      eza.enable = true;
-      zoxide = {
-        enable = true;
-        enableZshIntegration = true;
-      };
-
-      fzf = {
-        enable = true;
-        enableZshIntegration = true;
-      };
-
-      starship = {
-        enable = true;
-        enableZshIntegration = true;
-        settings = {
-          nix_shell.symbol = " ";
-        };
-      };
-
-      command-not-found = {
-        enable = true;
-      };
-
-      btop = {
-        enable = true;
-      };
-
-      ripgrep = {
-        enable = true;
-      };
-      zsh = {
-        enable = true;
-        enableCompletion = true;
-        shellAliases = {
-          ls = "eza --color=always --long --git --icons=always";
-          ll = "ls -lah";
-          cd = "z"; # use zoxide
-          cat = "${pkgs.bat}/bin/bat";
-          tmux = "tmux -u";
-          ec = "emacsclient -nc";
-          eec = "emacsclient -nw";
-          e = "emacs -nc";
-          ee = "emacs -nw";
-          tree = "${pkgs.eza}/bin/eza --color=auto --tree";
-          cal = "cal -m";
-          vim = "nvim";
-          grep = "grep --color=auto";
-        };
-        initContent = ''
-          bindkey '^Y' autosuggest-accept
-          bindkey -s ^f "tmux-sessionizer^M"
-
-          export EDITOR="emacsclient -nw"
-
-          # This fixes a bug where a % sign is printed in vterm
-          unsetopt PROMPT_SP
-        '';
-
-        oh-my-zsh = {
+      programs = {
+        bat.enable = true;
+        eza.enable = true;
+        zoxide = {
           enable = true;
-          plugins = [
-            "command-not-found"
-            "git"
-            "vi-mode"
-          ];
+          enableZshIntegration = true;
+        };
+
+        fzf = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+
+        starship = {
+          enable = true;
+          enableZshIntegration = true;
+          settings = {
+            nix_shell.symbol = " ";
+          };
+        };
+
+        command-not-found = {
+          enable = true;
+        };
+
+        btop = {
+          enable = true;
+        };
+
+        ripgrep = {
+          enable = true;
+        };
+        zsh = {
+          enable = true;
+          enableCompletion = true;
+          shellAliases = {
+            ls = "eza --color=always --long --git --icons=always";
+            ll = "ls -lah";
+            cd = "z"; # use zoxide
+            cat = "${pkgs.bat}/bin/bat";
+            tmux = "tmux -u";
+            ec = "emacsclient -nc";
+            eec = "emacsclient -nw";
+            e = "emacs -nc";
+            ee = "emacs -nw";
+            tree = "${pkgs.eza}/bin/eza --color=auto --tree";
+            cal = "cal -m";
+            vim = "nvim";
+            grep = "grep --color=auto";
+          };
+          initContent = ''
+            bindkey '^Y' autosuggest-accept
+            bindkey -s ^f "tmux-sessionizer^M"
+
+            export EDITOR="emacsclient -nw"
+
+            # This fixes a bug where a % sign is printed in vterm
+            unsetopt PROMPT_SP
+          '';
+
+          oh-my-zsh = {
+            enable = true;
+            plugins = [
+              "command-not-found"
+              "git"
+              "vi-mode"
+            ];
+          };
+
         };
 
       };
 
     };
-
-  };
 
 }
