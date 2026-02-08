@@ -10,6 +10,7 @@
     }:
     {
       imports = with inputs.self.modules.nixos; [
+        users
         wifi
         ssh
         audio
@@ -23,7 +24,6 @@
       networking.hostName = "tartopom"; # Define your hostname.
 
       myNixOS = {
-        bundles.users.enable = true;
         bundles.locale.enable = true;
         bundles.fonts.enable = true;
       };
