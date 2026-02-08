@@ -2,8 +2,19 @@
 
 {
   flake.modules.nixos.tartopom =
-    { config, pkgs, ... }:
     {
+      inputs,
+      config,
+      pkgs,
+      ...
+    }:
+    {
+      imports = with inputs.self.modules.nixos; [
+        wifi
+        ssh
+        audio
+      ];
+
       # Bootloader.
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
@@ -16,7 +27,6 @@
         bundles.users.enable = true;
         bundles.locale.enable = true;
         bundles.console.enable = true;
-        bundles.audio.enable = true;
         bundles.fonts.enable = true;
       };
 

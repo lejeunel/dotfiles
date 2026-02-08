@@ -8,6 +8,10 @@
       imports = with inputs.self.modules.nixos; [
         wifi
         ssh
+        audio
+        greetd
+        libinput
+        portals
       ];
 
       # Bootloader.
@@ -23,7 +27,6 @@
         bundles.wayland.enable = true;
         bundles.users.enable = true;
         bundles.locale.enable = true;
-        bundles.audio.enable = true;
         bundles.fonts.enable = true;
         bundles.power.enable = true;
       };
