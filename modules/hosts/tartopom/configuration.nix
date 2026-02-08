@@ -11,6 +11,7 @@
     {
       imports = with inputs.self.modules.nixos; [
         users
+        locale
         wifi
         ssh
         audio
@@ -24,16 +25,12 @@
       networking.hostName = "tartopom"; # Define your hostname.
 
       myNixOS = {
-        bundles.locale.enable = true;
         bundles.fonts.enable = true;
       };
 
       virtualisation.docker.enable = true;
 
-      # Enable OpenGL
-      hardware.opengl = {
-        enable = true;
-      };
+      hardware.graphics.enable = true;
 
       # Load nvidia driver for Xorg and Wayland
       services.xserver.videoDrivers = [ "nvidia" ];

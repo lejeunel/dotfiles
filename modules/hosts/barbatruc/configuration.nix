@@ -7,6 +7,7 @@
 
       imports = with inputs.self.modules.nixos; [
         users
+        locale
         wifi
         ssh
         audio
@@ -26,7 +27,6 @@
 
       myNixOS = {
         bundles.ccid.enable = true;
-        bundles.locale.enable = true;
         bundles.fonts.enable = true;
       };
 
