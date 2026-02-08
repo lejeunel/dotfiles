@@ -8,6 +8,7 @@
       imports = with inputs.self.modules.nixos; [
         users
         locale
+        fonts
         wifi
         ssh
         audio
@@ -27,7 +28,6 @@
 
       myNixOS = {
         bundles.ccid.enable = true;
-        bundles.fonts.enable = true;
       };
 
       # Enable OpenGL

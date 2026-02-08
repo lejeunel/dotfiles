@@ -12,6 +12,7 @@
       imports = with inputs.self.modules.nixos; [
         users
         locale
+        fonts
         wifi
         ssh
         audio
@@ -23,10 +24,6 @@
       boot.loader.efi.canTouchEfiVariables = true;
 
       networking.hostName = "tartopom"; # Define your hostname.
-
-      myNixOS = {
-        bundles.fonts.enable = true;
-      };
 
       virtualisation.docker.enable = true;
 
