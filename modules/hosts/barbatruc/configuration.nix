@@ -13,6 +13,7 @@
         libinput
         portals
         stylix
+        console
       ];
 
       # Bootloader.
@@ -23,7 +24,6 @@
 
       myNixOS = {
         bundles.desktop.enable = true;
-        bundles.console.enable = true;
         bundles.ccid.enable = true;
         bundles.users.enable = true;
         bundles.locale.enable = true;

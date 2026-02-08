@@ -26,7 +26,6 @@
         bundles.xorg.enable = true;
         bundles.users.enable = true;
         bundles.locale.enable = true;
-        bundles.console.enable = true;
         bundles.fonts.enable = true;
       };
 
