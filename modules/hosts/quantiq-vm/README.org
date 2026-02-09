@@ -1,0 +1,6 @@
+#+TITLE: Quantiq-VM
+#+DATE:  Feb 14, 2026
+
+* Specs
+Ubuntu-base virtual machine
+
