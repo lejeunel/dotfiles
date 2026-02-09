@@ -6,22 +6,8 @@
     {
 
       imports = with inputs.self.modules.nixos; [
-        users
-        locale
-        fonts
-        systemd-boot
-        networking
-        nix
-        wifi
-        ssh
-        audio
-        greetd
-        libinput
-        portals
-        stylix
-        console
-        upower
-        pcscd
+        system-desktop
+
       ];
 
       networking.hostName = "barbatruc"; # Define your hostname.
@@ -29,9 +15,7 @@
       powerManagement.enable = true;
       powerManagement.powertop.enable = true;
       services.thermald.enable = true;
-      services.tlp = {
-        enable = true;
-      };
+      services.tlp.enable = true;
 
       # Set your time zone.
       time.timeZone = "Europe/Paris";

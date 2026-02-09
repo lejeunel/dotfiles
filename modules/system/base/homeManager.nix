@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.base =
+  flake.modules.homeManager.system-base =
     { config, ... }:
     {
       nixpkgs.config.allowUnfree = true;

@@ -5,15 +5,14 @@
     imports = with inputs.self.modules.nixos; [
       system-cli
 
-      wlogout
-      zathura
       niri
-      hypridle
-      hyprpaper
-      hyprlock
-      rofi
-      swaync
-      gtk
+      portals
+      ssh
+      wifi
+      audio
+      libinput
+      portals
+      pcscd
     ];
 
   };

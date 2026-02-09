@@ -20,14 +20,8 @@
         };
         modules = [
           inputs.self.modules.homeManager."${name}@${host}"
-
           {
-            nixpkgs.config.allowUnfree = true;
-            home = {
-              username = "${name}";
-              homeDirectory = "/home/${name}";
-              stateVersion = "24.05";
-            };
+            home.username = name;
           }
         ];
       };

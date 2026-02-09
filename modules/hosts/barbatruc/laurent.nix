@@ -2,53 +2,17 @@
 {
   flake.modules.homeManager."laurent@barbatruc" = {
     imports = with inputs.self.modules.homeManager; [
-      tmux
-      git
-      alacritty
-      firefox
-      imv
-      shell
-      bluetooth
+      system-desktop
+
+      dev
+
       drawing
-      direnv
-      cpp
-      waybar
-      wlogout
-      wifi
-      zathura
-
-      niri
-      hypridle
-      hyprpaper
-      hyprlock
-      rofi
-      swaync
-
-      podman
-      python
-
-      filebrowser
-
-      golang
-      gpg
-      gtk
-      javascript
-      guile
-
-      qwerty-fr
-
       messaging
       office
 
-      lua
-      latex
+      podman
+      filebrowser
 
-      emacs
-
-      stylix
-
-      sops
-      email
     ];
 
   };

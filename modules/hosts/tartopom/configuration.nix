@@ -10,18 +10,7 @@
     }:
     {
       imports = with inputs.self.modules.nixos; [
-        users
-        locale
-        systemd-boot
-        fonts
-        nix
-        networking
-
-        pcscd
-        wifi
-        ssh
-        audio
-        xserver
+        system-desktop
       ];
 
       networking.hostName = "tartopom"; # Define your hostname.

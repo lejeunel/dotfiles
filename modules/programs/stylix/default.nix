@@ -58,12 +58,11 @@ in
     ];
     stylix = {
 
+      enable = true;
       base16Scheme = base16Scheme;
       fonts = fonts;
       cursor = cursor;
 
-      targets.grub.enable = true;
-      targets.grub.useWallpaper = true;
       targets.plymouth.enable = true;
       targets.nixos-icons.enable = true;
     };
