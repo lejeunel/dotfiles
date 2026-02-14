@@ -23,25 +23,10 @@
   };
   outputs =
     inputs@{ flake-parts, import-tree, ... }:
-    # https://flake.parts/module-arguments.html
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      top@{
-        config,
-        withSystem,
-        moduleWithSystem,
-        ...
-      }:
-      {
-        imports = [
-          (inputs.import-tree ./modules)
-        ];
-        flake = {
-          nixosModules.default = ./nixosModules;
-
-        };
-        systems = [
-          "x86_64-linux"
-        ];
-      }
-    );
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ (import-tree ./modules) ];
+      systems = [
+        "x86_64-linux"
+      ];
+    };
 }
