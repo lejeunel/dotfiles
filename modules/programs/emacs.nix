@@ -52,8 +52,7 @@
         shfmt
         shellcheck
 
-        nil # LSP
-        nixd # another lSP
+        nixd # LSP
         nixfmt # formatting
 
         emacs.pkgs.all-the-icons-nerd-fonts
