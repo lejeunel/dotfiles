@@ -7,7 +7,6 @@ in
   flake.modules.homeManager.email =
     {
       pkgs,
-      sops,
       config,
       ...
     }:
