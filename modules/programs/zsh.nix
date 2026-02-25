@@ -2,7 +2,7 @@
   flake.modules.homeManager.zsh =
     { pkgs, ... }:
     {
-      zsh = {
+      programs.zsh = {
         enable = true;
         enableCompletion = true;
         shellAliases = {

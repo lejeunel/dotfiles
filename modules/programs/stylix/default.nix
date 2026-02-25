@@ -87,7 +87,6 @@ in
         targets.neovim.enable = false;
         targets.rofi.enable = false;
         targets.waybar.enable = false;
-        targets.swaync.enable = false;
         targets.emacs.enable = false;
         targets.firefox = {
           enable = true;

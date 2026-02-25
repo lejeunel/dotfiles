@@ -4,6 +4,7 @@
     {
       imports = [
         inputs.niri-flake.nixosModules.niri
+        inputs.self.modules.nixos.dms
       ];
 
       programs.niri.enable = true;
@@ -42,15 +43,13 @@
       terminal = "${pkgs.alacritty}/bin/alacritty";
       wlogout = "${pkgs.wlogout}/bin/wlogout";
       hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
-      scriptsFPath = "${config.home.homeDirectory}/.config/niri/scripts";
       editor = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc'';
-      notif-center = "${pkgs.swaynotificationcenter}/bin/swaync-client -t";
-      clipboard = "${pkgs.wl-clipboard-rs}/bin/wl-paste";
+      filemanager = "${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval '(dirvish)'";
+      clipboard = "${pkgs.wl-clipboard}/bin/wl-paste";
 
     in
     {
       home.packages = with pkgs; [
-        swaynotificationcenter
         swappy
         libnotify
         cliphist
@@ -58,6 +57,7 @@
       ];
       imports = [
         inputs.niri-flake.homeModules.niri
+        inputs.self.modules.homeManager.dms
       ];
 
       xdg.configFile."niri/scripts" = {
@@ -68,6 +68,9 @@
         source = ../../assets/icons;
         recursive = true;
       };
+      # xdg.configFile."niri/dms" = {
+      #   source = ../../assets/niri-dms;
+      # };
 
       programs.niri = {
         enable = true;
@@ -75,13 +78,17 @@
           prefer-no-csd = true;
 
           spawn-at-startup = [
-            { argv = [ "${pkgs.waybar}/bin/waybar" ]; }
             {
               argv = [
-                "${clipboard}"
-                "--watch"
-                "cliphist"
-                "store"
+                "pkill -x dms"
+                "||"
+                "${pkgs.dms-shell}/bin/dms"
+                "run"
+              ];
+            }
+            {
+              argv = [
+                "${clipboard} --watch cliphist store"
               ];
             }
             {
@@ -176,10 +183,11 @@
             "Mod+Return".action.spawn = "${terminal}";
             "Mod+Backspace".action.spawn-sh = "pkill -x ${wlogout} || ${wlogout} -b 4";
             "Mod+E".action.spawn-sh = "${editor}";
+            "Mod+W".action.spawn-sh = "${filemanager}";
             "Mod+Alt+L".action.spawn = [ "${hyprlock}" ];
             "Mod+Space".action.toggle-overview = [ ];
             "Mod+S".action.screenshot = [ ];
-            "Mod+C".action.spawn-sh = "${notif-center}";
+            "Mod+C".action.spawn-sh = "${pkgs.dms-shell}/bin/dms ipc call notifications toggle";
             "Mod+Q".action.close-window = [ ];
             "Mod+F".action.maximize-column = [ ];
             "Mod+Shift+F".action.fullscreen-window = [ ];
@@ -187,7 +195,7 @@
             "Mod+Minus".action.set-column-width = "-10%";
             "Mod+Equal".action.set-column-width = "+10%";
 
-            "Mod+D".action.spawn-sh = "pkill -x rofi || ${scriptsFPath}/rofi.sh drun";
+            "Mod+D".action.spawn-sh = "${pkgs.dms-shell}/bin/dms ipc call spotlight toggle";
 
             "Mod+H".action.focus-column-left = [ ];
             "Mod+L".action.focus-column-right = [ ];
@@ -202,8 +210,22 @@
             "Mod+Shift+K".action.move-window-to-workspace-up = [ ];
           };
         };
-      };
+        # extraConfig = ''
+        #           include "${config.home.homeDirectory}/.config/niri/dms/colors.kdl"
+        #           include "${config.home.homeDirectory}/.config/niri/dms/layout.kdl"
+        #           include "${config.home.homeDirectory}/.config/niri/dms/alttab.kdl"
+        #           include "${config.home.homeDirectory}/.config/niri/dms/binds.kdl"
 
+        #   layout {
+        #     background-color "transparent"
+        #   }
+
+        #   layer-rule {
+        #     match namespace="^quickshell$"
+        #     place-within-backdrop true
+        #   }
+        # '';
+      };
     };
 
 }

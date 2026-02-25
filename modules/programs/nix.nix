@@ -1,11 +1,10 @@
 {
-  flake.modules.homeManager.cpp =
+  flake.modules.homeManager.nix =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        gnumake
-        cmake
-        gcc
+        nh
+        home-manager
       ];
 
     };

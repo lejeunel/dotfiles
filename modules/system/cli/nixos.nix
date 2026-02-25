@@ -13,7 +13,6 @@
       networking
       stylix
       upower
-      greetd
     ];
 
   };

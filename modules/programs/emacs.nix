@@ -25,7 +25,7 @@
         sqlite
 
         # :lang cc
-        clang-tools
+        # clang-tools
 
         tectonic
 

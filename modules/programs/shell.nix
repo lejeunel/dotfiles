@@ -5,13 +5,13 @@
     {
       imports = with inputs.self.modules.homeManager; [
         zsh
+        nix
       ];
 
       home.packages = with pkgs; [
         calcurse
         fastfetch
         psmisc
-        nh
         pdftk
         imagemagick
         unzip

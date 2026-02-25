@@ -13,6 +13,7 @@
       libinput
       portals
       pcscd
+      dms-greeter
     ];
 
   };
