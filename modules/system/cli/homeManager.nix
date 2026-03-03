@@ -11,7 +11,6 @@
       shell
       bluetooth
       wifi
-      qwerty-fr
       emacs
       nvim
       stylix

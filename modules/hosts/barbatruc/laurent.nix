@@ -4,6 +4,8 @@
     imports = with inputs.self.modules.homeManager; [
       system-desktop
 
+      qwerty-fr
+
       dev
 
       drawing

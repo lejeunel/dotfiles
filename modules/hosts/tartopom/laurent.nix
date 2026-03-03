@@ -5,6 +5,8 @@
       system-desktop
       dev
 
+      qwerty-fr
+
       drawing
       messaging
       office
