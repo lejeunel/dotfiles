@@ -8,6 +8,7 @@
       waybar
       wlogout
       zathura
+      pcmanfm
       niri
       hypridle
       hyprpaper

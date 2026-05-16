@@ -24,7 +24,7 @@ let
     package = pkgs.bibata-cursors;
     size = 28;
   };
-  image = ./cat-sound.png;
+  image = ../../../assets/wallpapers/cat-sound.png;
   sizes = {
     applications = 12;
     terminal = 15;

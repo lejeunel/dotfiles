@@ -43,7 +43,7 @@
       terminal = "${pkgs.alacritty}/bin/alacritty";
       wlogout = "${pkgs.wlogout}/bin/wlogout";
       hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
-      editor = ''${pkgs.emacs-pgtk}/bin/emacsclient -nc'';
+      editor = "${pkgs.emacs-pgtk}/bin/emacsclient -nc";
       filemanager = "${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval '(dirvish)'";
       clipboard = "${pkgs.wl-clipboard}/bin/wl-paste";
 
@@ -61,16 +61,13 @@
       ];
 
       xdg.configFile."niri/scripts" = {
-        source = ../../assets/scripts;
+        source = ../../../assets/scripts;
         recursive = true;
       };
       xdg.configFile."niri/icons" = {
-        source = ../../assets/icons;
+        source = ../../../assets/icons;
         recursive = true;
       };
-      # xdg.configFile."niri/dms" = {
-      #   source = ../../assets/niri-dms;
-      # };
 
       programs.niri = {
         enable = true;

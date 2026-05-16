@@ -132,7 +132,7 @@ in
               subject=$(echo "$subject" | sed -E 's/\([^)]*\)$//' | xargs -0)
 
               # Send notification
-              notify-send -t 5000 "New email from $from" "$subject"
+              notify-send -t 5000 -- "New email from $from" "$subject"
           done
 
           ${pkgs.afew}/bin/afew --tag --new

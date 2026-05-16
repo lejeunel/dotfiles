@@ -17,8 +17,8 @@
           "[fullscreen] f" = "toggle_fullscreen";
           "c" = "recolor";
           "p" = "print";
-          "r" = "reload";
-          "R" = "rotate";
+          "R" = "reload";
+          "r" = "rotate";
 
           "K" = "zoom in";
           "J" = "zoom out";
