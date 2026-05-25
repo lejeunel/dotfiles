@@ -5,7 +5,7 @@
     {
       home.packages = with pkgs; [
         telegram-desktop
-        wasistlos
+        karere
         teams-for-linux
         slack
       ];

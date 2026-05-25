@@ -5,8 +5,7 @@
       system-cli
 
       firefox
-      waybar
-      wlogout
+      chrome
       zathura
       pcmanfm
       niri

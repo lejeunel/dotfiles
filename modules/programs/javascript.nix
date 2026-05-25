@@ -4,7 +4,7 @@
     {
       home.packages = with pkgs; [
         yarn
-        nodejs_20
+        nodejs_24
       ];
 
     };

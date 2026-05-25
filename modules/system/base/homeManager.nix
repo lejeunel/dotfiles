@@ -5,7 +5,7 @@
       nixpkgs.config.allowUnfree = true;
       home = {
         homeDirectory = "/home/${config.home.username}";
-        stateVersion = "24.05";
+        stateVersion = "26.05";
       };
     };
 

@@ -5,7 +5,7 @@
 
       # Core features
       enableSystemMonitoring = true; # System monitoring widgets (dgop)
-      enableDynamicTheming = true; # Wallpaper-based theming (matugen)
+      enableDynamicTheming = false; # Wallpaper-based theming (matugen)
       enableAudioWavelength = true; # Audio visualizer (cava)
       enableCalendarEvents = true; # Calendar integration (khal)
     };
@@ -261,7 +261,7 @@
         updaterTerminalAdditionalParams = "";
         displayNameMode = "system";
         screenPreferences = {
-          wallpaper = [ ];
+          wallpaper = [ "all" ];
         };
         showOnLastDisplay = { };
         barConfigs = [

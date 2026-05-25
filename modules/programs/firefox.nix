@@ -1,11 +1,16 @@
 {
 
   flake.modules.homeManager.firefox =
-    { inputs, pkgs, ... }:
     {
-
+      inputs,
+      config,
+      pkgs,
+      ...
+    }:
+    {
       programs.firefox = {
         enable = true;
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
         package = pkgs.firefox.override {
           nativeMessagingHosts = [ pkgs.web-eid-app ];
           pkcs11Modules = [ pkgs.eid-mw ];
