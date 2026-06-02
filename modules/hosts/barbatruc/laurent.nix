@@ -8,6 +8,8 @@
 
       dev
 
+      aws
+
       drawing
       messaging
       office
