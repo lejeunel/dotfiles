@@ -8,6 +8,16 @@
       ...
     }:
     {
+      xdg = {
+        mime.enable = true;
+        mimeApps = {
+          enable = true;
+          defaultApplications = {
+            "text/html" = [ "firefox.desktop" ];
+          };
+        };
+      };
+
       programs.firefox = {
         enable = true;
         configPath = "${config.xdg.configHome}/mozilla/firefox";
