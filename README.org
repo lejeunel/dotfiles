@@ -21,7 +21,7 @@ echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
 
 * Enable custom shell when login through ssh
 
-Add the following to run ~zsh~ automatically upon login:
+Add the following to ~.profile~ to run ~zsh~ automatically upon login:
 
 #+begin_src sh
 if [ -t 1 ] && [ -x "$(command -v zsh)" ] && [ "$SHELL" != "$(which zsh)" ]; then
