@@ -1,30 +1,32 @@
 #+title: Readme
 
 * Commands
-** Rebuilding system
-From project's root:
+** Shorthand CLI
+From project's root install the nix package manager:
 
-#+begin_src shell
-nh os switch .
+#+begin_src sh
+./hey install-nix
 #+end_src
 
-** Apply Home-Manager configuration
-
-From project's root:
+Install a home-manager profile defined in the flake:
 
 #+begin_src shell
-nh home switch .
-#+end_src
-
-** Cleaning old generations
-
-#+begin_src shell
-nh clean all
+./hey hm-switch .#<USER>@<HOST>
 #+end_src
 
 ** Enabling experimental features globally when installing from standalone home-manager
 #+begin_src shell
 echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+#+end_src
+
+* Enable custom shell when login through ssh
+
+Add the following to run ~zsh~ automatically upon login:
+
+#+begin_src sh
+if [ -t 1 ] && [ -x "$(command -v zsh)" ] && [ "$SHELL" != "$(which zsh)" ]; then
+    exec zsh
+fi
 #+end_src
 
 * Secrets
