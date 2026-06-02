@@ -106,6 +106,14 @@
         '';
       };
 
+      home.file.".local/scripts/doom-install" = {
+        executable = true;
+        text = ''
+          ${pkgs.git}/bin/git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+            ~/.config/emacs/bin/doom install
+        '';
+      };
+
       home.sessionVariables = {
         GDK_BACKEND = "wayland";
       };
