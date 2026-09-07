@@ -5,8 +5,14 @@
 
       xdg.portal = {
         enable = true;
-        # Disable wlr portal (conflicts with Hyprland’s own)
-        wlr.enable = false;
+        config = {
+          common = {
+            default = [ "gtk" ];
+            "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+            "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+            "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
+          };
+        };
 
         # Add extra portals here
         extraPortals = [
