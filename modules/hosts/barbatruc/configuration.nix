@@ -2,7 +2,7 @@
 
 {
   flake.modules.nixos.barbatruc =
-    { inputs, pkgs, ... }:
+    { inputs, ... }:
     {
 
       imports = with inputs.self.modules.nixos; [

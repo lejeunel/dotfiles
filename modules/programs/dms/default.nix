@@ -47,7 +47,7 @@
         animationSpeed = 1;
         customAnimationDuration = 500;
         wallpaperFillMode = "Fill";
-        wallpaperPath = "${config.home.homeDirectory}/.config/DankMaterialShell/wallpapers/cat-sound.png";
+        wallpaperPath = "${config.home.homeDirectory}/.config/DankMaterialShell/wallpapers/lonely-fish.png";
         blurredWallpaperLayer = false;
         blurWallpaperOnOverview = false;
         showLauncherButton = true;

@@ -7,10 +7,9 @@
       firefox
       chrome
       zathura
-      pcmanfm
+      nautilus
       niri
       hypridle
-      hyprpaper
       hyprlock
       rofi
       gtk

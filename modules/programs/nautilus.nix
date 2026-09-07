@@ -1,10 +1,9 @@
 {
-  flake.modules.homeManager.pcmanfm =
+  flake.modules.homeManager.nautilus =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        pcmanfm
+        nautilus
       ];
-
     };
 }
