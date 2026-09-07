@@ -15,7 +15,7 @@
 
       defalias = ''
         (defalias
-          alt (tap-next ralt (layer-toggle accent))
+          prt (tap-next sysrq (layer-toggle accent))
           sft (tap-next lsft (layer-toggle upper))
           sfg (tap-next lsft (layer-toggle greek-upper))
           rcd (tap-hold 200 rctl (layer-switch greek))
@@ -101,7 +101,7 @@
           tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
           caps a    s    d    f    g    h    j    k    l    ;    '    ret
           lsft z    x    c    v    b    n    m    ,    .    /    rsft
-          lctl met  lalt           spc            ralt rctl lft  up   down rght
+          lctl met  lalt           spc            ralt sysrq rctl lft  up   down rght
         )
 
 
@@ -111,7 +111,7 @@
           tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
           esc a    s    d    f    g    h    j    k    l    ;    @qt    ret
           @sft z    x    c    v    b    n    m    ,    .    /    @sft
-          lctl met  lalt           spc           @alt @rcd lft  up   down rght
+          lctl met  lalt           spc           lalt @prt rctl lft  up   down rght
         )
 
         (deflayer upper
@@ -120,7 +120,7 @@
           _    Q    W    E    R    T    Y    U    I    O    P    {    }    |
           _    A    S    D    F    G    H    J    K    L    :    @dqt    _
           _    Z    X    C   V     B    N    M    <    >    ?    _
-          _    _    _              spc            _    _    _    _    _    _
+          _    _    _              spc            _    _    _    _    _    _    _
         )
 
         (deflayer accent
@@ -129,7 +129,7 @@
           _    â    é    è    _    _    _    ù    _    _    œ    _    _    _
           _    à    æ    ë    _    _    _    _    ï    _    _    _    _
           _    ä    _    @ç   _    _    _    _    _    _    _    _
-          _    _    _              _              _    _    _    _    _    _
+          _    _    _              _              _    _    _    _    _    _    _
         )
 
         (deflayer greek
@@ -138,7 +138,7 @@
           _    ;    @si_ @eps @rho @tau @ips @the   @iot    @omi    @pi    _    _    _
           _    @alp @sig @del @phi @gam @eta @xi    @kap    @lam    _    _    _
           @sfg @zet @khi @psi @ome @bet @nu  @mu    _       _       _    @sfg
-          _    _    lalt              _              _    @rcg    _    _    _    _
+          _    _    lalt              _              _    _    @rcg    _    _    _    _
         )
         (deflayer greek-upper
           _
@@ -146,7 +146,7 @@
           _    .    @SIG @EPS @RHO @TAU @IPS @THE   @IOT    @OMI    @PI    _    _    _
           _    @ALP @SIG @DEL @PHI @GAM @ETA @XI    @KAP    @LAM    @dia   @dqt    _
           _    @ZET @KHI @PSI @OME @BET @NU  @MU    _       _    _    _
-          _    _    lalt              _              _    @rcg    _    _    _    _
+          _    _    lalt              _              _    _    @rcg    _    _    _    _
         )
       '';
 
