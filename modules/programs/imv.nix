@@ -29,7 +29,7 @@
         imv = {
           name = "Imv";
           genericName = "Image Viewer";
-          exec = "${pkgs.imv}/bin/imv -n %f .";
+          exec = "${pkgs.imv}/bin/imv %f";
         };
       };
       xdg.mimeApps = {
