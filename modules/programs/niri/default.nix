@@ -43,8 +43,8 @@
       terminal = "${pkgs.alacritty}/bin/alacritty";
       wlogout = "${pkgs.wlogout}/bin/wlogout";
       hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
-      editor = "${pkgs.emacs-pgtk}/bin/emacsclient -nc";
-      filemanager = "${pkgs.emacs-pgtk}/bin/emacsclient -nc --eval '(dirvish)'";
+      editor = "${pkgs.emacs31-pgtk}/bin/emacsclient -nc";
+      filemanager = "${pkgs.emacs31-pgtk}/bin/emacsclient -nc --eval '(dirvish)'";
       clipboard = "${pkgs.wl-clipboard}/bin/wl-paste";
 
     in

@@ -68,15 +68,15 @@
         aspellDicts.en-computers
         # aspellDicts.en-science
 
-        emacs-pgtk.pkgs.vterm
+        emacs31-pgtk.pkgs.vterm
 
-        emacs-pgtk.pkgs.treesit-grammars.with-all-grammars
+        emacs31-pgtk.pkgs.treesit-grammars.with-all-grammars
       ];
 
       programs = {
         emacs = {
           enable = true;
-          package = pkgs.emacs-pgtk;
+          package = pkgs.emacs31-pgtk;
         };
       };
 
@@ -84,7 +84,7 @@
 
         executable = true;
         text = ''
-          ${pkgs.emacs-pgtk}/bin/emacs --batch \
+          ${pkgs.emacs31-pgtk}/bin/emacs --batch \
               -l org \
               --eval "(setq org-src-preserve-indentation t)" \
               "$1" \
@@ -102,7 +102,7 @@
           echo ">>> Tangling literate config ..."
           ./$HOME/.local/scripts/emacs-tangle $EMACSDIR/config.org
           echo ">>> Starting Emacs and auto-package fetching/installing ..."
-          ${pkgs.emacs-pgtk}/bin/emacs --init-dir="$EMACSDIR" -nw --eval="(ll/first-install)"
+          ${pkgs.emacs31-pgtk}/bin/emacs --init-dir="$EMACSDIR" -nw --eval="(ll/first-install)"
         '';
       };
 
@@ -136,8 +136,8 @@
             "XDG_RUNTIME_DIR=%t"
           ];
           Type = "forking";
-          ExecStart = "${pkgs.emacs-pgtk}/bin/emacs --daemon";
-          ExecStop = ''${pkgs.emacs-pgtk}/bin/emacsclient --eval "(kill-emacs)"'';
+          ExecStart = "${pkgs.emacs31-pgtk}/bin/emacs --daemon";
+          ExecStop = ''${pkgs.emacs31-pgtk}/bin/emacsclient --eval "(kill-emacs)"'';
           Restart = "on-failure";
         };
         Install = {
@@ -148,7 +148,7 @@
         emacsclient = {
           name = "Emacs Client";
           genericName = "Text Editor";
-          exec = "${pkgs.emacs-pgtk}/bin/emacsclient -nc %f";
+          exec = "${pkgs.emacs31-pgtk}/bin/emacsclient -nc %f";
           icon = "emacs";
         };
       };

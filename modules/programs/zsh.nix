@@ -22,7 +22,7 @@
         };
         initContent = ''
           bindkey '^Y' autosuggest-accept
-          bindkey -s ^f "tmux-sessionizer^M"
+          bindkey -e
 
           export EDITOR="emacsclient -nw"
 
@@ -35,7 +35,6 @@
           plugins = [
             "command-not-found"
             "git"
-            "vi-mode"
           ];
         };
 
