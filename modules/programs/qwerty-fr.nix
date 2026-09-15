@@ -20,6 +20,8 @@
           sfg (tap-next lsft (layer-toggle greek-upper))
           rcd (tap-hold 200 rctl (layer-switch greek))
           rcg (tap-hold 200 rctl (layer-switch default))
+          cca (tap-hold-next-release 200 esc lctl)
+          cre (tap-hold-next-release 200 ret rctl)
 
           ç  RA-,
           €  RA-5
@@ -30,6 +32,7 @@
           dia (tap-macro ")
           alp (cmd-button "wtype α")
           si_ (cmd-button "wtype ς")
+
           eps (cmd-button "wtype ε")
           rho (cmd-button "wtype ρ")
           tau (cmd-button "wtype τ")
@@ -109,7 +112,7 @@
           caps
           grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
           tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-          esc a    s    d    f    g    h    j    k    l    ;    @qt    ret
+          @cca a    s    d    f    g    h    j    k    l    ;    @qt    @cre
           @sft z    x    c    v    b    n    m    ,    .    /    @sft
           lctl met  lalt           spc           lalt @prt rctl lft  up   down rght
         )
