@@ -8,6 +8,8 @@
         config = {
           common = {
             default = [ "gtk" ];
+            "org.freedesktop.impl.portal.Access" = [ "gnome" ];
+            "org.freedesktop.impl.portal.Camera" = [ "gnome" ];
             "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
             "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
             "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
