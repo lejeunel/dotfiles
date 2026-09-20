@@ -1,9 +1,12 @@
 {
-  flake.modules.homeManager.archive = {
-    programs.zip = {
-      enable = true;
-    };
+  flake.modules.homeManager.archive =
+    { pkgs, ... }:
 
-  };
+    {
+      home.packages = with pkgs; [
+        zip
+      ];
+
+    };
 
 }

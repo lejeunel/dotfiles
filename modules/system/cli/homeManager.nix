@@ -17,6 +17,8 @@
       sops
       email
       gpg
+
+      archive
     ];
   };
 
