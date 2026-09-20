@@ -20,8 +20,8 @@
           sfg (tap-next lsft (layer-toggle greek-upper))
           rcd (tap-hold 200 rctl (layer-switch greek))
           rcg (tap-hold 200 rctl (layer-switch default))
-          cca (tap-hold-next-release 200 esc lctl)
-          cre (tap-hold-next-release 200 ret rctl)
+          cca (tap-hold 200 esc lctl)
+          cre (tap-hold 200 ret rctl)
 
           ç  RA-,
           €  RA-5
