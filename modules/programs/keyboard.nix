@@ -20,8 +20,6 @@
           sfg (tap-next lsft (layer-toggle greek-upper))
           rcd (tap-hold 200 rctl (layer-switch greek))
           rcg (tap-hold 200 rctl (layer-switch default))
-          cca (tap-hold 200 esc lctl)
-          cre (tap-hold 200 ret rctl)
 
           ç  RA-,
           €  RA-5
@@ -112,9 +110,9 @@
           caps
           grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
           tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-          @cca a    s    d    f    g    h    j    k    l    ;    @qt    @cre
+          esc a    s    d    f    g    h    j    k    l    ;    @qt    ret
           @sft z    x    c    v    b    n    m    ,    .    /    @sft
-          lctl met  lalt           spc           lalt @prt rctl lft  up   down rght
+          met lalt  lctl           spc           lctl lalt @prt lft  up   down rght
         )
 
         (deflayer upper

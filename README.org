@@ -1,6 +1,7 @@
 #+title: Readme
 
 * Commands
+
 ** Shorthand CLI
 From project's root install the nix package manager:
 
