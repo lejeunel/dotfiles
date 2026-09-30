@@ -92,20 +92,6 @@
         '';
       };
 
-      home.file.".local/scripts/emacs-install" = {
-
-        executable = true;
-        text = ''
-          EMACSDIR=$HOME/.config/emacs
-          echo ">>> Deleting packages, grammars and native compilation cache ..."
-          rm -rf $EMACSDIR/eln-cache $EMACSDIR/elpa $EMACSDIR/tree-sitter $EMACSDIR/elpaca $EMACSDIR/auto-save-list $EMACSDIR/transient
-          echo ">>> Tangling literate config ..."
-          ./$HOME/.local/scripts/emacs-tangle $EMACSDIR/config.org
-          echo ">>> Starting Emacs and auto-package fetching/installing ..."
-          ${pkgs.emacs31-pgtk}/bin/emacs --init-dir="$EMACSDIR" -nw --eval="(ll/first-install)"
-        '';
-      };
-
       home.file.".local/scripts/doom-install" = {
         executable = true;
         text = ''
@@ -144,11 +130,21 @@
           WantedBy = [ "default.target" ];
         };
       };
+      
       xdg.desktopEntries = {
         emacsclient = {
           name = "Emacs Client";
           genericName = "Text Editor";
           exec = "${pkgs.emacs31-pgtk}/bin/emacsclient -nc %f";
+          icon = "emacs";
+        };
+      };
+      
+      xdg.desktopEntries = {
+        vanilla-emacs = {
+          name = "Vanilla  Emacs";
+          genericName = "Text Editor";
+          exec = "${pkgs.emacs31-pgtk}/bin/emacs --init-directory=${config.home.homeDirectory}/.config/vanilla-emacs";
           icon = "emacs";
         };
       };
