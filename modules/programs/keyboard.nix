@@ -16,10 +16,10 @@
       defalias = ''
         (defalias
           prt (tap-next sysrq (layer-toggle accent))
-          sft (tap-next lsft (layer-toggle upper))
           sfg (tap-next lsft (layer-toggle greek-upper))
           rcd (tap-hold 200 rctl (layer-switch greek))
           rcg (tap-hold 200 rctl (layer-switch default))
+          cap (tap-next esc (layer-toggle motion))
 
           ç  RA-,
           €  RA-5
@@ -110,18 +110,19 @@
           caps
           grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
           tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-          esc a    s    d    f    g    h    j    k    l    ;    @qt    ret
-          @sft z    x    c    v    b    n    m    ,    .    /    @sft
-          met lalt  lctl           spc           lctl lalt @prt lft  up   down rght
+          @cap a    s    d    f    g    h    j    k    l    ;    @qt    ret
+          lsft z    x    c    v    b    n    m    ,    .    /    lsft
+          met  lalt lctl           spc           lctl  lalt @prt lft  up   down rght
         )
+ 
 
-        (deflayer upper
+        (deflayer motion
           _
-          ~    !    @    #    $    %   @crc  &    *    \(    \)  \_   +    _
-          _    Q    W    E    R    T    Y    U    I    O    P    {    }    |
-          _    A    S    D    F    G    H    J    K    L    :    @dqt    _
-          _    Z    X    C   V     B    N    M    <    >    ?    _
-          _    _    _              spc            _    _    _    _    _    _    _
+          _  _    _    _    _    _    _    _    _    _    _    _    _    _
+          _  _    _    _    _    _    home pgdn pgup end    _    _    _  _
+          _  _    _    _    _    _    left down up  right  _    _        _
+          _     _    _   _    _    _    A-b  A-e  A-a    A-f   _    _
+          _   _    _           _           _    _    _    _    _   _    _
         )
 
         (deflayer accent
