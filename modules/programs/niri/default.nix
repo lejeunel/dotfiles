@@ -179,13 +179,11 @@
           binds = {
             "Mod+Return".action.spawn = "${terminal}";
             "Mod+Backspace".action.spawn-sh = "pkill -x ${wlogout} || ${wlogout} -b 4";
-            "Mod+E".action.spawn-sh = "${editor}";
-            "Mod+W".action.spawn-sh = "${filemanager}";
             "Mod+Alt+L".action.spawn = [ "${hyprlock}" ];
             "Mod+Space".action.toggle-overview = [ ];
             "Mod+S".action.screenshot = [ ];
             "Mod+C".action.spawn-sh = "${pkgs.dms-shell}/bin/dms ipc call notifications toggle";
-            "Mod+Q".action.close-window = [ ];
+            "Mod+W".action.close-window = [ ];
             "Mod+F".action.maximize-column = [ ];
             "Mod+Shift+F".action.fullscreen-window = [ ];
             "Mod+Ctrl+F".action.expand-column-to-available-width = [ ];
