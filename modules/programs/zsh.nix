@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.zsh =
-    { pkgs, ... }:
+    { pkgs,lib, ... }:
     {
       programs.zsh = {
         enable = true;
@@ -20,8 +20,18 @@
           vim = "nvim";
           grep = "grep --color=auto";
         };
+        plugins = [          {
+            name = "zsh-shift-select";
+            src = pkgs.fetchFromGitHub {
+              owner = "jirutka";
+              repo = "zsh-shift-select";
+              rev = "da460999b7d31aef0f0a82a3e749d70edf6f2ef9r";
+              hash = "sha256-ekA8acUgNT/t2SjSBGJs2Oko5EB7MvVUccC6uuTI/vc=";
+            };
+        }];        
         initContent = ''
           bindkey '^Y' autosuggest-accept
+          bindkey '^W' kill-region
           bindkey -e
 
           export EDITOR="emacsclient -nw"
