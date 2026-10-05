@@ -8,6 +8,8 @@
             "by-id/usb-DZTECH_DZ65RGBV3_vial:f64c2b3c-if02-event-kbd"
           else if vars.host == "barbatruc" then
             "by-path/platform-i8042-serio-0-event-kbd"
+          else if vars.host == "ulahup" then
+            "by-path/platform-i8042-serio-0-event-kbd"
           else
             abort "keyboard-layout flake needs a valid hostname!"
         )
