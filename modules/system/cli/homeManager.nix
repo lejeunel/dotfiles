@@ -14,8 +14,6 @@
       emacs
       nvim
       stylix
-      sops
-      email
       gpg
 
       archive
