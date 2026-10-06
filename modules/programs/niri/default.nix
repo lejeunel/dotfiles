@@ -72,6 +72,9 @@
       programs.niri = {
         enable = true;
         settings = {
+          gestures = {
+            hot-corners.enable = false;
+          };
           prefer-no-csd = true;
 
           spawn-at-startup = [
