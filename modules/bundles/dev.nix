@@ -11,7 +11,7 @@
       golang
       javascript
       guile
-
+      claude
     ];
   };
 
