@@ -8,15 +8,11 @@
 
       dev
 
-      # aws
+      aws
 
-      # drawing
-      # messaging
-      # office
-
-      # podman
-      # filebrowser
-
+      drawing
+      messaging
+      office
     ];
 
   };

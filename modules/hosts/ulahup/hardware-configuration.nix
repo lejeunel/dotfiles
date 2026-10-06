@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 
 {
   flake.modules.nixos.ulahup =
@@ -12,8 +12,24 @@
     {
 	  imports =
 	    [ (modulesPath + "/installer/scan/not-detected.nix")
+        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14
+        inputs.nixos-hardware.nixosModules.common-cpu-intel
+        inputs.nixos-hardware.nixosModules.common-pc-ssd
 	    ];
 
+    # Firmware (AX211 Wi-Fi/BT, Intel GPU, etc.) + makes the microcode line work
+    hardware.enableRedistributableFirmware = true;
+
+    hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+      };
+    services.blueman.enable = true;
+
+    # Fingerprint reader, firmware updates via LVFS
+    services.fprintd.enable = true;
+    services.fwupd.enable = true;
+    
 	  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "sd_mod" ];
 	  boot.initrd.kernelModules = [ ];
 	  boot.kernelModules = [ "kvm-intel" ];
