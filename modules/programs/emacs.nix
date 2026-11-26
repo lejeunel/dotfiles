@@ -11,6 +11,9 @@
       ];
 
       home.packages = with pkgs; [
+        pkgs.nerd-fonts.iosevka
+        pkgs.nerd-fonts.symbols-only
+                
         # :emacs dired +dirvish
         ffmpegthumbnailer
         mediainfo
@@ -65,10 +68,6 @@
         aspell
         aspellDicts.fr
         aspellDicts.en
-        aspellDicts.en-computers
-        # aspellDicts.en-science
-
-        emacs31-pgtk.pkgs.vterm
 
         emacs31-pgtk.pkgs.treesit-grammars.with-all-grammars
       ];
@@ -139,15 +138,7 @@
           icon = "emacs";
         };
       };
-      
-      xdg.desktopEntries = {
-        vanilla-emacs = {
-          name = "Vanilla  Emacs";
-          genericName = "Text Editor";
-          exec = "${pkgs.emacs31-pgtk}/bin/emacs --init-directory=${config.home.homeDirectory}/.config/vanilla-emacs";
-          icon = "emacs";
-        };
-      };
+
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {

@@ -17,7 +17,11 @@
       gpg
 
       archive
+      mount
     ];
+
+    # let fontconfig find fonts installed via home.packages
+    fonts.fontconfig.enable = true;
   };
 
 }

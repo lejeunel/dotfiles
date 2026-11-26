@@ -26,9 +26,6 @@
           bindkey -e
 
           export EDITOR="emacsclient -nw"
-
-          # This fixes a bug where a % sign is printed in vterm
-          unsetopt PROMPT_SP
         '';
 
         oh-my-zsh = {

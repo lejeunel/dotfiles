@@ -42,9 +42,6 @@
     let
       terminal = "${pkgs.alacritty}/bin/alacritty";
       wlogout = "${pkgs.wlogout}/bin/wlogout";
-      hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
-      editor = "${pkgs.emacs31-pgtk}/bin/emacsclient -nc";
-      filemanager = "${pkgs.emacs31-pgtk}/bin/emacsclient -nc --eval '(dirvish)'";
       clipboard = "${pkgs.wl-clipboard}/bin/wl-paste";
 
     in
@@ -61,35 +58,22 @@
       ];
 
       xdg.configFile."niri/scripts" = {
-        source = ../../../assets/scripts;
+        source = ../../assets/scripts;
         recursive = true;
       };
       xdg.configFile."niri/icons" = {
-        source = ../../../assets/icons;
+        source = ../../assets/icons;
         recursive = true;
       };
 
       programs.niri = {
         enable = true;
         settings = {
-          gestures = {
-            hot-corners.enable = false;
-          };
           prefer-no-csd = true;
 
           spawn-at-startup = [
             {
-              argv = [
-                "pkill -x dms"
-                "||"
-                "${pkgs.dms-shell}/bin/dms"
-                "run"
-              ];
-            }
-            {
-              argv = [
-                "${clipboard} --watch cliphist store"
-              ];
+              sh = "pkill -x dms || ${pkgs.dux-shell}/bin/dms run";
             }
             {
               argv = [
@@ -145,12 +129,15 @@
             focus-follows-mouse.enable = false;
             keyboard = {
               xkb = {
-                layout = "us";
-                variant = "intl";
+                layout = "us,gr";
+                variant = "intl,";
               };
+              track-layout = "global";
             };
             touchpad = {
               tap = true;
+              accel-profile = "flat";
+              accel-speed = 0.6;
               natural-scroll = true;
             };
           };
@@ -182,10 +169,11 @@
           binds = {
             "Mod+Return".action.spawn = "${terminal}";
             "Mod+Backspace".action.spawn-sh = "pkill -x ${wlogout} || ${wlogout} -b 4";
-            "Mod+Alt+L".action.spawn = [ "${hyprlock}" ];
+            "Mod+Alt+L".action.spawn-sh = "${pkgs.dux-shell}/bin/dms ipc call lock lock";
             "Mod+Space".action.toggle-overview = [ ];
+            "Mod+Shift+Space".action.switch-layout = "next";
             "Mod+S".action.screenshot = [ ];
-            "Mod+C".action.spawn-sh = "${pkgs.dms-shell}/bin/dms ipc call notifications toggle";
+            "Mod+C".action.spawn-sh = "${pkgs.dux-shell}/bin/dms ipc call notifications toggle";
             "Mod+W".action.close-window = [ ];
             "Mod+F".action.maximize-column = [ ];
             "Mod+Shift+F".action.fullscreen-window = [ ];
@@ -193,19 +181,19 @@
             "Mod+Minus".action.set-column-width = "-10%";
             "Mod+Equal".action.set-column-width = "+10%";
 
-            "Mod+D".action.spawn-sh = "${pkgs.dms-shell}/bin/dms ipc call spotlight toggle";
+            "Mod+D".action.spawn-sh = "${pkgs.dux-shell}/bin/dms ipc call spotlight toggle";
 
-            "Mod+H".action.focus-column-left = [ ];
-            "Mod+L".action.focus-column-right = [ ];
-            "Mod+J".action.focus-workspace-down = [ ];
-            "Mod+K".action.focus-workspace-up = [ ];
+            "Mod+J".action.focus-column-left = [ ];
+            "Mod+semicolon".action.focus-column-right = [ ];
+            "Mod+K".action.focus-workspace-down = [ ];
+            "Mod+L".action.focus-workspace-up = [ ];
             "Mod+P".action.focus-monitor-up = [ ];
             "Mod+N".action.focus-monitor-down = [ ];
 
-            "Mod+Shift+H".action.move-column-left = [ ];
-            "Mod+Shift+L".action.move-column-right = [ ];
-            "Mod+Shift+J".action.move-window-to-workspace-down = [ ];
-            "Mod+Shift+K".action.move-window-to-workspace-up = [ ];
+            "Mod+Shift+J".action.move-column-left = [ ];
+            "Mod+Shift+semicolon".action.move-column-right = [ ];
+            "Mod+Shift+K".action.move-window-to-workspace-down = [ ];
+            "Mod+Shift+L".action.move-window-to-workspace-up = [ ];
           };
         };
         # extraConfig = ''
