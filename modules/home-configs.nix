@@ -7,6 +7,7 @@
     "laurent@barbatruc" = inputs.self.lib.mkHome "x86_64-linux" "laurent" "barbatruc";
     "laurent@quantiq-vm" = inputs.self.lib.mkHome "x86_64-linux" "laurent" "quantiq-vm";
     "laurent@ulahup" = inputs.self.lib.mkHome "x86_64-linux" "laurent" "ulahup";
+    "laurent@barbidul" = inputs.self.lib.mkHome "x86_64-linux" "laurent" "barbidul";
   };
 
 }

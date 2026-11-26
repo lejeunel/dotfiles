@@ -10,6 +10,8 @@
             "by-path/platform-i8042-serio-0-event-kbd"
           else if vars.host == "ulahup" then
             "by-path/platform-i8042-serio-0-event-kbd"
+          else if vars.host == "barbidul" then
+            "by-path/platform-i8042-serio-0-event-kbd"
           else
             abort "keyboard-layout flake needs a valid hostname!"
         )

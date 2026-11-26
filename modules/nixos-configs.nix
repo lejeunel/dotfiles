@@ -6,5 +6,6 @@
     tartopom = inputs.self.lib.mkSystem "tartopom";
     barbatruc = inputs.self.lib.mkSystem "barbatruc";
     ulahup = inputs.self.lib.mkSystem "ulahup";
+    barbidul = inputs.self.lib.mkSystem "barbidul";
   };
 }
