@@ -1,6 +1,6 @@
 {
-  flake.modules.nixos.dms-greeter = {
-    services.displayManager.dms-greeter = {
+  flake.modules.nixos.dux-greeter = {
+    services.displayManager.dux-greeter = {
       enable = true;
       compositor.name = "niri";
     };

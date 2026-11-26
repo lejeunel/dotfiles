@@ -88,6 +88,8 @@ in
         targets.rofi.enable = false;
         targets.waybar.enable = false;
         targets.emacs.enable = false;
+        targets.alacritty.enable = false;
+	targets.fzf.enable = false;
         targets.firefox = {
           enable = true;
           profileNames = [ "laurent" ];

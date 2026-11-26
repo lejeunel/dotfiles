@@ -5,12 +5,11 @@
       system-cli
 
       firefox
+      emacs-keys
       chrome
       zathura
       nautilus
       niri
-      hypridle
-      hyprlock
       rofi
       gtk
     ];

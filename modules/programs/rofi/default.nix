@@ -6,7 +6,7 @@
       programs.rofi = {
         enable = true;
         package = pkgs.rofi;
-        extraConfig = {
+        settings = {
           kb-remove-to-eol = "";
           kb-remove-char-back = "BackSpace,Shift+BackSpace";
           kb-mode-complete = "";

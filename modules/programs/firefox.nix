@@ -8,6 +8,11 @@
       ...
     }:
     {
+      # Unbind C-w (close tab) so it reaches the GTK Emacs key theme as
+      # kill-region; close tabs with C-F4. 
+      home.file."${config.programs.firefox.configPath}/${config.programs.firefox.profiles.laurent.path}/customKeys.json".text =
+        builtins.toJSON { key_close = { }; };
+
       xdg = {
         mime.enable = true;
         mimeApps = {

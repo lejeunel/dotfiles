@@ -1,37 +1,45 @@
 {
-  flake.modules.nixos.dms = {
-    programs.dms-shell = {
-      enable = true;
+  flake.modules.nixos.dms =
+    { inputs, ... }:
+    {
 
-      # Core features
-      enableSystemMonitoring = true; # System monitoring widgets (dgop)
-      enableDynamicTheming = false; # Wallpaper-based theming (matugen)
-      enableAudioWavelength = true; # Audio visualizer (cava)
-      enableCalendarEvents = true; # Calendar integration (khal)
+      imports = [
+        inputs.dux-shell.nixosModules.dank-material-shell
+      ];
+
+      programs.dank-material-shell = {
+        enable = true;
+
+        # Core features
+        enableSystemMonitoring = true; # System monitoring widgets (dgop)
+        enableDynamicTheming = false; # Wallpaper-based theming (matugen)
+        enableAudioWavelength = true; # Audio visualizer (cava)
+        enableCalendarEvents = true; # Calendar integration (khal)
+      };
     };
-  };
 
   flake.modules.homeManager.dms =
-    { config, ... }:
+    { inputs, ... }:
     {
+
+      imports = [
+        inputs.dux-shell.homeModules.dank-material-shell
+        inputs.dux-shell.homeModules.niri
+      ];
+
       xdg.configFile."DankMaterialShell/wallpapers" = {
-        source = ../../../assets/wallpapers;
+        source = ../../assets/wallpapers;
         recursive = true;
       };
 
       home.file.".config/DankMaterialShell/settings.json".text = builtins.toJSON {
-        currentThemeName = "custom";
-        currentThemeCategory = "registry";
-        customThemeFile = "${config.home.homeDirectory}/.config/DankMaterialShell/themes/catppuccin/theme.json";
-        registryThemeVariants = {
-          catppuccin = {
-            dark = {
-              flavor = "macchiato";
-              accent = "mauve";
-            };
-          };
-
-        };
+            themeModeAutoEnabled= true;
+            themeModeAutoMode= "time";
+            themeModeStartHour= 18;
+            themeModeStartMinute= 0;
+            themeModeEndHour= 6;
+            themeModeEndMinute= 0;
+            themeModeShareGammaSettings= true;
         matugenScheme = "scheme-tonal-spot";
         runUserMatugenTemplates = true;
         matugenTargetMonitor = "";
@@ -43,11 +51,9 @@
         use24HourClock = true;
         showSeconds = false;
         useFahrenheit = false;
-        nightModeEnabled = false;
         animationSpeed = 1;
         customAnimationDuration = 500;
         wallpaperFillMode = "Fill";
-        wallpaperPath = "${config.home.homeDirectory}/.config/DankMaterialShell/wallpapers/lonely-fish.png";
         blurredWallpaperLayer = false;
         blurWallpaperOnOverview = false;
         showLauncherButton = true;
@@ -61,7 +67,6 @@
         showCpuTemp = true;
         showGpuTemp = true;
         selectedGpuIndex = 0;
-        enabledGpuPciIds = [ ];
         showSystemTray = true;
         showClock = true;
         showNotificationButton = true;
@@ -136,7 +141,8 @@
         clockCompactMode = false;
         focusedWindowCompactMode = false;
         runningAppsCompactMode = true;
-        keyboardLayoutNameCompactMode = false;
+        keyboardLayoutNameCompactMode = true;
+	keyboardLayoutNameShowIcon = true;
         runningAppsCurrentWorkspace = false;
         runningAppsGroupByApp = false;
         centeringMode = "index";
@@ -147,14 +153,9 @@
         spotlightModalViewMode = "list";
         sortAppsAlphabetically = false;
         appLauncherGridColumns = 4;
-        spotlightCloseNiriOverview = true;
-        niriOverviewOverlayEnabled = true;
-        weatherLocation = "New York, NY";
-        weatherCoordinates = "40.7128,-74.0060";
         useAutoLocation = true;
         weatherEnabled = true;
         networkPreference = "auto";
-        vpnLastConnected = "";
         iconTheme = "System Default";
         launcherLogoMode = "apps";
         launcherLogoCustomPath = "";
@@ -178,17 +179,17 @@
         soundNewNotification = true;
         soundVolumeChanged = true;
         soundPluggedIn = true;
-        acMonitorTimeout = 0;
-        acLockTimeout = 0;
+        acMonitorTimeout = 420;
+        acLockTimeout = 300;
         acSuspendTimeout = 0;
         acSuspendBehavior = 0;
         acProfileName = "";
-        batteryMonitorTimeout = 0;
-        batteryLockTimeout = 0;
+        batteryMonitorTimeout = 420;
+        batteryLockTimeout = 300;
         batterySuspendTimeout = 0;
         batterySuspendBehavior = 0;
         batteryProfileName = "";
-        lockBeforeSuspend = false;
+        lockBeforeSuspend = true;
         loginctlLockIntegration = true;
         fadeToLockEnabled = false;
         fadeToLockGracePeriod = 5;
@@ -287,6 +288,13 @@
               "clipboard"
               "cpuUsage"
               "memUsage"
+              {
+                id = "keyboard_layout_name";
+                enabled = true;
+                keyboardLayoutNameLabelOverrides = {
+                  "en-US, intl., with dead keys" = "en-US";
+                };
+              }
               "notificationButton"
               "battery"
               "controlCenterButton"

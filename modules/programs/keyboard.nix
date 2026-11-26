@@ -18,10 +18,8 @@
       defalias = ''
         (defalias
           prt (tap-next sysrq (layer-toggle accent))
-          sfg (tap-next lsft (layer-toggle greek-upper))
-          rcd (tap-hold 200 rctl (layer-switch greek))
-          rcg (tap-hold 200 rctl (layer-switch default))
-          cap (tap-next esc (layer-toggle motion))
+          cap (tap-next esc (layer-toggle accent))
+          spm (tap-hold-next-release 200 spc (layer-toggle motion))
 
           ç  RA-,
           €  RA-5
@@ -30,57 +28,6 @@
           crc (tap-macro ^ spc)
 
           dia (tap-macro ")
-          alp (cmd-button "wtype α")
-          si_ (cmd-button "wtype ς")
-
-          eps (cmd-button "wtype ε")
-          rho (cmd-button "wtype ρ")
-          tau (cmd-button "wtype τ")
-          ips (cmd-button "wtype υ")
-          the (cmd-button "wtype θ")
-          iot (cmd-button "wtype ι")
-          omi (cmd-button "wtype ο")
-          pi (cmd-button "wtype π")
-          sig (cmd-button "wtype σ")
-          del (cmd-button "wtype δ")
-          phi (cmd-button "wtype φ")
-          gam (cmd-button "wtype γ")
-          eta (cmd-button "wtype η")
-          xi (cmd-button "wtype ξ")
-          kap (cmd-button "wtype κ")
-          lam (cmd-button "wtype λ")
-          zet (cmd-button "wtype ζ")
-          khi (cmd-button "wtype χ")
-          psi (cmd-button "wtype ψ")
-          ome (cmd-button "wtype ω")
-          bet (cmd-button "wtype β")
-          nu (cmd-button "wtype ν")
-          mu (cmd-button "wtype μ")
-
-          ALP (cmd-button "wtype Α")
-          EPS (cmd-button "wtype Ε")
-          RHO (cmd-button "wtype Ρ")
-          TAU (cmd-button "wtype Τ")
-          IPS (cmd-button "wtype Υ")
-          THE (cmd-button "wtype Θ")
-          IOT (cmd-button "wtype Ι")
-          OMI (cmd-button "wtype Ο")
-          PI (cmd-button "wtype Π")
-          SIG (cmd-button "wtype Σ")
-          DEL (cmd-button "wtype Δ")
-          PHI (cmd-button "wtype Φ")
-          GAM (cmd-button "wtype Γ")
-          ETA (cmd-button "wtype Η")
-          XI  (cmd-button "wtype Ξ")
-          KAP (cmd-button "wtype Κ")
-          LAM (cmd-button "wtype Λ")
-          ZET (cmd-button "wtype Ζ")
-          KHI (cmd-button "wtype Χ")
-          PSI (cmd-button "wtype Ψ")
-          OME (cmd-button "wtype Ω")
-          BET (cmd-button "wtype Β")
-          NU  (cmd-button "wtype Ν")
-          MU  (cmd-button "wtype Μ")
         )
       '';
 
@@ -104,7 +51,7 @@
           tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
           caps a    s    d    f    g    h    j    k    l    ;    '    ret
           lsft z    x    c    v    b    n    m    ,    .    /    rsft
-          lctl met  lalt           spc            ralt sysrq rctl lft  up   down rght
+          lctl met  lalt           spc           ralt sysrq rctl lft  up   down rght
         )
 
 
@@ -114,16 +61,15 @@
           tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
           @cap a    s    d    f    g    h    j    k    l    ;    @qt    ret
           lsft z    x    c    v    b    n    m    ,    .    /    lsft
-          met  lalt lctl           spc           lctl  lalt @prt lft  up   down rght
+          met  lalt lctl           @spm           lctl  lalt @prt lft  up   down rght
         )
- 
 
         (deflayer motion
           _
           _  _    _    _    _    _    _    _    _    _    _    _    _    _
-          _  _    _    _    _    _    home pgdn pgup end    _    _    _  _
-          _  _    _    _    _    _    left down up  right  _    _        _
-          _     _    _   _    _    _    A-b  A-e  A-a    A-f   _    _
+          _  _    _    _    _    _    _  home   pgdn pgup end       _    _  _
+          _  _    _    _    _    _    _ left down up right    _        _
+          _     _    _   _    _    _    _ A-b  A-a  A-e    A-f      _
           _   _    _           _           _    _    _    _    _   _    _
         )
 
@@ -134,23 +80,6 @@
           _    à    æ    ë    _    _    _    _    ï    _    _    _    _
           _    ä    _    @ç   _    _    _    _    _    _    _    _
           _    _    _              _              _    _    _    _    _    _    _
-        )
-
-        (deflayer greek
-          _
-          _    _    _    _    _    _   _    _   _   _   _    _    _    _
-          _    ;    @si_ @eps @rho @tau @ips @the   @iot    @omi    @pi    _    _    _
-          _    @alp @sig @del @phi @gam @eta @xi    @kap    @lam    _    _    _
-          @sfg @zet @khi @psi @ome @bet @nu  @mu    _       _       _    @sfg
-          _    _    lalt              _              _    _    @rcg    _    _    _    _
-        )
-        (deflayer greek-upper
-          _
-          _    _    _    _    _    _   _    _   _   _   _    _    _    _
-          _    .    @SIG @EPS @RHO @TAU @IPS @THE   @IOT    @OMI    @PI    _    _    _
-          _    @ALP @SIG @DEL @PHI @GAM @ETA @XI    @KAP    @LAM    @dia   @dqt    _
-          _    @ZET @KHI @PSI @OME @BET @NU  @MU    _       _    _    _
-          _    _    lalt              _              _    _    @rcg    _    _    _    _
         )
       '';
 

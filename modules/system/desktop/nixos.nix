@@ -13,8 +13,9 @@
       libinput
       portals
       pcscd
-      dms-greeter
-    ];
+      dux-greeter
+      ibus
+   ];
 
   };
 
