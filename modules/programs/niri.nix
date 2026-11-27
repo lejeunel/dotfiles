@@ -72,9 +72,9 @@
           prefer-no-csd = true;
 
           spawn-at-startup = [
-            #{
-            #  sh = "pkill -x dms || ${pkgs.dux-shell}/bin/dms run";
-            #}
+            {
+              sh = "pkill -x dms || ${pkgs.dux-shell}/bin/dms run";
+            }
             {
               argv = [
                 "${clipboard}"
